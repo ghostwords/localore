@@ -1,0 +1,5 @@
+-r requirements.txt
+grip
+ipython
+prospector==0.10.2
+pyinotify
