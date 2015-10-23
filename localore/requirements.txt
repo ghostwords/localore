@@ -1,3 +1,4 @@
 Django>=1.8,<1.9
+django_environ==0.4.0
 wagtail==1.1
 Wand==0.4.1
