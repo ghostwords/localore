@@ -36,6 +36,10 @@ LOGGING = {
     },
 }
 
+# log e-mails to console in development
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # Application definition
 
