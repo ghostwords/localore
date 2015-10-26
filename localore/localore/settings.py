@@ -9,6 +9,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 env = Env(
     ALLOWED_HOSTS=(list, []),
     DEBUG=(bool, False),
+    DJANGO_LOG_LEVEL=(str, 'INFO'),
 )
 Env.read_env()
 
@@ -17,6 +18,23 @@ DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+
+# make Django log to stderr
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': env('DJANGO_LOG_LEVEL'),
+        },
+    },
+}
 
 
 # Application definition
