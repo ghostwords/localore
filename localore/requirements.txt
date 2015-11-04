@@ -1,5 +1,6 @@
 Django>=1.8,<1.9
 django_environ==0.4.0
+django_overextends==0.4.0
 psycopg2==2.6.1
 pytz
 wagtail==1.1
