@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+	<img src="{% static 'images/AIR_lightgrey.png' %}" title="AIR logo" width=80>
+
 	{#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#}
 	{{ self.body|richtext }}
+
+	<ul class="juicer-feed" data-feed-id="fa-demo"></ul>
+{% endblock %}
+
+{% block extra_css %}
+	<link href="//assets.juicer.io/embed.css" media="all" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block extra_js %}
+	<script src="//assets.juicer.io/embed.js" type="text/javascript"></script>
 {% endblock %}
