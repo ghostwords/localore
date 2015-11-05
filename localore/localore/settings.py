@@ -10,6 +10,7 @@ env = Env(
     ALLOWED_HOSTS=(list, []),
     DEBUG=(bool, False),
     DJANGO_LOG_LEVEL=(str, 'INFO'),
+    MEDIA_ROOT=(str, os.path.join(BASE_DIR, 'media')),
 )
 Env.read_env()
 
@@ -178,7 +179,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # URL to use when referring to static files located in STATIC_ROOT
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = env('MEDIA_ROOT')
 MEDIA_URL = '/media/'
 
 
