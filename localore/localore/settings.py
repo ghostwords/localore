@@ -61,6 +61,9 @@ INSTALLED_APPS = (
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
 
+    # needs to go after wagtaildocs to remove its site summary
+    'localore_admin',
+
     'modelcluster',
     'compressor',
     'taggit',

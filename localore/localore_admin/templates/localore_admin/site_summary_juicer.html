@@ -1,0 +1,11 @@
+{% load i18n wagtailadmin_tags %}
+
+<li class="icon icon-site">
+    <a href="https://www.juicer.io/sign-in" target=_blank>
+    {% blocktrans count counter=total_posts with total_posts|intcomma as total %}
+        <span>{{ total }}</span> Juicer Posts
+    {% plural %}
+        <span>{{ total }}</span> Juicer Posts
+    {% endblocktrans %}
+    </a>
+</li>
