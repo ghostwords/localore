@@ -46,6 +46,7 @@ if DEBUG:
 
 INSTALLED_APPS = (
     'home',
+    'blog',
     'search',
 
     'wagtail.contrib.wagtailstyleguide',
