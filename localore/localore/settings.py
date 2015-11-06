@@ -10,6 +10,7 @@ env = Env(
     ALLOWED_HOSTS=(list, []),
     DEBUG=(bool, False),
     DJANGO_LOG_LEVEL=(str, 'INFO'),
+    EMBEDLY_KEY=(str, None),
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, 'media')),
 )
 Env.read_env()
@@ -191,3 +192,5 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Localore: Finding America"
+if env('EMBEDLY_KEY'):
+    EMBEDLY_KEY = env('EMBEDLY_KEY')
