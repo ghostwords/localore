@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+	<article id="blog-post">
+		<h1>{{ self.title }}</h1>
+		{# TODO post-meta? #}
+		<p class="post-meta">By {{ self.owner }} at {{ self.first_published_at }}</p>
+		<p class="meta">{{ self.date }}</p>
+
+		{% if self.main_image %}
+			{% image self.main_image width-400 %}
+		{% endif %}
+
+		<div class="intro">{{ self.intro }}</div>
+
+		{{ self.body }}
+	</article>
+{% endblock %}
