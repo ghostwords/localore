@@ -4,7 +4,12 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailcore.blocks import CharBlock, RichTextBlock, StructBlock, TextBlock
+from wagtail.wagtailcore.blocks import (
+    CharBlock,
+    RichTextBlock,
+    StructBlock,
+    TextBlock
+)
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     InlinePanel,
@@ -12,6 +17,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel,
     StreamFieldPanel,
 )
+from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
@@ -46,6 +52,7 @@ class BlogPage(Page):
         ('paragraph',
             RichTextBlock(icon='doc-full', label='Rich Text')),
         ('image', ImageChooserBlock(icon='image')),
+        ('embed', EmbedBlock(icon='media')),
     ])
 
     search_fields = Page.search_fields + (
