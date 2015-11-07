@@ -16,6 +16,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
 
+import datetime
+
 
 class QuoteBlock(StructBlock):
     quote = TextBlock("quote title")
@@ -36,7 +38,7 @@ class BlogPage(Page):
         related_name='+'
     )
 
-    date = models.DateField("Post date")
+    date = models.DateField("Post date", default=datetime.date.today)
     intro = models.CharField(max_length=250)
     body = StreamField([
         ('heading', CharBlock(classname="full title", icon="title")),
