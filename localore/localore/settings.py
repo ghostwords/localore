@@ -192,5 +192,6 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Localore: Finding America"
+WAGTAILEMBEDS_EMBED_FINDER = 'localore.embeds.finder'
 if env('EMBEDLY_KEY'):
     EMBEDLY_KEY = env('EMBEDLY_KEY')
