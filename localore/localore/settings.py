@@ -38,6 +38,17 @@ LOGGING = {
     },
 }
 
+
+# E-mail settings
+
+DEFAULT_FROM_EMAIL = 'Localore: Finding America CMS <admin@demo.finding-america.com>'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_SUBJECT_PREFIX = ''
+EMAIL_HOST='localhost'
+EMAIL_PORT=25
+EMAIL_USE_TLS=False
+
 # log e-mails to console in development
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
