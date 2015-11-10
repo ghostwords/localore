@@ -45,9 +45,12 @@ class BlogPage(Page):
     )
 
     date = models.DateField("Post date", default=datetime.date.today)
-    intro = models.CharField(max_length=250)
     body = StreamField([
-        ('heading', CharBlock(classname="full title", icon="title")),
+        ('heading', CharBlock(
+            classname="full title",
+            icon='title',
+            template='blog/blocks/heading.html'
+        )),
         ('quote', QuoteBlock()),
         ('paragraph',
             RichTextBlock(icon='doc-full', label='Rich Text')),
@@ -56,16 +59,18 @@ class BlogPage(Page):
     ])
 
     search_fields = Page.search_fields + (
-        index.SearchField('intro'),
         index.SearchField('body'),
     )
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         ImageChooserPanel('main_image'),
-        FieldPanel('intro'),
         StreamFieldPanel('body')
     ]
+
+    @property
+    def blog_index(self):
+        return self.get_ancestors().type(BlogIndexPage).last()
 
 
 class LinkFields(models.Model):
@@ -110,9 +115,9 @@ class BlogIndexRelatedLink(Orderable, RelatedLink):
 
 
 class BlogIndexPage(Page):
-    intro = RichTextField(blank=True)
+    body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full"),
+        FieldPanel('body', classname="full"),
         InlinePanel('related_links', label="Featured posts"),
     ]
