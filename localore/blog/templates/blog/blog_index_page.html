@@ -7,7 +7,7 @@
 {% block content %}
 	<h1>{{ self.title }}</h1>
 
-	<div class="intro">{{ self.intro|richtext }}</div>
+	<hr>
 
 	{% if self.related_links.all %}
 		<ul>
@@ -21,7 +21,11 @@
 					{% endif %}
 					<a href="{{ item.link }}">{{ item.link_page|default:item.link }}</a>
 				</li>
+				<br>
 			{% endfor %}
 		</ul>
+		<hr>
 	{% endif %}
+
+	<div class="body-content">{{ self.body|richtext }}</div>
 {% endblock %}

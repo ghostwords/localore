@@ -12,6 +12,8 @@
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 		{# Global stylesheets #}
 		{% compress css %}
 		<link rel="stylesheet" type="text/css" href="{% static 'css/localore.css' %}">
@@ -25,7 +27,11 @@
 	<body class="{% block body_class %}{% endblock %}">
 		{% wagtailuserbar %}
 
-		{% block content %}{% endblock %}
+		<div class="main container">
+
+			{% block content %}{% endblock %}
+
+		</div>
 
 		{# Global javascript #}
 		{% compress js %}

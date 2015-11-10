@@ -5,6 +5,7 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+	<br>
 	<img src="{% static 'images/AIR_lightgrey.png' %}" title="AIR logo" width=80>
 
 	{#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#}
