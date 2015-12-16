@@ -25,6 +25,13 @@
 - include: install.yaml
   become_user: www-data
 
+- name: Run django-admin publish_scheduled_pages every hour
+  cron:
+    name: publish scheduled pages in Wagtail
+    minute: 0
+    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py publish_scheduled_pages
+    state: present
+
 - name: Update app version
   file:
     state: link
