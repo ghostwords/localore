@@ -9,7 +9,7 @@ from wagtail.wagtailembeds.embeds import embedly, oembed
 def finder(url, max_width=None):
     domain = urlparse(url).netloc
     if (domain.endswith(('instagram.com', 'twitter.com')) or
-            not hasattr(settings, 'EMBEDLY_KEY')):
+            not hasattr(settings, 'WAGTAILEMBEDS_EMBEDLY_KEY')):
         return oembed(url, max_width)
 
     return embedly(url, max_width)

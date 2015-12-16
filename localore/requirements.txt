@@ -5,6 +5,6 @@ elasticsearch>=1.0.0,<2.0.0
 embedly==0.5.0
 psycopg2==2.6.1
 pytz
-wagtail==1.1
+wagtail==1.2
 Wand==0.4.1
 -e git+https://github.com/django-compressor/django-compressor.git@de3afb17ab102430e9d3c97034f6016c6a0d3037#egg=django-compressor
