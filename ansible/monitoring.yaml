@@ -1,0 +1,10 @@
+- hosts: monitoring
+  become: True
+  gather_facts: False
+  roles:
+    - role: graphite
+      tags: [setup, graphite]
+    - role: collectd
+      tags: [setup, collectd]
+    - role: grafana
+      tags: [setup, grafana]

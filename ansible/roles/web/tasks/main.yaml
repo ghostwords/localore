@@ -1,0 +1,11 @@
+---
+
+- include: nginx.yaml
+  tags:
+    - nginx
+    - setup
+
+- include: uwsgi.yaml
+  tags:
+    - setup
+    - uwsgi

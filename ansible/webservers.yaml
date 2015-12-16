@@ -1,0 +1,17 @@
+- hosts: webservers
+  become: True
+  gather_facts: False
+  roles:
+    - role: base
+      tags: setup
+
+    - role: collectd
+      tags: [setup, collectd]
+
+    # TODO move into dbservers playbook?
+    - role: database
+      tags:
+        - database
+        - setup
+
+    - web

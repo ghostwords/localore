@@ -1,0 +1,25 @@
+#{{ ansible_managed }}
+
+# TODO review https://github.com/torchbox/wagtail/blob/master/etc/uwsgi.conf.sample
+# TODO autocomplete for `service`?
+description "{{ domain }} uWSGI server"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+setuid www-data
+setgid www-data
+
+exec uwsgi \
+	--socket /tmp/uwsgi-{{ domain }}.sock \
+	--chmod-socket=660 \
+	--uid www-data \
+	--gid www-data \
+	--virtualenv /var/www/{{ domain }}/current/venv \
+	--chdir /var/www/{{ domain }}/current \
+	--module {{ django_project_name }}.wsgi \
+	--master \
+	--processes 4 \
+	--logger-req file:/var/log/uwsgi/{{ domain }}-access.log \
+	--logger file:/var/log/uwsgi/{{ domain }}-error.log \
+	--die-on-term

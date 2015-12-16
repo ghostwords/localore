@@ -1,0 +1,37 @@
+---
+
+- name: Get timestamp
+  local_action: shell date +%s%3N
+  register: timestamp
+  run_once: True
+  become: False
+
+- name: Create release archive
+  local_action: >
+      command chdir=../{{ django_project_name }}
+      zip --filesync -R ../ansible/{{ django_project_name }}.zip '*'
+        -x '*.swp'
+        -x '*__pycache__*'
+        -x 'db.sqlite3'
+        -x 'media/*'
+  become: False
+
+- name: Ensure /var/www and /var/media exist
+  file: path={{ item }} owner=www-data group=www-data mode=0775 state=directory
+  with_items:
+    - /var/www
+    - /var/media
+
+- include: install.yaml
+  become_user: www-data
+
+- name: Update app version
+  file:
+    state: link
+    src: "{{ release_dir }}"
+    path: /var/www/{{ domain }}/current
+  notify:
+    - test and reload Nginx
+    - restart uWSGI
+
+# TODO clean up old deploys

@@ -1,0 +1,15 @@
+---
+
+# TODO changing the domain leaves the old config in place
+- name: Copy Nginx site config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/{{ domain }}
+  notify:
+   - test and reload Nginx
+
+- name: Activate Nginx site config
+  file:
+    state: link
+    src: /etc/nginx/sites-available/{{ domain }}
+    path: /etc/nginx/sites-enabled/{{ domain }}

@@ -1,0 +1,47 @@
+- name: Create release directory
+  file: path={{ release_dir }} state=directory
+
+- name: Upload and unpack release archive
+  unarchive: src={{ django_project_name }}.zip dest={{ release_dir }}
+
+# TODO switch to virtualenv_python after ansible 2.0
+- name: Create the virtual environment
+  command: virtualenv {{ virtualenv_dir }} --no-site-packages -p /usr/bin/python3
+    creates={{ virtualenv_dir }}/bin/activate
+
+# TODO use virtualenvwrapper to cache packages to save bandwidth
+- name: Install packages from requirements.txt
+  pip:
+    virtualenv: "{{ virtualenv_dir }}"
+    requirements: "{{ release_dir }}/requirements.txt"
+
+- name: Create Django environment config
+  template: src=.env.j2 dest={{ release_dir }}/{{ django_project_name }}/.env
+
+- name: Run Django database migrations
+  django_manage:
+    command: migrate
+    app_path: "{{ release_dir }}"
+    virtualenv: "{{ virtualenv_dir }}"
+
+# TODO not-idempotent, needs fixing!
+#- name: Ensure Django superuser exists
+#  django_manage:
+#    # TODO if new install, need to set the password manually:
+#    # source venv/bin/activate && ./manage.py changepassword
+#    command: createsuperuser --noinput
+#      --username={{ django_admin_user }} --email={{ django_admin_email }}
+#    app_path: "{{ release_dir }}"
+#    virtualenv: "{{ virtualenv_dir }}"
+
+- name: Run django-admin collectstatic
+  django_manage:
+    command: collectstatic
+    app_path: "{{ release_dir }}"
+    virtualenv: "{{ virtualenv_dir }}"
+
+- name: Run django-admin compress
+  django_manage:
+    command: compress
+    app_path: "{{ release_dir }}"
+    virtualenv: "{{ virtualenv_dir }}"

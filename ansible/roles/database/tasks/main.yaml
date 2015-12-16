@@ -1,0 +1,18 @@
+---
+
+- name: Install required system packages
+  apt: name={{ item }} state=present
+  with_items: [postgresql, python-psycopg2]
+
+- name: Ensure database exists
+  become_user: postgres
+  postgresql_db: name={{ dbname }}
+
+# TODO passlib for idempotency? http://docs.ansible.com/ansible/postgresql_user_module.html
+- name: Ensure user has access to database
+  become_user: postgres
+  postgresql_user: db={{ dbname }} name={{ dbuser }} password={{ dbpassword }} priv=ALL
+
+- name: Ensure user does not have unnecessary privileges
+  become_user: postgres
+  postgresql_user: name={{ dbuser }} role_attr_flags=NOSUPERUSER,NOCREATEDB

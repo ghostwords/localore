@@ -1,0 +1,12 @@
+---
+
+grafana_auth_basic_user: "{{ vault_grafana_auth_basic_user }}"
+grafana_auth_basic_password: "{{ vault_grafana_auth_basic_password }}"
+grafana_security_admin_user: "{{ vault_grafana_security_admin_user }}"
+grafana_security_admin_password: "{{ vault_grafana_security_admin_password }}"
+grafana_security_secret_key: "{{ vault_grafana_security_secret_key }}"
+grafana_server_domain: "{{ vault_grafana_server_domain }}"
+grafana_smtp_from_address: "{{ vault_grafana_smtp_from_address }}"
+
+graphite_carbon_cache_line_receiver_interface: 0.0.0.0
+graphite_carbon_ufw_allowed_hosts: "{{ vault_graphite_carbon_ufw_allowed_hosts }}"

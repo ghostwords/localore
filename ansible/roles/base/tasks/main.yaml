@@ -1,0 +1,41 @@
+---
+
+- name: Ensure apt cache is up to date
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install required system packages
+  apt: name={{ item }} state=present
+  with_items:
+    - python-dev
+    - python-pip
+
+    # required by psycopg2
+    - libpq-dev
+
+    - zip
+
+    # TODO for Pillow!!! https://github.com/python-pillow/Pillow/blob/master/depends/ubuntu_14.04.sh
+    # TODO move into Wagtail role?
+    - python-dev
+    - python-setuptools
+    - python3-dev
+    - python-virtualenv
+    - cmake
+
+    - libtiff5-dev
+    - libjpeg8-dev
+    - zlib1g-dev
+    - libfreetype6-dev
+    - liblcms2-dev
+    - libwebp-dev
+    - tcl8.6-dev
+    - tk8.6-dev
+    - python-tk
+    - python3-tk
+
+    # TODO required to fix https://github.com/torchbox/wagtail/issues/1792 ???
+    - imagemagick
+
+# TODO check the options here; move it?
+- name: Install virtualenv
+  pip: name=virtualenv state=present

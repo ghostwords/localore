@@ -1,0 +1,3 @@
+[submodule "ansible/roles_common"]
+	path = ansible/roles_common
+	url = https://github.com/ghostwords/ansible-roles.git

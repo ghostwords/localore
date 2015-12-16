@@ -2,7 +2,7 @@
 
 ## Developer setup
 
-This is a Python 3 project.
+This is a Python 3 project. It uses git submodules; clone with `--recursive`.
 
 1. Install platform dependencies:
 

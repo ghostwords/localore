@@ -1,0 +1,27 @@
+#{{ ansible_managed }}
+
+# TODO review https://github.com/torchbox/wagtail/blob/master/etc/nginx.conf.sample
+server {
+	listen [::]:80;
+	listen 80;
+	server_name {{ domain }};
+
+	root /var/www/{{ domain }}/current;
+
+	location /static {
+		root /var/www/{{ domain }}/current;
+		access_log off;
+	}
+
+	location /media {
+		alias /var/media/{{ domain }};
+		access_log off;
+		#expires max;
+		#add_header Cache-Control "public";
+	}
+
+	location / {
+		uwsgi_pass unix:/tmp/uwsgi-{{ domain }}.sock;
+		include /etc/nginx/uwsgi_params;
+	}
+}

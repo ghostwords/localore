@@ -1,0 +1,9 @@
+- hosts: webservers
+  become: True
+  gather_facts: False
+  vars:
+    release_dir: /var/www/{{ domain }}/releases/{{ timestamp.stdout }}
+    virtualenv_dir: "{{ release_dir }}/venv"
+  roles:
+    - role: deploy
+      tags: deploy

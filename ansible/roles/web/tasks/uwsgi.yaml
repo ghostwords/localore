@@ -1,0 +1,20 @@
+---
+
+- name: Install required system packages (pip3)
+  apt: name=python3-pip state=present
+
+- name: Install uWSGI
+  pip: executable=pip3 name=uwsgi state=present
+  notify:
+   - restart uWSGI
+
+- name: Ensure /var/log/uwsgi exists and belongs to www-data:adm
+  file: path=/var/log/uwsgi owner=www-data group=adm state=directory
+
+# TODO changing the domain leaves the old config in place
+- name: Copy uWSGI Upstart service config
+  template: src=upstart.uwsgi.conf.j2 dest=/etc/init/uwsgi-{{ domain }}.conf
+  notify:
+   - restart uWSGI
+
+# TODO emperor mode: http://daeyunshin.com/2013/01/06/nginx-uwsgi-django-flask-deployment.html
