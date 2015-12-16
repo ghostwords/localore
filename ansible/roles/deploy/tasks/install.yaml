@@ -16,7 +16,7 @@
     requirements: "{{ release_dir }}/requirements.txt"
 
 - name: Create Django environment config
-  template: src=.env.j2 dest={{ release_dir }}/{{ django_project_name }}/.env
+  template: src=env.j2 dest={{ release_dir }}/{{ django_project_name }}/.env
 
 - name: Run Django database migrations
   django_manage:
