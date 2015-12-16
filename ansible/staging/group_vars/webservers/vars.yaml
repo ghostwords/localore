@@ -1,5 +1,6 @@
 ---
 
+collectd_plugin_nginx: on
 collectd_plugin_write_graphite: "{{ vault_collectd_plugin_write_graphite }}"
 
 domain: "{{ vault_domain }}"
