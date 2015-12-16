@@ -1,4 +1,6 @@
 __pycache__/
-*.sw?
-db.sqlite3
 Session.vim
+*.sw?
+
+db.sqlite3
+localore/media/
