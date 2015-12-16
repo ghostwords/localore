@@ -10,7 +10,7 @@ dbpassword: "{{ vault_dbpassword }}"
 dbhost: "{{ vault_dbhost }}"
 dbname: "{{ vault_dbname }}"
 
-django_project_name: "{{ vault_django_project_name }}"
+django_project_name: localore
 django_secret_key: "{{ vault_django_secret_key }}"
 
 elasticsearch_heap_size: '256m'
