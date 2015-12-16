@@ -206,3 +206,11 @@ WAGTAIL_SITE_NAME = "Localore: Finding America"
 WAGTAILEMBEDS_EMBED_FINDER = 'localore.embeds.finder'
 if env('EMBEDLY_KEY'):
     EMBEDLY_KEY = env('EMBEDLY_KEY')
+
+if not DEBUG:
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+            'INDEX': 'localore',
+        },
+    }

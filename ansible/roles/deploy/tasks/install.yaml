@@ -45,3 +45,9 @@
     command: compress
     app_path: "{{ release_dir }}"
     virtualenv: "{{ virtualenv_dir }}"
+
+- name: Run django-admin update_index
+  django_manage:
+    command: update_index
+    app_path: "{{ release_dir }}"
+    virtualenv: "{{ virtualenv_dir }}"
