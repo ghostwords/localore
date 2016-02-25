@@ -74,7 +74,11 @@ class BlogPage(Page):
 
 
 class LinkFields(models.Model):
-    link_external = models.URLField("External link", blank=True)
+    link_external = models.URLField(
+        "External link",
+        blank=True,
+        max_length=500
+    )
     link_page = models.ForeignKey(
         'blog.BlogPage',
         null=True,
