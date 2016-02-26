@@ -10,7 +10,14 @@ dbpassword: "{{ vault_dbpassword }}"
 dbhost: "{{ vault_dbhost }}"
 dbname: "{{ vault_dbname }}"
 
+django_email_host_user: "{{ vault_django_email_host_user }}"
+django_email_host_password: "{{ vault_django_email_host_password }}"
+django_email_host: "{{ vault_django_email_host }}"
+django_email_port: "{{ vault_django_email_port }}"
+django_email_use_tls: "{{ vault_django_email_use_tls }}"
+
 django_project_name: localore
+
 django_secret_key: "{{ vault_django_secret_key }}"
 
 elasticsearch_heap_size: '256m'

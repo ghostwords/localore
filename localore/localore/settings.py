@@ -8,9 +8,20 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # set default values and casting
 env = Env(
     ALLOWED_HOSTS=(list, []),
+
     DEBUG=(bool, False),
+
     DJANGO_LOG_LEVEL=(str, 'INFO'),
+
+    DEFAULT_FROM_EMAIL=(str, 'webmaster@localhost'),
+    EMAIL_HOST_USER=(str, ''),
+    EMAIL_HOST_PASSWORD=(str, ''),
+    EMAIL_HOST=(str, 'localhost'),
+    EMAIL_PORT=(int, 25),
+    EMAIL_USE_TLS=(bool, False),
+
     EMBEDLY_KEY=(str, None),
+
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, 'media')),
 )
 Env.read_env()
@@ -41,13 +52,13 @@ LOGGING = {
 
 # E-mail settings
 
-DEFAULT_FROM_EMAIL = 'Localore: Finding America CMS <admin@demo.finding-america.com>'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_SUBJECT_PREFIX = ''
-EMAIL_HOST='localhost'
-EMAIL_PORT=25
-EMAIL_USE_TLS=False
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 # log e-mails to console in development
 if DEBUG:
