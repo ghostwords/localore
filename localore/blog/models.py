@@ -45,6 +45,7 @@ class BlogPage(Page):
     )
 
     date = models.DateField("Post date", default=datetime.date.today)
+
     body = StreamField([
         ('heading', CharBlock(
             classname="full title",
@@ -58,15 +59,21 @@ class BlogPage(Page):
         ('embed', EmbedBlock(icon='media')),
     ])
 
+    # search index config
     search_fields = Page.search_fields + (
         index.SearchField('body'),
     )
 
+    # admin editor panels config
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         ImageChooserPanel('main_image'),
         StreamFieldPanel('body')
     ]
+
+    # parent page/subpage type rules
+    parent_page_types = ['blog.BlogIndexPage']
+    subpage_types = []
 
     @property
     def blog_index(self):
@@ -125,3 +132,5 @@ class BlogIndexPage(Page):
         FieldPanel('body', classname="full"),
         InlinePanel('related_links', label="Featured posts"),
     ]
+
+    subpage_types = ['blog.BlogPage']

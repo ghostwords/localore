@@ -12,5 +12,7 @@ class HomePage(Page):
         FieldPanel('body', classname="full")
     ]
 
+    parent_page_types = []
+
     class Meta:
         verbose_name = "Homepage"
