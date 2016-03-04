@@ -134,3 +134,7 @@ class BlogIndexPage(Page):
     ]
 
     subpage_types = ['blog.BlogPage']
+
+    @property
+    def posts(self):
+        return BlogPage.objects.live().descendant_of(self).order_by('-date')

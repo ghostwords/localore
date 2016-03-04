@@ -28,4 +28,14 @@
 	{% endif %}
 
 	<div class="body-content">{{ self.body|richtext }}</div>
+
+	<hr>
+
+	<h4>Archive</h4>
+	{% for post in self.posts %}
+		<a href="{% pageurl post %}">{{ post.title }}</a>
+		<br>
+	{% empty %}
+		No posts.
+	{% endfor %}
 {% endblock %}
