@@ -22,6 +22,9 @@ env = Env(
 
     EMBEDLY_KEY=(str, None),
 
+    JUICER_AUTH_TOKEN=(str, None),
+    JUICER_FEED_ID=(str, None),
+
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, 'media')),
 )
 Env.read_env()
@@ -225,3 +228,7 @@ if not DEBUG:
             'INDEX': 'localore',
         },
     }
+
+# Juicer settings
+JUICER_FEED_ID = env('JUICER_FEED_ID')
+JUICER_AUTH_TOKEN = env('JUICER_AUTH_TOKEN')

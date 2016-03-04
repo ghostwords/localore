@@ -1,11 +1,17 @@
 {% load i18n wagtailadmin_tags %}
 
 <li class="icon icon-site">
-    <a href="https://www.juicer.io/feeds/fa-demo/moderation" target=_blank>
-    {% blocktrans count counter=total_posts with total_posts|intcomma as total %}
-        <span>{{ total }}</span> Juicer Post in Queue
-    {% plural %}
-        <span>{{ total }}</span> Juicer Posts in Queue
-    {% endblocktrans %}
-    </a>
+	{% if error %}
+		<span class="error-message" style="font-size:large">
+			Error fetching Juicer post counts
+		</span>
+	{% else %}
+		<a href="https://www.juicer.io/feeds/{{ feed_id }}/moderation" target=_blank>
+		{% blocktrans count counter=total_posts with total_posts|intcomma as total %}
+			<span>{{ total }}</span> Juicer Post in Queue
+		{% plural %}
+			<span>{{ total }}</span> Juicer Posts in Queue
+		{% endblocktrans %}
+		</a>
+	{% endif %}
 </li>
