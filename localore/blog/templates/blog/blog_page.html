@@ -2,23 +2,23 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
 
 	<article id="blog-post">
 		<div class="page-header">
-			<h2>{{ self.title }}</h2>
+			<h2>{{ page.title }}</h2>
 			{# TODO post-meta? meta? #}
-			<p class="post-meta">By {{ self.owner }} at {{ self.first_published_at }}</p>
-			<a href="{% pageurl self.blog_index %}">back to blog</a>
+			<p class="post-meta">By {{ page.owner }} at {{ page.first_published_at }}</p>
+			<a href="{% pageurl page.blog_index %}">back to blog</a>
 		</div>
 
-		{% if self.main_image %}
-			{% image self.main_image width-400 %}
+		{% if page.main_image %}
+			{% image page.main_image width-400 %}
 		{% endif %}
 
-		{{ self.body }}
+		{{ page.body }}
 	</article>
 
 {% endblock %}

@@ -2,16 +2,16 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-	<h1>{{ self.title }}</h1>
+	<h1>{{ page.title }}</h1>
 
 	<hr>
 
-	{% if self.related_links.all %}
+	{% if page.related_links.all %}
 		<ul>
-			{% for item in self.related_links.all %}
+			{% for item in page.related_links.all %}
 				<li>
 					{{ item.title }}
 					<br>
@@ -27,12 +27,12 @@
 		<hr>
 	{% endif %}
 
-	<div class="body-content">{{ self.body|richtext }}</div>
+	<div class="body-content">{{ page.body|richtext }}</div>
 
 	<hr>
 
 	<h4>Archive</h4>
-	{% for post in self.posts %}
+	{% for post in page.posts %}
 		<a href="{% pageurl post %}">{{ post.title }}</a>
 		<br>
 	{% empty %}
