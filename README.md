@@ -16,7 +16,7 @@
 
 4. Optional, but recommended: Set up a Python 3 "virtual environment" for working on this project with `virtualenv`.
 
-5. Install Python dependencies: `pip install -r localore/requirements-dev.txt`. When we run into errors here, it probably means we forgot to document and/or install some platform dependency (see step 3).
+5. Install Python dependencies: `pip install -r localore/requirements-dev.txt`. Install from `requirements-dev-linux.txt` on Linux. When we run into errors here, it probably means we forgot to document and/or install some platform dependency (see step 3).
 
 6. Set up the database: `./localore/manage.py migrate`, then `createsuperuser`
 
