@@ -1,0 +1,24 @@
+strictness: veryhigh
+
+pylint:
+  disable:
+    - C0103
+    - R0903
+    - W0105
+    - W0232
+
+pep8:
+  disable:
+    - E261
+    - E265
+    - E266
+#    - W602
+#    - W603
+#  enable:
+#    - W601
+#  options:
+#    max-line-length: 79
+
+# TODO install prospector[with_vulture]
+vulture:
+  run: false
