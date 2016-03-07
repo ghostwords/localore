@@ -1,6 +1,7 @@
+import os
+
 from environ import Env
 
-import os
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -217,6 +218,7 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Localore: Finding America"
+WAGTAIL_USAGE_COUNT_ENABLED = True
 WAGTAILEMBEDS_EMBED_FINDER = 'localore.embeds.finder'
 if env('EMBEDLY_KEY'):
     WAGTAILEMBEDS_EMBEDLY_KEY = env('EMBEDLY_KEY')
@@ -224,7 +226,8 @@ if env('EMBEDLY_KEY'):
 if not DEBUG:
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+            'BACKEND':
+                'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
             'INDEX': 'localore',
         },
     }
