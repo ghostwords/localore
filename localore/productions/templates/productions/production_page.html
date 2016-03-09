@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+	<article id="blog-post">
+		<div class="page-header">
+			<h2>{{ page.title }}</h2>
+			<a href="{% pageurl page.productions_index %}">back to list of productions</a>
+		</div>
+
+		{% image page.hero_image fill-800x300-c100 %}
+
+		{{ page.description|richtext }}
+	</article>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %} About | {{ current_page_name.title }}{% endblock %}
+
+{% block body_class %}template-about-{{ current_page_name }}{% endblock %}
+
+{% block content %}
+
+	<h1>About | {{ current_page_name.title }}</h1>
+
+	<hr>
+
+	<p>
+		{% for page in about_page_names %}
+			{% if page == current_page_name %}
+				{{ page }}
+			{% else %}
+				<a href="/about/{{ page }}">{{ page }}</a>
+			{% endif %}
+			{% if not forloop.last %}|{% endif %}
+		{% endfor %}
+	</p>
+
+	<hr>
+
+	{% block about_content %}{% endblock %}
+
+{% endblock %}

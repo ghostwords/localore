@@ -29,6 +29,21 @@
 
 		<div class="main container">
 
+			<br>
+
+			<a href="/"><img src="{% static 'images/AIR_lightgrey.png' %}" title="AIR logo" width=80></a>
+
+			{#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#}
+
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/about/">About</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="/productions/">Productions</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="/blog/">Connections</a>
+
+			<hr>
+
 			{% block content %}{% endblock %}
 
 		</div>

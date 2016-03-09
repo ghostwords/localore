@@ -72,6 +72,7 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = (
+    'about',
     'blog',
     'home',
     'people',

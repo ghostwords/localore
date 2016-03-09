@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+	<h1>{{ page.title }}</h1>
+
+	<ul>
+	{% for prod in page.productions %}
+		<li>
+			{% image prod.logo_image height-40 %}
+			{{ prod.city }}, {{ prod.state }}:
+			<a href="{% pageurl prod %}">{{ prod.title }}</a>
+		</li>
+	{% empty %}
+		<li>No productions.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

@@ -62,10 +62,6 @@ class Person(models.Model, index.Indexed):
         ], "Contact")
     ]
 
-    # TODO about.TeamPage?
-    #parent_page_types = ['productions.PeopleIndexPage']
-    #subpage_types = []
-
     class Meta:
         verbose_name = "person"
         verbose_name_plural = "people"

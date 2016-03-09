@@ -91,6 +91,10 @@ class ProductionPage(Page):
     parent_page_types = ['productions.ProductionsIndexPage']
     subpage_types = []
 
+    @property
+    def productions_index(self):
+        return self.get_ancestors().type(ProductionsIndexPage).last()
+
     class Meta:
         verbose_name = "production"
 
@@ -100,7 +104,4 @@ class ProductionsIndexPage(Page):
 
     @property
     def productions(self):
-        return (
-            ProductionPage.objects.live().descendant_of(self)
-            .order_by('-date')
-        )
+        return ProductionPage.objects.live().descendant_of(self)
