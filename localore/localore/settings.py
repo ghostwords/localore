@@ -78,7 +78,6 @@ INSTALLED_APPS = (
     'productions',
     'search',
 
-    'wagtail.contrib.wagtailstyleguide',
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -108,6 +107,10 @@ INSTALLED_APPS = (
 
     'wagtailmodeladmin',
 )
+if DEBUG:
+    INSTALLED_APPS += (
+        'wagtail.contrib.wagtailstyleguide',
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
