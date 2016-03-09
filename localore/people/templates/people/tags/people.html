@@ -1,0 +1,18 @@
+{% regroup people by production as productions %}
+
+{% for production in productions %}
+<p>
+	<h3>
+		{% if production.grouper %}
+			{{ production.grouper }}
+		{% else %}
+			AIR
+		{% endif %}
+	</h3>
+
+	{% for person in production.list %}
+		{{ person }}
+		<br>
+	{% endfor %}
+</p>
+{% endfor %}

@@ -1,9 +1,11 @@
 {% extends "about/base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags people_tags %}
 
 {% block about_content %}
 
 	<h2>Team</h2>
+
+	{% people %}
 
 {% endblock %}
