@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -21,8 +23,6 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
-
-import datetime
 
 
 class QuoteBlock(StructBlock):

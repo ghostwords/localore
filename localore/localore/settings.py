@@ -72,8 +72,10 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = (
-    'home',
     'blog',
+    'home',
+    'people',
+    'productions',
     'search',
 
     'wagtail.contrib.wagtailstyleguide',
@@ -103,6 +105,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'wagtailmodeladmin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -117,6 +121,8 @@ MIDDLEWARE_CLASSES = (
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+
+    'wagtailmodeladmin.middleware.ModelAdminMiddleware',
 )
 
 ROOT_URLCONF = 'localore.urls'

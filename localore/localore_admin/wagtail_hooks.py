@@ -1,3 +1,6 @@
+import json
+import logging
+
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
@@ -5,9 +8,6 @@ from django.conf import settings
 
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailadmin.site_summary import SummaryItem
-
-import json
-import logging
 
 
 logger = logging.getLogger('localore.juicer_site_summary')
@@ -35,7 +35,9 @@ class JuicerSummaryItem(SummaryItem):
             }
 
         try:
-            count = json.loads(r.read().decode('utf-8'))['posts']['total_count']
+            count = json.loads(
+                r.read().decode('utf-8')
+            )['posts']['total_count']
         except KeyError as err:
             logger.error("KeyError fetching Juicer post counts: %s", err)
             return {
@@ -57,3 +59,8 @@ def add_juicer_summary_item(request, items):
     ]
 
     items.append(JuicerSummaryItem(request))
+
+
+@hooks.register('construct_main_menu')
+def hide_snippets_menu_item(_, menu_items):
+    menu_items[:] = [item for item in menu_items if item.name != 'snippets']
