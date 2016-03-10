@@ -28,7 +28,11 @@ env = Env(
 
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, 'media')),
 )
-Env.read_env()
+# read from a local, unversioned dev environment file if it exists
+local_env_file = os.path.join(PROJECT_DIR, '.env.local')
+Env.read_env(
+    env_file=local_env_file if os.path.isfile(local_env_file) else None
+)
 
 DEBUG = env('DEBUG')
 

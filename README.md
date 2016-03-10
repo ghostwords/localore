@@ -18,9 +18,11 @@
 
 5. Install Python dependencies: `pip install -r localore/requirements-dev.txt`. Install from `requirements-dev-linux.txt` on Linux. When we run into errors here, it probably means we forgot to document and/or install some platform dependency (see step 3).
 
-6. Set up the database: `./localore/manage.py migrate`, then `createsuperuser`
+6. Copy [localore/localore/.env](localore/localore/.env) to `localore/localore/.env.local`. This is where your local environment variable settings (database config, etc.) go. See the arguments passed into `Env()` in [localore/localore/settings.py](localore/localore/settings.py) for the complete list.
 
-7. Run the dev server: `./localore/manage.py runserver`
+7. Set up the database: `python localore/manage.py migrate`, then `createsuperuser`
+
+8. Run the dev server: `python localore/manage.py runserver`
 
 
 ## License
