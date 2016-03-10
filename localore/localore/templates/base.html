@@ -1,4 +1,4 @@
-{% load compress static wagtailuserbar %}
+{% load blog_tags compress productions_tags static wagtailuserbar %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -36,11 +36,19 @@
 			{#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#}
 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="/about/">About</a>
+			<a href="{% url 'about-index' %}">About</a>
+
+			{% get_productions_index_page as productions_root %}
+			{% if productions_root %}
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="/productions/">Productions</a>
+			<a href="{{ productions_root.url }}">{{ productions_root }}</a>
+			{% endif %}
+
+			{% get_blog_index_page as blog_root %}
+			{% if blog_root %}
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="/blog/">Connections</a>
+			<a href="{{ blog_root.url }}">{{ blog_root }}</a>
+			{% endif %}
 
 			<hr>
 
