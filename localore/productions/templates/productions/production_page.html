@@ -6,15 +6,36 @@
 
 {% block content %}
 
-	<article id="blog-post">
-		<div class="page-header">
-			<h2>{{ page.title }}</h2>
+	<div class="page-header">
+
+		<h2>{{ page.title }}</h2>
+
+		{% with prev=self.get_prev_siblings.live.first next=self.get_next_siblings.live.first %}
+		<nav>
+			{% if prev %}
+				<a href="{% pageurl prev %}" title="{{ prev }}">previous</a>
+			{% else %}
+				previous
+			{% endif %}
+
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+
+			{% if next %}
+				<a href="{% pageurl next %}" title="{{ next }}">next</a>
+			{% else %}
+				next
+			{% endif %}
+
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+
 			<a href="{% pageurl page.productions_index %}">back to list of productions</a>
-		</div>
+		</nav>
+		{% endwith %}
 
-		{% image page.hero_image fill-800x300-c100 %}
+	</div>
 
-		{{ page.description|richtext }}
-	</article>
+	{% image page.hero_image fill-800x300-c100 %}
+
+	{{ page.description|richtext }}
 
 {% endblock %}
