@@ -10,10 +10,11 @@
   local_action: >
       command chdir=../{{ django_project_name }}
       zip --filesync -R ../ansible/{{ django_project_name }}.zip '*'
-        -x '*.swp'
-        -x '*__pycache__*'
         -x 'db.sqlite3'
+        -x '*/.env.local'
         -x 'media/*'
+        -x '*__pycache__*'
+        -x '*.swp'
   become: False
 
 - name: Ensure /var/www and /var/media exist
