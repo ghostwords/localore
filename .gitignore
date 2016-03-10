@@ -4,5 +4,5 @@ Session.vim
 
 ansible/localore.zip
 db.sqlite3
-localore/.env.local
+localore/localore/.env.local
 localore/media/
