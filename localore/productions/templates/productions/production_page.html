@@ -10,7 +10,7 @@
 
 		<h2>{{ page.title }}</h2>
 
-		{% with prev=self.get_prev_siblings.live.first next=self.get_next_siblings.live.first %}
+		{% with prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
 		<nav>
 			{% if prev %}
 				<a href="{% pageurl prev %}" title="{{ prev }}">previous</a>
