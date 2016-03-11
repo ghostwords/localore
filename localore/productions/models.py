@@ -2,14 +2,48 @@ from django.db import models
 
 from localflavor.us.models import USStateField
 
+from modelcluster.fields import ParentalKey
+
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    MultiFieldPanel
+    InlinePanel
 )
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+
+
+class LinkField(models.Model):
+    SERVICE_NAME_CHOICES = (
+        ('', 'Other'),
+        ('instagram', 'Instagram'),
+        ('soundcloud', 'SoundCloud'),
+        ('tumblr', 'Tumblr'),
+        ('twitter', 'Twitter'),
+        ('vimeo', 'Vimeo'),
+        ('youtube', 'YouTube'),
+    )
+
+    service_name = models.CharField(
+        "service",
+        max_length=10,
+        choices=SERVICE_NAME_CHOICES,
+        blank=True
+    )
+    url = models.URLField("URL")
+
+    panels = [
+        FieldPanel('service_name'),
+        FieldPanel('url'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class ProductionPageRelatedLink(LinkField):
+    page = ParentalKey('ProductionPage', related_name='related_links')
 
 
 class ProductionPage(Page):
@@ -39,13 +73,6 @@ class ProductionPage(Page):
 
     description = RichTextField()
 
-    twitter_url = models.URLField("Twitter URL", blank=True)
-    instagram_url = models.URLField("Instagram URL", blank=True)
-    youtube_url = models.URLField("YouTube URL", blank=True)
-    tumblr_url = models.URLField("Tumblr URL", blank=True)
-    soundcloud_url = models.URLField("SoundCloud URL", blank=True)
-    vine_url = models.URLField("Vine URL", blank=True)
-
     # TODO producer & collaborator info (opens to bio)
     # @property
 
@@ -73,18 +100,7 @@ class ProductionPage(Page):
         ImageChooserPanel('hero_image'),
         ImageChooserPanel('logo_image'),
         FieldPanel('description', classname='full'),
-        MultiFieldPanel(
-            [
-                FieldPanel('twitter_url'),
-                FieldPanel('instagram_url'),
-                FieldPanel('youtube_url'),
-                FieldPanel('tumblr_url'),
-                FieldPanel('soundcloud_url'),
-                FieldPanel('vine_url')
-            ],
-            heading="Social Links",
-            classname="collapsible collapsed"
-        ),
+        InlinePanel('related_links', label="Related links"),
         FieldPanel('highlights', classname='full'),
     ]
 

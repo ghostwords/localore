@@ -9,6 +9,11 @@
 	<div class="page-header">
 
 		<h2>{{ page.title }}</h2>
+		<h4>{{ page.city }}, {{ page.get_state_display }}</h4>
+
+		{% image page.hero_image fill-900x150-c100 %}
+		<br>
+		<br>
 
 		{% with prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
 		<nav>
@@ -34,8 +39,26 @@
 
 	</div>
 
-	{% image page.hero_image fill-800x300-c100 %}
-
 	{{ page.description|richtext }}
+
+	<hr>
+
+	<h4>Social links</h4>
+	{% if page.related_links.all %}
+		<ul>
+		{% for link in page.related_links.all %}
+			<li>
+				{{ link.url }}
+				{% if link.service_name %} ({{ link.get_service_name_display }}){% endif %}
+			</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		No social links.
+	{% endif %}
+
+	<hr>
+
+	{{ page.highlights|richtext }}
 
 {% endblock %}
