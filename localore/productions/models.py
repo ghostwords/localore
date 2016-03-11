@@ -6,7 +6,8 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    InlinePanel
+    InlinePanel,
+    MultiFieldPanel
 )
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
@@ -95,10 +96,14 @@ class ProductionPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('city'),
-        FieldPanel('state'),
-        ImageChooserPanel('hero_image'),
-        ImageChooserPanel('logo_image'),
+        MultiFieldPanel(
+            [FieldPanel('city'), FieldPanel('state')],
+            "Location"
+        ),
+        MultiFieldPanel(
+            [ImageChooserPanel('hero_image'), ImageChooserPanel('logo_image')],
+            "Graphics"
+        ),
         FieldPanel('description', classname='full'),
         InlinePanel('related_links', label="Related links"),
         FieldPanel('highlights', classname='full'),
