@@ -34,7 +34,7 @@ class Person(models.Model, index.Indexed):
         help_text="Leave blank for AIR/Localore staff."
     )
 
-    biography = RichTextField()
+    biography = RichTextField(blank=True)
 
     email = models.EmailField(blank=True)
     twitter_url = models.URLField("Twitter URL", blank=True)
