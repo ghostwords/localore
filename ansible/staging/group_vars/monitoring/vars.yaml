@@ -5,6 +5,8 @@ grafana_auth_basic_password: "{{ vault_grafana_auth_basic_password }}"
 grafana_security_admin_user: "{{ vault_grafana_security_admin_user }}"
 grafana_security_admin_password: "{{ vault_grafana_security_admin_password }}"
 grafana_security_secret_key: "{{ vault_grafana_security_secret_key }}"
+grafana_server_cert_file: /etc/letsencrypt/live/{{ grafana_server_domain }}/fullchain.pem
+grafana_server_cert_key: /etc/letsencrypt/live/{{ grafana_server_domain }}/key.pem
 grafana_server_domain: "{{ vault_grafana_server_domain }}"
 grafana_smtp_from_address: "{{ vault_grafana_smtp_from_address }}"
 
