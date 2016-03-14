@@ -4,10 +4,10 @@ import logging
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from django.conf import settings
-
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailadmin.site_summary import SummaryItem
+
+from localore_admin.models import JuicerSettings
 
 
 logger = logging.getLogger('localore.juicer_site_summary')
@@ -19,11 +19,18 @@ class JuicerSummaryItem(SummaryItem):
 
     # TODO cache
     def get_context(self):
+        settings = JuicerSettings.for_site(self.request.site)
+        if not settings.juicer_feed_id or not settings.juicer_auth_token:
+            return {
+                'error': True,
+                'settings_error': True
+            }
+
         request = Request(
             'https://www.juicer.io/api/feeds/'
             '%s/moderated?authentication_token=%s&count=true' % (
-                settings.JUICER_FEED_ID,
-                settings.JUICER_AUTH_TOKEN
+                settings.juicer_feed_id,
+                settings.juicer_auth_token
             )
         )
         try:
@@ -45,7 +52,7 @@ class JuicerSummaryItem(SummaryItem):
             }
 
         return {
-            'feed_id': settings.JUICER_FEED_ID,
+            'feed_id': settings.juicer_feed_id,
             'total_posts': count
         }
 

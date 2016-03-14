@@ -23,6 +23,3 @@ django_secret_key: "{{ vault_django_secret_key }}"
 elasticsearch_heap_size: '256m'
 
 embedly_key: "{{ vault_embedly_key }}"
-
-juicer_auth_token: "{{ vault_juicer_auth_token }}"
-juicer_feed_id: "{{ vault_juicer_feed_id }}"

@@ -8,7 +8,11 @@
 
 	{{ page.body|richtext }}
 
-	<ul class="juicer-feed" data-feed-id="fa-demo"></ul>
+	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
+	{% if juicer_feed_id %}
+	<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}"></ul>
+	{% endif %}
+	{% endwith %}
 
 {% endblock %}
 

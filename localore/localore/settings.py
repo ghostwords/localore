@@ -23,9 +23,6 @@ env = Env(
 
     EMBEDLY_KEY=(str, None),
 
-    JUICER_AUTH_TOKEN=(str, None),
-    JUICER_FEED_ID=(str, None),
-
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, 'media')),
 )
 # read from a local, unversioned dev environment file if it exists
@@ -94,6 +91,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
+    'wagtail.contrib.settings',
 
     # needs to go after wagtaildocs to remove its site summary
     'localore_admin',
@@ -148,6 +146,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtail.contrib.settings.context_processors.settings',
             ],
         },
     },
@@ -245,7 +244,3 @@ if not DEBUG:
             'INDEX': 'localore',
         },
     }
-
-# Juicer settings
-JUICER_FEED_ID = env('JUICER_FEED_ID')
-JUICER_AUTH_TOKEN = env('JUICER_AUTH_TOKEN')

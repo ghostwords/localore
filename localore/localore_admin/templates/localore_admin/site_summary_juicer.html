@@ -3,7 +3,12 @@
 <li class="icon icon-site">
 	{% if error %}
 		<span class="error-message" style="font-size:large">
-			Error fetching Juicer post counts
+			{% if settings_error %}
+				Juicer not yet configured:
+				<a href="settings/localore_admin/juicersettings">Click here to set up</a>
+			{% else %}
+				Error fetching Juicer post counts
+			{% endif %}
 		</span>
 	{% else %}
 		<a href="https://www.juicer.io/feeds/{{ feed_id }}/moderation" target=_blank>
