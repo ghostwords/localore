@@ -1,10 +1,33 @@
 #{{ ansible_managed }}
 
-# TODO review https://github.com/torchbox/wagtail/blob/master/etc/nginx.conf.sample
 server {
 	listen [::]:80;
 	listen 80;
 	server_name {{ domain }};
+
+	# serve ACME challenge files over HTTP
+	location /.well-known/acme-challenge/ {
+		alias /var/www/challenges/.well-known/acme-challenge/;
+		try_files $uri @forward_https;
+	}
+
+	# redirect HTTP requests to HTTPS
+	location @forward_https {
+		return 301 https://{{ domain }}$request_uri;
+	}
+	location / {
+		return 301 https://{{ domain }}$request_uri;
+	}
+}
+
+server {
+	listen [::]:443 ssl spdy;
+	listen 443 ssl spdy;
+	server_name {{ domain }};
+
+	ssl_certificate /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ domain }}/key.pem;
+	include /etc/nginx/ssl.conf;
 
 	root /var/www/{{ domain }}/current;
 
