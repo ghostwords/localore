@@ -47,6 +47,28 @@ class ProductionPageRelatedLink(LinkField):
     page = ParentalKey('ProductionPage', related_name='related_links')
 
 
+class JuicerSourceField(models.Model):
+    name = models.CharField(
+        "source account name",
+        max_length=100,
+        help_text=(
+            "Juicer source account name, without # or @. "
+            "Filters across all account types in the feed."
+        )
+    )
+
+    panels = [
+        FieldPanel('name'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class ProductionPageJuicerSource(JuicerSourceField):
+    page = ParentalKey('ProductionPage', related_name='juicer_sources')
+
+
 class ProductionPage(Page):
     city = models.CharField(max_length=255)
     state = USStateField()
@@ -82,8 +104,6 @@ class ProductionPage(Page):
     # auto-generated links to connections that link to this production
     # @property
 
-    # TODO juicer slider
-
     highlights = RichTextField(
         blank=True,
         help_text="Optional WYSIWYG area to highlight the production's work."
@@ -108,10 +128,17 @@ class ProductionPage(Page):
         FieldPanel('description', classname='full'),
         InlinePanel('related_links', label="Related links"),
         FieldPanel('highlights', classname='full'),
+        InlinePanel('juicer_sources', label="Juicer sources"),
     ]
 
     parent_page_types = ['productions.ProductionsIndexPage']
     subpage_types = []
+
+    @property
+    def juicer_feed_filter(self):
+        return ",".join(
+            source.name for source in self.juicer_sources.all()
+        )
 
     @property
     def productions_index(self):
