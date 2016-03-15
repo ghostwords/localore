@@ -13,15 +13,10 @@ urlpatterns = [
     ), name='about-index'),
 ]
 
-for page in ABOUT_PAGES:
+for page_name in ABOUT_PAGES:
     urlpatterns.append(
-        url(
-            r'^' + page + '$',
-            views.about,
-            {
-                'current_page_name': page,
-                'about_page_names': ABOUT_PAGES
-            },
-            name='about-' + page
-        )
+        url(r'^' + page_name + '$', views.about, {
+            'current_page_name': page_name,
+            'about_page_names': ABOUT_PAGES
+        }, name='about-' + page_name)
     )

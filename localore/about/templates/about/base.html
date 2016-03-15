@@ -13,11 +13,11 @@
 	<hr>
 
 	<p>
-		{% for page in about_page_names %}
-			{% if page == current_page_name %}
-				{{ page }}
+		{% for page_name in about_page_names %}
+			{% if page_name == current_page_name %}
+				{{ page_name }}
 			{% else %}
-				<a href="/about/{{ page }}">{{ page }}</a>
+				<a href="{% url 'about-'|add:page_name %}">{{ page_name }}</a>
 			{% endif %}
 			{% if not forloop.last %}|{% endif %}
 		{% endfor %}
