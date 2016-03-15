@@ -43,7 +43,12 @@ class Person(models.Model, index.Indexed):
     search_fields = (
         index.SearchField('first_name'),
         index.SearchField('last_name'),
+        index.SearchField('role', partial_match=True),
         index.SearchField('biography', partial_match=True),
+        # TODO only works with Elasticsearch
+        index.RelatedFields('production', [
+            index.SearchField('title', partial_match=True),
+        ]),
     )
 
     panels = [
@@ -62,11 +67,27 @@ class Person(models.Model, index.Indexed):
         ], "Contact")
     ]
 
+    @property
+    def role_and_production(self):
+        if self.role and self.production:
+            return self.role + ", " + self.production.title
+        elif self.role:
+            return self.role
+        elif self.production:
+            return self.production
+
     class Meta:
+        ordering = ('-production', 'first_name', 'last_name')
         verbose_name = "person"
         verbose_name_plural = "people"
 
     def __str__(self):
-        return "%s %s" % (
-            self.first_name, self.last_name
-        )
+        out = [
+            self.first_name,
+            self.last_name
+        ]
+
+        if self.role_and_production:
+            out.append(" (%s)" % self.role_and_production)
+
+        return " ".join(out)

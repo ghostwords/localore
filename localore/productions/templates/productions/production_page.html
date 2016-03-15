@@ -57,6 +57,19 @@
 		No social links.
 	{% endif %}
 
+	<h4>Featured people</h4>
+	{% if page.related_people.all %}
+		<ul>
+		{% for item in page.related_people.all %}
+			<li>
+				{{ item.person }}
+			</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		No featured people.
+	{% endif %}
+
 	<hr>
 
 	{{ page.highlights|richtext }}

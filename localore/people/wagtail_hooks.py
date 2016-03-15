@@ -12,7 +12,6 @@ class PeopleAdmin(ModelAdmin):
     menu_order = 300
     list_display = ('profile_photo', 'full_name', 'production', 'role')
     list_filter = ('role', 'production')
-    ordering = ('-production',)
     search_fields = ('last_name', 'first_name', 'biography')
 
     def full_name(self, obj): # pylint: disable=no-self-use

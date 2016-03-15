@@ -10,9 +10,10 @@ from wagtail.wagtailadmin.edit_handlers import (
     MultiFieldPanel
 )
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 
 class LinkField(models.Model):
@@ -45,6 +46,26 @@ class LinkField(models.Model):
 
 class ProductionPageRelatedLink(LinkField):
     page = ParentalKey('ProductionPage', related_name='related_links')
+
+
+class PersonField(models.Model):
+    person = models.ForeignKey(
+        'people.Person',
+        on_delete=models.CASCADE,
+        related_name='+',
+        verbose_name="Name"
+    )
+
+    panels = [
+        SnippetChooserPanel('person'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class ProductionPageRelatedPerson(Orderable, PersonField):
+    page = ParentalKey('ProductionPage', related_name='related_people')
 
 
 class JuicerSourceField(models.Model):
@@ -97,9 +118,6 @@ class ProductionPage(Page):
 
     description = RichTextField()
 
-    # TODO producer & collaborator info (opens to bio)
-    # @property
-
     # TODO "mentioned in":
     # auto-generated links to connections that link to this production
     # @property
@@ -127,6 +145,9 @@ class ProductionPage(Page):
         ),
         FieldPanel('description', classname='full'),
         InlinePanel('related_links', label="Related links"),
+        InlinePanel(
+            'related_people', label="Featured team members", max_num=2
+        ),
         FieldPanel('highlights', classname='full'),
         InlinePanel('juicer_sources', label="Juicer sources"),
     ]
