@@ -68,6 +68,10 @@ class Person(models.Model, index.Indexed):
     ]
 
     @property
+    def full_name(self):
+        return self.first_name + " " + self.last_name
+
+    @property
     def role_and_production(self):
         if self.role and self.production:
             return self.role + ", " + self.production.title

@@ -62,7 +62,7 @@
 		<ul>
 		{% for item in page.related_people.all %}
 			<li>
-				{{ item.person }}
+				<a href="{% url 'about-team' %}#{{ item.person.full_name|slugify }}">{{ item.person }}</a>
 			</li>
 		{% endfor %}
 		</ul>
