@@ -54,9 +54,10 @@ class ProductionPage(Page):
     hero_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
+        blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        help_text="The large header/feature/hero image for this production."
+        help_text="The header/hero/feature image for this production."
     )
 
     # TODO optional feature video
