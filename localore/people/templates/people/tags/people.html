@@ -1,18 +1,47 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
 {% regroup people by production as productions %}
 
 {% for production in productions %}
-<p>
-	<h3>
-		{% if production.grouper %}
-			{{ production.grouper }}
-		{% else %}
-			AIR
-		{% endif %}
-	</h3>
 
-	{% for person in production.list %}
-		{{ person }}
+	<div class="row">
+
+		<div class="text-center">
+			{% if production.grouper %}
+				<h4>{{ production.grouper.city }}, {{ production.grouper.state }}</h4>
+			{% endif %}
+			<h3>
+				{% if production.grouper %}
+					{{ production.grouper.title }}
+				{% else %}
+					AIR | Localore Team
+				{% endif %}
+			</h3>
+		</div>
+
 		<br>
-	{% endfor %}
-</p>
+		<br>
+
+		{% for person in production.list %}
+		<div class="col-md-4">
+			{% image person.photo fill-140x140-c100 %}
+			<p>
+				<b>{{ person.full_name }}</b>
+			</p>
+			<p>
+				{{ person.email }}
+				{{ person.twitter_url }}
+				{{ person.instagram_url }}
+			</p>
+			<p>
+				{{ person.biography|richtext }}
+			</p>
+		</div>
+		{% endfor %}
+
+	</div>
+
+	{% if not forloop.last %}<hr>{% endif %}
+	<br>
+
 {% endfor %}
