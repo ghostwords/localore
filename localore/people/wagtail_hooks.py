@@ -12,7 +12,13 @@ class PeopleAdmin(ModelAdmin):
     menu_order = 300
     list_display = ('profile_photo', 'full_name', 'production', 'role')
     list_filter = ('role', 'production')
-    search_fields = ('last_name', 'first_name', 'biography')
+    search_fields = (
+        'first_name',
+        'last_name',
+        'role',
+        'biography',
+        'production__title',
+    )
 
     def full_name(self, obj): # pylint: disable=no-self-use
         return "%s %s" % (
