@@ -29,6 +29,8 @@ class PeopleAdmin(ModelAdmin):
     full_name.admin_order_field = 'last_name'
 
     def profile_photo(self, obj):
+        if not obj.photo:
+            return
         return format_html(
             '<img src="{}" title="{}" alt="{}" style="height:40px">',
             obj.photo.file.url,
