@@ -10,6 +10,10 @@ class Migration(migrations.Migration):
         ('localore_admin', '0002_auto_20160316_1444'),
     ]
 
+    run_before = [
+        ('home', '0002_create_homepage'),
+    ]
+
     operations = [
         migrations.RenameField(
             model_name='localoreimage',
