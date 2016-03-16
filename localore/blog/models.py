@@ -37,7 +37,7 @@ class QuoteBlock(StructBlock):
 
 class BlogPage(Page):
     main_image = models.ForeignKey(
-        'wagtailimages.Image',
+        'localore_admin.LocaloreImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

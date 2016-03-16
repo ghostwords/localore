@@ -231,10 +231,15 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Localore: Finding America"
+
 WAGTAIL_USAGE_COUNT_ENABLED = True
+
 WAGTAILEMBEDS_EMBED_FINDER = 'localore.embeds.finder'
+
 if env('EMBEDLY_KEY'):
     WAGTAILEMBEDS_EMBEDLY_KEY = env('EMBEDLY_KEY')
+
+WAGTAILIMAGES_IMAGE_MODEL = 'localore_admin.LocaloreImage'
 
 if not DEBUG:
     WAGTAILSEARCH_BACKENDS = {

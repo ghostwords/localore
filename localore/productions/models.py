@@ -95,7 +95,7 @@ class ProductionPage(Page):
     state = USStateField()
 
     hero_image = models.ForeignKey(
-        'wagtailimages.Image',
+        'localore_admin.LocaloreImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -108,7 +108,7 @@ class ProductionPage(Page):
     # https://github.com/torchbox/wagtail/pull/1553
 
     logo_image = models.ForeignKey(
-        'wagtailimages.Image',
+        'localore_admin.LocaloreImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
