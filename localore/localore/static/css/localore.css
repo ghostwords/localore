@@ -6,3 +6,12 @@
 .responsive-object {
 	padding-bottom: 0px !important;
 }
+
+.j-filters {
+	display: none !important;
+}
+
+.juicer-feed.image-grid .j-poster {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
