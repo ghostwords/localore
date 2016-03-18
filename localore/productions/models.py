@@ -70,11 +70,11 @@ class ProductionPageRelatedPerson(Orderable, PersonField):
 
 class JuicerSourceField(models.Model):
     name = models.CharField(
-        "source account name",
+        "source account or hashtag",
         max_length=100,
         help_text=(
-            "Juicer source account name, without # or @. "
-            "Filters across all account types in the feed."
+            "Juicer source name, without # or @. Filters by account/hashtag "
+            "within the feed across all services (Twitter, Facebook, ...)."
         )
     )
 
