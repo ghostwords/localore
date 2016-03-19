@@ -58,9 +58,9 @@
 	{% endif %}
 
 	<h4>Featured people</h4>
-	{% if page.related_people.all %}
+	{% if page.featured_people.all %}
 		<ul>
-		{% for item in page.related_people.all %}
+		{% for item in page.featured_people.all %}
 			<li>
 				<a href="{% url 'about-team' %}#{{ item.person.full_name|slugify }}">{{ item.person }}</a>
 			</li>

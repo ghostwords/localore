@@ -1,14 +1,18 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     MultiFieldPanel,
-    PageChooserPanel
+    PageChooserPanel,
 )
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
+
+from productions.models import ProductionPageRelatedPerson
 
 
 @register_snippet
@@ -40,25 +44,29 @@ class Person(models.Model, index.Indexed):
     twitter_url = models.URLField("Twitter URL", blank=True)
     instagram_url = models.URLField("Instagram URL", blank=True)
 
+    # Wagtail search
     search_fields = (
         index.SearchField('first_name'),
         index.SearchField('last_name'),
         index.SearchField('role', partial_match=True),
         index.SearchField('biography', partial_match=True),
-        # TODO only works with Elasticsearch
+        # only works with Elasticsearch
         index.RelatedFields('production', [
             index.SearchField('title', partial_match=True),
         ]),
     )
 
+    # Wagtail admin
     panels = [
         MultiFieldPanel([
             FieldPanel('first_name'),
             FieldPanel('last_name'),
+            ImageChooserPanel('photo'),
+        ], "Name and Photo"),
+        MultiFieldPanel([
+            PageChooserPanel('production', 'productions.ProductionPage'),
             FieldPanel('role'),
-        ], "Name and Role"),
-        ImageChooserPanel('photo'),
-        PageChooserPanel('production', 'productions.ProductionPage'),
+        ], "Production"),
         FieldPanel('biography', classname="full"),
         MultiFieldPanel([
             FieldPanel('email'),
@@ -95,3 +103,27 @@ class Person(models.Model, index.Indexed):
             out.append(" (%s)" % self.role_and_production)
 
         return " ".join(out)
+
+
+@receiver(post_save, sender=Person)
+# pylint: disable=unused-argument
+def update_production_related_people(sender, instance, **kwargs):
+    if not instance.production:
+        return
+
+    latest_revision = instance.production.get_latest_revision_as_page()
+
+    related_people = [
+        item.person for item in latest_revision.related_people.all()
+    ]
+    if instance in related_people:
+        return
+
+    latest_revision.related_people.add(ProductionPageRelatedPerson(
+        page=instance.production,
+        person=instance
+    ))
+
+    latest_revision.save_revision(
+        user=instance.production.get_latest_revision().user
+    )
