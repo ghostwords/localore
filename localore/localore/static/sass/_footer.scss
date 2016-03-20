@@ -1,0 +1,15 @@
+footer {
+  padding: 2em;
+  text-align: center;
+  background-color: $orange;
+
+  p,a {
+    color: #fff;
+    font-family: $roboto-reg;
+    font-size: 14px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}

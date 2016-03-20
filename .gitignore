@@ -6,3 +6,10 @@ ansible/localore.zip
 db.sqlite3
 localore/localore/.env.local
 localore/media/
+
+env/
+.nodemonignore
+.sass-cache/
+npm-debug.log
+localore/node_modules/
+localore/localore/static/bower_components/

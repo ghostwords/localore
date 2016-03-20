@@ -1,0 +1,73 @@
+html,body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: #fff;
+  font-family:  $roboto;
+  color: $med-grey;
+}
+
+#view {
+
+}
+
+.container {
+  @include outer-container($grid-md);
+  padding-top: $header-title + 30px;
+  padding-bottom: 3em;
+
+  @include media($tablet) {
+      @include pad($header-title + 30px flex-gutter() 3em flex-gutter());
+  }
+
+
+  & > img {
+    @include img-responsive();
+    margin: 3rem auto;
+  }
+
+}
+
+p {
+  // @include span-columns(6);
+}
+
+
+a {
+  font-family: $roboto;
+  color: $dark-grey;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.rich-text img {
+	max-width: 100%;
+	height: auto;
+}
+
+.responsive-object {
+	padding-bottom: 0px !important;
+}
+
+.j-filters {
+	display: none !important;
+}
+
+.juicer-feed.image-grid .j-poster {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}

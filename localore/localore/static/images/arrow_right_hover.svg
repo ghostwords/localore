@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="21px" height="29px" viewBox="0 0 21 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Arrow Right</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Final-Design" sketch:type="MSArtboardGroup" transform="translate(-965.000000, -803.000000)" fill="#57585A">
+            <g id="Locations-Slider" sketch:type="MSLayerGroup" transform="translate(-15.000000, 638.000000)">
+                <g id="Glyphicons-/-chevron-right-+-Glyphicons-/-chevron-right" transform="translate(54.000000, 160.000000)" sketch:type="MSShapeGroup">
+                    <g id="Arrow-Right" transform="translate(926.000000, 5.000000)">
+                        <path d="M6.4672,29.0008056 L0.6824,23.2008056 L9.1544,14.6699722 L0.6824,6.13913889 L6.4672,0.339138889 L20.1944,14.1383056 L20.6984,14.6699722 L20.6752,14.6941389 L20.6752,14.7183056 L6.4672,29.0008056" id="Fill-82"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

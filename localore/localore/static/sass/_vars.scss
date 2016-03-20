@@ -1,0 +1,23 @@
+$dark-grey: #231f20;
+$med-grey: #57585a;
+$grey: #979797;
+$light-grey: #d8d8d8;
+$orange: #f16736;
+
+$roboto: 'Roboto Slab', serif;
+$roboto-reg: 'Roboto', serif;
+$noto: 'Noto Serif', serif;
+
+$grid-sm: 35.5em;
+$grid-md: 48em;
+$grid-lg: 64em;
+$grid-xl: 80em;
+
+// Breakpoints
+$mobile: new-breakpoint(max-width $grid-sm 4);
+$tablet: new-breakpoint(max-width $grid-md 4);
+
+$header-sm: 67px;
+// $header-md: 95px;
+$header-md: 85px;
+$header-title: $header-md * 2;

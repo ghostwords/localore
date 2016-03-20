@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 70 69"
+	 style="enable-background:new 0 0 70 69;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{filter:url(#Adobe_OpacityMaskFilter);}
+	.st2{mask:url(#mask-2);fill:#FFFFFF;}
+	.st3{filter:url(#Adobe_OpacityMaskFilter_1_);}
+	.st4{mask:url(#mask-4);fill:#FFFFFF;}
+</style>
+<title>CPB</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1" sketch:type="MSPage">
+	<g id="Final-Design" transform="translate(-478.000000, -1246.000000)" sketch:type="MSArtboardGroup">
+		<g id="Locations-Slider" transform="translate(-15.000000, 638.000000)" sketch:type="MSLayerGroup">
+			<g id="Funders" transform="translate(15.000000, 571.000000)">
+				<g id="Group" transform="translate(215.000000, 37.000000)">
+					<g id="CPB" transform="translate(263.129366, 0.000000)">
+						<path id="Fill-1" sketch:type="MSShapeGroup" class="st0" d="M26.7,34.2c0-4.3,3.5-7.7,7.7-7.7c4.3,0,7.7,3.5,7.7,7.7
+							c0,4.3-3.5,7.7-7.7,7.7C30.2,42,26.7,38.5,26.7,34.2"/>
+						<path id="Fill-3" sketch:type="MSShapeGroup" class="st0" d="M51.7,34.2c0-4.3,3.5-7.7,7.7-7.7c4.3,0,7.7,3.5,7.7,7.7
+							c0,4.3-3.5,7.7-7.7,7.7C55.1,42,51.7,38.5,51.7,34.2"/>
+						<g id="Group-7">
+							<g id="Clip-6">
+							</g>
+							<defs>
+								<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0" y="0.1" width="68.9" height="68.9">
+									<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+								</filter>
+							</defs>
+							<mask maskUnits="userSpaceOnUse" x="0" y="0.1" width="68.9" height="68.9" id="mask-2">
+								<g class="st1">
+									<path id="path-1" class="st0" d="M0,0.1h68.9V69H0"/>
+								</g>
+							</mask>
+							<path id="Fill-5" sketch:type="MSShapeGroup" class="st2" d="M2.1,34.2c0-4.3,3.5-7.7,7.7-7.7c2.8,0,5.2,1.5,6.6,3.7h3.1
+								c-1.6-3.8-5.3-6.5-9.7-6.5c-4.5,0-8.3,2.8-9.8,6.8V0.1h48.8v44.7h2.9v-3.4c1.9,2.1,4.7,3.4,7.7,3.4c4.2,0,7.9-2.5,9.5-6.1V69
+								H26.6V41.2c1.9,2.2,4.7,3.6,7.9,3.6c5.8,0,10.5-4.7,10.5-10.5s-4.7-10.5-10.5-10.5c-3.1,0-6,1.4-7.9,3.6v-3.6H24v10.6V69H0
+								V38c1.5,4,5.3,6.8,9.8,6.8c4.1,0,7.7-2.4,9.4-5.9H16c-1.4,1.9-3.7,3.1-6.2,3.1C5.6,42,2.1,38.5,2.1,34.2"/>
+						</g>
+						<g id="Group-10">
+							<g id="Clip-9">
+							</g>
+							<defs>
+								<filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="51.7" y="0.1" width="17.3" height="29.7">
+									<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+								</filter>
+							</defs>
+							<mask maskUnits="userSpaceOnUse" x="51.7" y="0.1" width="17.3" height="29.7" id="mask-4">
+								<g class="st3">
+									<path id="path-3" class="st0" d="M0,0.1h68.9V69H0V0.1z"/>
+								</g>
+							</mask>
+							<path id="Fill-8" sketch:type="MSShapeGroup" class="st4" d="M51.7,0.1h17.3v29.7c-1.7-3.6-5.3-6.1-9.5-6.1
+								c-3.1,0-5.8,1.3-7.7,3.4V0.1z"/>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

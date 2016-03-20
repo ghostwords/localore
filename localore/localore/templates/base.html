@@ -9,14 +9,37 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="AIR’s Localore: Finding America is building media with communities from Alaska to Baltimore, carrying us beyond the headlines, and illuminating the rich diversity of our nation.">
+    <meta name="keywords" content="public media, finding america, localore, air, air media, association of independents in radio, innovation, online listen, public radio, npr, hearken, fort drum, charm city, frontier of change, confederate monuments, podcasts, podcast, ensley, birmingham, climate change alaska, precious lives, flux">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Facebook META -->
+  	<meta property="og:site_name" content="Localore: Finding America | Beyond the Headlines with AIR">
+  	<meta property="og:title" content="Localore: Finding America | Beyond the Headlines with AIR">
+  	<meta property="og:description" content="AIR’s Localore: Finding America is building media with communities from Alaska to Baltimore, carrying us beyond the headlines, and illuminating the rich diversity of our nation.">
+  	<meta property="og:url" content="http://findingamerica.airmedia.org/">
+  	<meta property="og:image" content="http://i.imgur.com/btxmXfa.jpg">
+  	<meta property="og:type" content="website">
+
+  	<!-- Twitter META -->
+  	<meta name="twitter:card" content="summary_large_image">
+  	<meta name="twitter:title" content="Localore: Finding America | Beyond the Headlines with AIR">
+  	<meta name="twitter:description" content="AIR’s Localore: Finding America is building media with communities from Alaska to Baltimore, carrying us beyond the headlines, and illuminating the rich diversity of our nation.">
+  	<meta name="twitter:url" content="http://findingamerica.airmedia.org/">
+  	<meta name="twitter:image" content="http://i.imgur.com/btxmXfa.jpg">
+
+    <link rel="shortcut icon" href="favicon.ico">
+
+		<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700|Roboto:400,300,100,500,700,300italic,400italic,100italic,500italic,700italic' rel='stylesheet' type='text/css'>
 
 		{# Global stylesheets #}
 		{% compress css %}
-		<link rel="stylesheet" type="text/css" href="{% static 'css/localore.css' %}">
+
+		<!-- bower:css -->
+		<link rel="stylesheet" href="/static/bower_components/normalize-css/normalize.css" />
+		<!-- endbower -->
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 		{% endcompress %}
 
 		{% block extra_css %}
@@ -27,37 +50,42 @@
 	<body class="{% block body_class %}{% endblock %}">
 		{% wagtailuserbar %}
 
-		<div class="main container">
+		<header>
+			<div class="nav-section">
+			  <div class="logo fa-logo">
+			    <img src="static/images/FA_logo.png" alt="Finding America Logo" />
+			  </div>
+			  <a class="logo air-logo" href="http://airmedia.org" target="_blank">
+			    <img src="static/images/AIR_logo.png" alt="AIR Media Logo" />
+			  </a>
+			</div>
+    </header>
 
-			<br>
 
-			<a href="/"><img src="{% static 'images/AIR_lightgrey.png' %}" title="AIR logo" width=80></a>
 
-			{#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#}
 
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="{% url 'about-index' %}">About</a>
+					<!-- {#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#} -->
 
-			{% get_productions_index_page as productions_root %}
-			{% if productions_root %}
-			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="{{ productions_root.url }}">{{ productions_root }}</a>
-			{% endif %}
+					<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
 
-			{% get_blog_index_page as blog_root %}
-			{% if blog_root %}
-			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="{{ blog_root.url }}">{{ blog_root }}</a>
-			{% endif %}
 
-			<hr>
+    <div id="view">
+      {% block content %}{% endblock %}
+    </div>
 
-			{% block content %}{% endblock %}
-
-		</div>
+    <footer>
+      <p>
+        Copyright © AIR Inc. All rights reserved.&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://airmedia.org" target="blank">airmedia.org</a>
+      </p>
+    </footer>
 
 		{# Global javascript #}
 		{% compress js %}
+		<!-- bower:js -->
+		<script src="/static/bower_components/jquery/dist/jquery.js"></script>
+		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+		<!-- endbower -->
 		<script type="text/javascript" src="{% static 'js/localore.js' %}"></script>
 		{% endcompress %}
 

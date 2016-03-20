@@ -1,0 +1,81 @@
+.team-section {
+
+  margin-top: 3rem;
+
+  .team-item {
+
+    text-align: center;
+    margin-bottom: 3rem;
+
+    .team-location {
+      font-family: $roboto-reg;
+      font-weight: 100;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .team-name {
+      display: inline-block;
+      font-family: $roboto;
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .team-collapse-toggle {
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .team-members {
+      @include row(table);
+    }
+
+    .team-member {
+      // height: 250px;
+      // border: 1px solid blue;
+      @include span-columns(4);
+      @include pad(0 flex-gutter() 0 flex-gutter());
+      text-align: left;
+
+      &:first-of-type {
+        @include pad(0 flex-gutter()*2 0 0);
+      }
+      &:last-of-type {
+        @include pad(0 0 0 flex-gutter()*2);
+      }
+
+      & > img {
+        width: 75%;
+        margin: 0 auto 15px auto;
+        border-radius: 100%;
+        @include img-responsive();
+      }
+
+      .team-member-name {
+        font-family: $roboto;
+        color: $med-grey;
+      }
+
+      .team-member-title {
+        font-family: $roboto;
+        margin-bottom: 10px;
+      }
+
+      ul.team-member-links {
+        border: 1px solid blue;
+      }
+
+      .team-member-desc {
+        font-family: $roboto-reg;
+        font-size: em(15);
+        line-height: 1.4;
+      }
+    }
+  }
+
+
+}

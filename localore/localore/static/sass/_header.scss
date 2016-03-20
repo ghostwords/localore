@@ -1,0 +1,65 @@
+header {
+  // background-color: $dark-grey;
+  background-color: rgba(0,0,0,0.6);
+  padding: 1.5em 1em;
+  width: 100%;
+  height: $header-md;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 10;
+  @include transition(all 300ms ease-in-out);
+
+  // @media screen and (min-width: $grid-md) {
+  //   // position: static;
+  //   padding: 1em 1.5em;
+  //   height: $header-md-expanded;
+  //
+  //   &.scrolled {
+  //     height: $header-md;
+  //
+  //     .fa-logo {
+  //       height: 75%;
+  //     }
+  //
+  //     .air-logo {
+  //       height: 100%;
+  //     }
+  //   }
+  // }
+
+  .nav-section {
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    @include outer-container($grid-lg);
+    // max-width: $grid-lg;
+
+    .logo {
+      @include vertical-align();
+      @include transition(all 250ms ease-in-out);
+
+      svg, img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .fa-logo {
+      float: left;
+      height: 100%;
+      width: inherit;
+
+      // @media screen and (min-width: $grid-md) {
+      //   height: 60%;
+      //   svg, img {
+      //   }
+      // }
+    }
+
+    .air-logo {
+      float: right;
+      height: 125%;
+      // @media screen and (min-width: $grid-md) { height: 80%; }
+    }
+  }
+}

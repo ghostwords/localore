@@ -1,10 +1,26 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags productions_tags blog_tags %}
 
 {% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+<div class="container">
+
+	<a href="{% url 'about-index' %}">About</a>
+
+	{% get_productions_index_page as productions_root %}
+	{% if productions_root %}
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a href="{{ productions_root.url }}">{{ productions_root }}</a>
+	{% endif %}
+
+	{% get_blog_index_page as blog_root %}
+	{% if blog_root %}
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a href="{{ blog_root.url }}">{{ blog_root }}</a>
+	{% endif %}
+
 
 	{{ page.body|richtext }}
 
@@ -13,6 +29,8 @@
 	<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}"></ul>
 	{% endif %}
 	{% endwith %}
+
+</div>
 
 {% endblock %}
 

@@ -1,0 +1,28 @@
+/* Mixin */
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+// @mixin complete-center() {
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%,-50%);
+//   -ms-transform: translate(-50%,-50%);
+//   transform: translate(-50%,-50%);
+// }
+
+$browser-context: 16; // Default
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+@mixin img-responsive($display: block) {
+  display: $display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}

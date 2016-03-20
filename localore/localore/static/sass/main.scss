@@ -1,0 +1,17 @@
+@import "library-configs";
+
+// bower:scss
+@import "../bower_components/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "../bower_components/neat/app/assets/stylesheets/_neat.scss";
+@import "../bower_components/typeplate-starter-kit/scss/_typeplate-index.scss";
+// endbower
+
+@import "bootstrap-config";
+@import "mixins";
+@import "util";
+@import "vars";
+@import "base";
+@import "header";
+@import "footer";
+@import "team";
+@import "title";
