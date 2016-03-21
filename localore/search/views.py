@@ -1,11 +1,13 @@
-from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
+from django.shortcuts import render
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
 
 
 def search(request):
+    json = request.GET.get('json', False)
     search_query = request.GET.get('query', None)
     page = request.GET.get('page', 1)
 
@@ -28,7 +30,20 @@ def search(request):
     except EmptyPage:
         search_results = paginator.page(paginator.num_pages)
 
-    return render(request, 'search/search.html', {
+    response = {
         'search_query': search_query,
         'search_results': search_results,
-    })
+    }
+
+    if json:
+        response['search_results'] = [
+            dict(
+                (attr, getattr(result.specific, attr))
+                for attr in ['title', 'url']
+                if hasattr(result.specific, attr)
+            ) for result in response['search_results']
+        ]
+
+        return JsonResponse(response)
+    else:
+        return render(request, 'search/search.html', response)
