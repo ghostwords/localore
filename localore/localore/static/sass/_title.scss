@@ -51,22 +51,16 @@
     li {
       padding-left: 7px;
       padding-right: 7px;
-    }
-
-    a {
       font-size: em(13);
       letter-spacing: 2px;
       font-family: $roboto-reg;
-      color: $orange;
+      color: $grey;
       text-transform: uppercase;
+    }
 
-      &.selected {
-        color: $grey;
-
-        &:hover {
-          text-decoration: none;
-        }
-      }
+    a {
+        font-family: $roboto-reg;
+        color: $orange;
     }
   }
 

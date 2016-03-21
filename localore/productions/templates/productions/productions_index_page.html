@@ -5,17 +5,58 @@
 {% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-	<h1>{{ page.title }}</h1>
+<div id="title" class="title-section">
+  <div>
+    <h1>Productions</h1>
+    <h3>Lorem ipsum description something</h3>
+    <ul class="title-section-about list-inline">
 
-	<ul>
-	{% for prod in page.productions %}
-		<li>
-			{% image prod.logo_image height-40 %}
-			{{ prod.city }}, {{ prod.state }}:
-			<a href="{% pageurl prod %}">{{ prod.title }}</a>
-		</li>
-	{% empty %}
-		<li>No productions.</li>
-	{% endfor %}
-	</ul>
+			{% for page_name in about_page_names %}
+				<li>
+				{% if page_name == current_page_name %}
+					{{ page_name }}
+				{% else %}
+					<a href="{% url 'about-'|add:page_name %}">{{ page_name }}</a>
+				{% endif %}
+				</li>
+			{% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="description"></div>
+<div class="container-full">
+
+	<div class="prod-grid">
+
+		{% for prod in page.productions %}
+
+      {% if forloop.counter0|divisibleby:3 %}
+        <div class="prod-grid-row">
+      {% endif %}
+
+    			<!-- {% image prod.hero_image fill-140x140-c100 as image %} -->
+    			{% image prod.hero_image original as image %}
+    			<!-- <a href="{% pageurl prod %}" class="productions-grid-item"> -->
+    			<div class="prod-grid-item">
+            <div class="prod-item-bg" style="background-image:url({{ image.url }})"></div>
+            <a class="prod-item-link" href="{% pageurl prod %}">
+              <div class="prod-item-content">
+                <span class="prod-item-title">{{ prod.title }}</span>
+                <span class="prod-item-loc">{{ prod.city }}, {{ prod.state }}</span>
+              </div>
+            </a>
+    			</div>
+
+      {% if forloop.counter|divisibleby:3 %}
+        </div>
+      {% endif %}
+
+      {% empty %}
+        <h3>No productions.</h3>
+
+		{% endfor %}
+	</div>
+
+</div>
+
 {% endblock %}

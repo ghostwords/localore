@@ -7,24 +7,27 @@
 {% block body_class %}template-about-{{ current_page_name }}{% endblock %}
 
 {% block content %}
+<div id="title" class="title-section">
+  <div>
+    <h1>About</h1>
+    <h3>Lorem ipsum description something</h3>
+    <ul class="title-section-about list-inline">
 
-	<h1>About | {{ current_page_name.title }}</h1>
-
-	<hr>
-
-	<p>
-		{% for page_name in about_page_names %}
-			{% if page_name == current_page_name %}
-				{{ page_name }}
-			{% else %}
-				<a href="{% url 'about-'|add:page_name %}">{{ page_name }}</a>
-			{% endif %}
-			{% if not forloop.last %}|{% endif %}
-		{% endfor %}
-	</p>
-
-	<hr>
-
+			{% for page_name in about_page_names %}
+				<li>
+				{% if page_name == current_page_name %}
+					{{ page_name }}
+				{% else %}
+					<a href="{% url 'about-'|add:page_name %}">{{ page_name }}</a>
+				{% endif %}
+				</li>
+			{% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="description">
+</div>
+<div class="container">
 	{% block about_content %}{% endblock %}
-
+</div>
 {% endblock %}

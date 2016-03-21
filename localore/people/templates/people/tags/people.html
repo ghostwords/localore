@@ -4,44 +4,52 @@
 
 {% for production in productions %}
 
-	<div class="row">
+<div class="team-item">
 
-		<div class="text-center">
-			{% if production.grouper %}
-				<h4>{{ production.grouper.city }}, {{ production.grouper.state }}</h4>
-			{% endif %}
-			<h3>
+		{% if production.grouper %}
+			<h6 class="team-location">{{ production.grouper.city }}, {{ production.grouper.state }}</h6>
+		{% endif %}
+		<a  data-toggle="collapse"
+				href="#team-members-{{forloop.counter0}}"
+				aria-expanded="false"
+				aria-controls="team-members-{{forloop.counter0}}"
+				data-parent=".team-section">
+			<h4 class="team-name">
 				{% if production.grouper %}
 					{{ production.grouper.title }}
 				{% else %}
 					AIR | Localore Team
 				{% endif %}
-			</h3>
+			</h4>
+		</a>
+
+		<!-- <div id="team-members-{{forloop.counter0}}" class="collapse"> -->
+		<div id="team-members-{{forloop.counter0}}">
+			<div class="team-members">
+				{% for person in production.list %}
+				<div class="team-member">
+					<!-- <img src="https://assets.lensculture.com/static/competitions/jury/juror-ann-2.jpg" /> -->
+					<!-- <img src="{% image person.photo fill-140x140-c100 %}" /> -->
+					{% image person.photo fill-140x140-c100 %}
+					<h6 class="team-member-name">{{ person.full_name }}</h6>
+					<p class="team-member-title">{{ person.role }}</p>
+					<ul class="list-inline team-member-links">
+						<li><a href="mailto:{{ person.email }}" class="email">email</a></li>
+						<li><a href="{{ person.twitter_url }}" class="twitter">twitter</a></li>
+						<li><a href="{{ person.instagram_url }}" class="insta">insta</a></li>
+					</ul>
+					<div class="team-member-desc">{{ person.biography|richtext }}</div>
+				</div>
+				{% endfor %}
+			</div>
 		</div>
 
-		<br>
-		<br>
 
-		{% for person in production.list %}
-		<div class="col-md-4">
-			{% image person.photo fill-140x140-c100 %}
-			<p>
-				<b>{{ person.full_name }}</b>
-			</p>
-			<p>
-				{{ person.email }}
-				{{ person.twitter_url }}
-				{{ person.instagram_url }}
-			</p>
-			<p>
-				{{ person.biography|richtext }}
-			</p>
-		</div>
-		{% endfor %}
 
-	</div>
 
-	{% if not forloop.last %}<hr>{% endif %}
-	<br>
+
+	{% if not forloop.last %}<hr />{% endif %}
+
+</div>
 
 {% endfor %}

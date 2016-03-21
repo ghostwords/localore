@@ -5,6 +5,7 @@
 {% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+<div class="description"></div>
 <div class="container">
 
 	<a href="{% url 'about-index' %}">About</a>

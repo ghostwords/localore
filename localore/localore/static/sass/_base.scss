@@ -13,13 +13,16 @@ body {
 
 }
 
+
+
 .container {
   @include outer-container($grid-md);
-  padding-top: $header-title + 30px;
-  padding-bottom: 3em;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  position: relative;
 
   @include media($tablet) {
-      @include pad($header-title + 30px flex-gutter() 3em flex-gutter());
+      @include pad(3em default 3em default);
   }
 
 
@@ -27,8 +30,30 @@ body {
     @include img-responsive();
     margin: 3rem auto;
   }
+  //
+  // &:before {
+  //   content: '';
+  //   display: block;
+  //   background-color: green;
+  //   position: absolute;
+  //   top: 0;
+  //   height: $header-title + 30px;
+  //   width: 100%;
+  // }
 
 }
+
+.container-full {
+  @include outer-container(100%);
+}
+
+.description {
+  background: url('/static/images/header_bg.jpg') fixed;
+  background-size: auto 273px;
+  height: $header-title + 100px;
+  width: 100%;
+}
+
 
 p {
   // @include span-columns(6);

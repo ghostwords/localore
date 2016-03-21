@@ -26,3 +26,9 @@ $browser-context: 16; // Default
   max-width: 100%; // Part 1: Set a maximum relative to the parent
   height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
 }
+
+@mixin abs-position() {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;   
+}

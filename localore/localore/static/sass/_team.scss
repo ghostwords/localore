@@ -32,6 +32,7 @@
 
     .team-members {
       @include row(table);
+      // @include reset-display;
     }
 
     .team-member {
@@ -56,12 +57,18 @@
       }
 
       .team-member-name {
+        text-align: center;
         font-family: $roboto;
-        color: $med-grey;
+        color: $dark-grey;
+        margin-bottom: 5px;
       }
 
       .team-member-title {
+        text-align: center;
         font-family: $roboto;
+        color: $dark-grey;
+        font-weight: 100;
+        font-size: em(15);
         margin-bottom: 10px;
       }
 
