@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load about_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
@@ -62,7 +62,8 @@
 		<ul>
 		{% for item in page.featured_people.all %}
 			<li>
-				<a href="{% url 'about-team' %}#{{ item.person.full_name|slugify }}">{{ item.person }}</a>
+				{% get_about_team_page as about_team_page %}
+				<a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ item.person }}</a>
 			</li>
 		{% endfor %}
 		</ul>

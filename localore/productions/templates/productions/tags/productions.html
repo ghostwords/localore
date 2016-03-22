@@ -2,7 +2,7 @@
 
 {% for production in productions %}
 
-	<div class="row">
+	<div class="row" id="{{ production.title|slugify }}">
 
 		<div class="text-center">
 			<h4>{{ production.city }}, {{ production.state }}</h4>
