@@ -151,7 +151,7 @@ class ProductionPage(Page):
         InlinePanel('related_links', label="Related links"),
         InlinePanel(
             'related_people',
-            label="Team members",
+            label="about page team members",
             help_text=(
                 "Select the production's team members, and the order "
                 "to display them in on the About: Team page."
@@ -159,7 +159,7 @@ class ProductionPage(Page):
         ),
         InlinePanel(
             'featured_people',
-            label="Featured team members",
+            label="featured team members",
             max_num=3,
             help_text="Select up to three people to feature on this page."
         ),
