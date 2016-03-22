@@ -1,5 +1,4 @@
-$.ajax($('#juicer-summary-item')
-	.data('juicer-summary-item-url'))
+$.ajax($('#juicer-summary-item').data('juicer-summary-item-url'))
 	.done(function (data) {
 		$('#juicer-summary-item')
 			.removeClass('icon-spinner')
