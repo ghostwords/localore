@@ -7,7 +7,8 @@
     "bourbon": "~4.2.6",
     "neat": "~1.7.4",
     "typeplate-starter-kit": "~3.0.1",
-    "bootstrap-sass": "~3.3.6"
+    "bootstrap-sass": "~3.3.6",
+    "vide": "~0.5.0"
   },
   "devDependencies": {
     "chai": "~3.4.2",
@@ -17,7 +18,8 @@
     "bootstrap-sass": {
       "main": [
         "assets/javascripts/bootstrap/transition.js",
-        "assets/javascripts/bootstrap/collapse.js"
+        "assets/javascripts/bootstrap/collapse.js",
+        "assets/javascripts/bootstrap/modal.js"
       ]
     },
     "typeplate-starter-kit": {

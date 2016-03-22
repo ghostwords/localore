@@ -1,7 +1,7 @@
 header {
   // background-color: $dark-grey;
   background-color: rgba(0,0,0,0.6);
-  padding: 1.5em 1em;
+  padding: 1.5em 1.5em;
   width: 100%;
   height: $header-md;
   position: fixed;
@@ -27,11 +27,29 @@ header {
   //   }
   // }
 
+  .template-homepage & {
+    // height: $header-md + 40;
+    // @include filter-gradient(#231f20, #000000, vertical); // IE6-9
+
+    background-color: transparent;
+
+    &:after {
+      content: '';
+      display: block;
+      @include abs-position();
+      z-index: -1;
+      height: $header-md + 50;
+      @include background-image(linear-gradient(top, rgba(21,19,19,0.65) 0%,rgba(0,0,0,0) 100%));
+
+    }
+
+  }
+
   .nav-section {
     height: 100%;
     margin: 0 auto;
     position: relative;
-    @include outer-container($grid-lg);
+    @include outer-container($grid-xl);
     // max-width: $grid-lg;
 
     .logo {

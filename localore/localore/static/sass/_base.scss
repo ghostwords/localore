@@ -48,12 +48,17 @@ body {
 }
 
 .description {
-  background: url('/static/images/header_bg.jpg') fixed;
-  background-size: auto 273px;
+  background: url('/static/images/header_bg.png') fixed;
+  background-size: auto 40%;
+  background-position: top center;
   height: $header-title + 100px;
   width: 100%;
-}
 
+  @include media($desktop-xl) {
+      background-size: 100%;
+  }
+
+}
 
 p {
   // @include span-columns(6);

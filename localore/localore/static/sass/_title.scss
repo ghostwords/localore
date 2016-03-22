@@ -1,24 +1,11 @@
-.title-section {
-  width: 400px;
-  height: $header-md * 1.5;
-  background-color: $dark-grey;
+.title {
   position: fixed;
+  width: 400px;
+  height: $header-md;
   top: 0;
   left: 50%;
   margin-left: -200px;
   z-index: 20;
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -($header-md * .5);
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: ($header-md * .5) 200px 0 200px;
-    border-color: $dark-grey transparent transparent transparent;
-  }
 
   & > div {
     @include vertical-align();
@@ -40,6 +27,45 @@
   h3 {
     font-size: em(16);
     margin-bottom: 15px;
+  }
+
+}
+
+.title-home {
+
+  margin-top: .7em;
+  position: absolute;
+
+  h1 {
+    font-size: em(60);
+    margin-bottom: 7px;
+  }
+  h3 {
+    font-family: $roboto-reg;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: 100;
+    font-size: em(15);
+    line-height: 18px;
+    margin-bottom: 15px;
+  }
+}
+
+.title-about {
+
+  height: $header-md * 1.5;
+  background-color: $dark-grey;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -($header-md * .5);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: ($header-md * .5) 200px 0 200px;
+    border-color: $dark-grey transparent transparent transparent;
   }
 
   .title-section-about {
