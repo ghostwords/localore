@@ -15,8 +15,6 @@ urlpatterns = [
 
     url(r'^search/$', 'search.views.search', name='search'),
 
-    url(r'^about/', include('about.urls')),
-
     url(r'', include(wagtail_urls)),
 ]
 

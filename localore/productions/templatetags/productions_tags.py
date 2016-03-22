@@ -13,7 +13,6 @@ def get_productions_index_page():
     'productions/tags/productions.html',
     takes_context=True
 )
-# TODO localore team
 def productions(context):
     return {
         'productions': ProductionPage.objects.live(),

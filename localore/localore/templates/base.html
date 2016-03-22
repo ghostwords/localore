@@ -1,4 +1,4 @@
-{% load blog_tags compress productions_tags static wagtailuserbar %}
+{% load about_tags blog_tags compress productions_tags static wagtailuserbar %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -35,8 +35,11 @@
 
 			{#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#}
 
+			{% get_about_mission_page as about_mission_page %}
+			{% if about_mission_page %}
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="{% url 'about-index' %}">About</a>
+			<a href="{{ about_mission_page.url }}">About</a>
+			{% endif %}
 
 			{% get_productions_index_page as productions_root %}
 			{% if productions_root %}

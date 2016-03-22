@@ -1,0 +1,43 @@
+{% extends "about/base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags productions_tags %}
+
+{% block about_content %}
+
+	{{ page.description|richtext }}
+
+	<div class="row">
+
+		<div class="text-center">
+			<h3>AIR | Localore Team</h3>
+		</div>
+
+		<br>
+		<br>
+
+		{% for item in page.related_people.all %}
+		{% with person=item.person %}
+		<div class="col-md-4">
+			{% image person.photo fill-140x140-c100 %}
+			<p>
+				<b>{{ person.full_name }}</b>
+			</p>
+			<p>
+				{{ person.email }}
+				{{ person.twitter_url }}
+				{{ person.instagram_url }}
+			</p>
+			<p>
+				{{ person.biography|richtext }}
+			</p>
+		</div>
+		{% endwith %}
+		{% endfor %}
+
+	</div>
+
+	<hr>
+
+	{% productions %}
+
+{% endblock %}

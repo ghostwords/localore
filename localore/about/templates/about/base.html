@@ -1,26 +1,38 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load about_tags wagtailcore_tags wagtailimages_tags %}
 
-{% block title %} About | {{ current_page_name.title }}{% endblock %}
+{% block title %} About | {{ page.title }}{% endblock %}
 
-{% block body_class %}template-about-{{ current_page_name }}{% endblock %}
+{% block body_class %}template-about-{{ page.title|slugify }}{% endblock %}
 
 {% block content %}
 
-	<h1>About | {{ current_page_name.title }}</h1>
+	<h1>{{ page.title }}</h1>
 
 	<hr>
 
 	<p>
-		{% for page_name in about_page_names %}
-			{% if page_name == current_page_name %}
-				{{ page_name }}
-			{% else %}
-				<a href="{% url 'about-'|add:page_name %}">{{ page_name }}</a>
-			{% endif %}
-			{% if not forloop.last %}|{% endif %}
-		{% endfor %}
+		{% get_about_mission_page as about_mission_page %}
+		{% if page == about_mission_page %}
+			Mission
+		{% else %}
+			<a href="{{ about_mission_page.url }}">Mission</a>
+		{% endif %}
+		|
+		{% get_about_team_page as about_team_page %}
+		{% if page == about_team_page %}
+			Team
+		{% else %}
+			<a href="{{ about_team_page.url }}">Team</a>
+		{% endif %}
+		|
+		{% get_about_contact_page as about_contact_page %}
+		{% if page == about_contact_page %}
+			Connect
+		{% else %}
+			<a href="{{ about_contact_page.url }}">Connect</a>
+		{% endif %}
 	</p>
 
 	<hr>
