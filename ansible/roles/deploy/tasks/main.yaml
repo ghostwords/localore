@@ -15,6 +15,7 @@
         -x 'media/*'
         -x '*__pycache__*'
         -x '*.swp'
+        -x 'node_modules/*'
   become: False
 
 - name: Ensure /var/www and /var/media exist
