@@ -32,7 +32,7 @@
 
 10. Run the Django dev server: `python manage.py runserver`
 
-11. Run Grunt: `grunt serve`
+11. Run Grunt to watch/recompile static resources, perform live reloading, etc.: `grunt serve`
 
 	If the Django dev server isn't running on port 8000 (the default), you have to update livereload's proxy config in [Gruntfile.js](localore/Gruntfile.js).
 
