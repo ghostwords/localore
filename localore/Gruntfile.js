@@ -72,7 +72,8 @@ module.exports = function (grunt) {
             '**/*.html',
             '<%= config.app %>/static/css/*.css',
             '<%= config.app %>/images/{,*/}*',
-            '.tmp/scripts/{,*/}*.js'
+            '.tmp/scripts/{,*/}*.js',
+            '!node_modules/**'
           ],
           // port: 9000,
           proxy: 'localhost:8000',
