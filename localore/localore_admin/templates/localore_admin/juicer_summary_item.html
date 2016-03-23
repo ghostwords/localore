@@ -1,0 +1,20 @@
+{% load i18n wagtailadmin_tags %}
+
+{% if error %}
+	<span class="error-message" style="font-size:large">
+		{% if settings_error %}
+			Juicer not yet configured:
+			<a href="settings/localore_admin/juicersettings">Click here to set up</a>
+		{% else %}
+			Error fetching Juicer post counts
+		{% endif %}
+	</span>
+{% else %}
+	<a href="https://www.juicer.io/feeds/{{ feed_id }}/moderation" target=_blank>
+	{% blocktrans count counter=total_posts with total_posts|intcomma as total %}
+		<span>{{ total }}</span> Juicer Post in Queue
+	{% plural %}
+		<span>{{ total }}</span> Juicer Posts in Queue
+	{% endblocktrans %}
+	</a>
+{% endif %}

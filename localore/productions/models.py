@@ -68,6 +68,10 @@ class ProductionPageRelatedPerson(Orderable, PersonField):
     page = ParentalKey('ProductionPage', related_name='related_people')
 
 
+class ProductionPageFeaturedPerson(Orderable, PersonField):
+    page = ParentalKey('ProductionPage', related_name='featured_people')
+
+
 class JuicerSourceField(models.Model):
     name = models.CharField(
         "source account or hashtag",
@@ -146,7 +150,18 @@ class ProductionPage(Page):
         FieldPanel('description', classname='full'),
         InlinePanel('related_links', label="Related links"),
         InlinePanel(
-            'related_people', label="Featured team members", max_num=2
+            'related_people',
+            label="about page team members",
+            help_text=(
+                "Select the production's team members, and the order "
+                "to display them in on the About: Team page."
+            )
+        ),
+        InlinePanel(
+            'featured_people',
+            label="featured team members",
+            max_num=3,
+            help_text="Select up to three people to feature on this page."
         ),
         FieldPanel('highlights', classname='full'),
         InlinePanel('juicer_sources', label="Juicer sources"),

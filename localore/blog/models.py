@@ -84,10 +84,12 @@ class LinkFields(models.Model):
     link_external = models.URLField(
         "External link",
         blank=True,
-        max_length=500
+        max_length=500,
+        help_text="Please provide an external URL, or select a page below."
     )
     link_page = models.ForeignKey(
-        'blog.BlogPage',
+        Page,
+        verbose_name="Internal link",
         null=True,
         blank=True,
         related_name='+'
@@ -110,7 +112,7 @@ class LinkFields(models.Model):
 
 
 class RelatedLink(LinkFields):
-    title = models.CharField(max_length=255, help_text="Link title")
+    title = models.CharField(max_length=255)
 
     panels = [
         FieldPanel('title'),

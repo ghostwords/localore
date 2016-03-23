@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load about_tags wagtailcore_tags wagtailimages_tags %}
 
-{% block title %} About | {{ current_page_name.title }}{% endblock %}
+{% block title %} About | {{ page.title }}{% endblock %}
 
-{% block body_class %}template-about-{{ current_page_name }}{% endblock %}
+{% block body_class %}template-about-{{ page.title|slugify }}{% endblock %}
 
 {% block content %}
 <div id="title" class="title title-about">
@@ -13,15 +13,33 @@
     <h3>Lorem ipsum description something</h3>
     <ul class="title-section-about list-inline">
 
-			{% for page_name in about_page_names %}
-				<li>
-				{% if page_name == current_page_name %}
-					{{ page_name }}
-				{% else %}
-					<a href="{% url 'about-'|add:page_name %}">{{ page_name }}</a>
-				{% endif %}
-				</li>
-			{% endfor %}
+		<li>
+		{% get_about_mission_page as about_mission_page %}
+		{% if page == about_mission_page %}
+			Mission
+		{% else %}
+			<a href="{{ about_mission_page.url }}">Mission</a>
+		{% endif %}
+		</li>
+
+		<li>
+		{% get_about_team_page as about_team_page %}
+		{% if page == about_team_page %}
+			Team
+		{% else %}
+			<a href="{{ about_team_page.url }}">Team</a>
+		{% endif %}
+		</li>
+
+		<li>
+		{% get_about_contact_page as about_contact_page %}
+		{% if page == about_contact_page %}
+			Connect
+		{% else %}
+			<a href="{{ about_contact_page.url }}">Connect</a>
+		{% endif %}
+		</li>
+
     </ul>
   </div>
 </div>

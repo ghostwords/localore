@@ -1,0 +1,41 @@
+{% extends "about/base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags productions_tags %}
+
+{% block about_content %}
+
+	{{ page.description|richtext }}
+
+	<div class="team-section">
+
+		{# TODO factor out into "production" tag: see also productions/.../tags/productions.html #}
+		<div class="team-item">
+			<h4 class="team-name">AIR | Localore Team</h4>
+			<div>
+				<div class="team-members">
+					{% for item in page.related_people.all %}
+					{% with person=item.person %}
+					<div class="team-member">
+						{% image person.photo fill-140x140-c100 %}
+						<h6 class="team-member-name">{{ person.full_name }}</h6>
+						<p class="team-member-title">{{ person.role }}</p>
+						<ul class="list-inline team-member-links">
+							<li><a href="mailto:{{ person.email }}" class="email">email</a></li>
+							<li><a href="{{ person.twitter_url }}" class="twitter">twitter</a></li>
+							<li><a href="{{ person.instagram_url }}" class="insta">insta</a></li>
+						</ul>
+						<div class="team-member-desc">{{ person.biography|richtext }}</div>
+					</div>
+					{% endwith %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+		{% productions %}
+
+	</div>
+
+{% endblock %}

@@ -1,26 +1,18 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% regroup people by production as productions %}
-
 {% for production in productions %}
 
-<div class="team-item">
+<div class="team-item" id="{{ production.title|slugify }}">
 
-		{% if production.grouper %}
-			<h6 class="team-location">{{ production.grouper.city }}, {{ production.grouper.state }}</h6>
-		{% endif %}
+		{# TODO factor out into "production" tag: see also about/templates/about/about_team_page.html #}
+
+		<h6 class="team-location">{{ production.city }}, {{ production.state }}</h6>
 		<a  data-toggle="collapse"
 				href="#team-members-{{forloop.counter0}}"
 				aria-expanded="false"
 				aria-controls="team-members-{{forloop.counter0}}"
 				data-parent=".team-section">
-			<h4 class="team-name">
-				{% if production.grouper %}
-					{{ production.grouper.title }}
-				{% else %}
-					AIR | Localore Team
-				{% endif %}
-			</h4>
+			<h4 class="team-name">{{ production.title }}</h4>
 		</a>
 
 		<!-- <div id="team-members-{{forloop.counter0}}" class="collapse"> -->

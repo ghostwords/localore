@@ -1,0 +1,25 @@
+{% extends "about/base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block about_content %}
+
+	{{ page.description_top|richtext }}
+
+	<img src="http://10up.com/wp-content/themes/10up-v2/assets/img/map-us-alaska-clear.png" />
+
+	{{ page.description_bottom|richtext }}
+
+	{% if page.related_links.all %}
+		<ul>
+			{% for item in page.related_links.all %}
+				<li>
+					<a href="{{ item.link }}">{{ item.title }}</a>
+				</li>
+				<br>
+			{% endfor %}
+		</ul>
+		<hr>
+	{% endif %}
+
+{% endblock %}
