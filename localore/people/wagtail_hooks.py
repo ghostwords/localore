@@ -1,9 +1,28 @@
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 
+from wagtail.wagtailadmin.search import SearchArea
+from wagtail.wagtailcore import hooks
+from wagtail.wagtailsnippets.permissions import user_can_edit_snippet_type
+
 from wagtailmodeladmin.options import ModelAdmin, wagtailmodeladmin_register
 
 from people.models import Person
+
+
+class PeopleSearchArea(SearchArea):
+    def is_shown(self, request):
+        return user_can_edit_snippet_type(request.user, Person)
+
+
+@hooks.register('register_admin_search_area')
+def register_people_search_area():
+    return PeopleSearchArea(
+        'Team Members',
+        reverse('people_person_modeladmin_index/'),
+        classnames='icon icon-group',
+        order=150
+    )
 
 
 class PeopleAdmin(ModelAdmin):
