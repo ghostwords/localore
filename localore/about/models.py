@@ -28,7 +28,7 @@ class AboutMissionPage(Page):
         InlinePanel('related_links', label="Related links"),
     ]
 
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['home.HomePage', 'localore_admin.PageAlias']
     subpage_types = []
 
 
@@ -55,7 +55,7 @@ class AboutTeamPage(Page):
         ),
     ]
 
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['home.HomePage', 'localore_admin.PageAlias']
     subpage_types = []
 
 
@@ -70,5 +70,5 @@ class AboutContactPage(Page):
         FieldPanel('contact_information', classname='full'),
     ]
 
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['home.HomePage', 'localore_admin.PageAlias']
     subpage_types = []

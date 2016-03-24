@@ -1,15 +1,40 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
+from django.shortcuts import redirect
 from django.utils.safestring import mark_safe
 
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import (
     Image,
     AbstractImage,
     AbstractRendition
 )
+
+from blog.models import LinkFields
+
+
+# redirect page class
+
+class PageAlias(Page, LinkFields): # pylint: disable=too-many-ancestors
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(LinkFields.panels, "Redirect to"),
+    ]
+
+    parent_page_types = ['home.HomePage']
+
+    def clean(self):
+        if not self.link:
+            raise ValidationError(
+                "You must specify an alias pointing to an existing page "
+                "or external URL."
+            )
+
+    def serve(self, request):
+        return redirect(self.link, permanent=False)
 
 
 # site settings

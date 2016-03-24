@@ -92,6 +92,7 @@ class LinkFields(models.Model):
         verbose_name="Internal link",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         related_name='+'
     )
 
