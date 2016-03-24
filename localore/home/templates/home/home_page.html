@@ -14,10 +14,13 @@
 <div class="container-full">
 
 	<section class="featured-connection">
-		<div id="bgVideo"
-				 class="full-bg"
-				 data-vide-bg="mp4: {% static 'videos/ocean.mp4' %}, webm: {% static 'videos/ocean.webm' %}, ogv: {% static 'videos/ocean.ogv' %}, poster: {% static 'videos/ocean.jpg' %}"
-				 data-vide-options="posterType: jpg">
+		<div id="bgVideo" class="full-bg"
+			{% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
+				data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}"
+			{% else %}
+				data-vide-bg="mp4: {% static 'videos/ocean.mp4' %}, webm: {% static 'videos/ocean.webm' %}, ogv: {% static 'videos/ocean.ogv' %}, poster: {% static 'videos/ocean.jpg' %}"
+			{% endif %}
+			data-vide-options="posterType: jpg">
 		</div>
 		<div class="play-icon" data-toggle="modal" data-target="#homeVideo"></div>
 	</section>
