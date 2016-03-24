@@ -31,6 +31,8 @@ server {
 
 	root /var/www/{{ domain }}/current;
 
+	client_max_body_size 4m;
+
 	location /static {
 		root /var/www/{{ domain }}/current;
 		access_log off;
