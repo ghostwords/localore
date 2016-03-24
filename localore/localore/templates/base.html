@@ -36,7 +36,7 @@
 		{% compress css %}
 
 		<!-- bower:css -->
-		<link rel="stylesheet" href="/static/bower_components/normalize-css/normalize.css" />
+		<link rel="stylesheet" href="{% static 'bower_components/normalize-css/normalize.css' %}" />
 		<!-- endbower -->
 
 		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
@@ -81,11 +81,11 @@
 		{# Global javascript #}
 		{% compress js %}
 		<!-- bower:js -->
-		<script src="/static/bower_components/jquery/dist/jquery.js"></script>
-		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
-		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
-		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
-		<script src="/static/bower_components/vide/dist/jquery.vide.js"></script>
+		<script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+		<script src="{% static 'bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js' %}"></script>
+		<script src="{% static 'bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js' %}"></script>
+		<script src="{% static 'bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js' %}"></script>
+		<script src="{% static 'bower_components/vide/dist/jquery.vide.js' %}"></script>
 		<!-- endbower -->
 		<script type="text/javascript" src="{% static 'js/localore.js' %}"></script>
 		{% endcompress %}
