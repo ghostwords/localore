@@ -8,7 +8,10 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class HomePage(Page):
-    body = RichTextField(blank=True)
+    site_intro = RichTextField(blank=True)
+
+    live_feed_intro = RichTextField(blank=True)
+
     video_mp4 = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -39,7 +42,8 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+        FieldPanel('site_intro', classname="full"),
+        FieldPanel('live_feed_intro', classname="full"),
         MultiFieldPanel([
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),

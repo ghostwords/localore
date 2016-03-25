@@ -28,7 +28,7 @@
 	<section class="live-feed" id="livefeed">
 		<div class="container">
 			<h4>Live Feed</h4>
-			<p>Do ut consectetur est consectetur enim minim ex deserunt. Irure est aliquip qui quis ea consectetur laborum occaecat cupidatat laborum eu fugiat. Tempor quis fugiat officia do proident in culpa amet.</p>
+			{{ page.live_feed_intro|richtext }}
 		</div>
 	</section>
 
@@ -62,9 +62,8 @@
 {% endblock %}
 
 {% block extra_js %}
-	<!-- NOTE: need to specify the juicer embed WITHOUT JQUERY -->
+	{# NOTE: need to specify the juicer embed WITHOUT JQUERY #}
 	<script src="//assets.juicer.io/embed-no-jquery.js" type="text/javascript"></script>
-
 
 	<script>
 	  // Load the IFrame Player API code asynchronously.
@@ -115,7 +114,6 @@
 
 
 		});
-
 	</script>
 
 {% endblock %}
