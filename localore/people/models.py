@@ -89,7 +89,7 @@ class Person(models.Model, index.Indexed):
             return self.production
 
     class Meta:
-        ordering = ('-production', 'first_name', 'last_name')
+        ordering = ('last_name',)
         verbose_name = "person"
         verbose_name_plural = "people"
 

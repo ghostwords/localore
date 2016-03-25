@@ -5,7 +5,11 @@ from wagtail.wagtailadmin.search import SearchArea
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailsnippets.permissions import user_can_edit_snippet_type
 
-from wagtailmodeladmin.options import ModelAdmin, wagtailmodeladmin_register
+from wagtailmodeladmin.options import (
+    ModelAdmin,
+    ThumbmnailMixin,
+    wagtailmodeladmin_register
+)
 
 from people.models import Person
 
@@ -25,6 +29,10 @@ def register_people_search_area():
     )
 
 
+class PersonThumbnailMixin(ThumbmnailMixin):
+    thumb_image_field_name = 'photo'
+
+
 class PeopleAdmin(ModelAdmin):
     model = Person
     menu_icon = 'group'
@@ -39,6 +47,10 @@ class PeopleAdmin(ModelAdmin):
         'biography',
         'production__title',
     )
+
+    def profile_photo(self, obj): # pylint: disable=no-self-use
+        return PersonThumbnailMixin().admin_thumb(obj)
+    profile_photo.short_description = "photo"
 
     def role_and_production(self, obj): # pylint: disable=no-self-use
         if obj.production and obj.role:
@@ -67,16 +79,5 @@ class PeopleAdmin(ModelAdmin):
         )
     full_name.short_description = 'name'
     full_name.admin_order_field = 'last_name'
-
-    def profile_photo(self, obj):
-        if not obj.photo:
-            return
-        return format_html(
-            '<img src="{}" title="{}" alt="{}" style="height:40px">',
-            obj.photo.file.url,
-            obj.photo,
-            "team member profile photo of " + self.full_name(obj)
-        )
-    profile_photo.short_description = 'photo'
 
 wagtailmodeladmin_register(PeopleAdmin)
