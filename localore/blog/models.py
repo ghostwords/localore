@@ -79,6 +79,9 @@ class BlogPage(Page):
     def blog_index(self):
         return self.get_ancestors().type(BlogIndexPage).last()
 
+    class Meta:
+        verbose_name = "connection"
+
 
 class LinkFields(models.Model):
     link_external = models.URLField(
@@ -141,3 +144,6 @@ class BlogIndexPage(Page):
     @property
     def posts(self):
         return BlogPage.objects.live().descendant_of(self).order_by('-date')
+
+    class Meta:
+        verbose_name = "connections index page"
