@@ -173,10 +173,13 @@ class BlogIndexRelatedLink(Orderable, RelatedLink):
 
 
 class BlogIndexPage(Page):
-    body = RichTextField(blank=True)
+    subtitle = models.CharField(max_length=255, blank=True)
+
+    intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+        FieldPanel('subtitle', classname="full"),
+        FieldPanel('intro', classname="full"),
         InlinePanel('related_links', label="Featured posts"),
     ]
 
