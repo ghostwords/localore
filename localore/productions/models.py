@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms.widgets import RadioSelect
 
 from localflavor.us.models import USStateField
 
@@ -190,8 +191,37 @@ class ProductionPage(Page):
 
 
 class ProductionsIndexPage(Page):
+    DISPLAY_TYPE_GRID = 'g'
+    DISPLAY_TYPE_LIST = 'l'
+    DISPLAY_TYPE_CHOICES = (
+        (DISPLAY_TYPE_GRID, 'Grid'),
+        (DISPLAY_TYPE_LIST, 'List'),
+    )
+
+    default_view = models.CharField(
+        max_length=1,
+        choices=DISPLAY_TYPE_CHOICES,
+        default=DISPLAY_TYPE_GRID
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('default_view', widget=RadioSelect),
+    ]
+
     subpage_types = ['productions.ProductionPage']
 
     @property
     def productions(self):
         return ProductionPage.objects.live().descendant_of(self)
+
+    def get_context(self, request):
+        context = super(ProductionsIndexPage, self).get_context(request)
+
+        context['DISPLAY_TYPE_GRID'] = ProductionsIndexPage.DISPLAY_TYPE_GRID
+        context['DISPLAY_TYPE_LIST'] = ProductionsIndexPage.DISPLAY_TYPE_LIST
+        context['use_list_view'] = (
+            request.GET.get('t', self.default_view) ==
+            ProductionsIndexPage.DISPLAY_TYPE_LIST
+        )
+
+        return context

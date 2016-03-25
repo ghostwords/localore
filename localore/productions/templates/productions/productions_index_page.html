@@ -5,57 +5,77 @@
 {% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+
 <div id="title" class="title title-about">
   <div>
     <h1>Productions</h1>
     <h3>Lorem ipsum description something</h3>
     <ul class="title-section-about list-inline">
-
-			{% for page_name in about_page_names %}
-				<li>
-				{% if page_name == current_page_name %}
-					{{ page_name }}
-				{% else %}
-					<a href="{% url 'about-'|add:page_name %}">{{ page_name }}</a>
-				{% endif %}
-				</li>
-			{% endfor %}
+		{% if use_list_view %}
+			<a href="{% pageurl page %}?t={{ DISPLAY_TYPE_GRID }}">Grid</a>
+		{% else %}
+			Grid
+		{% endif %}
+		|
+		{% if use_list_view %}
+			List
+		{% else %}
+			<a href="{% pageurl page %}?t={{ DISPLAY_TYPE_LIST }}">List</a>
+		{% endif %}
     </ul>
   </div>
 </div>
+
 <div class="description"></div>
+
 <div class="container-full">
+
+{% if use_list_view %}
+	{# LIST VIEW #}
+
+	{% for prod in page.productions %}
+		<a class="prod-item-link" href="{% pageurl prod %}">
+			<div class="prod-item-content">
+				<span class="prod-item-loc">{{ prod.city }}, {{ prod.state }}</span>
+				<span class="prod-item-title">{{ prod.title }}</span>
+			</div>
+		</a>
+	{% empty %}
+		<h3>No productions.</h3>
+	{% endfor %}
+
+{% else %}
+{# GRID VIEW #}
 
 	<div class="prod-grid">
 
-		{% for prod in page.productions %}
+		{% for prod in page.productions|dictsort:"title" %}
 
-      {% if forloop.counter0|divisibleby:3 %}
-        <div class="prod-grid-row">
-      {% endif %}
+			{% if forloop.counter0|divisibleby:3 %}<div class="prod-grid-row">{% endif %}
 
-    			<!-- {% image prod.hero_image fill-140x140-c100 as image %} -->
-    			{% image prod.hero_image original as image %}
-    			<!-- <a href="{% pageurl prod %}" class="productions-grid-item"> -->
-    			<div class="prod-grid-item">
-            <div class="prod-item-bg" style="background-image:url({{ image.url }})"></div>
-            <a class="prod-item-link" href="{% pageurl prod %}">
-              <div class="prod-item-content">
-                <span class="prod-item-title">{{ prod.title }}</span>
-                <span class="prod-item-loc">{{ prod.city }}, {{ prod.state }}</span>
-              </div>
-            </a>
-    			</div>
+			{# image prod.hero_image fill-140x140-c100 as image #}
+			{% image prod.hero_image original as image %}
+			<div class="prod-grid-item">
+				<div class="prod-item-bg" style="background-image:url({{ image.url }})"></div>
+				<a class="prod-item-link" href="{% pageurl prod %}">
+					<div class="prod-item-content">
+						<span class="prod-item-title">{{ prod.title }}</span>
+						<span class="prod-item-loc">{{ prod.city }}, {{ prod.state }}</span>
+					</div>
+				</a>
+			</div>
 
-      {% if forloop.counter|divisibleby:3 %}
-        </div>
-      {% endif %}
+			{% if forloop.counter|divisibleby:3 %}</div>{% endif %}
 
-      {% empty %}
-        <h3>No productions.</h3>
+		{% empty %}
+
+			<h3>No productions.</h3>
 
 		{% endfor %}
+
 	</div>
+
+{% endif %}
 
 </div>
 
