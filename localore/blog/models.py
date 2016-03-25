@@ -100,7 +100,7 @@ class BlogPage(Page):
 
     # search index config
     search_fields = Page.search_fields + (
-        index.SearchField('body'),
+        index.SearchField('body', partial_match=True),
     )
 
     # admin editor panels config
