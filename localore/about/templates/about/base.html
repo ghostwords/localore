@@ -7,42 +7,42 @@
 {% block body_class %}template-about-{{ page.title|slugify }}{% endblock %}
 
 {% block content %}
+
 <div id="title" class="title title-about">
-  <div>
-    <h1>About</h1>
-    <h3>Lorem ipsum description something</h3>
-    <ul class="title-section-about list-inline">
+	<div>
+		<h1>{{ page.title }}</h1>
+		<h3>{{ page.subtitle }}</h3>
+		<ul class="title-section-about list-inline">
+			<li>
+			{% get_about_mission_page as about_mission_page %}
+			{% if page == about_mission_page %}
+				Mission
+			{% else %}
+				<a href="{{ about_mission_page.url }}">Mission</a>
+			{% endif %}
+			</li>
 
-		<li>
-		{% get_about_mission_page as about_mission_page %}
-		{% if page == about_mission_page %}
-			Mission
-		{% else %}
-			<a href="{{ about_mission_page.url }}">Mission</a>
-		{% endif %}
-		</li>
+			<li>
+			{% get_about_team_page as about_team_page %}
+			{% if page == about_team_page %}
+				Team
+			{% else %}
+				<a href="{{ about_team_page.url }}">Team</a>
+			{% endif %}
+			</li>
 
-		<li>
-		{% get_about_team_page as about_team_page %}
-		{% if page == about_team_page %}
-			Team
-		{% else %}
-			<a href="{{ about_team_page.url }}">Team</a>
-		{% endif %}
-		</li>
-
-		<li>
-		{% get_about_contact_page as about_contact_page %}
-		{% if page == about_contact_page %}
-			Connect
-		{% else %}
-			<a href="{{ about_contact_page.url }}">Connect</a>
-		{% endif %}
-		</li>
-
-    </ul>
-  </div>
+			<li>
+			{% get_about_contact_page as about_contact_page %}
+			{% if page == about_contact_page %}
+				Connect
+			{% else %}
+				<a href="{{ about_contact_page.url }}">Connect</a>
+			{% endif %}
+			</li>
+		</ul>
+	</div>
 </div>
+
 <div class="description">
 </div>
 <div class="container">
