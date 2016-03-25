@@ -75,6 +75,16 @@
 
 	{{ page.highlights|richtext }}
 
+	<h4>Mentioned In</h4>
+	<p>
+		{% for blog_page in page.mentioned_in %}
+			<a href="{{ blog_page.url }}">{{ blog_page }}</a>
+			{% if not forloop.last %}, {% endif %}
+		{% empty %}
+			No mentions.
+		{% endfor %}
+	</p>
+
 	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
 		{% if juicer_feed_id and page.juicer_feed_filter %}
 			<h4>Juicer feed for {{ page.juicer_feed_filter }}</h4>

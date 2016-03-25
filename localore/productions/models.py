@@ -15,6 +15,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
+from blog.models import BlogPageAssociatedProduction
+
 
 class LinkField(models.Model):
     SERVICE_NAME_CHOICES = (
@@ -122,10 +124,6 @@ class ProductionPage(Page):
 
     description = RichTextField()
 
-    # TODO "mentioned in":
-    # auto-generated links to connections that link to this production
-    # @property
-
     highlights = RichTextField(
         blank=True,
         help_text="Optional WYSIWYG area to highlight the production's work."
@@ -179,6 +177,13 @@ class ProductionPage(Page):
     @property
     def productions_index(self):
         return self.get_ancestors().type(ProductionsIndexPage).last()
+
+    @property
+    def mentioned_in(self):
+        associations = BlogPageAssociatedProduction.objects.filter(
+            production_page=self
+        )
+        return [item.page for item in associations]
 
     class Meta:
         verbose_name = "production"
