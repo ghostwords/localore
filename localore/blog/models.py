@@ -25,6 +25,45 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
 
 
+class AssociatedProduction(models.Model):
+    production_page = models.ForeignKey(
+        'productions.ProductionPage',
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+
+    panels = [
+        PageChooserPanel('production_page'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class BlogPageAssociatedProduction(Orderable, AssociatedProduction):
+    page = ParentalKey('BlogPage', related_name='associated_productions')
+
+
+class RelatedConnection(models.Model):
+    related_blog_page = models.ForeignKey(
+        'blog.BlogPage',
+        verbose_name="Related Connection",
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+
+    panels = [
+        PageChooserPanel('related_blog_page'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class BlogPageRelatedConnection(Orderable, RelatedConnection):
+    page = ParentalKey('BlogPage', related_name='related_posts')
+
+
 class QuoteBlock(StructBlock):
     quote = TextBlock("quote title")
     attribution = CharBlock()
@@ -68,7 +107,9 @@ class BlogPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         ImageChooserPanel('main_image'),
-        StreamFieldPanel('body')
+        StreamFieldPanel('body'),
+        InlinePanel('associated_productions', label="Associated Productions"),
+        InlinePanel('related_posts', label="Related Connections"),
     ]
 
     # parent page/subpage type rules
