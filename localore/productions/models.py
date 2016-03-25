@@ -198,6 +198,10 @@ class ProductionsIndexPage(Page):
         (DISPLAY_TYPE_LIST, 'List'),
     )
 
+    subtitle = models.CharField(max_length=255, blank=True)
+
+    intro = RichTextField(blank=True)
+
     default_view = models.CharField(
         max_length=1,
         choices=DISPLAY_TYPE_CHOICES,
@@ -205,6 +209,8 @@ class ProductionsIndexPage(Page):
     )
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname='full'),
+        FieldPanel('intro', classname='full'),
         FieldPanel('default_view', widget=RadioSelect),
     ]
 
