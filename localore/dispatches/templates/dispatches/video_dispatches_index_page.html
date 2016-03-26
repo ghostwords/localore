@@ -1,0 +1,18 @@
+{% extends "dispatches/base.html" %}
+
+{% load embed_video_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block dispatches_index_content %}
+
+	{% for dispatch in page.dispatches %}
+		<div>
+			{{ dispatch }}
+			<br>
+			{# see http://django-embed-video.readthedocs.org/en/v1.1.0/examples.html#template-examples #}
+			{% video dispatch.video.url query="rel=0&wmode=transparent" is_secure=True as video %}
+			{% video video 'medium' %}
+			{% endvideo %}
+		</div>
+	{% endfor %}
+
+{% endblock %}

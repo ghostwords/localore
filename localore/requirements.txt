@@ -10,3 +10,4 @@ wagtail==1.4.1
 wagtailmodeladmin==2.5.0
 Wand==0.4.2
 -e git+https://github.com/django-compressor/django-compressor.git@de3afb17ab102430e9d3c97034f6016c6a0d3037#egg=django-compressor
+-e git+https://github.com/SalahAdDin/wagtail-embedvideos.git@efc3eb2669c58f6ac52d9e11e5c6c0f685f4f25b#egg=wagtail_embed_videos

@@ -97,10 +97,12 @@ INSTALLED_APPS = (
     # needs to go after wagtaildocs to remove its site summary
     'localore_admin',
 
-    'modelcluster',
     'compressor',
-    'taggit',
+    'embed_video',
+    'modelcluster',
     'overextends',
+    'taggit',
+    'wagtail_embed_videos',
 
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block body_class %}template-{{ page.title|slugify }}{% endblock %}
+
+{% block content %}
+
+<div id="title" class="title title-about">
+	<div>
+		<h1>Dispatches</h1>
+		<h3>{{ page.subtitle }}</h3>
+		<ul class="title-section-about list-inline">
+			{# TODO menu #}
+			<li>
+				Video
+			</li>
+			<li>
+				Audio
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="description">
+	{{ page.intro|richtext }}
+</div>
+
+<div class="container">
+	{% block dispatches_index_content %}{% endblock %}
+</div>
+{% endblock %}
