@@ -75,6 +75,7 @@ if DEBUG:
 INSTALLED_APPS = (
     'about',
     'blog',
+    'dispatches',
     'home',
     'people',
     'productions',
