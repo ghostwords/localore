@@ -4,11 +4,7 @@
 
 {% block about_content %}
 
-	{{ page.description_top|richtext }}
-
-	<img src="http://10up.com/wp-content/themes/10up-v2/assets/img/map-us-alaska-clear.png" />
-
-	{{ page.description_bottom|richtext }}
+	{{ page.description|richtext }}
 
 	{% if page.related_links.all %}
 		<ul>

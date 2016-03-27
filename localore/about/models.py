@@ -17,18 +17,15 @@ class AboutMissionPageRelatedLink(Orderable, RelatedLink):
 
 class AboutMissionPage(Page):
     subtitle = models.CharField(max_length=255, blank=True)
-    description_top = RichTextField("Top description")
-    description_bottom = RichTextField("Bottom description")
+    description = RichTextField()
 
     search_fields = Page.search_fields + (
-        index.SearchField('description_top', partial_match=True),
-        index.SearchField('description_bottom', partial_match=True),
+        index.SearchField('description', partial_match=True),
     )
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
-        FieldPanel('description_top', classname='full'),
-        FieldPanel('description_bottom', classname='full'),
+        FieldPanel('description', classname='full'),
         InlinePanel('related_links', label="Related links"),
     ]
 
