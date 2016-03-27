@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
 
     run_before = [
         ('home', '0002_create_homepage'),
+        ('people', '0006_auto_20160318_1718'),
     ]
 
     operations = [
