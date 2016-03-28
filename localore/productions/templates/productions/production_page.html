@@ -54,14 +54,14 @@
 		<!-- team -->
 		{% if page.featured_people.all %}
 		<div class="prod-team">
-
+				{% get_about_team_page as about_team_page %}
 				<div class="team-members clearfix">
 					{% for item in page.featured_people.all %}
 					{% with person=item.person %}
-					<!-- <a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ item.person }}</a> -->
+					{# <a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ item.person }}</a> #}
 					<div class="team-member">
-						<!-- <img src="https://assets.lensculture.com/static/competitions/jury/juror-ann-2.jpg" /> -->
-						<!-- <img src="{% image person.photo fill-140x140-c100 %}" /> -->
+						{# <img src="https://assets.lensculture.com/static/competitions/jury/juror-ann-2.jpg" /> #}
+						{# <img src="{% image person.photo fill-140x140-c100 %}" /> #}
 						{% image person.photo fill-140x140-c100 %}
 						<h6 class="team-member-name"><a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ person.full_name }}</a></h6>
 						<p class="team-member-title">{{ person.role }}</p>
@@ -79,17 +79,22 @@
 
 <div class="container">
 
-	<h4 class="text-center">Highlights</h4>
-	{{ page.highlights|richtext }}
+	{% if page.highlights %}
+		<h4 class="text-center">Highlights</h4>
+		{{ page.highlights|richtext }}
+	{% endif %}
 
-	<div class="connection-prods">
-		<h6>Mentioned In</h6>
-		{% for blog_page in page.mentioned_in %}
-			<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>
-		{% if not forloop.last %}, {% endif %}
-		{% endfor %}
-	</div>
-
+	{% with blog_pages=page.mentioned_in %}
+	{% if blog_pages %}
+		<div class="connection-prods">
+			<h6>Mentioned In</h6>
+			{% for blog_page in blog_pages %}
+				<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>
+			{% if not forloop.last %}, {% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% endwith %}
 
 </div>
 

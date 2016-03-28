@@ -5,12 +5,21 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
+
 <div id="title" class="title title-home">
-  <div>
-    <h1>Oceans</h1>
-    <h3>Across America</h3>
-  </div>
+	<div>
+		<h1>
+			{% if page.related_content_page %}
+				<a href="{% pageurl page.related_content_page %}">{{ page.related_content_title }}</a>
+			{% else %}
+				{{ page.related_content_title }}
+			{% endif %}
+		</h1>
+
+		<h3>{{ page.related_content_subtitle }}</h3>
+	</div>
 </div>
+
 <div class="container-full">
 
 	<section class="hero-section">
