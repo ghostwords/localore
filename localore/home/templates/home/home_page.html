@@ -5,12 +5,21 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
+
 <div id="title" class="title title-home">
-  <div>
-    <h1>Oceans</h1>
-    <h3>Across America</h3>
-  </div>
+	<div>
+		<h1>
+			{% if page.related_content_page %}
+				<a href="{% pageurl page.related_content_page %}">{{ page.related_content_title }}</a>
+			{% else %}
+				{{ page.related_content_title }}
+			{% endif %}
+		</h1>
+
+		<h3>{{ page.related_content_subtitle }}</h3>
+	</div>
 </div>
+
 <div class="container-full">
 
 	<section class="hero-section">
@@ -22,7 +31,10 @@
 			{% endif %}
 			data-vide-options="posterType: jpg">
 		</div>
-		<div class="play-icon" data-toggle="modal" data-target="#homeVideo"></div>
+
+		{% if page.video_youtube_id %}
+			<div class="play-icon" data-toggle="modal" data-target="#homeVideo"></div>
+		{% endif %}
 	</section>
 
 	<section class="live-feed" id="livefeed">
@@ -65,6 +77,7 @@
 	{# NOTE: need to specify the juicer embed WITHOUT JQUERY #}
 	<script src="//assets.juicer.io/embed-no-jquery.js" type="text/javascript"></script>
 
+	{% if page.video_youtube_id %}
 	<script>
 	  // Load the IFrame Player API code asynchronously.
 	  var tag = document.createElement('script');
@@ -81,7 +94,7 @@
 
 			window.onYouTubePlayerAPIReady = function() {
 				player = new YT.Player('modal-player', {
-					videoId: 'j6IIjLK-8fU',
+					videoId: '{{ page.video_youtube_id }}',
 					playerVars: {
 						modestbranding: '1',
 						rel: '0',
@@ -115,5 +128,6 @@
 
 		});
 	</script>
+	{% endif %}
 
 {% endblock %}
