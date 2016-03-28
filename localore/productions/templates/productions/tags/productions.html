@@ -1,10 +1,8 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags people_tags %}
 
 {% for production in productions %}
 
 <div class="team-item" id="{{ production.title|slugify }}">
-
-	{# TODO factor out into "production" tag: see also about/templates/about/about_team_page.html #}
 
 	<h6 class="team-location">{{ production.city }}, {{ production.state }}</h6>
 	<a data-toggle="collapse"
@@ -15,28 +13,11 @@
 		<h4 class="team-name">{{ production.title }}</h4>
 	</a>
 
-	<!-- <div id="team-members-{{ forloop.counter0 }}" class="collapse"> -->
+	{# <div id="team-members-{{ forloop.counter0 }}" class="collapse"> #}
 	<div id="team-members-{{ forloop.counter0 }}">
 		<div class="team-members clearfix">
 			{% for item in production.related_people.all %}
-			{% with person=item.person %}
-			<div class="team-member">
-				<!-- <img src="https://assets.lensculture.com/static/competitions/jury/juror-ann-2.jpg" /> -->
-				<!-- <img src="{% image person.photo fill-140x140-c100 %}" /> -->
-				{% image person.photo fill-140x140-c100 %}
-				<h6 class="team-member-name">{{ person.full_name }}</h6>
-				<p class="team-member-title">{{ person.role }}</p>
-
-				<div class="social-links">
-					<ul class="list-inline">
-						<li><a href="mailto:{{ person.email }}" class="social-link social-link-email"></a></li>
-						<li><a href="{{ person.twitter_url }}" class="social-link social-link-twitter"></a></li>
-						<li><a href="{{ person.instagram_url }}" class="social-link social-link-instagram"></a></li>
-					</ul>
-				</div>
-				<div class="team-member-desc">{{ person.biography|richtext }}</div>
-			</div>
-			{% endwith %}
+			{% person item.person %}
 			{% endfor %}
 		</div>
 	</div>
