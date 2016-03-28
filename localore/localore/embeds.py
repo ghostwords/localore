@@ -2,7 +2,8 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 
-from wagtail.wagtailembeds.embeds import embedly, oembed
+from wagtail.wagtailembeds.finders.embedly import embedly
+from wagtail.wagtailembeds.finders.oembed import oembed
 
 
 # work around Embedly missing embedding HTML for Twitter and Instagram URLs
