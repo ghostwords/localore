@@ -79,17 +79,22 @@
 
 <div class="container">
 
-	<h4 class="text-center">Highlights</h4>
-	{{ page.highlights|richtext }}
+	{% if page.highlights %}
+		<h4 class="text-center">Highlights</h4>
+		{{ page.highlights|richtext }}
+	{% endif %}
 
-	<div class="connection-prods">
-		<h6>Mentioned In</h6>
-		{% for blog_page in page.mentioned_in %}
-			<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>
-		{% if not forloop.last %}, {% endif %}
-		{% endfor %}
-	</div>
-
+	{% with blog_pages=page.mentioned_in %}
+	{% if blog_pages %}
+		<div class="connection-prods">
+			<h6>Mentioned In</h6>
+			{% for blog_page in blog_pages %}
+				<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>
+			{% if not forloop.last %}, {% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% endwith %}
 
 </div>
 
