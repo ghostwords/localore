@@ -1,0 +1,29 @@
+.prod-description {
+
+  margin-bottom: 10em;
+
+  & > .container.with-logo {
+    padding-top: 8em;
+  }
+
+  .rich-text {
+    padding-bottom: 2em;
+  }
+
+  .prod-logo {
+    position: absolute;
+    top: -75px;
+    border: 1px solid $med-grey;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .prod-team {
+    width: 75%;
+    position: absolute;
+    left: 50%;
+    @include transform(translateX(-50%));
+
+  }
+}

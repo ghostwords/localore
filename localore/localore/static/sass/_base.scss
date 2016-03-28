@@ -26,7 +26,7 @@ body {
   }
 
 
-  & > img {
+  & .rich-text img, & .block-image img {
     @include img-responsive();
     margin: 3rem auto;
   }
@@ -53,12 +53,35 @@ body {
   background-position: top center;
   height: $header-title + 100px;
   width: 100%;
+  position: relative;
 
   @include media($desktop-xl) {
       background-size: 100%;
   }
 
+  .rich-text {
+    @include outer-container($grid-md);
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+
+    p {
+      color: #323130;
+      text-align: center;
+    }
+  }
+
 }
+
+.text-description {
+    background-color: $light-grey;
+}
+
+.text-center {
+  text-align: center;
+}
+
 
 p {
   // @include span-columns(6);
@@ -67,18 +90,34 @@ p {
 
 a {
   font-family: $roboto;
-  color: $dark-grey;
+  // color: $dark-grey;
+  color: $orange;
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
   }
+
+  &.link-large {
+    font-size: 1.5em;
+  }
+}
+
+h6 {
+  font-family: $roboto-reg;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
 }
 
 .rich-text img {
 	max-width: 100%;
 	height: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
+
 
 .responsive-object {
 	padding-bottom: 0px !important;

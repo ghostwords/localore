@@ -14,9 +14,11 @@
 
   text-align: center;
 
-  h1, h3 {
+  h1, h2, h3, h4, h5, h6 {
     color: #fff;
     font-weight: 300;
+    padding-left: 40px;
+    padding-right: 40px;
     // @include vertical-align();
   }
 
@@ -24,9 +26,16 @@
     font-size: em(36);
     margin-bottom: 7px;
   }
+  h2 {
+    font-size: em(30);
+    margin-bottom: 7px;
+  }
   h3 {
     font-size: em(16);
     margin-bottom: 15px;
+  }
+  h6 {
+    color: $orange;
   }
 
 }
@@ -66,6 +75,7 @@
     border-style: solid;
     border-width: ($header-md * .5) 200px 0 200px;
     border-color: $dark-grey transparent transparent transparent;
+    z-index: -1;
   }
 
   .title-section-about {
@@ -87,6 +97,30 @@
     a {
         font-family: $roboto-reg;
         color: $orange;
+    }
+  }
+
+  .title-nav {
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    width: 18px;
+    height: 34px;
+    opacity: 0.6;
+    @include transition(all 0.3s ease);
+
+
+    &.title-prev {
+      background: url('/static/images/connections_arrow_left.png') no-repeat center;
+      left: 15px;
+    }
+    &.title-next {
+      background: url('/static/images/connections_arrow_right.png') no-repeat center;
+      right: 15px;
+    }
+    &:hover {
+      opacity: 1;
     }
   }
 

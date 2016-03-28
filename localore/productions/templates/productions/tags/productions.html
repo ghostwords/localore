@@ -8,7 +8,7 @@
 
 	<h6 class="team-location">{{ production.city }}, {{ production.state }}</h6>
 	<a data-toggle="collapse"
-			href="#team-members- {{ forloop.counter0 }}"
+			href="#team-members-{{ forloop.counter0 }}"
 			aria-expanded="false"
 			aria-controls="team-members-{{ forloop.counter0 }}"
 			data-parent=".team-section">
@@ -17,7 +17,7 @@
 
 	<!-- <div id="team-members-{{ forloop.counter0 }}" class="collapse"> -->
 	<div id="team-members-{{ forloop.counter0 }}">
-		<div class="team-members">
+		<div class="team-members clearfix">
 			{% for item in production.related_people.all %}
 			{% with person=item.person %}
 			<div class="team-member">
@@ -26,19 +26,20 @@
 				{% image person.photo fill-140x140-c100 %}
 				<h6 class="team-member-name">{{ person.full_name }}</h6>
 				<p class="team-member-title">{{ person.role }}</p>
-				<ul class="list-inline team-member-links">
-					<li><a href="mailto:{{ person.email }}" class="email">email</a></li>
-					<li><a href="{{ person.twitter_url }}" class="twitter">twitter</a></li>
-					<li><a href="{{ person.instagram_url }}" class="insta">insta</a></li>
-				</ul>
+
+				<div class="social-links">
+					<ul class="list-inline">
+						<li><a href="mailto:{{ person.email }}" class="social-link social-link-email"></a></li>
+						<li><a href="{{ person.twitter_url }}" class="social-link social-link-twitter"></a></li>
+						<li><a href="{{ person.instagram_url }}" class="social-link social-link-instagram"></a></li>
+					</ul>
+				</div>
 				<div class="team-member-desc">{{ person.biography|richtext }}</div>
 			</div>
 			{% endwith %}
 			{% endfor %}
 		</div>
 	</div>
-
-	{% if not forloop.last %}<hr />{% endif %}
 
 </div>
 

@@ -5,37 +5,34 @@
 {% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-	<h1>{{ page.title }}</h1>
-	<h3>{{ page.subtitle }}</h3>
 
-	<hr>
 
-	{% if page.related_links.all %}
-		<ul>
-			{% for item in page.related_links.all %}
-				<li>
-					{{ item.title }}
-					<br>
-					{% if item.link_page.main_image %}
-						{% image item.link_page.main_image width-200 %}
-						<br>
-					{% endif %}
-					<a href="{{ item.link }}">{{ item.link_page|default:item.link }}</a>
-				</li>
-				<br>
-			{% endfor %}
-		</ul>
-		<hr>
-	{% endif %}
+<div id="title" class="title title-about">
+	<div>
+		<h1>{{ page.title }}</h1>
+		<h3>{{ page.subtitle }}</h3>
+	</div>
+</div>
 
-	<div class="body-content">{{ page.intro|richtext }}</div>
+<div class="description">{{ page.intro|richtext }}</div>
 
-	<hr>
 
+<div class="container-full">
 	{% for post in page.posts %}
-		<a href="{% pageurl post %}">{{ post.title }}</a>
-		<br>
+
+		{% image post.main_image original as image %}
+		<div class="post-item">
+			<div class="post-item-bg" style="background-image:url({{ image.url }})"></div>
+			<a class="post-item-link" href="{% pageurl post %}">
+				<div class="post-item-content">
+					<span class="post-item-title">{{ post.title }}</span>
+					<span class="post-item-loc">{{ post.subtitle }}</span>
+				</div>
+			</a>
+		</div>
 	{% empty %}
 		No posts.
 	{% endfor %}
+</div>
+
 {% endblock %}

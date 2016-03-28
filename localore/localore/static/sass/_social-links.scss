@@ -1,0 +1,54 @@
+.social-links {
+  display: table;
+  margin: 0 auto;
+
+  .template-production & {
+    padding-bottom: 2em;
+  }
+
+  li {
+    padding-left: 7px;
+    padding-right: 7px;
+
+  }
+
+  .social-link {
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url('/static/images/social/link.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+    background-size: cover;
+
+    &.social-link-instagram {
+      background: url('/static/images/social/instagram.svg') no-repeat center;
+      background-size: auto 100%;
+    }
+    &.social-link-twitter   {
+      background: url('/static/images/social/twitter.svg') no-repeat center;
+      background-size: auto 100%;
+    }
+    &.social-link-email     {
+      background: url('/static/images/social/email.svg') no-repeat center;
+      background-size: auto 100%;
+    }
+    &.social-link-soundcloud{
+      background: url('/static/images/social/soundcloud.svg') no-repeat center;
+      background-size: 100%;
+    }
+    &.social-link-vimeo     {
+      background: url('/static/images/social/vimeo.svg') no-repeat center;
+      background-size: auto 100%;
+    }
+    &.social-link-youtube   {
+      background: url('/static/images/social/youtube.svg') no-repeat center;
+      background-size: auto 100%;
+    }
+    &.social-link-tumblr    {
+      background: url('/static/images/social/tumblr.svg') no-repeat center;
+      background-size: auto 100%;
+    }
+  }
+}

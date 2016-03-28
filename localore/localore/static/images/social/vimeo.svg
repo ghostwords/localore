@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>Vimeo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path id="path-1" d="M0,0.326306011 L19.796,0.326306011 L19.796,17.5519126 L0,17.5519126"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Production-Detail-HIghlights-,-Logo" transform="translate(-600.000000, -874.000000)">
+            <g id="Description" transform="translate(0.000000, 584.000000)">
+                <g id="Social-Media-Icons" transform="translate(403.000000, 288.357923)">
+                    <g id="Vimeo" transform="translate(197.000000, 1.994536)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Clip-2"></g>
+                        <path d="M0,5.01362404 L0.804,6.06514317 C0.804,6.06514317 2.4624,4.76191366 3.0152,5.41293005 C3.568,6.06514317 5.6772,13.9331869 6.382,15.3848098 C6.9968,16.6581213 8.6928,18.3419082 10.552,17.1392033 C12.4108,15.9368973 18.5912,10.6749137 19.6972,4.46153661 C20.8028,-1.75104262 12.2596,-0.450605464 11.3556,4.96256393 C13.6168,3.60827432 14.824,5.51265683 13.6668,7.66835082 C12.5116,9.82244918 11.4564,11.2270011 10.9036,11.2270011 C10.352,11.2270011 9.9268,9.78614863 9.2952,7.26665137 C8.6416,4.66218689 8.6456,-0.0297584699 5.9288,0.501984699 C3.3668,1.00380984 0,5.01362404 0,5.01362404" id="Fill-1" fill="#F26836" mask="url(#mask-2)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

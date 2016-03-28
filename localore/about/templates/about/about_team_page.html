@@ -12,7 +12,7 @@
 		<div class="team-item">
 			<h4 class="team-name">AIR | Localore Team</h4>
 			<div>
-				<div class="team-members">
+				<div class="team-members clearfix">
 					{% for item in page.related_people.all %}
 					{% with person=item.person %}
 					<div class="team-member">
@@ -31,8 +31,6 @@
 				</div>
 			</div>
 		</div>
-
-		<hr>
 
 		{% productions %}
 

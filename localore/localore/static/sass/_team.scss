@@ -29,60 +29,71 @@
       font-size: 36px;
       line-height: 1;
     }
+  }
+}
 
-    .team-members {
-      @include row(table);
-      // @include reset-display;
+
+.team-members {
+  // @include row(table);
+  @include row();
+  text-align: center;
+
+    // @include reset-display;
+
+  .team-member {
+    // height: 250px;
+    // border: 1px solid blue;
+    // @include span-columns(4);
+    width: 33.3%;
+    display: inline-block;
+    margin-left: -4px;
+    vertical-align: top;
+    @include pad(0 flex-gutter() flex-gutter()*2 flex-gutter());
+    text-align: left;
+
+    // &:first-of-type {
+    //   @include pad(0 flex-gutter()*2 0 0);
+    // }
+    // &:last-of-type {
+    //   @include pad(0 0 0 flex-gutter()*2);
+    // }
+
+    & > img {
+      width: 75%;
+      margin: 0 auto 15px auto;
+      border-radius: 100%;
+      @include img-responsive();
     }
 
-    .team-member {
-      // height: 250px;
-      // border: 1px solid blue;
-      @include span-columns(4);
-      @include pad(0 flex-gutter() 0 flex-gutter());
-      text-align: left;
+    h6.team-member-name {
+      text-align: center;
+      font-family: $roboto;
+      color: $dark-grey;
+      margin-bottom: 5px;
+      letter-spacing: 0;
+      text-transform: none;
+      font-weight: 600;
+    }
 
-      &:first-of-type {
-        @include pad(0 flex-gutter()*2 0 0);
-      }
-      &:last-of-type {
-        @include pad(0 0 0 flex-gutter()*2);
-      }
+    .team-member-title {
+      text-align: center;
+      font-family: $roboto;
+      color: $dark-grey;
+      font-weight: 100;
+      font-size: em(15);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
 
-      & > img {
-        width: 75%;
-        margin: 0 auto 15px auto;
-        border-radius: 100%;
-        @include img-responsive();
-      }
+    ul.team-member-links {
+      border: 1px solid blue;
+    }
 
-      .team-member-name {
-        text-align: center;
-        font-family: $roboto;
-        color: $dark-grey;
-        margin-bottom: 5px;
-      }
-
-      .team-member-title {
-        text-align: center;
-        font-family: $roboto;
-        color: $dark-grey;
-        font-weight: 100;
-        font-size: em(15);
-        margin-bottom: 10px;
-      }
-
-      ul.team-member-links {
-        border: 1px solid blue;
-      }
-
-      .team-member-desc {
-        font-family: $roboto-reg;
-        font-size: em(15);
-        line-height: 1.4;
-      }
+    .team-member-desc {
+      font-family: $roboto-reg;
+      font-size: em(15);
+      line-height: 1.4;
     }
   }
-
 
 }

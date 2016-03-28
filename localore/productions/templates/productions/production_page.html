@@ -6,91 +6,99 @@
 
 {% block content %}
 
-	<div class="page-header">
-
+<div id="title" class="title title-about">
+	<div>
+		<h6>productions</h6>
 		<h2>{{ page.title }}</h2>
-		<h4>{{ page.city }}, {{ page.get_state_display }}</h4>
-
-		{% image page.hero_image fill-900x150-c100 %}
-		<br>
-		<br>
-
+		<h3>{{ page.city }}, {{ page.get_state_display }}</h3>
 		{% with prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
-		<nav>
 			{% if prev %}
-				<a href="{% pageurl prev %}" title="{{ prev }}">previous</a>
-			{% else %}
-				previous
+				<a href="{% pageurl prev %}" title="{{ prev }}" class="title-nav title-prev"></a>
 			{% endif %}
-
-			&nbsp;&nbsp;|&nbsp;&nbsp;
-
 			{% if next %}
-				<a href="{% pageurl next %}" title="{{ next }}">next</a>
-			{% else %}
-				next
+				<a href="{% pageurl next %}" title="{{ next }}" class="title-nav title-next"></a>
 			{% endif %}
-
-			&nbsp;&nbsp;|&nbsp;&nbsp;
-
-			<a href="{% pageurl page.productions_index %}">back to list of productions</a>
-		</nav>
 		{% endwith %}
+	</div>
+</div>
+
+<div class="hero-section hero-section-3by4">
+	{% image page.hero_image original as image %}
+	<div class="full-bg-image" style="background-image:url({{ image.url }})"></div>
+	<!-- need to handle videos here as well, same functionality as homepage -->
+</div>
+
+
+<div class="text-description prod-description">
+	<div class="container {% if page.logo_image %} with-logo {% endif %}">
+
+		<!--	logo -->
+		{% image page.logo_image height-150 class="prod-logo" %}
+
+		{{ page.description|richtext }}
+
+		{% if page.related_links.all %}
+		<div class="social-links">
+			<ul class="list-inline">
+			{% for link in page.related_links.all %}
+				<li>
+					<a href="{{ link.url }}" class="social-link {% if link.service_name %} social-link-{{ link.service_name }} {% endif %}"></a>
+
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
+
+
+		<!-- team -->
+		{% if page.featured_people.all %}
+		<div class="prod-team">
+
+				<div class="team-members clearfix">
+					{% for item in page.featured_people.all %}
+					{% with person=item.person %}
+					<!-- <a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ item.person }}</a> -->
+					<div class="team-member">
+						<!-- <img src="https://assets.lensculture.com/static/competitions/jury/juror-ann-2.jpg" /> -->
+						<!-- <img src="{% image person.photo fill-140x140-c100 %}" /> -->
+						{% image person.photo fill-140x140-c100 %}
+						<h6 class="team-member-name"><a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ person.full_name }}</a></h6>
+						<p class="team-member-title">{{ person.role }}</p>
+					</div>
+					{% endwith %}
+					{% endfor %}
+				</div>
+		</div>
+		{% endif %}
+
+
 
 	</div>
+</div>
 
-	{{ page.description|richtext }}
+<div class="container">
 
-	<hr>
-
-	<h4>Social links</h4>
-	{% if page.related_links.all %}
-		<ul>
-		{% for link in page.related_links.all %}
-			<li>
-				{{ link.url }}
-				{% if link.service_name %} ({{ link.get_service_name_display }}){% endif %}
-			</li>
-		{% endfor %}
-		</ul>
-	{% else %}
-		No social links.
-	{% endif %}
-
-	<h4>Featured people</h4>
-	{% if page.featured_people.all %}
-		<ul>
-		{% for item in page.featured_people.all %}
-			<li>
-				{% get_about_team_page as about_team_page %}
-				<a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ item.person }}</a>
-			</li>
-		{% endfor %}
-		</ul>
-	{% else %}
-		No featured people.
-	{% endif %}
-
-	<hr>
-
+	<h4 class="text-center">Highlights</h4>
 	{{ page.highlights|richtext }}
 
-	<h4>Mentioned In</h4>
-	<p>
+	<div class="connection-prods">
+		<h6>Mentioned In</h6>
 		{% for blog_page in page.mentioned_in %}
-			<a href="{{ blog_page.url }}">{{ blog_page }}</a>
-			{% if not forloop.last %}, {% endif %}
-		{% empty %}
-			No mentions.
+			<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>
+		{% if not forloop.last %}, {% endif %}
 		{% endfor %}
-	</p>
+	</div>
 
-	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
-		{% if juicer_feed_id and page.juicer_feed_filter %}
-			<h4>Juicer feed for {{ page.juicer_feed_filter }}</h4>
-			<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-filter="{{ page.juicer_feed_filter }}" data-style="slider"></ul>
-		{% endif %}
-	{% endwith %}
+
+</div>
+
+
+{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
+	{% if juicer_feed_id and page.juicer_feed_filter %}
+		<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-filter="{{ page.juicer_feed_filter }}" data-style="slider"></ul>
+	{% endif %}
+{% endwith %}
 
 {% endblock %}
 
@@ -101,7 +109,8 @@
 		{% endblock %}
 
 		{% block extra_js %}
-			<script src="//assets.juicer.io/embed.js" type="text/javascript"></script>
+			{# NOTE: need to specify the juicer embed WITHOUT JQUERY #}
+			<script src="//assets.juicer.io/embed-no-jquery.js" type="text/javascript"></script>
 		{% endblock %}
 	{% endif %}
 {% endwith %}

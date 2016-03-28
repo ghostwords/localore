@@ -13,8 +13,8 @@
 </div>
 <div class="container-full">
 
-	<section class="featured-connection">
-		<div id="bgVideo" class="full-bg"
+	<section class="hero-section">
+		<div id="bgVideo" class="full-bg-video"
 			{% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
 				data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}"
 			{% else %}

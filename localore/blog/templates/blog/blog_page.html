@@ -6,19 +6,44 @@
 
 {% block content %}
 
-	<article id="blog-post">
-		<div class="page-header">
-			<h2>{{ page.title }}</h2>
-			{# TODO post-meta? meta? #}
-			<p class="post-meta">By {{ page.owner }} at {{ page.first_published_at }}</p>
-			<a href="{% pageurl page.blog_index %}">back to blog</a>
-		</div>
+<div id="title" class="title title-about">
+	<div>
+		<h1>{{ page.title }}</h1>
+		<h3>{{ page.subtitle }}</h3>
+		<a href="#" class="title-nav title-prev"></a>
+		<a href="#" class="title-nav title-next"></a>
+	</div>
+</div>
 
-		{% if page.main_image %}
-			{% image page.main_image width-400 %}
-		{% endif %}
+<div class="hero-section">
+	{% if page.main_image %}
+		{% image page.main_image original as image %}
+		<div class="full-bg-image" style="background-image:url({{ image.url }})"></div>
+	{% endif %}
+	<!-- need to handle videos here as well, same functionality as homepage -->
+</div>
 
-		{{ page.body }}
-	</article>
+<div class="text-description">
+	<div class="container">
+		<p>Aliqua veniam pariatur elit sint dolor ad elit culpa esse adipisicing ex mollit velit amet occaecat non dolore. Id proident consectetur sunt aliquip sit ea eiusmod irure adipisicing aliquip. Exercitation cupidatat eu excepteur occaecat dolore esse duis nulla ullamco quis. Consequat sint cupidatat laborum eu excepteur quis amet. Ut excepteur ipsum incididunt mollit exercitation veniam eu et anim.</p>
+	</div>
+</div>
+
+<div class="container">
+
+	{{ page.body }}
+
+	<div class="connection-prods">
+		<h6>Productions Mentioned</h6>
+		<a href="#" class="link-large">Rise of Charm City</a>,  <a href="#" class="link-large">Frontiers of Change</a>
+	</div>
+</div>
+
+<div class="text-description connection-more">
+	<div class="container">
+		<h6>More connections</h6>
+		<a href="#" class="link-large">Rise of Charm City</a>,  <a href="#" class="link-large">Frontiers of Change</a>
+	</div>
+</div>
 
 {% endblock %}

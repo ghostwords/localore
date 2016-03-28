@@ -1,0 +1,13 @@
+.connection-prods {
+  margin-top: 4em;
+  text-align: center;
+}
+
+.connection-more {
+  text-align: center;
+
+  & > .container {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+}
