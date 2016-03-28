@@ -96,12 +96,12 @@ class HomePage(Page):
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),
             DocumentChooserPanel('video_ogv'),
-        ], "Background video"),
+        ], "Preview video"),
         MultiFieldPanel([
             FieldPanel('video_youtube_id'),
             FieldPanel('view_more_title'),
             PageChooserPanel('view_more_page'),
-        ], "Video"),
+        ], "Main video"),
         FieldPanel('live_feed_intro', classname="full"),
     ]
 
