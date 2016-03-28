@@ -4,9 +4,7 @@
 
 {% block about_content %}
 
-	{{ page.description_top|richtext }}
-
-	{{ page.description_bottom|richtext }}
+	{{ page.description|richtext }}
 
 	{% if page.related_links.all %}
 		<ul>
