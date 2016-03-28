@@ -36,21 +36,31 @@
 </div>
 
 <div class="container">
-
 	<h4 class="text-center">From Our Producers</h4>
+
 	{{ page.body }}
 
+	{% if page.associated_productions.all %}
 	<div class="connection-prods">
 		<h6>Productions Mentioned</h6>
-		<a href="#" class="link-large">Rise of Charm City</a>,  <a href="#" class="link-large">Frontiers of Change</a>
+		{% for item in page.associated_productions.all %}
+			<a href="{{ item.production_page.url }}" class="link-large">{{ item.production_page }}</a>
+		{% if not forloop.last %}, {% endif %}
+		{% endfor %}
 	</div>
+	{% endif %}
 </div>
 
+{% if page.related_posts.all %}
 <div class="text-description connection-more">
 	<div class="container">
 		<h6>More connections</h6>
-		<a href="#" class="link-large">Rise of Charm City</a>,  <a href="#" class="link-large">Frontiers of Change</a>
+		{% for item in page.related_posts.all %}
+			<a href="{{ item.related_blog_page.url }}" class="link-large">{{ item.related_blog_page }}</a>
+		{% if not forloop.last %}, {% endif %}
+		{% endfor %}
 	</div>
 </div>
+{% endif %}
 
 {% endblock %}
