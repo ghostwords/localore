@@ -2,6 +2,8 @@
 
 {% load embed_video_tags wagtailcore_tags wagtailimages_tags %}
 
+{% block body_class %}template-video-dispatches-index{% endblock %}
+
 {% block dispatches_index_content %}
 
 	{% for dispatch in page.dispatches %}

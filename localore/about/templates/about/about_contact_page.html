@@ -2,6 +2,8 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block body_class %}template-about-contact{% endblock %}
+
 {% block about_content %}
 
 	{{ page.contact_information|richtext }}

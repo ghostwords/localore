@@ -2,6 +2,8 @@
 
 {% load wagtailcore_tags wagtailimages_tags productions_tags %}
 
+{% block body_class %}template-about-team{% endblock %}
+
 {% block about_content %}
 
 	{{ page.description|richtext }}
