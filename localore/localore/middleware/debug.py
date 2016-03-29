@@ -21,7 +21,7 @@ class NonHtmlDebugToolbarMiddleware(object):
                     'Length: {}</body></html>'.format(len(response.content))
                 response = HttpResponse(new_content)
             elif response['Content-Type'] != 'text/html':
-                content = response.content
+                content = response.content.decode('utf-8')
                 try:
                     json_ = json.loads(content)
                     content = json.dumps(json_, sort_keys=True, indent=2)
