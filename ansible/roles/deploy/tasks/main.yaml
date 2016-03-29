@@ -34,6 +34,7 @@
     hour: 3
     job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py mediabackup
     state: present
+  become: False
 
 - name: Run django-admin dbbackup every hour
   cron:
@@ -41,6 +42,7 @@
     minute: 5
     job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py dbbackup
     state: present
+  become: False
 
 - name: Run django-admin publish_scheduled_pages every hour
   cron:
@@ -48,6 +50,7 @@
     minute: 0
     job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py publish_scheduled_pages
     state: present
+  become: False
 
 - name: Update app version
   file:
