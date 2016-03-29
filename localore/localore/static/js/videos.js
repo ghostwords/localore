@@ -3,9 +3,9 @@ $(function() {
   var $play = $('.play-icon');
   var $viewMore = $('.view-more');
   var $mainVideo = $('#main-video');
-  var $previewVideo = $('#preview-video');
-  var previewVideoPlayer = $('#preview-video').data('vide').getVideoObject();
   var mainVideoPlayer, videoPlaying = false;
+  var $preview = $('#preview');
+  // var previewVideoPlayer = $('#preview-video').data('vide').getVideoObject();
 
   var timeout;
   $(document).on('mousemove', function (event) {
@@ -15,21 +15,22 @@ $(function() {
       timeout = window.setTimeout(function () {
           // trigger the new event on event.target, so that it can bubble appropriately
           $(event.target).trigger('mousemoveend');
-      }, 1000);
+      }, 650);
   });
-  // $.fn.mousemoveend = function (cb) {
-  //     return this.on('mousemoveend', cb);
-  // });
+
+
+  // console.log(window.YOUTUBE_ID);
 
   window.onYouTubePlayerAPIReady = function() {
     mainVideoPlayer = new YT.Player('youtube-embed', {
-      videoId: 'j6IIjLK-8fU',
+      videoId: window.YOUTUBE_ID,
       playerVars: {
-        modestbranding: '1',
+        // modestbranding: '1',
         rel: '0',
         showinfo: '0',
         color: 'white',
-        controls: '0'
+        autohide: '0'
+        // , controls: '0'
       },
       events: {
         'onStateChange': onPlayerStateChange
@@ -40,24 +41,49 @@ $(function() {
 
   // when video ends
   window.onPlayerStateChange = function(event) {
-    if(event.data === 0) {
-      // $mainVideo.modal('hide');
+    // video cued
+    // console.log(event.data);
+    if(event.data === -1) {
+      console.log('cued');
+      // toggleMainVideo(false);
+    }
+    // video playing
+    else if (event.data === 1) {
+      console.log('play');
+      $play.addClass('pause');
+      $('.hero-section').append('<div id="video-overlay"></div>');
+      videoPlaying = true;
+      // toggleMainVideo(false);
+    }
+    // video paused
+    else if (event.data === 2) {
+      console.log('paused');
+      $play.removeClass('pause').addClass('show');
+      $viewMore.removeClass('hide');
+      $('#video-overlay').remove();
+      videoPlaying = false;
+      // toggleMainVideo(false);
+    }
+    // video ended
+    else if (event.data === 0) {
+      $('#video-overlay').remove();
+      $viewMore.removeClass('hide');
+      $('.after-link').addClass('show');
     }
   }
 
   var toggleMainVideo = function() {
-    console.log('toggle', videoPlaying);
+    // console.log('toggle', videoPlaying);
     if(!videoPlaying) {
       mainVideoPlayer.playVideo();
-      $play.addClass('pause');
     } else {
       mainVideoPlayer.pauseVideo();
-      $play.removeClass('pause');
     }
-    videoPlaying = !videoPlaying;
+    // videoPlaying = !videoPlaying;
   };
 
   $('.hero-section').on("mousemove", "#video-overlay", function () {
+    $('#main-video').trigger('hover');
     $play.addClass('show');
     $viewMore.removeClass('hide');
   });
@@ -68,36 +94,16 @@ $(function() {
 
 
   $play.one('click', function(e) {
-    $previewVideo.fadeOut(1000);
+    $preview.fadeOut(1000);
     $mainVideo.addClass('playing');
     toggleMainVideo();
     $play.removeClass('show');
     $viewMore.addClass('hide');
-    $('.hero-section').append('<div id="video-overlay"></div>');
-    // $('#video-overlay').mouseover(function () {
-    //   console.log('fuck');
-    // });
-    //console.log(e);
-
-    // $(document).on('mousemove', function () {
-    //   console.log('hello');
-    // });
-
     $(this).on('click', function() {
+      // console.log('click');
       toggleMainVideo();
     });
-
   });
-  //
-  // $homeVideo.on('show.bs.modal', function (e) {
-  //   player.playVideo();
-  //   vide.pause();
-  // });
-  //
-  // $homeVideo.on('hide.bs.modal', function (e) {
-  //   player.pauseVideo();
-  //   vide.play();
-  // });
 
 
 });

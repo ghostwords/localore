@@ -23,20 +23,23 @@
 <div class="container-full">
 
 	<section class="hero-section">
-		<div id="preview-video" class="full-bg-video"
-			{% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
-				data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}"
-			{% else %}
-				data-vide-bg="mp4: {% static 'videos/ocean.mp4' %}, webm: {% static 'videos/ocean.webm' %}, ogv: {% static 'videos/ocean.ogv' %}, poster: {% static 'videos/ocean.jpg' %}"
-			{% endif %}
-			data-vide-options="posterType: jpg">
-		</div>
+    {% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
+  		<div id="preview" class="full-bg-video"
+           data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}"
+  			   data-vide-options="posterType: jpg">
+  		</div>
+    {% else %}
+      <div id="preview" class="full-bg-image" style="background-image:url({{ page.video_poster_image.file.url }})"></div>
+    {% endif %}
     <div id="main-video" class="full-bg-video">
       <div id="youtube-embed"></div>
     </div>
 		<div class="play-icon"></div>
     <div class="view-more">
       LIVE FEED
+    </div>
+    <div class="after-link">
+      <a href="{% pageurl page.view_more_page %}">{{ page.view_more_title }}</a>
     </div>
 	</section>
 
@@ -68,6 +71,10 @@
 		</div>
 	</div>
 </div> -->
+
+<script type="text/javascript">
+  window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
+</script>
 
 {% endblock %}
 

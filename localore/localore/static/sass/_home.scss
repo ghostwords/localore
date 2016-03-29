@@ -13,13 +13,13 @@
   position: absolute;
   left: 50%;
   @include transform(translateX(-50%));
-  @include transition(all 300ms ease-out);
-  bottom: 5vh;
+  @include transition(opacity 300ms ease-out);
+  bottom: 9vh;
   width: 150px;
   height: 70px;
   background: url('/static/images/live_feed.svg') no-repeat bottom center;
   background-size: 60% 30%;
-  z-index: 15;
+  z-index: 18;
 
   color: #fff;
   font-family: $roboto-reg;
