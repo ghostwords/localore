@@ -18,6 +18,12 @@
 - name: Create Django environment config
   template: src=env.j2 dest={{ release_dir }}/{{ django_project_name }}/.env
 
+- name: Back up the database
+  django_manage:
+    command: dbbackup
+    app_path: "{{ release_dir }}"
+    virtualenv: "{{ virtualenv_dir }}"
+
 - name: Run Django database migrations
   django_manage:
     command: migrate

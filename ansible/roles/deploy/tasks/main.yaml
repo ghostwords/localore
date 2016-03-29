@@ -27,6 +27,21 @@
 - include: install.yaml
   become_user: www-data
 
+- name: Run django-admin mediabackup every day
+  cron:
+    name: back up media files
+    minute: 30
+    hour: 3
+    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py mediabackup
+    state: present
+
+- name: Run django-admin dbbackup every hour
+  cron:
+    name: back up the database
+    minute: 5
+    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py dbbackup
+    state: present
+
 - name: Run django-admin publish_scheduled_pages every hour
   cron:
     name: publish scheduled pages in Wagtail

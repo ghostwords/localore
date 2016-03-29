@@ -24,6 +24,10 @@ env = Env(
     EMBEDLY_KEY=(str, None),
 
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, 'media')),
+
+    DBBACKUP_AWS_ACCESS_KEY=(str, None),
+    DBBACKUP_AWS_SECRET_KEY=(str, None),
+    DBBACKUP_S3_BUCKET_NAME=(str, None),
 )
 # read from a local, unversioned dev environment file if it exists
 local_env_file = os.path.join(PROJECT_DIR, '.env.local')
@@ -98,6 +102,7 @@ INSTALLED_APPS = (
     'localore_admin',
 
     'compressor',
+    'dbbackup',
     'embed_video',
     'modelcluster',
     'overextends',
@@ -166,6 +171,10 @@ WSGI_APPLICATION = 'localore.wsgi.application'
 DATABASES = {
     'default': env.db()
 }
+# TODO work around https://github.com/joke2k/django-environ/issues/56
+for key in DATABASES['default']:
+    if not isinstance(DATABASES['default'][key], str):
+        DATABASES['default'][key] = ""
 
 
 # Internationalization
@@ -252,3 +261,14 @@ if not DEBUG:
             'INDEX': 'localore',
         },
     }
+
+
+# Django Database Backup
+
+DBBACKUP_STORAGE = 'dbbackup.storage.s3_storage'
+DBBACKUP_STORAGE_OPTIONS = {
+    'access_key': env('DBBACKUP_AWS_ACCESS_KEY'),
+    'secret_key': env('DBBACKUP_AWS_SECRET_KEY'),
+    'bucket_name': env('DBBACKUP_S3_BUCKET_NAME'),
+    'default_acl': 'private'
+}
