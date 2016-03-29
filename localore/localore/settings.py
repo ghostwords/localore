@@ -121,6 +121,7 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += (
         'wagtail.contrib.wagtailstyleguide',
+        'debug_toolbar',
     )
 
 MIDDLEWARE_CLASSES = (
@@ -138,6 +139,10 @@ MIDDLEWARE_CLASSES = (
 
     'wagtailmodeladmin.middleware.ModelAdminMiddleware',
 )
+if DEBUG:
+    MIDDLEWARE_CLASSES = (
+        'localore.middleware.debug.NonHtmlDebugToolbarMiddleware',
+    ) + MIDDLEWARE_CLASSES
 
 ROOT_URLCONF = 'localore.urls'
 
