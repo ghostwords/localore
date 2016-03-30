@@ -1,9 +1,10 @@
 .live-feed {
   width: 100%;
   background-color: #4A4A4A;
+  padding-top: 4em;
+  padding-bottom: 4em;
 
   h4, p {
-    font-weight: 400;
     color: #fff;
     text-align: center;
   }
@@ -38,6 +39,4 @@
   &.hide {
     opacity: 0;
   }
-
-  // border: 1px solid blue;
 }

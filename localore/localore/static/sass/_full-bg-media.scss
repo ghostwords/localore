@@ -46,8 +46,8 @@
   background: url('/static/images/play.png') no-repeat center;
   opacity: 0;
   @include transition(all 600ms ease-out);
-  width: 53px;
-  height: 80px;
+  width: 61px;
+  height: 88px;
   position: absolute;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
@@ -72,17 +72,6 @@
   }
 }
 
-.live-feed {
-  width: 100%;
-  background-color: #4A4A4A;
-
-  h4, p {
-    font-weight: 400;
-    color: #fff;
-    text-align: center;
-  }
-}
-
 .after-link {
 
   background-color: rgba(0,0,0,0.8);
@@ -104,7 +93,7 @@
   a {
     display: table;
     text-align: center;
-    font-size: em(24);
+    font-size: em(30);
     position: relative;
     top: 50%; left: 50%;
     @include transform(translate(-50%, -50%));

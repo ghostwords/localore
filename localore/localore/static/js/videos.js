@@ -7,6 +7,12 @@ $(function() {
   var $preview = $('#preview');
   // var previewVideoPlayer = $('#preview-video').data('vide').getVideoObject();
 
+  // if(jQuery.browser.mobile) {
+  //   console.log('fuckkkk');
+  //   $preview.css("display", "none");
+  //   $play.css("display", "none");
+  // }
+
   var timeout;
   $(document).on('mousemove', function (event) {
       if (timeout !== undefined) {
@@ -22,10 +28,11 @@ $(function() {
   // console.log(window.YOUTUBE_ID);
 
   window.onYouTubePlayerAPIReady = function() {
+    console.log('yt ready');
     mainVideoPlayer = new YT.Player('youtube-embed', {
       videoId: window.YOUTUBE_ID,
       playerVars: {
-        // modestbranding: '1',
+        modestbranding: '1',
         rel: '0',
         showinfo: '0',
         color: 'white',
@@ -33,11 +40,16 @@ $(function() {
         // , controls: '0'
       },
       events: {
+        'onReady': onReady,
         'onStateChange': onPlayerStateChange
       }
     });
-    $play.addClass('show');
+
   }
+
+  window.onReady = function(event) {
+    $play.addClass('show');
+  };
 
   // when video ends
   window.onPlayerStateChange = function(event) {
@@ -75,6 +87,10 @@ $(function() {
   var toggleMainVideo = function() {
     // console.log('toggle', videoPlaying);
     if(!videoPlaying) {
+      if(mainVideoPlayer.playVideo == undefined) {
+        setTimeout(function () { toggleMainVideo(); }, 100);
+        return;
+      }
       mainVideoPlayer.playVideo();
     } else {
       mainVideoPlayer.pauseVideo();
@@ -92,17 +108,27 @@ $(function() {
     $viewMore.addClass('hide');
   });
 
-
   $play.one('click', function(e) {
+
     $preview.fadeOut(1000);
     $mainVideo.addClass('playing');
-    toggleMainVideo();
     $play.removeClass('show');
     $viewMore.addClass('hide');
-    $(this).on('click', function() {
-      // console.log('click');
+
+    if(!jQuery.browser.mobile) {
       toggleMainVideo();
-    });
+      $(this).on('click', function() { toggleMainVideo(); });
+    }
+    // else {
+    //   var youtube = $('#youtube-embed')[0];
+    //   console.log(youtube);
+    //   var requestFullScreen = youtube.requestFullScreen || youtube.mozRequestFullScreen || youtube.webkitRequestFullScreen;
+    //   console.log(requestFullScreen);
+    //   if (requestFullScreen) {
+    //     console.log('requestfull');
+    //     requestFullScreen.bind(youtube)();
+    //   }
+    // }
   });
 
 

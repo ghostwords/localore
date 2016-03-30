@@ -1,0 +1,33 @@
+#menu {
+
+  .modal-content {
+    box-shadow: none;
+    border: none;
+  }
+
+  .modal-body {
+    text-align: center;
+    font-size: em(36);
+  }
+
+  .modal-close {
+    position: static;
+    text-align: center;
+    opacity: 1;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  a {
+    @include transition(color 300ms ease-out);
+
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+      color: #fff;
+    }
+  }
+
+}

@@ -53,7 +53,7 @@
 
 	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
 	{% if juicer_feed_id %}
-	<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-style="image-grid"></ul>
+	<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-style="image-grid" data-per="50" data-pages="2"></ul>
 	{% endif %}
 	{% endwith %}
 

@@ -1,11 +1,12 @@
 .modal-open {
-  overflow: hidden;
-  position:fixed;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  // overflow: hidden;
+  // position:fixed;
+  // height: 100%;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  padding-right: 0 !important;
 }
 .modal {
   display: none;
@@ -96,7 +97,7 @@
     font-size: em(110);
     line-height: 80px;
     font-weight: 100;
-    color: $orange;
+    // color: $orange;
 
   }
 }

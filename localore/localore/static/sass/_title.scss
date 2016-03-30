@@ -45,6 +45,11 @@
   margin-top: .7em;
   position: absolute;
 
+  @include media($mobile) {
+    margin-top: 4em;
+    font-size: 75%;
+  }
+
   h1 {
     font-size: em(60);
     margin-bottom: 7px;

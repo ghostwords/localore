@@ -52,9 +52,15 @@
 
 		<header>
 			<div class="nav-section">
-			  <div class="logo fa-logo">
-			    <img src="{% static 'images/FA_logo.png' %}" alt="Finding America Logo" />
-			  </div>
+				<div class="menu-icon" data-toggle="modal" data-target="#menu">
+				<!-- <div class="menu-icon"> -->
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<a class="logo fa-logo" href="/">
+					<img src="{% static 'images/FA_logo.png' %}" alt="Finding America Logo" />
+				</a>
 			  <a class="logo air-logo" href="http://airmedia.org" target="_blank">
 			    <img src="{% static 'images/AIR_logo.png' %}" alt="AIR Media Logo" />
 			  </a>
@@ -78,6 +84,28 @@
       </p>
     </footer>
 
+		<div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<ul class="list-unstyled">
+							<li><a href="">Home</a></li>
+							<li><a href="">Connections</a></li>
+							<li><a href="">Dispatches</a></li>
+							<li><a href="">Live Feed</a></li>
+							<li><a href="">Productions</a></li>
+							<li><a href="">About</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="modal-close">
+					<a data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</a>
+				</div>
+			</div>
+		</div>
+
 		<script>
 		  // Load the IFrame Player API code asynchronously.
 		  var tag = document.createElement('script');
@@ -95,8 +123,8 @@
 		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
 		<script src="/static/bower_components/vide/dist/jquery.vide.js"></script>
 		<!-- endbower -->
-		<script type="text/javascript" src="{% static 'js/videos.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/localore.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/videos.js' %}"></script>
 		{% endcompress %}
 
 		{% block extra_js %}
