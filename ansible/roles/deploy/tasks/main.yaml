@@ -32,7 +32,7 @@
     name: back up media files
     minute: 30
     hour: 3
-    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py mediabackup
+    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py mediabackup >/dev/null 2>&1
     state: present
   become: False
 
@@ -40,7 +40,7 @@
   cron:
     name: back up the database
     minute: 5
-    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py dbbackup
+    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py dbbackup >/dev/null 2>&1
     state: present
   become: False
 
