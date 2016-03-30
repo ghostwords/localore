@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-.PHONY: all deploy reload-nginx
+.PHONY: all deploy provision reload-nginx
 
 all:
 	@echo Run \`make deploy\` to deploy to staging.
