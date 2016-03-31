@@ -37,6 +37,19 @@ $(function() {
     }, 600, 'easeOutCirc');
   });
 
+  window.checkViewHeight = function() {
+    // console.log('juicer loaded');
+    if(window.location.hash.substr(1) === "livefeed") $(".view-more").click();
+  };
+
+  $("#menu a[href='/#livefeed']").click(function () {
+    if(window.location.pathname === "/") {
+      $(".view-more").click();
+      $('#menu').modal('hide');
+    }
+  });
+
+
   // $(".menu-icon").click(function() {
   //   $("#menu").addClass("in").css({ "display" : "block" });
   // });
