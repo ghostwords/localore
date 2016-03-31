@@ -33,6 +33,7 @@
 	<div id="main-video" class="full-bg-video">
 		<div id="youtube-embed"></div>
 	</div>
+	<div class="play-icon"></div>
 </div>
 
 {% if page.intro %}
@@ -69,5 +70,9 @@
 	</div>
 </div>
 {% endif %}
+
+<script type="text/javascript">
+	window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
+</script>
 
 {% endblock %}
