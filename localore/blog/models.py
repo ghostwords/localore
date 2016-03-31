@@ -128,7 +128,7 @@ class BlogPage(Page):
 
 
 class LinkFields(models.Model):
-    link_external = models.URLField(
+    link_external = models.CharField(
         "External link",
         blank=True,
         max_length=500,

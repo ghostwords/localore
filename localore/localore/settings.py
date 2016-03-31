@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'blog',
     'dispatches',
     'home',
+    'localore_core',
     'people',
     'productions',
     'search',
