@@ -1,0 +1,16 @@
+.section-dispatches {
+  background-color: $light-grey;
+  padding-bottom: 4em;
+}
+
+.dispatch-item-wrapper {
+  @include outer-container($grid-md);
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.5);
+
+  &:first-of-type {
+    position: relative;
+    top: -50px;
+  }
+}

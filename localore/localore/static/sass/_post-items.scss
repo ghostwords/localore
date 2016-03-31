@@ -11,6 +11,7 @@
     @include abs-position;
     background-color: $dark-grey;
     opacity: 0.3;
+    z-index: 2;
     @include transition(all 1.5s cubic-bezier(0.190, 1.000, 0.220, 1.000));
   }
 
@@ -37,7 +38,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    z-index: -1;
+    // z-index: -1;
     @include transform(scale(1));
     @include transition(all 1.5s cubic-bezier(0.190, 1.000, 0.220, 1.000));
     @include abs-position;
@@ -48,6 +49,7 @@
     @include abs-position;
     color: #fff;
     font-family: $roboto-reg;
+    z-index: 3;
 
     & > .post-item-content {
       position: absolute;
@@ -59,16 +61,35 @@
       & > span {
         display: block;
       }
-      & > .post-item-title {
+
+      & .post-item-list li {
+
+        padding-left: 10px;
+        padding-right: 10px;
+
+
+        &, span {
+          line-height: 18px;
+        }
+
+        &:not(:last-child) {
+          border-right: 1px solid #fff;
+        }
+      }
+
+      & .post-item-title {
         text-transform: uppercase;
         font-weight: 400;
-        font-size: em(19);
+        font-size: em(22);
         letter-spacing: 7px;
         line-height: 35px;
       }
-      & > .post-item-loc {
+
+      & .post-item-loc,
+      & .post-item-date,
+      & .post-item-desc {
         font-weight: 100;
-        font-size: em(16);
+        font-size: em(15);
         letter-spacing: 1.5px;
         line-height: 22px;
       }
