@@ -112,6 +112,10 @@ a {
 
 h1,h2,h3,h4,h5,h6 {
   font-weight: normal;
+
+  .block-paragraph &, .block-heading &, .rich-text & {
+    text-align: center;
+  }
 }
 
 h6 {
