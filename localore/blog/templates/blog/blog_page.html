@@ -22,8 +22,6 @@
 </div>
 
 <div class="hero-section">
-	{# TODO this needs to be implemented on the CMS - note the change from page.main_image to page.video_poster_image.file.url #}
-	{# functionality should be the same as on the homepage #}
 	{% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
 		<div id="preview" class="full-bg-video"
 				 data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}"
@@ -35,14 +33,16 @@
 	<div id="main-video" class="full-bg-video">
 		<div id="youtube-embed"></div>
 	</div>
+	<div class="play-icon"></div>
 </div>
 
-{# TODO this section needs to be dynamic and optional #}
+{% if page.intro %}
 <div class="text-description">
 	<div class="container">
-		<p>Aliqua veniam pariatur elit sint dolor ad elit culpa esse adipisicing ex mollit velit amet occaecat non dolore. Id proident consectetur sunt aliquip sit ea eiusmod irure adipisicing aliquip. Exercitation cupidatat eu excepteur occaecat dolore esse duis nulla ullamco quis. Consequat sint cupidatat laborum eu excepteur quis amet. Ut excepteur ipsum incididunt mollit exercitation veniam eu et anim.</p>
+		{{ page.intro|richtext }}
 	</div>
 </div>
+{% endif %}
 
 <div class="container">
 
@@ -70,5 +70,9 @@
 	</div>
 </div>
 {% endif %}
+
+<script type="text/javascript">
+	window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
+</script>
 
 {% endblock %}

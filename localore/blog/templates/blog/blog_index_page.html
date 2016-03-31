@@ -20,7 +20,7 @@
 <div class="container-full">
 	{% for post in page.posts %}
 
-		{% image post.main_image original as image %}
+		{% image post.video_poster_image original as image %}
 		<div class="post-item">
 			<div class="post-item-bg" style="background-image:url({{ image.url }})"></div>
 			<a class="post-item-link" href="{% pageurl post %}">
