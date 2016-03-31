@@ -1,4 +1,5 @@
-{% load about_tags blog_tags compress productions_tags staticfiles wagtailuserbar %}
+{% load compress staticfiles wagtailuserbar %}
+{% load about_tags blog_tags dispatches_tags productions_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -91,12 +92,30 @@
 				<div class="modal-content">
 					<div class="modal-body">
 						<ul class="list-unstyled">
-							<li><a href="">Home</a></li>
-							<li><a href="">Connections</a></li>
-							<li><a href="">Dispatches</a></li>
-							<li><a href="">Live Feed</a></li>
-							<li><a href="">Productions</a></li>
-							<li><a href="">About</a></li>
+							<li><a href="/">Home</a></li>
+
+							{% get_blog_index_page as connections_root %}
+							{% if connections_root %}
+								<li><a href="{{ connections_root.url }}">{{ connections_root }}</a></li>
+							{% endif %}
+
+							{% get_dispatches_index_page as dispatches_root %}
+							{% if dispatches_root %}
+								<li><a href="{{ dispatches_root.url }}">{{ dispatches_root }}</a></li>
+							{% endif %}
+
+							{# TODO needs fixing: clicking on homepage should close menu and smooth scroll, clicking on other pages should properly align livefeed to top of window #}
+							<li><a href="/#livefeed">Live Feed</a></li>
+
+							{% get_productions_index_page as productions_root %}
+							{% if productions_root %}
+								<li><a href="{{ productions_root.url }}">{{ productions_root }}</a></li>
+							{% endif %}
+
+							{% get_about_index_page as about_root %}
+							{% if about_root %}
+								<li><a href="{{ about_root.url }}">{{ about_root }}</a></li>
+							{% endif %}
 						</ul>
 					</div>
 				</div>
