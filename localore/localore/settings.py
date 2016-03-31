@@ -11,6 +11,7 @@ env = Env(
     ALLOWED_HOSTS=(list, []),
 
     DEBUG=(bool, False),
+    DEBUG_TOOLBAR=(bool, False),
 
     DJANGO_LOG_LEVEL=(str, 'INFO'),
 
@@ -122,7 +123,10 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += (
         'wagtail.contrib.wagtailstyleguide',
-        # 'debug_toolbar',
+    )
+if DEBUG and env('DEBUG_TOOLBAR'):
+    INSTALLED_APPS += (
+        'debug_toolbar',
     )
 
 MIDDLEWARE_CLASSES = (
