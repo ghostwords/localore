@@ -22,13 +22,22 @@
 </div>
 
 <div class="hero-section">
-	{% if page.main_image %}
-		{% image page.main_image original as image %}
-		<div class="full-bg-image" style="background-image:url({{ image.url }})"></div>
+	{# TODO this needs to be implemented on the CMS - note the change from page.main_image to page.video_poster_image.file.url #}
+	{# functionality should be the same as on the homepage #}
+	{% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
+		<div id="preview" class="full-bg-video"
+				 data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}"
+				 data-vide-options="posterType: jpg">
+		</div>
+	{% else %}
+		<div id="preview" class="full-bg-image" style="background-image:url({{ page.video_poster_image.file.url }})"></div>
 	{% endif %}
-	<!-- need to handle videos here as well, same functionality as homepage -->
+	<div id="main-video" class="full-bg-video">
+		<div id="youtube-embed"></div>
+	</div>
 </div>
 
+{# TODO this section needs to be dynamic and optional #}
 <div class="text-description">
 	<div class="container">
 		<p>Aliqua veniam pariatur elit sint dolor ad elit culpa esse adipisicing ex mollit velit amet occaecat non dolore. Id proident consectetur sunt aliquip sit ea eiusmod irure adipisicing aliquip. Exercitation cupidatat eu excepteur occaecat dolore esse duis nulla ullamco quis. Consequat sint cupidatat laborum eu excepteur quis amet. Ut excepteur ipsum incididunt mollit exercitation veniam eu et anim.</p>
@@ -36,7 +45,6 @@
 </div>
 
 <div class="container">
-	<h4 class="text-center">From Our Producers</h4>
 
 	{{ page.body }}
 

@@ -5,13 +5,6 @@ $(function() {
   var $mainVideo = $('#main-video');
   var mainVideoPlayer, videoPlaying = false;
   var $preview = $('#preview');
-  // var previewVideoPlayer = $('#preview-video').data('vide').getVideoObject();
-
-  // if(jQuery.browser.mobile) {
-  //   console.log('fuckkkk');
-  //   $preview.css("display", "none");
-  //   $play.css("display", "none");
-  // }
 
   var timeout;
   $(document).on('mousemove', function (event) {
@@ -23,7 +16,6 @@ $(function() {
           $(event.target).trigger('mousemoveend');
       }, 650);
   });
-
 
   // console.log(window.YOUTUBE_ID);
 
@@ -85,7 +77,7 @@ $(function() {
   }
 
   var toggleMainVideo = function() {
-    // console.log('toggle', videoPlaying);
+
     if(!videoPlaying) {
       if(mainVideoPlayer.playVideo == undefined) {
         setTimeout(function () { toggleMainVideo(); }, 100);
@@ -95,7 +87,7 @@ $(function() {
     } else {
       mainVideoPlayer.pauseVideo();
     }
-    // videoPlaying = !videoPlaying;
+
   };
 
   $('.hero-section').on("mousemove", "#video-overlay", function () {
@@ -119,16 +111,7 @@ $(function() {
       toggleMainVideo();
       $(this).on('click', function() { toggleMainVideo(); });
     }
-    // else {
-    //   var youtube = $('#youtube-embed')[0];
-    //   console.log(youtube);
-    //   var requestFullScreen = youtube.requestFullScreen || youtube.mozRequestFullScreen || youtube.webkitRequestFullScreen;
-    //   console.log(requestFullScreen);
-    //   if (requestFullScreen) {
-    //     console.log('requestfull');
-    //     requestFullScreen.bind(youtube)();
-    //   }
-    // }
+
   });
 
 
