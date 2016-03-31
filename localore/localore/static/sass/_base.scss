@@ -130,6 +130,9 @@ h6 {
 
 .responsive-object {
     position: relative;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .responsive-object iframe,
@@ -139,7 +142,25 @@ h6 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    &[src*='youtube'] {
+      height: 100%;
+    }
+
+    &[src*='instagram'] {
+      position: static;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    &[src*='soundcloud'] {
+      position: static;
+    }
+
+
+
 }
 
 .j-filters {

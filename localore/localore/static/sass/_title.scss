@@ -70,6 +70,19 @@
   height: $header-md * 1.5;
   background-color: $dark-grey;
 
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -($header-md * .5);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: ($header-md * .5) 200px 0 200px;
+    border-color: $dark-grey transparent transparent transparent;
+    z-index: -1;
+  }
+
   @include media($header-size) {
     box-sizing: content-box;
     position: static;
@@ -85,18 +98,6 @@
     }
   }
 
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -($header-md * .5);
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: ($header-md * .5) 200px 0 200px;
-    border-color: $dark-grey transparent transparent transparent;
-    z-index: -1;
-  }
 
   .title-section-about {
 
