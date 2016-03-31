@@ -1,8 +1,15 @@
 from django import template
 
 from about.models import AboutMissionPage, AboutTeamPage, AboutContactPage
+from localore_admin.models import PageAlias
 
 register = template.Library()
+
+
+@register.assignment_tag
+def get_about_index_page():
+    # TODO make more robust
+    return PageAlias.objects.live().filter(title="About").first()
 
 
 @register.assignment_tag
