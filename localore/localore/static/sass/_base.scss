@@ -162,8 +162,15 @@ h6 {
     &[src*='soundcloud'] {
       position: static;
     }
+}
 
+.fb-post {
 
+  .block-embed &, .block-paragraph & {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
 }
 
