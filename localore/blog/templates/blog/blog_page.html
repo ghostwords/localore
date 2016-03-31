@@ -22,8 +22,6 @@
 </div>
 
 <div class="hero-section">
-	{# TODO this needs to be implemented on the CMS - note the change from page.main_image to page.video_poster_image.file.url #}
-	{# functionality should be the same as on the homepage #}
 	{% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
 		<div id="preview" class="full-bg-video"
 				 data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}"

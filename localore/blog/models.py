@@ -77,7 +77,7 @@ class QuoteBlock(StructBlock):
 class BlogPage(Page):
     subtitle = models.CharField(max_length=255, blank=True)
 
-    main_image = models.ForeignKey(
+    video_poster_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
         null=True,
         blank=True,
@@ -111,7 +111,7 @@ class BlogPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
         FieldPanel('date'),
-        ImageChooserPanel('main_image'),
+        ImageChooserPanel('video_poster_image'),
         FieldPanel('intro', classname='full'),
         StreamFieldPanel('body'),
         InlinePanel('associated_productions', label="Associated Productions"),
