@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.utils.html import format_html
 
 from modelcluster.fields import ParentalKey
 
@@ -19,6 +20,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel,
     StreamFieldPanel,
 )
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -80,9 +82,38 @@ class BlogPage(Page):
     video_poster_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
         null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    video_mp4 = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
+    )
+    video_webm = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    video_ogv = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    video_youtube_id = models.CharField(
+        verbose_name="YouTube video ID",
+        max_length=12,
+        help_text=format_html(
+            "The part in bold: "
+            "https://www.youtube.com/watch?v=<b>j6IIjLK-8fU</b>"
+        ),
     )
 
     date = models.DateField("Post date", default=datetime.date.today)
@@ -111,7 +142,15 @@ class BlogPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
         FieldPanel('date'),
-        ImageChooserPanel('video_poster_image'),
+        MultiFieldPanel([
+            ImageChooserPanel('video_poster_image'),
+            DocumentChooserPanel('video_mp4'),
+            DocumentChooserPanel('video_webm'),
+            DocumentChooserPanel('video_ogv'),
+        ], "Preview video"),
+        MultiFieldPanel([
+            FieldPanel('video_youtube_id'),
+        ], "Main video"),
         FieldPanel('intro', classname='full'),
         StreamFieldPanel('body'),
         InlinePanel('associated_productions', label="Associated Productions"),
