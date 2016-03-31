@@ -70,6 +70,21 @@
   height: $header-md * 1.5;
   background-color: $dark-grey;
 
+  @include media($header-size) {
+    box-sizing: content-box;
+    position: static;
+    width: 100%;
+    padding-top: $header-md;
+    margin-left: 0;
+
+    & > div {
+      top: 50%;
+    }
+    &:after {
+      display: none;
+    }
+  }
+
   &:after {
     content: '';
     display: block;

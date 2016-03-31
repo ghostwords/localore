@@ -15,6 +15,7 @@ $grid-xl: 80em;
 // Breakpoints
 $mobile: new-breakpoint(max-width $grid-sm 4);
 $tablet: new-breakpoint(max-width $grid-md 4);
+$header-size: new-breakpoint(max-width 925px 4);
 $desktop-xl: new-breakpoint(min-width $grid-lg 4);
 
 $header-sm: 67px;

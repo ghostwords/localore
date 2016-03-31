@@ -51,9 +51,16 @@ body {
   background: url('/static/images/header_bg.png') fixed;
   background-size: auto 40%;
   background-position: top center;
+  background-repeat: no-repeat;
   height: $header-title + 100px;
   width: 100%;
   position: relative;
+
+  @include media($header-size) {
+    background: url('/static/images/header_bg_tablet.png');
+    background-size: 100%;
+    height: 100px;
+  }
 
   @include media($desktop-xl) {
       background-size: 100%;
