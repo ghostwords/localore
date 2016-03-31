@@ -87,6 +87,8 @@ class BlogPage(Page):
 
     date = models.DateField("Post date", default=datetime.date.today)
 
+    intro = RichTextField(blank=True)
+
     body = StreamField([
         ('heading', CharBlock(
             classname="full title",
@@ -110,6 +112,7 @@ class BlogPage(Page):
         FieldPanel('subtitle', classname='full'),
         FieldPanel('date'),
         ImageChooserPanel('main_image'),
+        FieldPanel('intro', classname='full'),
         StreamFieldPanel('body'),
         InlinePanel('associated_productions', label="Associated Productions"),
         InlinePanel('related_posts', label="Related Connections"),

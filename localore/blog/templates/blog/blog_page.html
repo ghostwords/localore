@@ -37,12 +37,13 @@
 	</div>
 </div>
 
-{# TODO this section needs to be dynamic and optional #}
+{% if page.intro %}
 <div class="text-description">
 	<div class="container">
-		<p>Aliqua veniam pariatur elit sint dolor ad elit culpa esse adipisicing ex mollit velit amet occaecat non dolore. Id proident consectetur sunt aliquip sit ea eiusmod irure adipisicing aliquip. Exercitation cupidatat eu excepteur occaecat dolore esse duis nulla ullamco quis. Consequat sint cupidatat laborum eu excepteur quis amet. Ut excepteur ipsum incididunt mollit exercitation veniam eu et anim.</p>
+		{{ page.intro|richtext }}
 	</div>
 </div>
+{% endif %}
 
 <div class="container">
 
