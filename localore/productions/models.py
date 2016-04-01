@@ -123,10 +123,6 @@ class ProductionPage(Page):
         )
     )
 
-    # TODO optional feature video
-    # https://github.com/torchbox/wagtail/issues/907
-    # https://github.com/torchbox/wagtail/pull/1553
-
     logo_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
         null=True,
