@@ -9,9 +9,17 @@
 
 	<div class="social-links">
 		<ul class="list-inline">
-			<li><a href="mailto:{{ person.email }}" class="social-link social-link-email"></a></li>
-			<li><a href="{{ person.twitter_url }}" class="social-link social-link-twitter"></a></li>
-			<li><a href="{{ person.instagram_url }}" class="social-link social-link-instagram"></a></li>
+			{% if person.email %}
+				<li><a href="mailto:{{ person.email }}" class="social-link social-link-email"></a></li>
+			{% endif %}
+
+			{% if person.twitter_url %}
+				<li><a href="{{ person.twitter_url }}" class="social-link social-link-twitter" target="_blank"></a></li>
+			{% endif %}
+
+			{% if person.instagram_url %}
+				<li><a href="{{ person.instagram_url }}" class="social-link social-link-instagram" target="_blank"></a></li>
+			{% endif %}
 		</ul>
 	</div>
 	<div class="team-member-desc">{{ person.biography|richtext }}</div>
