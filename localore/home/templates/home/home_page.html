@@ -46,10 +46,11 @@
 	<section class="live-feed" id="livefeed">
 		<div class="container">
 			<h4>Live Feed</h4>
+			{% if page.live_feed_intro %}
 			{{ page.live_feed_intro|richtext }}
+			{% endif %}
 		</div>
 	</section>
-
 
 	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
 	{% if juicer_feed_id %}
