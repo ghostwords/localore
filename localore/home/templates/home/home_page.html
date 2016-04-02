@@ -73,7 +73,13 @@
 </div> -->
 
 <script type="text/javascript">
-  window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
+	// Load the IFrame Player API code asynchronously.
+	var tag = document.createElement('script');
+	tag.src = "https://www.youtube.com/player_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
 </script>
 
 {% endblock %}
@@ -83,6 +89,8 @@
 {% endblock %}
 
 {% block extra_js %}
-	{# NOTE: need to specify the juicer embed WITHOUT JQUERY #}
+	<script type="text/javascript" src="{% static 'js/videos.js' %}"></script>
+
+	{# NOTE: need to specify the Juicer embed WITHOUT JQUERY #}
 	<script src="//assets.juicer.io/embed-no-jquery.js" type="text/javascript"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load staticfiles wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-connection{% endblock %}
 
@@ -33,7 +33,9 @@
 	<div id="main-video" class="full-bg-video">
 		<div id="youtube-embed"></div>
 	</div>
-	<div class="play-icon"></div>
+	{% if page.video_youtube_id %}
+		<div class="play-icon"></div>
+	{% endif %}
 </div>
 
 {% if page.intro %}
@@ -71,8 +73,20 @@
 </div>
 {% endif %}
 
-<script type="text/javascript">
-	window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
-</script>
+{% endblock %}
 
+{% block extra_js %}
+{% if page.video_youtube_id %}
+	<script type="text/javascript">
+		// Load the IFrame Player API code asynchronously.
+		var tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/player_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
+	</script>
+
+	<script type="text/javascript" src="{% static 'js/videos.js' %}"></script>
+{% endif %}
 {% endblock %}

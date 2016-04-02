@@ -34,6 +34,7 @@ class HomePage(Page):
 
     video_poster_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
+        verbose_name="poster image",
         null=True,
         on_delete=models.SET_NULL,
         related_name='+'
@@ -96,12 +97,12 @@ class HomePage(Page):
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),
             DocumentChooserPanel('video_ogv'),
-        ], "Preview video"),
+        ], "Hero section"),
         MultiFieldPanel([
             FieldPanel('video_youtube_id'),
             FieldPanel('view_more_title'),
             PageChooserPanel('view_more_page'),
-        ], "Main video"),
+        ], "Fullscreen video"),
         FieldPanel('live_feed_intro', classname="full"),
     ]
 

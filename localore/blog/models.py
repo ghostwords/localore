@@ -81,6 +81,7 @@ class BlogPage(Page):
 
     video_poster_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
+        verbose_name="poster image",
         null=True,
         on_delete=models.SET_NULL,
         related_name='+'
@@ -110,6 +111,7 @@ class BlogPage(Page):
     video_youtube_id = models.CharField(
         verbose_name="YouTube video ID",
         max_length=12,
+        blank=True,
         help_text=format_html(
             "The part in bold: "
             "https://www.youtube.com/watch?v=<b>j6IIjLK-8fU</b>"
@@ -147,10 +149,10 @@ class BlogPage(Page):
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),
             DocumentChooserPanel('video_ogv'),
-        ], "Preview video"),
+        ], "Hero section"),
         MultiFieldPanel([
             FieldPanel('video_youtube_id'),
-        ], "Main video"),
+        ], "Fullscreen video"),
         FieldPanel('intro', classname='full'),
         StreamFieldPanel('body'),
         InlinePanel('associated_productions', label="Associated Productions"),
@@ -172,8 +174,8 @@ class BlogPage(Page):
 class LinkFields(models.Model):
     link_external = models.CharField(
         "External link",
-        blank=True,
         max_length=500,
+        blank=True,
         help_text="Please provide an external URL, or select a page below."
     )
     link_page = models.ForeignKey(
