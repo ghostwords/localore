@@ -110,6 +110,19 @@ class ProductionPage(Page):
         help_text="The header/hero/feature image for this production."
     )
 
+    tile_image = models.ForeignKey(
+        'localore_admin.LocaloreImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text=(
+            "Optional: "
+            "The image to use on the grid view of the productions index page. "
+            "Will use hero image if not set."
+        )
+    )
+
     # TODO optional feature video
     # https://github.com/torchbox/wagtail/issues/907
     # https://github.com/torchbox/wagtail/pull/1553
@@ -142,10 +155,11 @@ class ProductionPage(Page):
             [FieldPanel('city'), FieldPanel('state')],
             "Location"
         ),
-        MultiFieldPanel(
-            [ImageChooserPanel('hero_image'), ImageChooserPanel('logo_image')],
-            "Graphics"
-        ),
+        MultiFieldPanel([
+            ImageChooserPanel('hero_image'),
+            ImageChooserPanel('tile_image'),
+            ImageChooserPanel('logo_image'),
+        ], "Graphics"),
         FieldPanel('description', classname='full'),
         InlinePanel('related_links', label="Related links"),
         InlinePanel(
