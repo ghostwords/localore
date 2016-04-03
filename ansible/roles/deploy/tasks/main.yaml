@@ -6,9 +6,15 @@
   run_once: True
   become: False
 
+#- local_action: command chdir=../{{ django_project_name }} pwd
+#  register: result
+#  become: False
+#
+#- debug: var=result.stdout
+
 - name: Create release archive
   local_action: >
-      command chdir=../{{ django_project_name }}
+      command chdir={{ django_project_name }}
       zip --filesync -R ../ansible/{{ django_project_name }}.zip '*'
         -x 'db.sqlite3'
         -x '*/.env.local'
