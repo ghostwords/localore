@@ -42,9 +42,37 @@ $(function() {
     if(window.location.hash.substr(1) === "livefeed") $(".view-more").click();
   };
 
+  $('#site-search').submit(function (e) {
+    var query = $('#site-search-text').val();
+    var $results = $('.search-results');
+
+    console.log('search', query);
+
+    // $.getJSON('https://demo.finding-america.com/search/?query=' + query + '&json=true', function(data) {
+    $.getJSON('/search/?query=' + query + '&json=true', function(data) {
+
+      if(data.search_results.length) {
+        $.each(data.search_results, function (v) {
+          $results.append('<a href="' + v.url + '"><h4>' + v.title + '</h4></a>');
+        })
+      } else {
+        $results.append('<p>Nothing found, apologies!</p>');
+      }
+
+
+
+      console.log(data);
+    });
+
+    return false;
+
+  });
+
   // $(".menu-icon").click(function() {
   //   $("#menu").addClass("in").css({ "display" : "block" });
   // });
+
+
 
 
 

@@ -98,6 +98,19 @@ header {
       }
     }
 
+    .search-icon {
+      background: url('/static/images/search.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 100%;
+      margin-right: 25px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
     .fa-logo {
       float: left;
       height: 100%;

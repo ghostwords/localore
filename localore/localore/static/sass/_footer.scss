@@ -1,15 +1,168 @@
 footer {
-  padding: 2em;
-  text-align: center;
-  background-color: $orange;
+  padding: 4em 3em;
+  background-color: #000;
+  @include outer-container($grid-xl);
 
-  p,a {
+  @include media($mobile) {
+    padding: 3em 1.5em;
+  };
+
+  & > div.row {
+    @include row();
+
+    &:not(:last-of-type) {
+      margin-bottom: 3em;
+    }
+
+    @include media($tablet) {
+      & > div {
+        display: table;
+        float: none;
+        margin: 0 auto 25px auto;
+      }
+
+      &:not(:last-of-type) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+
+  .email-signup {
+    float: left;
+    width: 400px;
+
+    @include media($mobile) {
+      width: 100%;
+    }
+
+    form {
+      position: relative;
+      width: 100%;
+      height: 35px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #fff;
+
+      input {
+          position: absolute;
+
+          height: 35px;
+
+          display: inline-block;
+          border: 0;
+          background-color: transparent;
+          font-size: 15px;
+          font-family: "Roboto";
+          font-weight: 100;
+          line-height: 1.53333333;
+          color: #fff;
+
+
+          &:focus{
+              outline: none;
+          }
+          &[type="email"] {
+            width: 85%;
+          }
+          &[type="submit"] {
+
+              height: 30px;
+              right: 0;
+              padding: 4px 10px;
+              border-radius: 5px;
+
+              margin-bottom: 0;
+              font-weight: normal;
+              text-align: center;
+              vertical-align: middle;
+              -ms-touch-action: manipulation;
+              touch-action: manipulation;
+              cursor: pointer;
+              background-image: none;
+              border: 1px solid #fff;
+              white-space: nowrap;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+
+              &:hover {
+                background: #fff;
+                color: #000;
+              }
+          }
+      }
+    }
+  }
+
+  .footer-social-links {
+
+    float: right;
+
+    @include media($tablet) {
+        float: none;
+        margin: 0 auto;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: top;
+      font-family: $roboto-reg;
+      line-height: 35px;
+      margin-right: 15px;
+    }
+
+    a {
+      display: inline-block;
+      opacity: 0.8;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:not(:last-of-type) {
+        margin-right: 20px;
+      }
+
+      img {
+        height: 35px;
+      }
+    }
+
+  }
+
+  .copyright {
+    float: left;
     color: #fff;
     font-family: $roboto-reg;
     font-size: 14px;
+    line-height: 35px;
+
+    a {
+      font-family: $roboto-reg;
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    @include media($mobile) {
+      font-size: 75%;
+    }
   }
 
-  a {
-    text-decoration: underline;
+  .funders {
+    float: right;
+
+    a {
+      display: inline-block;
+
+      &:not(:last-of-type) {
+        margin-right: 20px;
+      }
+
+      img {
+        height: 35px;
+      }
+    }
   }
+
 }
