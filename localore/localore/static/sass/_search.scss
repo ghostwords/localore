@@ -74,7 +74,9 @@
 
 
   .search-results {
-    color: #fff;
+    a, h4 {
+      color: #fff;
+    }
   }
 
 }
