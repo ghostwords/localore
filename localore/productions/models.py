@@ -22,6 +22,7 @@ from blog.models import BlogPageAssociatedProduction
 class LinkField(models.Model):
     SERVICE_NAME_CHOICES = (
         ('', 'Other'),
+        ('facebook', 'Facebook'),
         ('instagram', 'Instagram'),
         ('soundcloud', 'SoundCloud'),
         ('tumblr', 'Tumblr'),
