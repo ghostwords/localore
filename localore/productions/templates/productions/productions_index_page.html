@@ -49,7 +49,7 @@
 
 	<div class="prod-grid">
 
-		{% for prod in page.productions|dictsort:"title" %}
+		{% for prod in page.productions %}
 
 			{% if forloop.counter0|divisibleby:3 %}<div class="prod-grid-row">{% endif %}
 
