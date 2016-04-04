@@ -92,8 +92,7 @@ class DispatchPage(Page):
 
             return JsonResponse(response)
         else:
-            # TODO update URL to open the dispatch on load
-            index_url = self.dispatches_index.url
+            index_url = self.dispatches_index.url + '?dispatch=' + self.url
             return redirect(index_url, permanent=False)
 
 
