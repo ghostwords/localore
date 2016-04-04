@@ -12,7 +12,7 @@
 			<div class="post-item">
 				{% image dispatch.poster_image original as image %}
 				<div class="post-item-bg" style="background-image:url('{{ image.file.url }}')"></div>
-				<!-- <a class="post-item-link" data-toggle="modal" data-target="#dispatch" data-item="{% pageurl dispatch %}?json"> <!-- trigger modal --> -->
+				<!-- <a class="post-item-link" data-toggle="modal" data-target="#dispatch" data-item="{% pageurl dispatch %}?json"> <!-- trigger modal -->
 				<a class="post-item-link" data-item="{% pageurl dispatch %}?json">
 					<div class="post-item-content">
 						<span class="post-item-title">{{ dispatch.title }}</span>
