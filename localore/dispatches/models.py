@@ -20,11 +20,9 @@ from wagtail.wagtailsearch import index
 
 DISPATCH_TYPE_VIDEO = 'v'
 DISPATCH_TYPE_AUDIO = 'a'
-DISPATCH_TYPE_SERIES = 's'
 DISPATCH_TYPE_CHOICES = (
     (DISPATCH_TYPE_VIDEO, 'Video'),
     (DISPATCH_TYPE_AUDIO, 'Audio'),
-    (DISPATCH_TYPE_SERIES, 'Series'),
 )
 
 
