@@ -105,11 +105,9 @@ INSTALLED_APPS = (
 
     'compressor',
     'dbbackup',
-    'embed_video',
     'modelcluster',
     'overextends',
     'taggit',
-    'wagtail_embed_videos',
 
     'django.contrib.admin',
     'django.contrib.auth',
