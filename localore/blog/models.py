@@ -9,6 +9,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.blocks import (
     CharBlock,
+    RawHTMLBlock,
     RichTextBlock,
     StructBlock,
     TextBlock
@@ -129,10 +130,18 @@ class BlogPage(Page):
             template='blog/blocks/heading.html'
         )),
         ('quote', QuoteBlock()),
-        ('paragraph',
-            RichTextBlock(icon='doc-full', label='Rich Text')),
+        ('paragraph', RichTextBlock(icon='doc-full', label="Rich Text")),
         ('image', ImageChooserBlock(icon='image')),
         ('embed', EmbedBlock(icon='media')),
+        ('raw_html', RawHTMLBlock(
+            icon='code',
+            label="Raw HTML",
+            help_text=format_html(
+                '<ul class="messages"><li class="error">Please mind that '
+                'using raw HTML can break site rendering and/or compromise '
+                'site security.</li></ul>'
+            ),
+        )),
     ])
 
     # search index config
