@@ -7,7 +7,7 @@ from wagtail.wagtailsearch.models import Query
 
 
 def search(request):
-    json = request.GET.get('json', False)
+    do_json = 'json' in request.GET
     search_query = request.GET.get('query', None)
     page = request.GET.get('page', 1)
 
@@ -35,7 +35,7 @@ def search(request):
         'search_results': search_results,
     }
 
-    if json:
+    if do_json:
         response['search_results'] = [
             dict(
                 (attr, getattr(result.specific, attr))
