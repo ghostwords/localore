@@ -1,121 +1,117 @@
-#import datetime
-#
-#from django.db import models
-#
-#from localflavor.us.models import USStateField
-#
-#from wagtail.wagtailcore.models import Page
-#from wagtail.wagtailcore.fields import RichTextField
-#from wagtail.wagtailadmin.edit_handlers import (
-#    FieldPanel,
-#    MultiFieldPanel,
-#)
-#from wagtail.wagtailsearch import index
-#
-#from wagtail_embed_videos.edit_handlers import EmbedVideoChooserPanel
-#
-#
-#class DispatchPage(Page):
-#    date = models.DateField("Post date", default=datetime.date.today)
-#    city = models.CharField(max_length=255)
-#    state = USStateField()
-#    description = RichTextField(blank=True)
-#
-#    search_fields = Page.search_fields + (
-#        index.SearchField('location'),
-#        index.SearchField('description', partial_match=True),
-#    )
-#
-#    content_panels = Page.content_panels + [
-#        FieldPanel('date'),
-#        MultiFieldPanel(
-#            [FieldPanel('city'), FieldPanel('state')],
-#            "Location"
-#        ),
-#        FieldPanel('description'),
-#    ]
-#
-#    @property
-#    def dispatches_index(self):
-#        return self.get_ancestors().type(DispatchesIndexPage).last()
-#
-#    class Meta:
-#        abstract = True
-#
-#
-#class VideoDispatchPage(DispatchPage):
-#    # pylint: disable=too-many-ancestors
-#    video = models.ForeignKey(
-#        'wagtail_embed_videos.EmbedVideo',
-#        verbose_name="Video",
-#        null=True,
-#        blank=True,
-#        on_delete=models.SET_NULL,
-#        related_name='+'
-#    )
-#
-#    content_panels = DispatchPage.content_panels + [
-#        EmbedVideoChooserPanel('video'),
-#    ]
-#
-#    parent_page_types = ['dispatches.VideoDispatchesIndexPage']
-#    subpage_types = []
-#
-#    @property
-#    def get_video_url(self):
-#        return self.video.url
-#
-#    @property
-#    def get_video_thumbnail(self):
-#        return self.video.thumbnail
-#
-#    class Meta:
-#        verbose_name = "video dispatch"
-#        verbose_name_plural = "video dispatches"
-#
-#
-#class AudioDispatchPage(DispatchPage):
-#    # pylint: disable=too-many-ancestors
-#    parent_page_types = ['dispatches.AudioDispatchesIndexPage']
-#    subpage_types = []
-#
-#    class Meta:
-#        verbose_name = "audio dispatch"
-#        verbose_name_plural = "audio dispatches"
-#
-#
-#class DispatchesIndexPage(Page):
-#    subtitle = models.CharField(max_length=255, blank=True)
-#    intro = RichTextField(blank=True)
-#
-#    content_panels = Page.content_panels + [
-#        FieldPanel('subtitle', classname="full"),
-#        FieldPanel('intro', classname="full"),
-#    ]
-#
-#    class Meta:
-#        abstract = True
-#
-#
-#class VideoDispatchesIndexPage(DispatchesIndexPage):
-#    # pylint: disable=too-many-ancestors
-#    subpage_types = ['dispatches.VideoDispatchPage']
-#
-#    @property
-#    def dispatches(self):
-#        return (
-#            VideoDispatchPage.objects.live().descendant_of(self)
-#            .order_by('-date')
-#        )
-#
-#
-#class AudioDispatchesIndexPage(DispatchesIndexPage):
-#    # pylint: disable=too-many-ancestors
-#    subpage_types = ['dispatches.AudioDispatchPage']
-#
-#    @property
-#    def dispatches(self):
-#        return (
-#            AudioDispatchPage.objects.live().descendant_of(self)
-#            .order_by('-date')
-#        )
+import datetime
+
+from django.db import models
+from django.http import JsonResponse
+
+from localflavor.us.models import USStateField
+
+from wagtail.wagtailadmin.edit_handlers import (
+    FieldPanel,
+    MultiFieldPanel,
+)
+from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailembeds import embeds
+from wagtail.wagtailembeds.exceptions import EmbedException
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
+
+
+DISPATCH_TYPE_VIDEO = 'g'
+DISPATCH_TYPE_AUDIO = 'l'
+DISPATCH_TYPE_SERIES = 'l'
+DISPATCH_TYPE_CHOICES = (
+    (DISPATCH_TYPE_VIDEO, 'Video'),
+    (DISPATCH_TYPE_AUDIO, 'Audio'),
+    (DISPATCH_TYPE_SERIES, 'Series'),
+)
+
+
+class DispatchPage(Page):
+    date = models.DateField(default=datetime.date.today)
+
+    city = models.CharField(max_length=255)
+    state = USStateField()
+
+    description = RichTextField(blank=True)
+
+    poster_image = models.ForeignKey(
+        'localore_admin.LocaloreImage',
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    dispatch_type = models.CharField(
+        max_length=1,
+        choices=DISPATCH_TYPE_CHOICES,
+        default=DISPATCH_TYPE_VIDEO,
+    )
+
+    embed_url = models.URLField(
+        "Embed URL",
+        help_text="YouTube or SoundCloud"
+    )
+
+    search_fields = Page.search_fields + (
+        index.SearchField('location'),
+        index.SearchField('description', partial_match=True),
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('date'),
+        MultiFieldPanel(
+            [FieldPanel('city'), FieldPanel('state')],
+            "Location"
+        ),
+        FieldPanel('description', classname="full"),
+        ImageChooserPanel('poster_image'),
+        FieldPanel('dispatch_type'),
+        FieldPanel('embed_url'),
+    ]
+
+    parent_page_types = ['dispatches.DispatchesIndexPage']
+    subpage_types = []
+
+    def serve(self, request):
+        do_json = 'json' in request.GET
+        if do_json:
+            response = {}
+            response['title'] = self.title
+            response['embed_url'] = self.embed_url
+
+            try:
+                response['embed_html'] = embeds.get_embed(self.embed_url).html
+            except EmbedException:
+                response['embed_html'] = ''
+
+            return JsonResponse(response)
+        else:
+            # TODO fix TemplateDoesNotExist dispatches/dispatch_page.html
+            # by redirecting to appropriate DispatchesIndexPage URL
+            return super(DispatchPage, self).serve(request)
+
+
+class DispatchesIndexPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True)
+    intro = RichTextField(blank=True)
+
+    default_dispatch_type = models.CharField(
+        max_length=1,
+        choices=DISPATCH_TYPE_CHOICES,
+        default=DISPATCH_TYPE_VIDEO,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="full"),
+        FieldPanel('intro', classname="full"),
+        FieldPanel('default_dispatch_type'),
+    ]
+
+    subpage_types = ['dispatches.DispatchPage']
+
+    @property
+    def dispatches(self):
+        return (
+            DispatchPage.objects.live().descendant_of(self).order_by('-date')
+        )

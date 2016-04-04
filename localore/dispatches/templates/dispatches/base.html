@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags dispatches_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
@@ -11,13 +11,7 @@
 		<h1>Dispatches</h1>
 		<h3>{{ page.subtitle }}</h3>
 		<ul class="title-section-about list-inline">
-			{# TODO menu #}
-			<li>
-				Video
-			</li>
-			<li>
-				Audio
-			</li>
+			{#{% dispatches_menu page %}#}
 		</ul>
 	</div>
 </div>
@@ -29,4 +23,5 @@
 <div class="container-full section-dispatches">
 	{% block dispatches_index_content %}{% endblock %}
 </div>
+
 {% endblock %}
