@@ -18,9 +18,9 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 
-DISPATCH_TYPE_VIDEO = 'g'
-DISPATCH_TYPE_AUDIO = 'l'
-DISPATCH_TYPE_SERIES = 'l'
+DISPATCH_TYPE_VIDEO = 'v'
+DISPATCH_TYPE_AUDIO = 'a'
+DISPATCH_TYPE_SERIES = 's'
 DISPATCH_TYPE_CHOICES = (
     (DISPATCH_TYPE_VIDEO, 'Video'),
     (DISPATCH_TYPE_AUDIO, 'Audio'),
@@ -127,3 +127,15 @@ class DispatchesIndexPage(Page):
         return (
             DispatchPage.objects.live().descendant_of(self).order_by('-date')
         )
+
+    def get_context(self, request):
+        dispatches = self.dispatches
+
+        dispatches = dispatches.filter(
+            dispatch_type=request.GET.get('t', self.default_dispatch_type)
+        )
+
+        context = super(DispatchesIndexPage, self).get_context(request)
+        context['dispatches'] = dispatches
+
+        return context

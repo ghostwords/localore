@@ -1,25 +1,11 @@
-{% comment %}
-{# TODO #}
-		<ul class="title-section-about list-inline">
-			{% if use_list_view %}
-				<a href="{% pageurl page %}?t={{ DISPLAY_TYPE_GRID }}">Grid</a>
-			{% else %}
-				Grid
-			{% endif %}
-			|
-			{% if use_list_view %}
-				List
-			{% else %}
-				<a href="{% pageurl page %}?t={{ DISPLAY_TYPE_LIST }}">List</a>
-			{% endif %}
-		</ul>
-{% endcomment %}
+{% load wagtailcore_tags %}
+
+{% for item in menuitems %}
 	<li>
-		Video
+		{% if item.active %}
+			{{ item.name }}
+		{% else %}
+			<a href="{% pageurl page %}?t={{ item.value }}">{{ item.name }}</a>
+		{% endif %}
 	</li>
-	<li>
-		Audio
-	</li>
-	<li>
-		Series
-	</li>
+{% endfor %}
