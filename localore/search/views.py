@@ -36,14 +36,20 @@ def search(request):
     }
 
     if do_json:
-        response['search_results'] = [
-            dict(
-                (attr, getattr(result.specific, attr))
-                for attr in ['title', 'url']
-                if hasattr(result.specific, attr)
-            ) for result in response['search_results']
-        ]
+        search_results_serializable = []
+
+        for res in response['search_results']:
+            res_serializable = {}
+
+            res_serializable['title'] = res.specific.title
+            res_serializable['url'] = res.specific.url
+            res_serializable['content_type'] = res.specific.content_type.name
+
+            search_results_serializable.append(res_serializable)
+
+        response['search_results'] = search_results_serializable
 
         return JsonResponse(response)
+
     else:
         return render(request, 'search/search.html', response)
