@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.http import JsonResponse
+from django.shortcuts import redirect
 
 from localflavor.us.models import USStateField
 
@@ -73,6 +74,10 @@ class DispatchPage(Page):
     parent_page_types = ['dispatches.DispatchesIndexPage']
     subpage_types = []
 
+    @property
+    def dispatches_index(self):
+        return self.get_ancestors().type(DispatchesIndexPage).last()
+
     def serve(self, request):
         do_json = 'json' in request.GET
         if do_json:
@@ -87,9 +92,9 @@ class DispatchPage(Page):
 
             return JsonResponse(response)
         else:
-            # TODO fix TemplateDoesNotExist dispatches/dispatch_page.html
-            # by redirecting to appropriate DispatchesIndexPage URL
-            return super(DispatchPage, self).serve(request)
+            # TODO update URL to open the dispatch on load
+            index_url = self.dispatches_index.url
+            return redirect(index_url, permanent=False)
 
 
 class DispatchesIndexPage(Page):
