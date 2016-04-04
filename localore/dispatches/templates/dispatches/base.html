@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags dispatches_tags %}
+{% load staticfiles wagtailcore_tags wagtailimages_tags dispatches_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
@@ -24,4 +24,8 @@
 	{% block dispatches_index_content %}{% endblock %}
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="{% static 'js/dispatches.js' %}"></script>
 {% endblock %}
