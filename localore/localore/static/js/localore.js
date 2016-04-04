@@ -52,11 +52,12 @@ $(function() {
     $.getJSON('/search/?query=' + query + '&json=true', function(data) {
 
       if(data.search_results.length) {
-        $.each(data.search_results, function (v) {
+        $results.empty();
+        $.each(data.search_results, function (i, v) {
           $results.append('<a href="' + v.url + '"><h4>' + v.title + '</h4></a>');
         })
       } else {
-        $results.append('<p>Nothing found, apologies!</p>');
+        $results.html('<p>Nothing found, apologies!</p>');
       }
 
 
