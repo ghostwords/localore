@@ -34,15 +34,12 @@
 				<span aria-hidden="true">×</span>
 			</a>
 		</div>
+		<div class="dispatch-arrow dispatch-prev"></div>
+		<div class="dispatch-arrow dispatch-next"></div>
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
-					{# TODO #}
-					{% if page.dispatches.first %}
-						{{ page.dispatches.first.embed_url|embed }}
-					{% else %}
-						<iframe width="100%" height="300px" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/237603952&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
-					{% endif %}
+
 				</div>
 			</div>
 		</div>
