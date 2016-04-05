@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load staticfiles wagtailcore_tags productions_tags blog_tags %}
+{% load staticfiles wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -23,11 +23,14 @@
 <div class="container-full">
 
 	<section class="hero-section">
-		{% if page.video_mp4 and page.video_webm and page.video_ogv and page.video_poster_image %}
-			<div id="preview" class="full-bg-video" data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ page.video_poster_image.file.url }}" data-vide-options="posterType: jpg">
+		{% image page.video_poster_image max-2000x2000 as poster_image %}
+		{% if page.video_mp4 and page.video_webm and page.video_ogv and poster_image %}
+			<div id="preview" class="full-bg-video"
+					 data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ poster_image.url }}"
+					 data-vide-options="posterType: jpg">
 			</div>
 		{% else %}
-			<div id="preview" class="full-bg-image" style="background-image:url({{ page.video_poster_image.file.url }})"></div>
+			<div id="preview" class="full-bg-image" style="background-image:url({{ poster_image.url }})"></div>
 		{% endif %}
 		<div id="main-video" class="full-bg-video">
 			<div id="youtube-embed"></div>
@@ -60,6 +63,7 @@
 
 </div>
 
+{% comment %}
 <!-- <div class="modal fade" id="homeVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<a class="modal-close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">×</span>
@@ -72,6 +76,7 @@
 		</div>
 	</div>
 </div> -->
+{% endcomment %}
 
 <script type="text/javascript">
 	// Load the IFrame Player API code asynchronously.

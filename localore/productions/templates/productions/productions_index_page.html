@@ -53,9 +53,9 @@
 
 			{% if forloop.counter0|divisibleby:3 %}<div class="prod-grid-row">{% endif %}
 
-			{% image prod.tile_image|default:prod.hero_image original as image %}
+			{% image prod.tile_image|default:prod.hero_image max-800x800 as tile_image %}
 			<div class="prod-grid-item">
-				<div class="prod-item-bg" style="background-image:url({{ image.url }})"></div>
+				<div class="prod-item-bg" style="background-image:url({{ tile_image.url }})"></div>
 				<a class="prod-item-link" href="{% pageurl prod %}">
 					<div class="prod-item-content">
 						<span class="prod-item-title">{{ prod.title }}</span>

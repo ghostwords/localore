@@ -10,8 +10,8 @@
 
 		<div class="dispatch-item-wrapper">
 			<div class="post-item">
-				{% image dispatch.poster_image original as image %}
-				<div class="post-item-bg" style="background-image:url('{{ image.file.url }}')"></div>
+				{% image dispatch.poster_image max-2000x2000 as poster_image %}
+				<div class="post-item-bg" style="background-image:url('{{ poster_image.url }}')"></div>
 				{# <a class="post-item-link" data-toggle="modal" data-target="#dispatch" data-item="{% pageurl dispatch %}?json"> <!-- trigger modal --> #}
 				<a class="post-item-link" href="{% pageurl dispatch %}">
 					<div class="post-item-content">
