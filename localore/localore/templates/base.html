@@ -32,8 +32,8 @@
 
 		<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700|Roboto:400,300,100,500,700,300italic,400italic,100italic,500italic,700italic' rel='stylesheet' type='text/css'>
 
-		<!-- <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"> -->
-    <style type="text/css">
+	{# <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"> #}
+	{% comment %}<style type="text/css">
     	/*#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }*/
     	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
     	  We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
@@ -44,11 +44,10 @@
         padding: 8px;
         font-size: 0.8125em;
       }*/
-    </style>
+    </style>{% endcomment %}
 
 		{# Global stylesheets #}
 		{% compress css %}
-
 		<!-- bower:css -->
 		<link rel="stylesheet" href="/static/bower_components/normalize-css/normalize.css" />
 		<!-- endbower -->
@@ -62,12 +61,12 @@
 	</head>
 
 	<body class="{% block body_class %}{% endblock %}">
+
 		{% wagtailuserbar %}
 
 		<header>
 			<div class="nav-section">
 				<div class="menu-icon" data-toggle="modal" data-target="#menu">
-				<!-- <div class="menu-icon"> -->
 					<span></span>
 					<span></span>
 					<span></span>
@@ -75,27 +74,19 @@
 				<a class="logo fa-logo" href="/">
 					<img src="{% static 'images/FA_logo.png' %}" alt="Finding America Logo" />
 				</a>
-			  <a class="logo air-logo" href="http://airmedia.org" target="_blank">
-			    <img src="{% static 'images/AIR_logo.png' %}" alt="AIR Media Logo" />
-			  </a>
+				<a class="logo air-logo" href="http://airmedia.org" target="_blank">
+					<img src="{% static 'images/AIR_logo.png' %}" alt="AIR Media Logo" />
+				</a>
 				<div class="search-icon pull-right" data-toggle="modal" data-target="#search">
 				</div>
 			</div>
-    </header>
-
-
-
-					{#<p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a>.#}
-
-					<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-
+		</header>
 
     <div id="view">
       {% block content %}{% endblock %}
     </div>
 
     <footer>
-
 			<div class="row">
 				<div class="email-signup">
 					<div id="mc_embed_signup">
