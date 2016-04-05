@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load about_tags wagtailcore_tags wagtailimages_tags %}
+{% load about_tags wagtailcore_tags wagtailimages_tags productions_tags %}
 
 {% block body_class %}template-production{% endblock %}
 
@@ -8,7 +8,8 @@
 
 <div id="title" class="title title-about">
 	<div>
-		<h6>productions</h6>
+		{% get_productions_index_page as productions_index %}
+		<h6><a href="{% pageurl productions_index %}">{{ productions_index }}</a></h6>
 		<h2>{{ page.title }}</h2>
 		<h3>{{ page.city }}, {{ page.get_state_display }}</h3>
 		{% with prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
@@ -32,7 +33,7 @@
 <div class="text-description prod-description">
 	<div class="container {% if page.logo_image %} with-logo {% endif %}">
 
-		<!--	logo -->
+		<!-- logo -->
 		{% image page.logo_image height-150 class="prod-logo" %}
 
 		{{ page.description|richtext }}
