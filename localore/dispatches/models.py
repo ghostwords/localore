@@ -77,27 +77,41 @@ class DispatchPage(Page):
         return self.get_ancestors().type(DispatchesIndexPage).last()
 
     def serve(self, request):
-        do_json = 'json' in request.GET
-        if do_json:
-            response = {}
+        if 'json' in request.GET:
+            resp = {}
 
-            response['title'] = self.title
+            resp['title'] = self.title
 
-            prev_page = self.get_prev_siblings().live().first()
-            response['prev_url'] = prev_page.url + '?json' if prev_page else None
+            prev_page = (
+                DispatchPage.objects.live()
+                .sibling_of(self, False)
+                .filter(path__lte=self.path)
+                .order_by('-path')
+                .filter(dispatch_type=self.dispatch_type)
+                .first()
+            )
+            resp['prev_url'] = prev_page.url + '?json' if prev_page else None
 
-            next_page = self.get_next_siblings().live().first()
-            response['next_url'] = next_page.url + '?json' if next_page else None
+            next_page = (
+                DispatchPage.objects.live()
+                .sibling_of(self, False)
+                .filter(path__gte=self.path)
+                .order_by('path')
+                .filter(dispatch_type=self.dispatch_type)
+                .first()
+            )
+            resp['next_url'] = next_page.url + '?json' if next_page else None
 
-            response['embed_url'] = self.embed_url
+            resp['embed_url'] = self.embed_url
 
             try:
-                response['embed_html'] = embeds.get_embed(self.embed_url).html
+                resp['embed_html'] = embeds.get_embed(self.embed_url).html
             except EmbedException:
-                response['embed_html'] = ''
+                resp['embed_html'] = ''
 
-            return JsonResponse(response)
+            return JsonResponse(resp)
         else:
+
             index_url = self.dispatches_index.url + '?dispatch=' + self.url
             return redirect(index_url, permanent=False)
 
@@ -126,11 +140,14 @@ class DispatchesIndexPage(Page):
             DispatchPage.objects.live().descendant_of(self).order_by('-date')
         )
 
+    def get_dispatch_type(self, request):
+        return request.GET.get('t', self.default_dispatch_type)
+
     def get_context(self, request):
         dispatches = self.dispatches
 
         dispatches = dispatches.filter(
-            dispatch_type=request.GET.get('t', self.default_dispatch_type)
+            dispatch_type=self.get_dispatch_type(request)
         )
 
         context = super(DispatchesIndexPage, self).get_context(request)
