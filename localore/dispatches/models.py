@@ -90,7 +90,7 @@ class DispatchPage(Page):
                 .filter(dispatch_type=self.dispatch_type)
                 .first()
             )
-            resp['prev_url'] = prev_page.url + '?json' if prev_page else None
+            resp['prev_url'] = prev_page.url if prev_page else None
 
             next_page = (
                 DispatchPage.objects.live()
@@ -100,7 +100,7 @@ class DispatchPage(Page):
                 .filter(dispatch_type=self.dispatch_type)
                 .first()
             )
-            resp['next_url'] = next_page.url + '?json' if next_page else None
+            resp['next_url'] = next_page.url if next_page else None
 
             resp['embed_url'] = self.embed_url
 
