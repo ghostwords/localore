@@ -119,6 +119,9 @@ class DispatchPage(Page):
             )
             return redirect(index_url, permanent=False)
 
+    class Meta:
+        verbose_name = "dispatch"
+
 
 class DispatchesIndexPage(Page):
     subtitle = models.CharField(max_length=255, blank=True)
