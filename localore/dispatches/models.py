@@ -84,10 +84,10 @@ class DispatchPage(Page):
             response['title'] = self.title
 
             prev_page = self.get_prev_siblings().live().first()
-            response['prev_url'] = prev_page.url if prev_page else None
+            response['prev_url'] = prev_page.url + '?json' if prev_page else None
 
             next_page = self.get_next_siblings().live().first()
-            response['next_url'] = next_page.url if next_page else None
+            response['next_url'] = next_page.url + '?json' if next_page else None
 
             response['embed_url'] = self.embed_url
 
