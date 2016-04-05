@@ -13,7 +13,7 @@
 				{% image dispatch.poster_image original as image %}
 				<div class="post-item-bg" style="background-image:url('{{ image.file.url }}')"></div>
 				<!-- <a class="post-item-link" data-toggle="modal" data-target="#dispatch" data-item="{% pageurl dispatch %}?json"> <!-- trigger modal -->
-				<a class="post-item-link" data-item="{% pageurl dispatch %}">
+				<a class="post-item-link" href="{% pageurl dispatch %}">
 					<div class="post-item-content">
 						<span class="post-item-title">{{ dispatch.title }}</span>
 						<ul class="list-inline post-item-list">
@@ -34,8 +34,8 @@
 				<span aria-hidden="true">×</span>
 			</a>
 		</div>
-		<div class="dispatch-arrow dispatch-prev"></div>
-		<div class="dispatch-arrow dispatch-next"></div>
+		<a class="dispatch-arrow dispatch-prev"></a>
+		<a class="dispatch-arrow dispatch-next"></a>
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">

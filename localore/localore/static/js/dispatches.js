@@ -8,8 +8,8 @@ $(function() {
   var loadDispatch = function(data, item) {
     $next.removeClass('show');
     $prev.removeClass('show');
-    if(data.prev_url) $prev.addClass('show').attr("data-item", data.prev_url);
-    if(data.next_url) $next.addClass('show').attr("data-item", data.next_url);
+    if(data.prev_url) $prev.addClass('show').attr("href", data.prev_url);
+    if(data.next_url) $next.addClass('show').attr("href", data.next_url);
     window.history.pushState("", data.title, item);
     $modalBody.html(data.embed_html);
     $modal.modal('show');
@@ -35,11 +35,10 @@ $(function() {
     $.getJSON(item + "?json", function(data) { loadDispatch(data, item); });
   }
 
-
-
   $('.post-item-link, .dispatch-arrow').on('click', function() {
-    var item = $(this).attr("data-item");
-    $.getJSON(item, function(data) { loadDispatch(data, item); });
+    var item = $(this).attr("href");
+    $.getJSON(item + "?json", function(data) { loadDispatch(data, item); });
+    return false;
   });
 
   $modal.on('hide.bs.modal', function (e) {
