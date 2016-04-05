@@ -21,4 +21,8 @@ $(function() {
     });
   });
 
+  $modal.on('hide.bs.modal', function (e) {
+    $modalBody.empty();
+  });
+
 });
