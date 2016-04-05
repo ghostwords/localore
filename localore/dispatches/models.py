@@ -112,7 +112,11 @@ class DispatchPage(Page):
             return JsonResponse(resp)
         else:
 
-            index_url = self.dispatches_index.url + '?dispatch=' + self.url
+            index_url = "{}?dispatch={}&t={}".format(
+                self.dispatches_index.url,
+                self.url,
+                self.dispatch_type
+            )
             return redirect(index_url, permanent=False)
 
 
