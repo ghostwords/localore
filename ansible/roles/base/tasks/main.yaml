@@ -9,6 +9,9 @@
     - python-dev
     - python-pip
 
+    # required to pip install from git
+    - git
+
     # required by psycopg2
     - libpq-dev
 
