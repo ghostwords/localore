@@ -6,6 +6,11 @@
   left: 50%;
   margin-left: -200px;
   z-index: 20;
+  @include transition(opacity 600ms ease-out);
+
+  &.hide {
+    opacity: 0;
+  }
 
   & > div {
     @include vertical-align();

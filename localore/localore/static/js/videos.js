@@ -5,6 +5,8 @@ $(function() {
   var $mainVideo = $('#main-video');
   var mainVideoPlayer, videoPlaying = false;
   var $preview = $('#preview');
+  var $title = $('#title');
+  var $header = $('header');
 
   var timeout;
   $(document).on('mousemove', function (event) {
@@ -14,13 +16,13 @@ $(function() {
       timeout = window.setTimeout(function () {
           // trigger the new event on event.target, so that it can bubble appropriately
           $(event.target).trigger('mousemoveend');
-      }, 650);
+      }, 2000);
   });
 
   // console.log(window.YOUTUBE_ID);
 
   window.onYouTubePlayerAPIReady = function() {
-    console.log('yt ready');
+    // console.log('yt ready');
     mainVideoPlayer = new YT.Player('youtube-embed', {
       videoId: window.YOUTUBE_ID,
       playerVars: {
@@ -43,30 +45,25 @@ $(function() {
     $play.addClass('show');
   };
 
-  // when video ends
   window.onPlayerStateChange = function(event) {
     // video cued
-    // console.log(event.data);
     if(event.data === -1) {
-      console.log('cued');
-      // toggleMainVideo(false);
+      // console.log('cued');
     }
     // video playing
     else if (event.data === 1) {
-      console.log('play');
+      // console.log('play');
       $play.addClass('pause');
       $('.hero-section').append('<div id="video-overlay"></div>');
       videoPlaying = true;
-      // toggleMainVideo(false);
     }
     // video paused
     else if (event.data === 2) {
-      console.log('paused');
+      // console.log('paused');
       $play.removeClass('pause').addClass('show');
       $viewMore.removeClass('hide');
       $('#video-overlay').remove();
       videoPlaying = false;
-      // toggleMainVideo(false);
     }
     // video ended
     else if (event.data === 0) {
@@ -94,10 +91,14 @@ $(function() {
     $('#main-video').trigger('hover');
     $play.addClass('show');
     $viewMore.removeClass('hide');
+    $title.removeClass('hide');
+    $header.removeClass('hide');
   });
   $('.hero-section').on("mousemoveend", "#video-overlay", function () {
     $play.removeClass('show');
     $viewMore.addClass('hide');
+    $title.addClass('hide');
+    $header.addClass('hide');
   });
 
   $play.one('click', function(e) {
@@ -106,6 +107,8 @@ $(function() {
     $mainVideo.addClass('playing');
     $play.removeClass('show');
     $viewMore.addClass('hide');
+    $title.addClass('hide');
+    $header.addClass('hide');
 
     if(!jQuery.browser.mobile) {
       toggleMainVideo();
