@@ -69,6 +69,8 @@ $(function() {
 
   });
 
+  $('.prod-description').css("margin-bottom", $('.prod-team').height());
+
   // $(".menu-icon").click(function() {
   //   $("#menu").addClass("in").css({ "display" : "block" });
   // });

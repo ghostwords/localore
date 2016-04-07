@@ -1,6 +1,6 @@
 .prod-description {
 
-  margin-bottom: 10em;
+  // margin-bottom: 10em;
 
   & > .container.with-logo {
     padding-top: 8em;
@@ -24,6 +24,10 @@
     position: absolute;
     left: 50%;
     @include transform(translateX(-50%));
+
+    @include media($mobile) {
+      width: 100%;
+    }
 
   }
 }
