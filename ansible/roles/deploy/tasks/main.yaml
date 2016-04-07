@@ -9,6 +9,7 @@
 #- local_action: command chdir=../{{ django_project_name }} pwd
 #  register: result
 #  become: False
+#  run_once: True
 #
 #- debug: var=result.stdout
 
@@ -22,6 +23,7 @@
         -x '*__pycache__*'
         -x '*.swp'
         -x 'node_modules/*'
+  run_once: True
   become: False
 
 - name: Ensure /var/www and /var/media exist
