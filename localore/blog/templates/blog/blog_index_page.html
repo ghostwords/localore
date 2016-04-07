@@ -20,9 +20,9 @@
 <div class="container-full">
 	{% for post in page.posts %}
 
-		{% image post.video_poster_image max-2000x2000 as poster_image %}
+		{% image post.tile_image|default:post.video_poster_image max-2000x2000 as tile_image %}
 		<div class="post-item">
-			<div class="post-item-bg" style="background-image:url({{ poster_image.url }})"></div>
+			<div class="post-item-bg" style="background-image:url({{ tile_image.url }})"></div>
 			<a class="post-item-link" href="{% pageurl post %}">
 				<div class="post-item-content">
 					<span class="post-item-title">{{ post.title }}</span>

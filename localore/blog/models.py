@@ -119,6 +119,19 @@ class BlogPage(Page):
         ),
     )
 
+    tile_image = models.ForeignKey(
+        'localore_admin.LocaloreImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text=(
+            "Optional: "
+            "The image to use on the connections index page. "
+            "Will use poster image if not set."
+        )
+    )
+
     date = models.DateField("Post date", default=datetime.date.today)
 
     intro = RichTextField(blank=True)
@@ -155,6 +168,7 @@ class BlogPage(Page):
         FieldPanel('date'),
         MultiFieldPanel([
             ImageChooserPanel('video_poster_image'),
+            ImageChooserPanel('tile_image'),
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),
             DocumentChooserPanel('video_ogv'),
