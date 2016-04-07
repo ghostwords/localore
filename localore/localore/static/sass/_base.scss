@@ -187,6 +187,17 @@ h6 {
 
 }
 
+.j-loading {
+
+  &:before {
+    background-color: $orange !important;
+  }
+
+  border-color: $orange !important;
+}
+
+
+
 .j-filters {
 	display: none !important;
 }
@@ -196,6 +207,20 @@ h6 {
 	opacity: 1 !important;
 }
 
+.juicer-button {
+  font-size: em(16) !important;
+  border-radius: 7px !important;
+  padding: .8em !important;
+  font-family: $roboto !important;
+  text-transform: capitalize !important;
+  border-color: $orange !important;
+  color: $orange !important;
+
+  &:hover {
+    background-color: $orange !important;
+    color: #fff !important;
+  }
+}
 
 
 .browsehappy {

@@ -1,8 +1,8 @@
 .live-feed {
   width: 100%;
   background-color: #4A4A4A;
-  padding-top: 4em;
-  padding-bottom: 4em;
+  padding-top: 2em;
+  padding-bottom: 2em;
 
   h4, p {
     color: #fff;
@@ -15,7 +15,7 @@
   left: 50%;
   @include transform(translateX(-50%));
   @include transition(opacity 300ms ease-out);
-  bottom: 9vh;
+  bottom: 5vh;
   width: 150px;
   height: 70px;
   background: url('/static/images/live_feed.svg') no-repeat bottom center;
@@ -30,6 +30,10 @@
   font-weight: 100;
 
   opacity: 0.6;
+
+  @include media($mobile) {
+    bottom: 15vh;
+  }
 
   &:hover {
     cursor: pointer;
