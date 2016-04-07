@@ -4,6 +4,7 @@ import logging
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
+from django.core.cache import cache
 from django.shortcuts import render
 
 from localore_admin.models import JuicerSettings
@@ -13,17 +14,28 @@ logger = logging.getLogger('localore.juicer_site_summary')
 
 
 def get_juicer_count(settings):
-    if not settings.juicer_feed_id or not settings.juicer_auth_token:
+    feed_id = settings.juicer_feed_id
+    auth_token = settings.juicer_auth_token
+    cache_key = 'localore.juicer_feed.' + feed_id + '.count'
+
+    if not feed_id or not auth_token:
         return {
             'error': True,
             'settings_error': True
         }
 
+    # see if we have the count in cache
+    count = cache.get(cache_key)
+    if count is not None:
+        return {
+            'feed_id': feed_id,
+            'total_posts': count
+        }
+
     http_request = Request(
-        'https://www.juicer.io/api/feeds/'
-        '%s/moderated?authentication_token=%s&count=true' % (
-            settings.juicer_feed_id,
-            settings.juicer_auth_token
+        'https://www.juicer.io/api/feeds/%s/moderated?'
+        'authentication_token=%s&count=true' % (
+            feed_id, auth_token
         )
     )
     try:
@@ -44,9 +56,11 @@ def get_juicer_count(settings):
             'error': True
         }
 
-    # TODO cache
+    # cache the non-error result
+    cache.set(cache_key, count, 600) # ten minutes
+
     return {
-        'feed_id': settings.juicer_feed_id,
+        'feed_id': feed_id,
         'total_posts': count
     }
 

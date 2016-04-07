@@ -155,7 +155,6 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
         ],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -167,9 +166,18 @@ TEMPLATES = [
         },
     },
 ]
-if DEBUG:
-    for template_engine in TEMPLATES:
+for template_engine in TEMPLATES:
+    if DEBUG:
         template_engine['OPTIONS']['debug'] = True
+        template_engine['APP_DIRS'] = True
+    else:
+        # use the cached template loader
+        template_engine['OPTIONS']['loaders'] = [
+            ('django.template.loaders.cached.Loader', [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ]),
+        ]
 
 WSGI_APPLICATION = 'localore.wsgi.application'
 
@@ -280,3 +288,20 @@ DBBACKUP_STORAGE_OPTIONS = {
     'bucket_name': env('DBBACKUP_S3_BUCKET_NAME'),
     'default_acl': 'private'
 }
+
+
+# Django Cache Framework
+
+if not DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+            'LOCATION': '/tmp/memcached.sock',
+            'TIMEOUT': 500,
+            'BINARY': True,
+            'OPTIONS': {}
+        }
+    }
+
+# use write-through cache for session data
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'

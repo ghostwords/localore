@@ -66,5 +66,6 @@
   notify:
     - test and reload Nginx
     - restart uWSGI
+    - restart Memcached
 
 # TODO clean up old deploys

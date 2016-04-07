@@ -1,4 +1,11 @@
 ---
+
 dependencies:
   - elasticsearch
+
+  - role: memcached
+    memcached_additional_dependencies:
+      # required by pylibmc
+      - libmemcached-dev
+
   - nginx
