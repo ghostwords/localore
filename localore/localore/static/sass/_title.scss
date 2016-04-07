@@ -46,15 +46,26 @@
 .title-home {
 
   margin-top: .7em;
+  width: 450px;
+  margin-left: -225px;
   position: absolute;
 
-  @include media($mobile) {
-    margin-top: 4em;
+  @include media($header-size) {
+    width: 100%;
+    height: auto;
+    left: 0;
+    margin-left: 0;
+    margin-top: $header-md;
     font-size: 75%;
+
+    & > div {
+      top: 0;
+      @include transform(none);
+    }
   }
 
   h1 {
-    font-size: em(60);
+    font-size: em(50);
     margin-bottom: 7px;
   }
   h3 {

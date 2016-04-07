@@ -16,7 +16,7 @@
     top: -5em;
     margin-bottom: 0;
 
-    @include media($mobile) {
+    @include media($header-size) {
       top: 0;
       margin-bottom: 5em;
     }

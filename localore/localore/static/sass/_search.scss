@@ -1,5 +1,12 @@
 
 #search {
+
+  .modal-dialog {
+    @include media($mobile) {
+      // width: 85%;
+    }
+  }
+
   .modal-content {
     box-shadow: none;
     border: none;
@@ -8,19 +15,23 @@
 
   .search-form {
 
-    margin-bottom: 30px;
+    margin-bottom: 50px;
+
+    @include media($mobile) {
+      font-size: 75%;
+    }
 
     form {
       position: relative;
       width: 100%;
-      height: 60px;
+      height: 4em;
       padding-bottom: 5px;
       border-bottom: 2px solid #fff;
 
       input {
           position: absolute;
 
-          height: 60px;
+          height: 100%;
 
           display: inline-block;
           border: 0;
@@ -40,9 +51,11 @@
           }
           &[type="submit"] {
 
-              height: 50px;
+              height: 70%;
+              top: 15%;
               right: 0;
-              padding: 4px 10px;
+              // padding: 4px 10px;
+              padding: .25em .5em;
               font-family: $roboto;
               font-size: em(20);
               border-radius: 5px;
@@ -74,9 +87,33 @@
 
 
   .search-results {
-    a, h4 {
-      color: #fff;
+
+    .search-results-item {
+      margin: 0 auto 25px auto;
+      @include outer-container;
     }
+
+    a, h5, p, span {
+      color: #fff;
+      margin-bottom: 0;
+    }
+
+    span {
+      font-family: $roboto-reg;
+      @include span-columns(3);
+    }
+
+    h5 {
+      @include span-columns(9);
+    }
+
+    @include media($mobile) {
+      span, h5 {
+        width: 100%;
+      }
+
+    }
+
   }
 
 }

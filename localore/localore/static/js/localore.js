@@ -2,9 +2,9 @@ $(function() {
 
 
 
-  function _testCSS(prop) {
-      return prop in document.documentElement.style;
-  }
+  // function _testCSS(prop) {
+  //     return prop in document.documentElement.style;
+  // }
 
   /**
    * jQuery.browser.mobile (http://detectmobilebrowser.com/)
@@ -21,12 +21,21 @@ $(function() {
   // jQuery.browser.isChrome = !this.browser.isSafari && _testCSS('WebkitTransform');  // Chrome 1+
   // jQuery.browser.isIE = /*@cc_on!@*/false || _testCSS('msTransform');  // At least IE6
 
+
+  /**
+   *    UTIL
+   **/
+
   jQuery.extend( jQuery.easing,
   {
       easeOutCirc: function (x, t, b, c, d) {
           return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
       }
   });
+
+  FastClick.attach(document.body);
+
+
 
   /**
    *    HOMEPAGE
@@ -43,11 +52,17 @@ $(function() {
     if(window.location.hash.substr(1) === "livefeed") $(".view-more").click();
   };
 
+
+
+
   /**
    *    SITE SEARCH
    **/
 
   $('#site-search').submit(function (e) {
+
+    console.log('submit');
+
     var query = $('#site-search-text').val();
     var $results = $('.search-results');
 
@@ -55,10 +70,11 @@ $(function() {
     $.getJSON('/search/?query=' + query + '&json=true', function(data) {
 
       if(data.search_results.length) {
+        console.log(data);
         $results.empty();
         $.each(data.search_results, function (i, v) {
-          $results.append('<a href="' + v.url + '"><h4>' + v.title + '</h4></a>');
-        })
+          $results.append('<div class="search-results-item"><span>' + v.content_type + '</span><a href="' + v.url + '"><h5>' + v.title + '</h5></a></div>');
+        });
       } else {
         $results.html('<p>Nothing found, apologies!</p>');
       }
@@ -67,11 +83,15 @@ $(function() {
     return false;
   });
 
+
+
+
   /**
    *    PRODUCTION DETAILS
    **/
 
   $('.prod-description').css("margin-bottom", $('.prod-team').height());
+
 
 
   /**

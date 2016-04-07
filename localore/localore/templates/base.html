@@ -87,38 +87,41 @@
     </div>
 
     <footer>
-			<div class="row">
-				<div class="email-signup">
-					<div id="mc_embed_signup">
-						<form action="https://airmedia.us1.list-manage.com/subscribe/post?u=02d99c12bcbceba188ea5a04c&amp;id=a63141fa19" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate big-search" target="_blank" novalidate>
-					    <div id="mc_embed_signup_scroll">
-								<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email address to receive dispatches" required>
-					    	<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-					    	<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d4f5d1addd4357eb77c3f8a99_588f6c6ef4" tabindex="-1" value=""></div>
-					       <input type="submit" value="Go" name="subscribe" id="mc-embedded-subscribe" class="button">
-					    </div>
-						</form>
+			<div>
+				<div class="row">
+					<div class="email-signup">
+						<div id="mc_embed_signup">
+							<form action="https://airmedia.us1.list-manage.com/subscribe/post?u=02d99c12bcbceba188ea5a04c&amp;id=a63141fa19" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate big-search" target="_blank" novalidate>
+						    <div id="mc_embed_signup_scroll">
+									<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email address to receive dispatches" required>
+						    	<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+						    	<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d4f5d1addd4357eb77c3f8a99_588f6c6ef4" tabindex="-1" value=""></div>
+						       <input type="submit" value="Go" name="subscribe" id="mc-embedded-subscribe" class="button">
+						    </div>
+							</form>
+						</div>
+					</div>
+					<div class="footer-social-links">
+						<span>Connect</span>
+						<a href="https://www.facebook.com/AIRmedia" target="_blank"><img src="{% static 'images/facebook.svg' %}" alt="facebook" /></a>
+						<a href="https://twitter.com/airmedia" target="_blank"><img src="{% static 'images/twitter.svg' %}" alt="twitter" /></a>
+						<a href="https://www.instagram.com/aircurator/" target="_blank"><img src="{% static 'images/instagram.svg' %}" alt="instagram" /></a>
+						<a href="https://www.snapchat.com/add/findingamerica" target="_blank"><img src="{% static 'images/snapchat.svg' %}" alt="snapchat" /></a>
+						<a href="https://www.youtube.com/channel/UCJLhdx3-B-LWG1N_z_-Uu0A" target="_blank"><img src="{% static 'images/youtube.svg' %}" alt="youtube" /></a>
 					</div>
 				</div>
-				<div class="footer-social-links">
-					<span>Connect</span>
-					<a href="" target="_blank"><img src="{% static 'images/Facebook.svg' %}" alt="facebook" /></a>
-					<a href="" target="_blank"><img src="{% static 'images/Twitter.svg' %}" alt="twitter" /></a>
-					<a href="" target="_blank"><img src="{% static 'images/Instagram.svg' %}" alt="instagram" /></a>
-					<a href="" target="_blank"><img src="{% static 'images/Youtube.svg' %}" alt="youtube" /></a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="funders">
-					<a class="wyncote" href="http://www.wyncotefoundation.org/" target="_blank"><img src="{% static 'images/sponsors/Wyncote.svg' %}" alt="Wyncote" />
-					</a>
-					<a class="artworks" href="https://www.arts.gov/" target="_blank"><img src="{% static 'images/sponsors/Artworks.svg' %}" alt="Artworks" /></a>
-					<a class="cpb" href="http://www.cpb.org/" target="_blank"><img src="{% static 'images/sponsors/CPB.svg' %}" alt="CPB" /></a>
-					<a class="ford" href="https://www.fordfoundation.org/" target="_blank"><img src="{% static 'images/sponsors/Ford.svg' %}" alt="Ford" /></a>
-					<a class="macarthur" href="https://www.macfound.org/" target="_blank"><img src="{% static 'images/sponsors/MacArthur.svg' %}" alt="MacArthur" /></a>
-				</div>
-				<div class="copyright">
-					Copyright © AIR Inc. All rights reserved.&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://airmedia.org" target="_blank">airmedia.org</a>
+				<div class="row">
+					<div class="funders">
+						<a class="wyncote" href="http://www.wyncotefoundation.org/" target="_blank"><img src="{% static 'images/sponsors/Wyncote.svg' %}" alt="Wyncote" />
+						</a>
+						<a class="artworks" href="https://www.arts.gov/" target="_blank"><img src="{% static 'images/sponsors/Artworks.svg' %}" alt="Artworks" /></a>
+						<a class="cpb" href="http://www.cpb.org/" target="_blank"><img src="{% static 'images/sponsors/CPB.svg' %}" alt="CPB" /></a>
+						<a class="ford" href="https://www.fordfoundation.org/" target="_blank"><img src="{% static 'images/sponsors/Ford.svg' %}" alt="Ford" /></a>
+						<a class="macarthur" href="https://www.macfound.org/" target="_blank"><img src="{% static 'images/sponsors/MacArthur.svg' %}" alt="MacArthur" /></a>
+					</div>
+					<div class="copyright">
+						Copyright © AIR Inc. All rights reserved.&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://airmedia.org" target="_blank">airmedia.org</a>
+					</div>
 				</div>
 			</div>
     </footer>
@@ -155,7 +158,7 @@
 					<div class="modal-body">
 						<div class="search-form">
 							<form id="site-search" class="validate" target="_blank" novalidate>
-									<input type="text" value="" name="site-search-text" id="site-search-text" placeholder="Enter your search here" required>
+									<input type="text" value="" name="site-search-text" id="site-search-text" placeholder="Enter your search here" required autocomplete="off">
 						      <input type="submit" value="Search" name="site-search-button" id="site-search-button" class="button">
 							</form>
 						</div>
@@ -173,6 +176,7 @@
 		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
 		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
 		<script src="/static/bower_components/vide/dist/jquery.vide.js"></script>
+		<script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
 		<!-- endbower -->
 
 		<script type="text/javascript" src="{% static 'js/localore.js' %}"></script>

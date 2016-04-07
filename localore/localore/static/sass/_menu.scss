@@ -8,6 +8,10 @@
   .modal-body {
     text-align: center;
     font-size: em(36);
+
+    @include media($mobile) {
+      font-size: em(30);
+    }
   }
 
   .modal-close {
