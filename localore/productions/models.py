@@ -170,8 +170,8 @@ class ProductionPage(Page):
         InlinePanel(
             'featured_people',
             label="featured team members",
-            max_num=3,
-            help_text="Select up to three people to feature on this page."
+            max_num=4,
+            help_text="Select up to four people to feature on this page."
         ),
         FieldPanel('highlights', classname='full'),
         InlinePanel('juicer_sources', label="Juicer sources"),
