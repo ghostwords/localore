@@ -10,9 +10,16 @@
 
 	<div class="team-section">
 
-		<div class="team-item">
-			<h4 class="team-name">AIR | Localore Team</h4>
-			<div>
+		<div class="team-item" id="air-localore-team">
+			<h4 class="team-name"></h4>
+			<a data-toggle="collapse"
+					href="#team-members-0"
+					aria-expanded="true"
+					aria-controls="team-members-0"
+					data-parent=".team-section">
+				<h4 class="team-name">AIR | Localore Team</h4>
+			</a>
+			<div id="team-members-0" class="about-team-member collapse in">
 				<div class="team-members clearfix">
 					{% for item in page.related_people.all %}
 					{% person item.person %}

@@ -22,7 +22,7 @@ body {
   position: relative;
 
   @include media($tablet) {
-      @include pad(3em default 3em default);
+      @include pad(3em 1em 3em 1em);
   }
 
 

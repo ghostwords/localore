@@ -6,15 +6,14 @@
 
 	<h6 class="team-location">{{ production.city }}, {{ production.state }}</h6>
 	<a data-toggle="collapse"
-			href="#team-members-{{ forloop.counter0 }}"
-			aria-expanded="false"
-			aria-controls="team-members-{{ forloop.counter0 }}"
+			href="#team-members-{{ forloop.counter }}"
+			aria-expanded="true"
+			aria-controls="team-members-{{ forloop.counter }}"
 			data-parent=".team-section">
 		<h4 class="team-name">{{ production.title }}</h4>
 	</a>
 
-	{# <div id="team-members-{{ forloop.counter0 }}" class="collapse"> #}
-	<div id="team-members-{{ forloop.counter0 }}">
+	<div id="team-members-{{ forloop.counter }}" class="about-team-member collapse in">
 		<div class="team-members clearfix">
 			{% for item in production.related_people.all %}
 			{% person item.person %}

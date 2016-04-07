@@ -21,15 +21,16 @@ $(function() {
   // jQuery.browser.isChrome = !this.browser.isSafari && _testCSS('WebkitTransform');  // Chrome 1+
   // jQuery.browser.isIE = /*@cc_on!@*/false || _testCSS('msTransform');  // At least IE6
 
-  console.log(jQuery.browser);
-
-  // jQuery.easing['jswing'] = jQuery.easing['swing'];
   jQuery.extend( jQuery.easing,
   {
       easeOutCirc: function (x, t, b, c, d) {
           return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
       }
   });
+
+  /**
+   *    HOMEPAGE
+   **/
 
   $(".view-more").click(function() {
     $('html, body').animate({
@@ -42,11 +43,13 @@ $(function() {
     if(window.location.hash.substr(1) === "livefeed") $(".view-more").click();
   };
 
+  /**
+   *    SITE SEARCH
+   **/
+
   $('#site-search').submit(function (e) {
     var query = $('#site-search-text').val();
     var $results = $('.search-results');
-
-    console.log('search', query);
 
     // $.getJSON('https://demo.finding-america.com/search/?query=' + query + '&json=true', function(data) {
     $.getJSON('/search/?query=' + query + '&json=true', function(data) {
@@ -59,22 +62,25 @@ $(function() {
       } else {
         $results.html('<p>Nothing found, apologies!</p>');
       }
-
-
-
-      console.log(data);
     });
 
     return false;
-
   });
+
+  /**
+   *    PRODUCTION DETAILS
+   **/
 
   $('.prod-description').css("margin-bottom", $('.prod-team').height());
 
-  // $(".menu-icon").click(function() {
-  //   $("#menu").addClass("in").css({ "display" : "block" });
-  // });
 
+  /**
+   *    ABOUT - TEAM
+   **/
+
+   if(jQuery.browser.mobile) {
+     $('.about-team-member').collapse('hide');
+   }
 
 
 
