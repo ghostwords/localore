@@ -35,6 +35,17 @@ $(function() {
 
   FastClick.attach(document.body);
 
+  $(document).on('focus', '.accessible',function(){
+    var $this = $(this);
+    $(document).on('keyup.access', function(e){
+        if(e.which==13 || e.which==32) {  $this.click(); }
+    });
+  });
+  $(document).on('focusout', '.accessible',function(){
+    $(document).off('keyup.access');
+  });
+
+
 
 
   /**
@@ -59,9 +70,11 @@ $(function() {
    *    SITE SEARCH
    **/
 
-  $('#site-search').submit(function (e) {
+  $('#search').on('shown.bs.modal', function (e) {
+    $( "#site-search-text" ).focus();
+  });
 
-    console.log('submit');
+  $('#site-search').submit(function (e) {
 
     var query = $('#site-search-text').val();
     var $results = $('.search-results');
