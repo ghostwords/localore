@@ -32,10 +32,13 @@
   }
   h3 {
     font-size: em(16);
-    margin-bottom: 15px;
+    margin-bottom: 0;
   }
   h6 {
     color: $orange;
+    a {
+      font-family: $roboto-reg;
+    }
   }
 
 }
@@ -85,22 +88,33 @@
   }
 
   @include media($header-size) {
-    box-sizing: content-box;
     position: static;
     width: 100%;
-    padding-top: $header-md;
+    height: auto;
+    margin-top: $header-md;
     margin-left: 0;
+    padding-top: 2em;
+    padding-bottom: 2em;
+
 
     & > div {
-      top: 50%;
+      top: 0;
+      @include transform(none);
     }
     &:after {
       display: none;
     }
   }
 
+  @include media($mobile) {
+
+  }
+
 
   .title-section-about {
+
+    margin-top: 15px;
+    margin-bottom: 0;
 
     li:not(:last-child) {
       border-right: 2px solid lighten($dark-grey, 10%);

@@ -49,22 +49,12 @@ body {
 
 .description {
   background: url('/static/images/header_bg.png') fixed;
-  background-size: auto 40%;
+  background-size: 130%;
   background-position: top center;
   background-repeat: no-repeat;
   height: $header-title + 100px;
   width: 100%;
   position: relative;
-
-  @include media($header-size) {
-    background: url('/static/images/header_bg_tablet.png');
-    background-size: 100%;
-    height: 100px;
-  }
-
-  @include media($desktop-xl) {
-      background-size: 100%;
-  }
 
   .rich-text {
     @include outer-container($grid-md);
@@ -74,10 +64,36 @@ body {
     right: 0;
 
     p {
-      color: #323130;
+      color: #000;
       text-align: center;
     }
   }
+
+  @include media($header-size) {
+    background: url('/static/images/header_bg_tablet.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: auto;
+
+    .rich-text {
+
+      position: static;
+
+      p {
+        @include pad(2em default 2em default);
+      }
+    }
+
+  }
+
+  @include media($desktop-xl) {
+    background-size: 100%;
+  }
+
+  @include media($mobile) {
+    background-size: 200%;
+  }
+
 
 }
 
