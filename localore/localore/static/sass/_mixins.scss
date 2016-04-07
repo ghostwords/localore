@@ -17,8 +17,19 @@
 
 $browser-context: 16; // Default
 
+// @function em($pixels, $context: $browser-context) {
+//   @return #{$pixels/$context}em;
+// }
 @function em($pixels, $context: $browser-context) {
-  @return #{$pixels/$context}em;
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1em;
 }
 
 @mixin img-responsive($display: block) {
@@ -30,5 +41,5 @@ $browser-context: 16; // Default
 @mixin abs-position() {
   position: absolute;
   top: 0; left: 0;
-  width: 100%; height: 100%;   
+  width: 100%; height: 100%;
 }
