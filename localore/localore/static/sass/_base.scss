@@ -162,7 +162,12 @@ h6 {
     margin-left: auto;
     margin-right: auto;
 
-    &[src*='youtube'] {
+    &.embedly-embed {
+      height: 100%;
+    }
+
+    &[src*='youtube'],
+    &[src*='soundcloud'] {
       height: 100%;
     }
 
@@ -170,10 +175,6 @@ h6 {
       position: static;
       width: 100% !important;
       max-width: 100% !important;
-    }
-
-    &[src*='soundcloud'] {
-      position: static;
     }
 }
 

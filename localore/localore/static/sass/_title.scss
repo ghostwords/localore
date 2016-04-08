@@ -50,10 +50,16 @@
 
 .title-home {
 
-  margin-top: .7em;
+  margin-top: 1em;
   width: 450px;
   margin-left: -225px;
   position: absolute;
+
+
+  & > div {
+    top: 0;
+    @include transform(none);
+  }
 
   @include media($header-size) {
     width: 100%;
@@ -62,11 +68,6 @@
     margin-left: 0;
     margin-top: $header-md;
     font-size: 75%;
-
-    & > div {
-      top: 0;
-      @include transform(none);
-    }
   }
 
   h1 {
