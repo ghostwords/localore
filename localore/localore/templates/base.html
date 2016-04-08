@@ -1,4 +1,4 @@
-{% load compress staticfiles wagtailuserbar localore_core_tags %}
+{% load compress staticfiles wagtailcore_tags wagtailuserbar localore_core_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -69,7 +69,8 @@
 			<div class="intro-section">
 				<div class="intro-content">
 					<img src="{% static 'images/FA_logo_main.svg' %}" alt="Finding America Logo">
-					<p>Minim proident est eiusmod culpa proident deserunt enim dolor velit amet aute aliqua proident elit excepteur irure. Sit amet dolore voluptate Lorem et proident consectetur in culpa enim elit. Excepteur adipisicing excepteur duis in nisi excepteur consectetur anim amet tempor non aliqua consectetur esse. Nisi culpa culpa culpa pariatur duis sunt consectetur voluptate mollit proident dolor non exercitation aliqua in et.</p>
+					{% get_site_root as site_root %}
+					<p>{{ site_root.specific.site_intro|richtext }}</p>
 					<div class="intro-enter-btn accessible" tabindex="0">
 						<span>Enter</span>
 						<span class="enter-icon">

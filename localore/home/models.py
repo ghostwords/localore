@@ -13,6 +13,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class HomePage(Page):
+    site_intro = RichTextField(blank=True)
+
     related_content_title = models.CharField(
         verbose_name="title",
         max_length=255,
@@ -87,6 +89,7 @@ class HomePage(Page):
     live_feed_intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('site_intro', classname="full"),
         MultiFieldPanel([
             FieldPanel('related_content_title'),
             FieldPanel('related_content_subtitle'),
