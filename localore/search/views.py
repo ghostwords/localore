@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -5,6 +6,8 @@ from django.views.decorators.cache import cache_page
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
+
+from localore_admin.models import PageAlias
 
 
 # override per-site cache for search
@@ -16,11 +19,19 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
-        query = Query.get(search_query)
+        page_alias_content_type = ContentType.objects.get_for_model(PageAlias)
 
-        # Record hit
-        query.add_hit()
+        search_results = (
+            Page.objects.live().
+            # exclude root
+            filter(depth__gt=1).
+            # exclude PageAlias pages
+            exclude(content_type=page_alias_content_type).
+            search(search_query)
+        )
+
+        # log the query so Wagtail can suggest promoted results
+        Query.get(search_query).add_hit()
     else:
         search_results = Page.objects.none()
 
