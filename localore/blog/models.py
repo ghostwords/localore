@@ -191,7 +191,7 @@ class BlogPage(Page):
         return self.get_ancestors().type(BlogIndexPage).last()
 
     class Meta:
-        verbose_name = "connection"
+        verbose_name = "Connection"
 
 
 class LinkFields(models.Model):
@@ -260,4 +260,4 @@ class BlogIndexPage(Page):
         return BlogPage.objects.live().descendant_of(self).order_by('-date')
 
     class Meta:
-        verbose_name = "connections index page"
+        verbose_name = "Connections Index"

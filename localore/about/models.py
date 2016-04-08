@@ -32,6 +32,9 @@ class AboutMissionPage(Page):
     parent_page_types = ['home.HomePage', 'localore_admin.PageAlias']
     subpage_types = []
 
+    class Meta:
+        verbose_name = "About: Mission"
+
 
 class AboutTeamPageRelatedPerson(Orderable, PersonField):
     page = ParentalKey('AboutTeamPage', related_name='related_people')
@@ -61,6 +64,9 @@ class AboutTeamPage(Page):
     parent_page_types = ['home.HomePage', 'localore_admin.PageAlias']
     subpage_types = []
 
+    class Meta:
+        verbose_name = "About: Team"
+
 
 class AboutContactPage(Page):
     subtitle = models.CharField(max_length=255, blank=True)
@@ -77,3 +83,6 @@ class AboutContactPage(Page):
 
     parent_page_types = ['home.HomePage', 'localore_admin.PageAlias']
     subpage_types = []
+
+    class Meta:
+        verbose_name = "About: Connect"

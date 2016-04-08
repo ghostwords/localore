@@ -198,7 +198,7 @@ class ProductionPage(Page):
         return [item.page for item in associations]
 
     class Meta:
-        verbose_name = "production"
+        verbose_name = "Production"
 
 
 class ProductionsIndexPage(Page):
@@ -242,3 +242,6 @@ class ProductionsIndexPage(Page):
         )
 
         return context
+
+    class Meta:
+        verbose_name = "Productions Index"

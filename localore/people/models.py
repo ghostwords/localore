@@ -90,8 +90,8 @@ class Person(models.Model, index.Indexed):
 
     class Meta:
         ordering = ('last_name',)
-        verbose_name = "person"
-        verbose_name_plural = "people"
+        verbose_name = "Person"
+        verbose_name_plural = "People"
 
     def __str__(self):
         out = [

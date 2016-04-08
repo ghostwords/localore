@@ -120,7 +120,7 @@ class DispatchPage(Page):
             return redirect(index_url, permanent=False)
 
     class Meta:
-        verbose_name = "dispatch"
+        verbose_name = "Dispatch"
 
 
 class DispatchesIndexPage(Page):
@@ -161,3 +161,6 @@ class DispatchesIndexPage(Page):
         context['dispatches'] = dispatches
 
         return context
+
+    class Meta:
+        verbose_name = "Dispatches Index"
