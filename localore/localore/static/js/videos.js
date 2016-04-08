@@ -19,10 +19,10 @@ $(function() {
       }, 2000);
   });
 
-  // console.log(window.YOUTUBE_ID);
+  console.log(window.YOUTUBE_ID);
 
   window.onYouTubePlayerAPIReady = function() {
-    // console.log('yt ready');
+    console.log('yt ready 1');
     mainVideoPlayer = new YT.Player('youtube-embed', {
       videoId: window.YOUTUBE_ID,
       playerVars: {
@@ -42,6 +42,7 @@ $(function() {
   }
 
   window.onReady = function(event) {
+    console.log('yt ready 2');
     $play.addClass('show');
   };
 
