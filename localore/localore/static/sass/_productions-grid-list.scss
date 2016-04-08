@@ -1,3 +1,47 @@
+.prod-icon {
+  display: block;
+  height: 22px;
+  width: 22px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    .a {
+      fill: $grey;
+    }
+  }
+
+  &.active svg .a {
+    fill: $orange;
+  }
+
+}
+
+.prod-list {
+
+  .row {
+    @include row();
+  }
+
+  .prod-list-loc {
+    text-align: left;
+    line-height: 30px;
+    @include span-columns(4);
+  }
+
+  .prod-list-title {
+    @include span-columns(7);
+    & h5 { color: $orange; }
+  }
+
+  @include media($mobile) {
+    .prod-list-loc, .prod-list-title { @include fill-parent; }
+    .prod-list-title { margin-bottom: 1.5em }
+  }
+
+}
+
 .prod-grid {
   // display: table;
   @include fill-parent();

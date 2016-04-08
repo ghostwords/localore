@@ -19,9 +19,11 @@ body {
   position: relative;
 
   @include media($tablet) {
+      @include pad(3em 1.5em 3em 1.5em);
+  }
+  @include media($mobile) {
       @include pad(3em 1em 3em 1em);
   }
-
 
   & .rich-text img, & .block-image img {
     @include img-responsive();
