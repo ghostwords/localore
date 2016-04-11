@@ -1,5 +1,6 @@
 boto==2.39.0
 Django>=1.8,<1.9
+django_cachalot==1.2.1
 django_dbbackup==2.4.1
 django_environ==0.4.0
 django_localflavor==1.2.0
