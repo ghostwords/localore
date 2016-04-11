@@ -5,11 +5,11 @@ django_dbbackup==2.4.1
 django_environ==0.4.0
 django_localflavor==1.2.0
 django_overextends==0.4.1
-django_pylibmc==0.6.1
 django_storages_redux==1.3.2
 elasticsearch>=1.0.0,<2.0.0
 embedly==0.5.0
 psycopg2==2.6.1
+pylibmc==1.5.1
 pytz
 wagtail==1.4.3
 wagtailmodeladmin==2.5.0

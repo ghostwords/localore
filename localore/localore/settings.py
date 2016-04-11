@@ -311,10 +311,9 @@ DBBACKUP_STORAGE_OPTIONS = {
 if not DEBUG:
     CACHES = {
         'default': {
-            'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+            'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
             'LOCATION': '/tmp/memcached.sock',
             'TIMEOUT': None,
-            'BINARY': True,
             'OPTIONS': {}
         }
     }
