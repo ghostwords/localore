@@ -313,7 +313,7 @@ if not DEBUG:
         'default': {
             'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
             'LOCATION': '/tmp/memcached.sock',
-            'TIMEOUT': 500,
+            'TIMEOUT': None,
             'BINARY': True,
             'OPTIONS': {}
         }
