@@ -133,6 +133,14 @@ class BlogPage(Page):
     )
 
     date = models.DateField("Post date", default=datetime.date.today)
+    is_featured = models.BooleanField(
+        "featured",
+        default=False,
+        help_text=(
+            "Makes this connection go to the top of the list "
+            "on the connections index page."
+        ),
+    )
 
     intro = RichTextField(blank=True)
 
@@ -165,7 +173,10 @@ class BlogPage(Page):
     # admin editor panels config
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
-        FieldPanel('date'),
+        MultiFieldPanel([
+            FieldPanel('date'),
+            FieldPanel('is_featured'),
+        ], "Index page order"),
         MultiFieldPanel([
             ImageChooserPanel('video_poster_image'),
             ImageChooserPanel('tile_image'),
@@ -238,10 +249,6 @@ class RelatedLink(LinkFields):
         abstract = True
 
 
-class BlogIndexRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('BlogIndexPage', related_name='related_links')
-
-
 class BlogIndexPage(Page):
     subtitle = models.CharField(max_length=255, blank=True)
 
@@ -250,14 +257,16 @@ class BlogIndexPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname="full"),
         FieldPanel('intro', classname="full"),
-        InlinePanel('related_links', label="Featured posts"),
     ]
 
     subpage_types = ['blog.BlogPage']
 
     @property
     def posts(self):
-        return BlogPage.objects.live().descendant_of(self).order_by('-date')
+        return (
+            BlogPage.objects.live().descendant_of(self)
+            .order_by('-is_featured', '-date')
+        )
 
     class Meta:
         verbose_name = "Connections Index"
