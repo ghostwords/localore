@@ -53,7 +53,9 @@ class DispatchPage(Page):
     )
 
     search_fields = Page.search_fields + (
-        index.SearchField('location'),
+        index.SearchField('city'),
+        index.SearchField('state'),
+        index.SearchField('get_state_display'),
         index.SearchField('description', partial_match=True),
     )
 

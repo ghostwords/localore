@@ -143,6 +143,7 @@ class ProductionPage(Page):
     search_fields = Page.search_fields + (
         index.SearchField('city'),
         index.SearchField('state'),
+        index.SearchField('get_state_display'),
         index.SearchField('description', partial_match=True),
         index.SearchField('highlights', partial_match=True),
     )

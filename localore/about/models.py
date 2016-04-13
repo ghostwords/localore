@@ -20,6 +20,7 @@ class AboutMissionPage(Page):
     description = RichTextField()
 
     search_fields = Page.search_fields + (
+        index.SearchField('subtitle', partial_match=True),
         index.SearchField('description', partial_match=True),
     )
 
@@ -45,6 +46,7 @@ class AboutTeamPage(Page):
     description = RichTextField()
 
     search_fields = Page.search_fields + (
+        index.SearchField('subtitle', partial_match=True),
         index.SearchField('description', partial_match=True),
     )
 
@@ -73,6 +75,7 @@ class AboutContactPage(Page):
     contact_information = RichTextField()
 
     search_fields = Page.search_fields + (
+        index.SearchField('subtitle', partial_match=True),
         index.SearchField('contact_information', partial_match=True),
     )
 
