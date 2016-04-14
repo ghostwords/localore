@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.decorators.cache import cache_page
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
@@ -10,8 +9,6 @@ from wagtail.wagtailsearch.models import Query
 from localore_admin.models import PageAlias
 
 
-# override per-site cache for search
-@cache_page(30) # thirty seconds
 def search(request):
     do_json = 'json' in request.GET
     search_query = request.GET.get('query', None)
