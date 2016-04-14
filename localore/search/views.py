@@ -22,12 +22,12 @@ def search(request):
         page_alias_content_type = ContentType.objects.get_for_model(PageAlias)
 
         search_results = (
-            Page.objects.live().
-            # exclude root
-            filter(depth__gt=1).
+            Page.objects.live()
+            # exclude root and home pages
+            .filter(depth__gt=2)
             # exclude PageAlias pages
-            exclude(content_type=page_alias_content_type).
-            search(search_query)
+            .exclude(content_type=page_alias_content_type)
+            .search(search_query)
         )
 
         # log the query so Wagtail can suggest promoted results
