@@ -30,10 +30,19 @@ def search(request):
             .search(search_query)
         )
 
+        query = Query.get(search_query)
+
         # log the query so Wagtail can suggest promoted results
-        Query.get(search_query).add_hit()
+        query.add_hit()
+
+        # promoted search results
+        promoted_page_ids = [
+            pick.page.id for pick in query.editors_picks.all()
+        ]
+        promoted_results = Page.objects.filter(pk__in=promoted_page_ids)
     else:
         search_results = Page.objects.none()
+        promoted_results = Page.objects.none()
 
     # Pagination
     paginator = Paginator(search_results, 10)
@@ -47,23 +56,27 @@ def search(request):
     response = {
         'search_query': search_query,
         'search_results': search_results,
+        'promoted_results': promoted_results,
     }
 
     if do_json:
-        search_results_serializable = []
+        results_json = {
+            'search_query': search_query,
+            'search_results': [],
+        }
 
-        for res in response['search_results']:
-            res_serializable = {}
+        for result_type in ('promoted_results', 'search_results'):
+            for page in response[result_type]:
+                result = {}
 
-            res_serializable['title'] = res.specific.title
-            res_serializable['url'] = res.specific.url
-            res_serializable['content_type'] = res.specific.content_type.name
+                result['title'] = page.specific.title
+                result['url'] = page.specific.url
+                result['content_type'] = page.specific.content_type.name
 
-            search_results_serializable.append(res_serializable)
+                if result not in results_json['search_results']:
+                    results_json['search_results'].append(result)
 
-        response['search_results'] = search_results_serializable
-
-        return JsonResponse(response)
+        return JsonResponse(results_json)
 
     else:
         return render(request, 'search/search.html', response)
