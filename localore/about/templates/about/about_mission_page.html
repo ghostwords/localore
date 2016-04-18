@@ -22,11 +22,7 @@
 
 		<div class="mission-desc">
 
-			{# TODO: this needs to be dynamic #}
-			<p class="rich-text">
-				AIR producers carry the mission of public service media to every corner of America. With a particular expertise in audio, we hear what is not apparent, seek what may be hidden, and craft stories that reflect a full spectrum of human experience.
-				<br /><a href="http://airmedia.org">Learn More about AIR</a>
-			</p>
+			{{ page.org_description|richtext }}
 
 			<h5>Related Links</h5>
 			{% if page.related_links.all %}
