@@ -24,8 +24,8 @@
 
 			{{ page.org_description|richtext }}
 
-			<h5>Related Links</h5>
 			{% if page.related_links.all %}
+				<h5>Related Links</h5>
 				<ul class="list-unstyled">
 					{% for item in page.related_links.all %}
 						<li>
