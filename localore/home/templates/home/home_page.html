@@ -86,9 +86,7 @@
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 	window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
-
-	// TODO make dynamic
-	window.IS_360_VIDEO = true;
+	window.IS_360_VIDEO = {{ page.video_is_360|yesno:"true,false" }};
 </script>
 
 {% endblock %}

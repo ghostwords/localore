@@ -118,6 +118,11 @@ class BlogPage(Page):
             "https://www.youtube.com/watch?v=<b>j6IIjLK-8fU</b>"
         ),
     )
+    video_is_360 = models.BooleanField(
+        "360˚ video",
+        default=False,
+        help_text="This is a 360-degree video.",
+    )
 
     tile_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
@@ -188,6 +193,7 @@ class BlogPage(Page):
         ], "Hero section"),
         MultiFieldPanel([
             FieldPanel('video_youtube_id'),
+            FieldPanel('video_is_360'),
         ], "Fullscreen video"),
         FieldPanel('intro', classname='full'),
         StreamFieldPanel('body'),
