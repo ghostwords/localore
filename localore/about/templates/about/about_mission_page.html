@@ -1,23 +1,50 @@
 {% extends "about/base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load staticfiles wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-about-mission{% endblock %}
 
 {% block about_content %}
 
+<div class="container">
+
 	{{ page.description|richtext }}
 
-	{% if page.related_links.all %}
-		<ul>
-			{% for item in page.related_links.all %}
-				<li>
-					<a href="{{ item.link }}">{{ item.title }}</a>
-				</li>
-				<br>
-			{% endfor %}
-		</ul>
-		<hr>
-	{% endif %}
+</div>
+
+<div class="container-full mission-section">
+
+	<div class="container">
+
+		<div class="mission-airlogo">
+			<img src="{% static 'images/AIR_orange.svg' %}" alt="Air Logo" />
+		</div>
+
+		<div class="mission-desc">
+
+			{# TODO: this needs to be dynamic #}
+			<p class="rich-text">
+				AIR producers carry the mission of public service media to every corner of America. With a particular expertise in audio, we hear what is not apparent, seek what may be hidden, and craft stories that reflect a full spectrum of human experience.
+				<br /><a href="http://airmedia.org">Learn More about AIR</a>
+			</p>
+
+			<h5>Related Links</h5>
+			{% if page.related_links.all %}
+				<ul class="list-unstyled">
+					{% for item in page.related_links.all %}
+						<li>
+							<a href="{{ item.link }}">{{ item.title }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+		</div>
+
+
+
+	</div>
+
+</div>
 
 {% endblock %}

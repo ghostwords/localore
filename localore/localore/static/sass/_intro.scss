@@ -39,26 +39,44 @@
       width: 100%;
       padding: 3em 1.5em 0 1.5em;
 
+      position: absolute;
+      bottom: 14em;
+
       @include media($intro-height) {
         padding: 0 1.5em;
+        bottom: 6em;
         @include vertical-align(absolute);
       }
 
       @include media($mobile) {
         padding: 1em 1.5em;
-        & > p { font-size: 80%; }
+        bottom: 12em;
+        & > .rich-text > p {
+          margin: 1em 0;
+          font-size: 80%;
+        }
       }
 
       & > img {
-        width: 100%;
+        width: 50%;
         max-width: 400px;
         height: auto;
-        // display: block;
-        // margin: 0 auto;
+        display: block;
+        margin: 0 auto;
       }
 
-      & > p {
+      .rich-text > p {
+        font-size: em(14);
         margin: 1.5em 0;
+
+        @include media($intro-height) {
+          font-size: 1em;
+        }
+
+        @include media($mobile) {
+          margin: 1em 0;
+          font-size: 80%;
+        }
       }
 
       & > .intro-enter-btn {

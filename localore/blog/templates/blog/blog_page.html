@@ -89,6 +89,9 @@
 		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 		window.YOUTUBE_ID = '{{ page.video_youtube_id }}';
+
+		// TODO make dynamic
+		window.IS_360_VIDEO = false;
 	</script>
 
 	<script type="text/javascript" src="{% static 'js/videos.js' %}"></script>

@@ -19,8 +19,6 @@ $(function() {
       }, 2000);
   });
 
-  console.log(window.YOUTUBE_ID);
-
   window.onYouTubePlayerAPIReady = function() {
     console.log('yt ready 1');
     mainVideoPlayer = new YT.Player('youtube-embed', {
@@ -55,7 +53,13 @@ $(function() {
     else if (event.data === 1) {
       // console.log('play');
       $play.addClass('pause');
-      $('.hero-section').append('<div id="video-overlay"></div>');
+      if(!window.IS_360_VIDEO) $('.hero-section').append('<div id="video-overlay"></div>');
+      else {
+        $play.removeClass('show');
+        $viewMore.addClass('hide');
+        $title.fadeOut(600);
+        $header.fadeOut(600);
+      }
       videoPlaying = true;
     }
     // video paused
@@ -63,12 +67,18 @@ $(function() {
       // console.log('paused');
       $play.removeClass('pause').addClass('show');
       $viewMore.removeClass('hide');
-      $('#video-overlay').remove();
+      if(!window.IS_360_VIDEO) $('#video-overlay').remove();
+      else {
+        $play.addClass('show');
+        $viewMore.removeClass('hide');
+        $title.fadeIn(600);
+        $header.fadeIn(600);
+      }
       videoPlaying = false;
     }
     // video ended
     else if (event.data === 0) {
-      $('#video-overlay').remove();
+      if(!window.IS_360_VIDEO) $('#video-overlay').remove();
       $viewMore.removeClass('hide');
       $('.after-link').addClass('show');
     }
@@ -92,14 +102,14 @@ $(function() {
     $('#main-video').trigger('hover');
     $play.addClass('show');
     $viewMore.removeClass('hide');
-    $title.removeClass('hide');
-    $header.removeClass('hide');
+    $title.fadeIn(600);
+    $header.fadeIn(600);
   });
   $('.hero-section').on("mousemoveend", "#video-overlay", function () {
     $play.removeClass('show');
     $viewMore.addClass('hide');
-    $title.addClass('hide');
-    $header.addClass('hide');
+    $title.fadeOut(600);
+    $header.fadeOut(600);
   });
 
   $play.one('click', function(e) {
@@ -108,8 +118,8 @@ $(function() {
     $mainVideo.addClass('playing');
     $play.removeClass('show');
     $viewMore.addClass('hide');
-    $title.addClass('hide');
-    $header.addClass('hide');
+    $title.fadeOut(600);
+    $header.fadeOut(600);
 
     if(!jQuery.browser.mobile) {
       toggleMainVideo();

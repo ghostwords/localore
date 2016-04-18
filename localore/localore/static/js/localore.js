@@ -45,7 +45,29 @@ $(function() {
     $(document).off('keyup.access');
   });
 
+  $(document).on('click', '.accessible',function(){
+    $(this).addClass('clicked');
+  });
 
+  var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  var hasShrunkHeader = false;
+  var threshold = 125;
+  var windowWidth;
+  var $title = $('.title-about');
+
+  $(window).resize(function() { windowWidth = $(this).width(); }).trigger('resize');
+
+  $(window).scroll(function() {
+     var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+     if(st > lastScrollTop && st > threshold && windowWidth >= 925 && !hasShrunkHeader) {
+       $title.addClass('scrolled');
+       hasShrunkHeader = true;
+     } else if(st < lastScrollTop && hasShrunkHeader) {
+       $title.removeClass('scrolled');
+       hasShrunkHeader = false;
+     }
+     lastScrollTop = st;
+  });
 
   /**
    *    INTRO
@@ -69,20 +91,26 @@ $(function() {
     }
   }
 
-  if(!getCookie('has_visited')) {
-    setCookie('has_visited', 'true', 7);
+  // console.log(window.location.pathname);
+  if(!getCookie('has_visited') && window.location.pathname == '/') {
+    setCookie('has_visited', 'true', 30);
     $('body').addClass('intro');
     $('#intro').css("display", "block");
     $('.intro-section').addClass('show');
   }
 
-  $('.intro-enter-btn').click(function () {
+  $('#intro, .intro-enter-btn').click(function () {
     $('.intro-section').removeClass('show');
     setTimeout(function(){
       $('body').removeClass('intro');
       $('#intro').css("display", "none");
     }, 750);
   });
+
+  $('.intro-section').click(function (e) {
+    e.stopPropagation();
+  });
+
 
 
   /**
