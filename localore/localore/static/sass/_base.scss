@@ -101,6 +101,12 @@ body {
 
 }
 
+.accessible {
+  &.clicked {
+    outline: none;
+  }
+}
+
 .text-description {
     background-color: $light-grey;
 }

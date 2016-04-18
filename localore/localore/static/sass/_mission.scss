@@ -1,0 +1,38 @@
+.mission-section {
+
+  background-color: $light-grey;
+
+  .mission-airlogo {
+    @include span-columns(3);
+
+    img {
+      width: 75%;
+      height: auto;
+    }
+  }
+  .mission-desc {
+    @include span-columns(9);
+
+    h5 {
+      margin-top: 2em;
+      margin-bottom: 0;
+      line-height: 1.65;
+      font-weight: 600;
+      font-size: 1.2em;
+      color: #4A4A4A;
+    }
+  }
+
+  @include media($mobile) {
+    .mission-airlogo, .mission-desc {
+      @include fill-parent();
+    }
+
+    .mission-airlogo img {
+      display: block;
+      width: 30%;
+      margin: 0 auto 2em auto;
+    }
+  }
+
+}
