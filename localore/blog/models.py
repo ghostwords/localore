@@ -72,28 +72,15 @@ class QuoteBlock(StructBlock):
     attribution = CharBlock()
 
     class Meta:
-        template = 'blog/blocks/quote.html'
         icon = 'openquote'
+        template = 'blog/blocks/quote.html'
 
 
-class ImageCaptionBlock(StructBlock):
-    image = ImageChooserBlock(required=True)
-    caption = RichTextBlock(required=False)
-
+class CaptionBlock(RichTextBlock):
     class Meta:
-        template = 'blog/blocks/image_caption.html'
-        icon = 'image'
-        label = "Image"
-
-
-class EmbedCaptionBlock(StructBlock):
-    embed = EmbedBlock(required=True)
-    caption = RichTextBlock(required=False)
-
-    class Meta:
-        template = 'blog/blocks/embed_caption.html'
-        icon = 'media'
-        label = "Embed"
+        icon = 'openquote'
+        label = "Caption"
+        template = 'blog/blocks/caption.html'
 
 
 class BlogPage(Page):
@@ -176,8 +163,9 @@ class BlogPage(Page):
         )),
         ('quote', QuoteBlock()),
         ('paragraph', RichTextBlock(icon='doc-full', label="Rich Text")),
-        ('image_caption', ImageCaptionBlock()),
-        ('embed_caption', EmbedCaptionBlock()),
+        ('image', ImageChooserBlock(icon='image')),
+        ('embed', EmbedBlock(icon='media')),
+        ('caption', CaptionBlock()),
         ('raw_html', RawHTMLBlock(
             icon='code',
             label="Raw HTML",
