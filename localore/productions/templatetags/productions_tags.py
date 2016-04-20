@@ -15,6 +15,9 @@ def get_productions_index_page():
 )
 def productions(context):
     return {
-        'productions': ProductionPage.objects.live(),
+        'productions': (
+            ProductionPage.objects.live()
+            .prefetch_related('related_people__person__photo')
+        ),
         'request': context['request'],
     }

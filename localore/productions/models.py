@@ -230,7 +230,10 @@ class ProductionsIndexPage(Page):
 
     @property
     def productions(self):
-        return ProductionPage.objects.live().descendant_of(self)
+        return (
+            ProductionPage.objects.live().descendant_of(self)
+            .select_related('hero_image', 'tile_image')
+        )
 
     def get_context(self, request):
         context = super(ProductionsIndexPage, self).get_context(request)

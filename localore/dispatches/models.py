@@ -147,6 +147,7 @@ class DispatchesIndexPage(Page):
     def dispatches(self):
         return (
             DispatchPage.objects.live().descendant_of(self)
+            .select_related('poster_image')
         )
 
     def get_dispatch_type(self, request):

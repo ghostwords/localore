@@ -292,6 +292,7 @@ class BlogIndexPage(Page):
     def posts(self):
         return (
             BlogPage.objects.live().descendant_of(self)
+            .select_related('video_poster_image', 'tile_image')
             .order_by('-is_featured', '-date')
         )
 

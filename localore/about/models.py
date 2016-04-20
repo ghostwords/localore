@@ -69,6 +69,10 @@ class AboutTeamPage(Page):
     parent_page_types = ['home.HomePage', 'localore_admin.PageAlias']
     subpage_types = []
 
+    @property
+    def localore_staff(self):
+        return self.related_people.select_related('person__photo').all()
+
     class Meta:
         verbose_name = "About: Team"
 
