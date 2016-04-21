@@ -13,3 +13,5 @@
     state: link
     src: /etc/nginx/sites-available/{{ domain }}
     path: /etc/nginx/sites-enabled/{{ domain }}
+  notify:
+   - test and reload Nginx
