@@ -102,7 +102,7 @@ class DispatchPage(Page):
                 .order_by('-date', '-pk')
                 .first()
             )
-            resp['prev_url'] = prev_page.url if prev_page else None
+            resp['next_url'] = prev_page.url if prev_page else None
 
             next_page = (
                 DispatchPage.objects.live()
@@ -114,7 +114,7 @@ class DispatchPage(Page):
                 .order_by('date', 'pk')
                 .first()
             )
-            resp['next_url'] = next_page.url if next_page else None
+            resp['prev_url'] = next_page.url if next_page else None
 
             resp['embed_url'] = self.embed_url
 
