@@ -220,7 +220,7 @@ class BlogPage(Page):
     def prev(self):
         ordered_posts = (
             BlogPage.objects.live().sibling_of(self, inclusive=True)
-            .order_by('-is_featured', '-date')
+            .order_by('-is_featured', '-date', '-pk')
         )
         prev_item = None
         for item in ordered_posts:
@@ -232,7 +232,7 @@ class BlogPage(Page):
     def next(self):
         ordered_posts = (
             BlogPage.objects.live().sibling_of(self, inclusive=True)
-            .order_by('is_featured', 'date')
+            .order_by('is_featured', 'date', 'pk')
         )
         prev_item = None
         for item in ordered_posts:
@@ -321,7 +321,7 @@ class BlogIndexPage(Page):
         return (
             BlogPage.objects.live().descendant_of(self)
             .select_related('video_poster_image', 'tile_image')
-            .order_by('-is_featured', '-date')
+            .order_by('-is_featured', '-date', '-pk')
         )
 
     class Meta:
