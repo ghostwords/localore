@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.db.models.query import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect
 
@@ -84,12 +85,21 @@ class DispatchPage(Page):
 
             resp['title'] = self.title
 
+            # Modeled on
+            # https://github.com/django/django/blob/c339a5a6f72690cd90d5a653dc108fbb60274a20/django/db/models/base.py#L879-L893
+            #
+            # "Note that in the case of identical date values, these methods
+            # will use the primary key as a tie-breaker. This guarantees that
+            # no records are skipped or duplicated. That also means you cannot
+            # use those methods on unsaved objects."
             prev_page = (
                 DispatchPage.objects.live()
                 .sibling_of(self, False)
-                .filter(path__lte=self.path)
-                .order_by('-path')
                 .filter(dispatch_type=self.dispatch_type)
+                .filter(
+                    Q(date__lt=self.date) | Q(date=self.date, pk__lt=self.pk)
+                )
+                .order_by('-date', '-pk')
                 .first()
             )
             resp['prev_url'] = prev_page.url if prev_page else None
@@ -97,9 +107,11 @@ class DispatchPage(Page):
             next_page = (
                 DispatchPage.objects.live()
                 .sibling_of(self, False)
-                .filter(path__gte=self.path)
-                .order_by('path')
                 .filter(dispatch_type=self.dispatch_type)
+                .filter(
+                    Q(date__gt=self.date) | Q(date=self.date, pk__gt=self.pk)
+                )
+                .order_by('date', 'pk')
                 .first()
             )
             resp['next_url'] = next_page.url if next_page else None
@@ -148,6 +160,7 @@ class DispatchesIndexPage(Page):
         return (
             DispatchPage.objects.live().descendant_of(self)
             .select_related('poster_image')
+            .order_by('-date', '-pk')
         )
 
     def get_dispatch_type(self, request):
