@@ -217,6 +217,30 @@ class BlogPage(Page):
         return self.get_ancestors().type(BlogIndexPage).last()
 
     @property
+    def prev(self):
+        ordered_posts = (
+            BlogPage.objects.live().sibling_of(self, inclusive=True)
+            .order_by('-is_featured', '-date')
+        )
+        prev_item = None
+        for item in ordered_posts:
+            if item == self:
+                return prev_item
+            prev_item = item
+
+    @property
+    def next(self):
+        ordered_posts = (
+            BlogPage.objects.live().sibling_of(self, inclusive=True)
+            .order_by('is_featured', 'date')
+        )
+        prev_item = None
+        for item in ordered_posts:
+            if item == self:
+                return prev_item
+            prev_item = item
+
+    @property
     def video_poster_image_file_extension(self):
         return self.video_poster_image.file.url.split('.')[-1]
 

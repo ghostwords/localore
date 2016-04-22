@@ -112,8 +112,8 @@ class DispatchPage(Page):
                 resp['embed_html'] = ''
 
             return JsonResponse(resp)
-        else:
 
+        else:
             index_url = "{}?dispatch={}&t={}".format(
                 self.dispatches_index.url,
                 self.url,
