@@ -216,6 +216,18 @@ class BlogPage(Page):
     def blog_index(self):
         return self.get_ancestors().type(BlogIndexPage).last()
 
+    @property
+    def preview_modes(self):
+        return super(BlogPage, self).preview_modes + [
+            ('no-video', 'Preview poster image'),
+        ]
+
+    def serve_preview(self, request, mode_name):
+        if mode_name == 'no-video':
+            self.video_mp4 = None
+
+        return super(BlogPage, self).serve_preview(request, mode_name)
+
     class Meta:
         verbose_name = "Connection"
 

@@ -117,5 +117,17 @@ class HomePage(Page):
 
     parent_page_types = []
 
+    @property
+    def preview_modes(self):
+        return super(HomePage, self).preview_modes + [
+            ('no-video', 'Preview poster image'),
+        ]
+
+    def serve_preview(self, request, mode_name):
+        if mode_name == 'no-video':
+            self.video_mp4 = None
+
+        return super(HomePage, self).serve_preview(request, mode_name)
+
     class Meta:
         verbose_name = "Homepage"
