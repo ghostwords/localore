@@ -28,7 +28,7 @@
 	{% if page.video_mp4 and page.video_webm and page.video_ogv and poster_image %}
 		<div id="preview" class="full-bg-video"
 				 data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ poster_image.url }}"
-				 data-vide-options="posterType: jpg">
+				 data-vide-options="posterType: {{ page.video_poster_image_file_extension }}">
 		</div>
 	{% else %}
 		<div id="preview" class="full-bg-image" style="background-image:url({{ poster_image.url }})"></div>

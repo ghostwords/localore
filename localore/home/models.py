@@ -118,6 +118,10 @@ class HomePage(Page):
     parent_page_types = []
 
     @property
+    def video_poster_image_file_extension(self):
+        return self.video_poster_image.file.url.split('.')[-1]
+
+    @property
     def preview_modes(self):
         return super(HomePage, self).preview_modes + [
             ('no-video', 'Preview poster image'),

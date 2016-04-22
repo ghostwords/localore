@@ -217,6 +217,10 @@ class BlogPage(Page):
         return self.get_ancestors().type(BlogIndexPage).last()
 
     @property
+    def video_poster_image_file_extension(self):
+        return self.video_poster_image.file.url.split('.')[-1]
+
+    @property
     def preview_modes(self):
         return super(BlogPage, self).preview_modes + [
             ('no-video', 'Preview poster image'),
