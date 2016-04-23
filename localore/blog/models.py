@@ -217,7 +217,7 @@ class BlogPage(Page):
         return self.get_ancestors().type(BlogIndexPage).last()
 
     @property
-    def prev(self):
+    def prev_page(self):
         ordered_posts = (
             BlogPage.objects.live().sibling_of(self, inclusive=True)
             .order_by('-is_featured', '-date', '-pk')
@@ -229,7 +229,7 @@ class BlogPage(Page):
             prev_item = item
 
     @property
-    def next(self):
+    def next_page(self):
         ordered_posts = (
             BlogPage.objects.live().sibling_of(self, inclusive=True)
             .order_by('is_featured', 'date', 'pk')

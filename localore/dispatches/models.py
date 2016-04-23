@@ -1,7 +1,6 @@
 import datetime
 
 from django.db import models
-from django.db.models.query import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect
 
@@ -29,6 +28,13 @@ DISPATCH_TYPE_CHOICES = (
 
 class DispatchPage(Page):
     date = models.DateField(default=datetime.date.today)
+    is_featured = models.BooleanField(
+        "featured",
+        default=False,
+        help_text=(
+            "Makes this dispatch go to the top of the list in its category."
+        ),
+    )
 
     city = models.CharField(max_length=255)
     state = USStateField()
@@ -43,6 +49,7 @@ class DispatchPage(Page):
     )
 
     dispatch_type = models.CharField(
+        "category",
         max_length=1,
         choices=DISPATCH_TYPE_CHOICES,
         default=DISPATCH_TYPE_VIDEO,
@@ -61,7 +68,10 @@ class DispatchPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('date'),
+        MultiFieldPanel([
+            FieldPanel('date'),
+            FieldPanel('is_featured'),
+        ], "Index page order"),
         MultiFieldPanel(
             [FieldPanel('city'), FieldPanel('state')],
             "Location"
@@ -79,42 +89,45 @@ class DispatchPage(Page):
     def dispatches_index(self):
         return self.get_ancestors().type(DispatchesIndexPage).last()
 
+    # TODO refactor (similar def in blog/models.py)
+    @property
+    def prev_page(self):
+        ordered_items = (
+            DispatchPage.objects.live().sibling_of(self, inclusive=True)
+            .filter(dispatch_type=self.dispatch_type)
+            .order_by('-is_featured', '-date', '-pk')
+        )
+        prev_item = None
+        for item in ordered_items:
+            if item == self:
+                return prev_item
+            prev_item = item
+
+    # TODO refactor (similar def in blog/models.py)
+    @property
+    def next_page(self):
+        ordered_items = (
+            DispatchPage.objects.live().sibling_of(self, inclusive=True)
+            .filter(dispatch_type=self.dispatch_type)
+            .order_by('is_featured', 'date', 'pk')
+        )
+        prev_item = None
+        for item in ordered_items:
+            if item == self:
+                return prev_item
+            prev_item = item
+
     def serve(self, request):
         if 'json' in request.GET:
             resp = {}
 
             resp['title'] = self.title
 
-            # Modeled on
-            # https://github.com/django/django/blob/c339a5a6f72690cd90d5a653dc108fbb60274a20/django/db/models/base.py#L879-L893
-            #
-            # "Note that in the case of identical date values, these methods
-            # will use the primary key as a tie-breaker. This guarantees that
-            # no records are skipped or duplicated. That also means you cannot
-            # use those methods on unsaved objects."
-            prev_page = (
-                DispatchPage.objects.live()
-                .sibling_of(self, False)
-                .filter(dispatch_type=self.dispatch_type)
-                .filter(
-                    Q(date__lt=self.date) | Q(date=self.date, pk__lt=self.pk)
-                )
-                .order_by('-date', '-pk')
-                .first()
-            )
-            resp['next_url'] = prev_page.url if prev_page else None
+            prev_page = self.prev_page
+            resp['prev_url'] = prev_page.url if prev_page else None
 
-            next_page = (
-                DispatchPage.objects.live()
-                .sibling_of(self, False)
-                .filter(dispatch_type=self.dispatch_type)
-                .filter(
-                    Q(date__gt=self.date) | Q(date=self.date, pk__gt=self.pk)
-                )
-                .order_by('date', 'pk')
-                .first()
-            )
-            resp['prev_url'] = next_page.url if next_page else None
+            next_page = self.next_page
+            resp['next_url'] = next_page.url if next_page else None
 
             resp['embed_url'] = self.embed_url
 
@@ -160,7 +173,7 @@ class DispatchesIndexPage(Page):
         return (
             DispatchPage.objects.live().descendant_of(self)
             .select_related('poster_image')
-            .order_by('-date', '-pk')
+            .order_by('-is_featured', '-date', '-pk')
         )
 
     def get_dispatch_type(self, request):

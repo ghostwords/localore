@@ -12,7 +12,7 @@
 		<h6><a href="{% pageurl blog_index %}">{{ blog_index }}</a></h6>
 		<h1>{{ page.title }}</h1>
 		<h3>{{ page.subtitle }}</h3>
-		{% with prev=page.prev next=page.next %}
+		{% with prev=page.prev_page next=page.next_page %}
 			{% if prev %}
 				<a href="{% pageurl prev %}" title="{{ prev }}" class="title-nav title-prev"></a>
 			{% endif %}
