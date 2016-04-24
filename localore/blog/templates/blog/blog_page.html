@@ -41,6 +41,14 @@
 	{% endif %}
 </div>
 
+{% comment %}{# TODO #}
+	{% if page.video_credit_caption %}
+		<div class="container">
+			{{ page.video_credit_caption|richtext }}
+		</div>
+	{% endif %}
+{% endcomment %}
+
 {% if page.intro %}
 <div class="text-description">
 	<div class="container">
