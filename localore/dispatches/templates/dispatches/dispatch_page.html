@@ -2,7 +2,7 @@
 
 {% load staticfiles wagtailcore_tags %}
 
-{% block body_class %}template-dispatches-index{% endblock %}
+{% block body_class %}template-dispatch{% endblock %}
 
 {% block extra_js %}
 	<script type="text/javascript">
@@ -12,4 +12,9 @@
 		};
 	</script>
 	<script type="text/javascript" src="{% static 'js/dispatches.js' %}"></script>
+	<script type="text/javascript">
+		$(function () {
+			loadDispatch({{ data|safe }}, "{% pageurl page %}");
+		});
+	</script>
 {% endblock %}

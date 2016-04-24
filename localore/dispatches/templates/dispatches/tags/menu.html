@@ -5,7 +5,7 @@
 		{% if item.active %}
 			{{ item.name }}
 		{% else %}
-			<a href="{% pageurl page %}?t={{ item.value }}">{{ item.name }}</a>
+			<a href="{% pageurl index_page %}?t={{ item.value }}">{{ item.name }}</a>
 		{% endif %}
 	</li>
 {% endfor %}

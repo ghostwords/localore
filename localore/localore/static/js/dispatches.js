@@ -5,7 +5,7 @@ $(function() {
   var $prev = $modal.find('.dispatch-prev');
   var $next = $modal.find('.dispatch-next');
 
-  var loadDispatch = function(data, item) {
+  window.loadDispatch = function(data, item) {
 
     // clear prev/next arrows and apply new hrefs
     $next.removeClass('show');
@@ -26,9 +26,6 @@ $(function() {
       }
     });
 
-    // change URL
-    window.history.pushState("", data.title, item);
-
     // embed new content
     $modalBody.html(data.embed_html);
 
@@ -36,39 +33,48 @@ $(function() {
     $modal.modal('show');
   };
 
-  var getUrlParameter = function(sParam) {
-      var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-          sURLVariables = sPageURL.split('&'),
-          sParameterName,
-          i;
-
-      for (i = 0; i < sURLVariables.length; i++) {
-          sParameterName = sURLVariables[i].split('=');
-
-          if (sParameterName[0] === sParam) {
-              return sParameterName[1] === undefined ? true : sParameterName[1];
-          }
-      }
-  };
-
-  var item = getUrlParameter("dispatch");
-  if(item) {
-    $.getJSON(item + "?json", function(data) { loadDispatch(data, item); });
-  }
-
   $('.post-item-link, .dispatch-arrow').on('click', function() {
     var item = $(this).attr("href");
-    $.getJSON(item + "?json", function(data) { loadDispatch(data, item); });
+
+    // TODO cache
+    $.getJSON(item + "?json", function(data) {
+      // update URL to dispatch page
+      window.history.pushState("", data.title, item);
+
+      loadDispatch(data, item);
+    });
+
     return false;
   });
 
   $modal.on('hide.bs.modal', function (e) {
+    // update URL to dispatches index
+    if (document.location.pathname != INDEX_PAGE.path) {
+      window.history.pushState("", INDEX_PAGE.title, INDEX_PAGE.path);
+    }
+
     $(document).off("keydown.dispatch");
     $modalBody.empty();
   });
 
+  // handle browser back/forward navigation
+  window.onpopstate = function (ev) {
+    // if browser-initiated navigation
+    if (!ev.state) {
+      var path = document.location.pathname;
 
+      // dispatches index
+      if (path == INDEX_PAGE.path) {
+        $modal.modal('hide');
 
-
+      // dispatch
+      } else {
+        // TODO cache
+        $.getJSON(path + "?json", function (data) {
+          loadDispatch(data, path);
+        });
+      }
+    }
+  };
 
 });

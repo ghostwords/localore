@@ -1,8 +1,8 @@
 import datetime
+import json
 
 from django.db import models
 from django.http import JsonResponse
-from django.shortcuts import redirect
 
 from localflavor.us.models import USStateField
 
@@ -90,6 +90,7 @@ class DispatchPage(Page):
         return self.get_ancestors().type(DispatchesIndexPage).last()
 
     # TODO refactor (similar def in blog/models.py)
+    # TODO cache?
     @property
     def prev_page(self):
         ordered_items = (
@@ -104,6 +105,7 @@ class DispatchPage(Page):
             prev_item = item
 
     # TODO refactor (similar def in blog/models.py)
+    # TODO cache?
     @property
     def next_page(self):
         ordered_items = (
@@ -117,34 +119,45 @@ class DispatchPage(Page):
                 return prev_item
             prev_item = item
 
+    @property
+    def data(self):
+        data = {
+            'title': self.title
+        }
+
+        prev_page = self.prev_page
+        data['prev_url'] = prev_page.url if prev_page else None
+
+        next_page = self.next_page
+        data['next_url'] = next_page.url if next_page else None
+
+        data['embed_url'] = self.embed_url
+
+        try:
+            data['embed_html'] = embeds.get_embed(self.embed_url).html
+        except EmbedException:
+            data['embed_html'] = ''
+
+        return data
+
     def serve(self, request):
         if 'json' in request.GET:
-            resp = {}
+            return JsonResponse(self.data)
 
-            resp['title'] = self.title
+        return super().serve(request)
 
-            prev_page = self.prev_page
-            resp['prev_url'] = prev_page.url if prev_page else None
+    def get_context(self, request):
+        index_page = self.dispatches_index.specific
+        context = super().get_context(request)
 
-            next_page = self.next_page
-            resp['next_url'] = next_page.url if next_page else None
+        context['data'] = json.dumps(self.data)
+        context['dispatches'] = (
+            index_page.dispatches.filter(dispatch_type=self.dispatch_type)
+        )
+        context['dispatch_type'] = self.dispatch_type
+        context['index_page'] = index_page
 
-            resp['embed_url'] = self.embed_url
-
-            try:
-                resp['embed_html'] = embeds.get_embed(self.embed_url).html
-            except EmbedException:
-                resp['embed_html'] = ''
-
-            return JsonResponse(resp)
-
-        else:
-            index_url = "{}?dispatch={}&t={}".format(
-                self.dispatches_index.url,
-                self.url,
-                self.dispatch_type
-            )
-            return redirect(index_url, permanent=False)
+        return context
 
     class Meta:
         verbose_name = "Dispatch"
@@ -176,19 +189,13 @@ class DispatchesIndexPage(Page):
             .order_by('-is_featured', '-date', '-pk')
         )
 
-    def get_dispatch_type(self, request):
-        return request.GET.get('t', self.default_dispatch_type)
-
     def get_context(self, request):
-        dispatches = self.dispatches
-
-        dispatches = dispatches.filter(
-            dispatch_type=self.get_dispatch_type(request)
+        context = super().get_context(request)
+        context['dispatches'] = self.dispatches.filter(
+            dispatch_type=request.GET.get('t', self.default_dispatch_type)
         )
-
-        context = super(DispatchesIndexPage, self).get_context(request)
-        context['dispatches'] = dispatches
-
+        context['dispatch_type'] = self.default_dispatch_type
+        context['index_page'] = self
         return context
 
     class Meta:
