@@ -32,7 +32,7 @@ body {
 
   & .rich-text img, & .block-image img {
     @include img-responsive();
-    margin: 3rem auto;
+    margin: 2rem auto;
   }
   //
   // &:before {
@@ -154,15 +154,15 @@ h6 {
 .rich-text img {
 	max-width: 100%;
 	height: auto;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .responsive-object {
     position: relative;
     width: 100%;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .responsive-object iframe,
@@ -199,6 +199,23 @@ h6 {
     margin-right: auto;
   }
 
+}
+
+.block-caption {
+  text-align: center;
+
+  .rich-text {
+    position: relative;
+    top: -1.5rem;
+
+    p {
+      font-size: 90%;
+    }
+
+    p, a {
+      font-family: $roboto-reg;
+    }
+  }
 }
 
 .j-loading {

@@ -65,15 +65,13 @@ $(function() {
      var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
 
      if(st > lastScrollTop) {
-       scrollUpStart = scrollUpDist = 0;
        isScrollingUp = false;
+       scrollUpStart = scrollUpDist = 0;
      } else if(!isScrollingUp) {
        isScrollingUp = true;
        scrollUpStart = st;
-      //  console.log('scroll up start', scrollUpStart);
      } else {
        scrollUpDist = scrollUpStart - st;
-      //  console.log('scroll dist', scrollUpDist);
      }
 
 
