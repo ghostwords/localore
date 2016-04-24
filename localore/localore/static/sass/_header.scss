@@ -9,6 +9,16 @@ header {
   z-index: 20;
   @include transition(opacity 600ms ease-out);
 
+  -webkit-transition: -webkit-transform 1s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+  -moz-transition: -moz-transform 1s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+  transition: transform 1s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+  &.scrolled {
+    -webkit-transition: -webkit-transform 2.5s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+    -moz-transition: -moz-transform 2.5s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+    transition: transform 2.5s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+    @include transform(translateY(-$header-md * 1.5));
+  }
+
   &.hide {
     opacity: 0;
   }

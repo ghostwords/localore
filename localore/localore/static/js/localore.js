@@ -51,21 +51,42 @@ $(function() {
 
   var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   var hasShrunkHeader = false;
+  var isScrollingUp = false;
+  var scrollUpStart, scrollUpDist;
+  var scrollUpThreshold = 1500;
   var threshold = 125;
   var windowWidth;
   var $title = $('.title-about');
+  var $header = $('header').not('.template-homepage header');
 
   $(window).resize(function() { windowWidth = $(this).width(); }).trigger('resize');
 
   $(window).scroll(function() {
      var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+
+     if(st > lastScrollTop) {
+       scrollUpStart = scrollUpDist = 0;
+       isScrollingUp = false;
+     } else if(!isScrollingUp) {
+       isScrollingUp = true;
+       scrollUpStart = st;
+      //  console.log('scroll up start', scrollUpStart);
+     } else {
+       scrollUpDist = scrollUpStart - st;
+      //  console.log('scroll dist', scrollUpDist);
+     }
+
+
      if(st > lastScrollTop && st > threshold && windowWidth >= 925 && !hasShrunkHeader) {
        $title.addClass('scrolled');
+       $header.addClass('scrolled');
        hasShrunkHeader = true;
-     } else if(st < lastScrollTop && hasShrunkHeader) {
+     } else if((st < lastScrollTop && hasShrunkHeader && scrollUpDist > scrollUpThreshold) || st == 0) {
        $title.removeClass('scrolled');
+       $header.removeClass('scrolled');
        hasShrunkHeader = false;
      }
+
      lastScrollTop = st;
   });
 
