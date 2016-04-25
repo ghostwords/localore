@@ -138,7 +138,7 @@ $(function() {
 
   $(".view-more").click(function() {
     $('html, body').animate({
-        scrollTop: $("#livefeed").offset().top
+        scrollTop: $(window).height()
     }, 600, 'easeOutCirc');
   });
 

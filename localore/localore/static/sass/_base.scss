@@ -51,6 +51,14 @@ body {
   @include outer-container(100%);
 }
 
+.fade-big {
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+  height: 85vh;
+  @include background-image(linear-gradient(top, rgba(75,75,75,0.25) 0%,rgba(0,0,0,0) 100%));
+}
+
 .description {
   background: url('/static/images/header_bg.png') fixed;
   background-size: 130%;
@@ -108,7 +116,7 @@ body {
 }
 
 .text-description {
-    background-color: $light-grey;
+    background-color: #B8B7B7;
 }
 
 .text-center {
@@ -124,7 +132,7 @@ hr {
   box-sizing: content-box;
   border: 0;
   height: 0;
-  border-top: 1px solid darken($light-grey, 10%);
+  border-top: 1px solid $grey;
 }
 
 a {

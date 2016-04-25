@@ -64,7 +64,7 @@
     display: block;
     @include abs-position;
     background-color: $dark-grey;
-    opacity: 0.3;
+    opacity: 0.45;
     @include transition(all 1.5s cubic-bezier(0.190, 1.000, 0.220, 1.000));
   }
 
