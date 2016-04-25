@@ -89,8 +89,7 @@
 		<div class="connection-prods">
 			<h6>Mentioned In</h6>
 			{% for blog_page in blog_pages %}
-				<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>
-			{% if not forloop.last %}, {% endif %}
+				<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>{% if not forloop.last %}, {% endif %}
 			{% endfor %}
 		</div>
 	{% endif %}

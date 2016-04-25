@@ -70,8 +70,7 @@
 	<div class="connection-prods">
 		<h6>Productions Mentioned</h6>
 		{% for item in page.associated_productions.all %}
-			<a href="{{ item.production_page.url }}" class="link-large">{{ item.production_page }}</a>
-		{% if not forloop.last %}, {% endif %}
+			<a href="{{ item.production_page.url }}" class="link-large">{{ item.production_page }}</a>{% if not forloop.last %}, {% endif %}
 		{% endfor %}
 	</div>
 	{% endif %}
@@ -82,8 +81,7 @@
 	<div class="container">
 		<h6>More connections</h6>
 		{% for item in page.related_posts.all %}
-			<a href="{{ item.related_blog_page.url }}" class="link-large">{{ item.related_blog_page }}</a>
-		{% if not forloop.last %}, {% endif %}
+			<a href="{{ item.related_blog_page.url }}" class="link-large">{{ item.related_blog_page }}</a>{% if not forloop.last %}, {% endif %}
 		{% endfor %}
 	</div>
 </div>
