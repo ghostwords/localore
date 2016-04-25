@@ -32,7 +32,7 @@ body {
 
   & .rich-text img, & .block-image img {
     @include img-responsive();
-    margin: 2rem auto;
+    margin: 3rem auto;
   }
   //
   // &:before {
@@ -120,6 +120,12 @@ p {
   // @include span-columns(6);
 }
 
+hr {
+  box-sizing: content-box;
+  border: 0;
+  height: 0;
+  border-top: 1px solid darken($light-grey, 10%);
+}
 
 a {
   font-family: $roboto;
@@ -154,15 +160,16 @@ h6 {
 .rich-text img {
 	max-width: 100%;
 	height: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .responsive-object {
     position: relative;
-    width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    width: 80%;
+    margin: 3rem auto;
+    // margin-top: 2rem;
+    // margin-bottom: 2rem;
 }
 
 .responsive-object iframe,
@@ -202,12 +209,12 @@ h6 {
 }
 
 .block-caption {
+  display: inline;
   text-align: center;
+  position: relative;
+  top: -2.5rem;
 
   .rich-text {
-    position: relative;
-    top: -1.5rem;
-
     p {
       font-size: 90%;
     }
@@ -215,6 +222,10 @@ h6 {
     p, a {
       font-family: $roboto-reg;
     }
+  }
+
+  & + .block-embed .responsive-object {
+    margin-top: 0;
   }
 }
 
