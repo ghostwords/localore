@@ -28,6 +28,11 @@ header {
     // padding: 1.5em 1em;
   }
 
+  & .header-section-right {
+    height: 100%;
+    float: right;
+  }
+
   .template-homepage & {
     // height: $header-md + 40;
     // @include filter-gradient(#231f20, #000000, vertical); // IE6-9
@@ -66,7 +71,7 @@ header {
       float:left;
       height: 60%;
       width: 25px;
-      margin-right: 15px;
+      margin-right: 25px;
       position: relative;
       top: 3px;
       @include transition(all 200ms ease-out);
@@ -108,6 +113,8 @@ header {
       background: url('/static/images/search.svg');
       background-position: center;
       background-repeat: no-repeat;
+      display: inline-block;
+      vertical-align: top;
       width: 20px;
       height: 100%;
       margin-right: 25px;
@@ -138,9 +145,9 @@ header {
     }
 
     .air-logo {
-      float: right;
-      height: 125%;
-
+      display: inline-block;
+      vertical-align: middle;
+      height: 120%;
       @include media($mobile) {
         height: 90%;
       }
