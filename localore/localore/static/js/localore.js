@@ -140,6 +140,7 @@ $(function() {
     $('html, body').animate({
         scrollTop: $(window).height()
     }, 600, 'easeOutCirc');
+    $(this).blur();
   });
 
   window.checkViewHeight = function() {
