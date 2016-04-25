@@ -216,6 +216,11 @@ h6 {
 
 }
 
+.block-raw_html {
+  width: 80%;
+  margin: 3rem auto;
+}
+
 .block-caption {
   display: inline;
   text-align: center;
@@ -232,7 +237,9 @@ h6 {
     }
   }
 
-  & + .block-embed .responsive-object {
+  & + .block-embed .responsive-object,
+  & + .block-image img,
+  & + .block-raw_html {
     margin-top: 0;
   }
 }
@@ -272,6 +279,12 @@ h6 {
   }
 }
 
+.juicer-feed.slider .slick-prev:hover:before, .juicer-feed.slider .slick-next:hover:before {
+  color: $orange !important;
+}
+.juicer-feed.image-grid .j-text .j-message a, .juicer-feed.slider .j-text .j-message a, .juicer-feed.hip .j-text .j-message a {
+  color: $orange !important;
+}
 
 .browsehappy {
   margin: 0.2em 0;
