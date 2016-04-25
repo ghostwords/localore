@@ -80,6 +80,8 @@ $(function() {
     else if (event.data === 0) {
       if(!window.IS_360_VIDEO) $('#video-overlay').remove();
       $viewMore.removeClass('hide');
+      $title.fadeIn(600);
+      $header.fadeIn(600);
       $('.after-link').addClass('show');
     }
   }

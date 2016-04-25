@@ -1,6 +1,12 @@
+.template-production > #view > .prod-content {
+  padding-top: 0;
+}
+
 .prod-description {
 
-  // margin-bottom: 10em;
+  @include media($mobile) {
+    margin-bottom: 1000px;
+  }
 
   & > .container.with-logo {
     padding-top: 8em;

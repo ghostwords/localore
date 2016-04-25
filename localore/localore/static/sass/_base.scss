@@ -55,7 +55,7 @@ body {
   position: absolute;
   width: 100%;
   z-index: 0;
-  height: 85vh;
+  height: 100vh;
   @include background-image(linear-gradient(top, rgba(75,75,75,0.25) 0%,rgba(0,0,0,0) 100%));
 }
 
