@@ -124,6 +124,11 @@ class ProductionPage(Page):
         )
     )
 
+    image_credit_caption = RichTextField(
+        verbose_name="credit caption",
+        blank=True
+    )
+
     logo_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
         null=True,
@@ -155,6 +160,7 @@ class ProductionPage(Page):
         ),
         MultiFieldPanel([
             ImageChooserPanel('hero_image'),
+            FieldPanel('image_credit_caption'),
             ImageChooserPanel('tile_image'),
             ImageChooserPanel('logo_image'),
         ], "Graphics"),

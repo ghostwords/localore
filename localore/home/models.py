@@ -62,10 +62,6 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    video_credit_caption = RichTextField(
-        verbose_name="credit caption",
-        blank=True
-    )
 
     video_youtube_id = models.CharField(
         verbose_name="YouTube video ID",
@@ -109,7 +105,6 @@ class HomePage(Page):
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),
             DocumentChooserPanel('video_ogv'),
-            FieldPanel('video_credit_caption'),
         ], "Hero section"),
         MultiFieldPanel([
             FieldPanel('video_youtube_id'),
