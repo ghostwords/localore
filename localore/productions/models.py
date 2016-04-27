@@ -102,6 +102,12 @@ class ProductionPage(Page):
     city = models.CharField(max_length=255)
     state = USStateField()
 
+    host_station_call_sign = models.CharField(
+        "call sign",
+        max_length=12,
+        help_text="The host radio station's call sign."
+    )
+
     hero_image = models.ForeignKey(
         'localore_admin.LocaloreImage',
         null=True,
@@ -149,15 +155,17 @@ class ProductionPage(Page):
         index.SearchField('city'),
         index.SearchField('state'),
         index.SearchField('get_state_display'),
+        index.SearchField('host_station_call_sign'),
         index.SearchField('description', partial_match=True),
         index.SearchField('highlights', partial_match=True),
     )
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [FieldPanel('city'), FieldPanel('state')],
-            "Location"
-        ),
+        MultiFieldPanel([
+            FieldPanel('city'),
+            FieldPanel('state'),
+            FieldPanel('host_station_call_sign'),
+        ], "Location"),
         MultiFieldPanel([
             ImageChooserPanel('hero_image'),
             FieldPanel('image_credit_caption'),
