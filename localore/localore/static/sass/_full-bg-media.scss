@@ -11,13 +11,18 @@
     top: calc(100% + 5px);
     right: 10px;
 
-    .rich-text p {
+    .rich-text p, .rich-text a {
       font-family: $roboto-reg;
       font-style: italic;
-      font-size: 90%;
       color: lighten($med-grey, 15%);
     }
-    // bottom: 15px;
+
+    .rich-text p {
+      font-size: 90%;
+    }
+    .rich-text a {
+      text-decoration: underline;
+    }
   }
 }
 
