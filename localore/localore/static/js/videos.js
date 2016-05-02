@@ -120,10 +120,10 @@ $(function() {
     $mainVideo.addClass('playing');
     $play.removeClass('show');
     $viewMore.addClass('hide');
-    $title.fadeOut(600);
-    $header.fadeOut(600);
 
     if(!jQuery.browser.mobile) {
+      $title.fadeOut(600);
+      $header.fadeOut(600);
       toggleMainVideo();
       $(this).on('click', function() { toggleMainVideo(); });
     }
