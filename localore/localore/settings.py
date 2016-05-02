@@ -249,7 +249,7 @@ COMPRESS_OFFLINE = True
 # minify CSS
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.CSSMinFilter',
+    'compressor.filters.cssmin.rCSSMinFilter',
 ]
 
 # don't append query strings to url() assets in CSS

@@ -1,6 +1,7 @@
 boto==2.39.0
 Django>=1.8,<1.9
 django_cachalot==1.2.1
+django_compressor==2.0
 django_dbbackup==2.4.1
 django_environ==0.4.0
 django_localflavor==1.2.0
@@ -14,4 +15,3 @@ pytz
 wagtail==1.4.3
 wagtailmodeladmin==2.5.0
 Wand==0.4.2
--e git+https://github.com/django-compressor/django-compressor.git@de3afb17ab102430e9d3c97034f6016c6a0d3037#egg=django-compressor
