@@ -5,6 +5,20 @@
   &.hero-section-3by4 {
     height: 75vh;
   }
+
+  .hero-section-caption {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 10px;
+
+    .rich-text p {
+      font-family: $roboto-reg;
+      font-style: italic;
+      font-size: 90%;
+      color: lighten($med-grey, 15%);
+    }
+    // bottom: 15px;
+  }
 }
 
 #preview {

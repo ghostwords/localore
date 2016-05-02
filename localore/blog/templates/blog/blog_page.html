@@ -41,15 +41,10 @@
 	{% endif %}
 	<div class="view-more accessible" tabindex="0">
 	</div>
-</div>
-
-{% comment %}{# TODO #}
 	{% if page.video_credit_caption %}
-		<div class="container">
-			{{ page.video_credit_caption|richtext }}
-		</div>
+		<div class="hero-section-caption">{{ page.video_credit_caption|richtext }}</div>
 	{% endif %}
-{% endcomment %}
+</div>
 
 {% if page.intro %}
 <div class="text-description">
