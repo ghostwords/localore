@@ -58,12 +58,15 @@
 			{% if forloop.counter0|divisibleby:3 %}<div class="prod-grid-row">{% endif %}
 
 			{% image prod.tile_image|default:prod.hero_image max-800x800 as tile_image %}
-			<div class="prod-grid-item">
-				<div class="prod-item-bg" style="background-image:url({{ tile_image.url }})"></div>
-				<a class="prod-item-link" href="{% pageurl prod %}">
-					<div class="prod-item-content">
-						<span class="prod-item-title">{{ prod.title }}</span>
-						<span class="prod-item-loc">{{ prod.city }}, {{ prod.state }}</span>
+			<div class="prod-grid-item post-item">
+				<div class="post-item-bg" style="background-image:url({{ tile_image.url }})"></div>
+				<a class="post-item-link" href="{% pageurl prod %}">
+					<div class="post-item-content">
+						<span class="post-item-title">{{ prod.title }}</span>
+						<ul class="list-inline post-item-list">
+							<li><span class="post-item-date">{{ prod.host_station_call_sign }}</span></li>
+							<li><span class="post-item-loc">{{ prod.city }}, {{ prod.state }}</span></li>
+						</ul>
 					</div>
 				</a>
 			</div>
