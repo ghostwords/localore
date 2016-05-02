@@ -17,6 +17,8 @@ from wagtail.wagtailembeds.exceptions import EmbedException
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
+from localore.embeds import get_default_finder
+
 
 DISPATCH_TYPE_VIDEO = 'v'
 DISPATCH_TYPE_AUDIO = 'a'
@@ -134,7 +136,12 @@ class DispatchPage(Page):
         data['embed_url'] = self.embed_url
 
         try:
-            data['embed_html'] = embeds.get_embed(self.embed_url).html
+            # use default SoundCloud embed style for dispatches;
+            # bypass overrides in our custom finder in localore/embeds.py
+            data['embed_html'] = embeds.get_embed(
+                self.embed_url,
+                finder=get_default_finder()
+            ).html
         except EmbedException:
             data['embed_html'] = ''
 

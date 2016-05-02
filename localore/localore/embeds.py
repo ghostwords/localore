@@ -6,11 +6,30 @@ from wagtail.wagtailembeds.finders.embedly import embedly
 from wagtail.wagtailembeds.finders.oembed import oembed
 
 
-# work around Embedly missing embedding HTML for Twitter and Instagram URLs
+def get_default_finder():
+    if hasattr(settings, 'WAGTAILEMBEDS_EMBEDLY_KEY'):
+        return embedly
+    return oembed
+
+
 def finder(url, max_width=None):
     domain = urlparse(url).netloc
-    if (domain.endswith(('instagram.com', 'twitter.com')) or
-            not hasattr(settings, 'WAGTAILEMBEDS_EMBEDLY_KEY')):
+
+    # work around Embedly missing embedding HTML for Twitter and Instagram URLs
+    if domain.endswith((
+        'instagram.com',
+        'twitter.com',
+    )):
         return oembed(url, max_width)
 
-    return embedly(url, max_width)
+    embed_dict = get_default_finder()(url, max_width)
+
+    if domain.endswith('soundcloud.com'):
+        embed_dict['html'] = (
+            embed_dict['html']
+            .replace('visual%3Dtrue', 'visual%3Dfalse')
+            .replace('width="500"', 'width="100%"')
+            .replace('height="500"', 'height="166"')
+        )
+
+    return embed_dict
