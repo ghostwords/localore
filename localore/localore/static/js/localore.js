@@ -188,13 +188,13 @@ $(function() {
    *    PRODUCTION DETAILS
    **/
 
-  //  $(window).load(function () {
-  //   $(window).resize(function() { $('.prod-description').css("margin-bottom", $('.prod-team').height()); }).trigger('resize');
-  //  });
-
-   setTimeout(function () {
-     $(window).resize(function() { $('.prod-description').css("margin-bottom", $('.prod-team').height()); }).trigger('resize');
-   }, 10);
+   $(window).load(function () {
+    $(window).resize(function() { $('.prod-description').css("margin-bottom", $('.prod-team').height()); }).trigger('resize');
+   });
+   // 
+  //  setTimeout(function () {
+  //    $(window).resize(function() { $('.prod-description').css("margin-bottom", $('.prod-team').height()); }).trigger('resize');
+  //  }, 10);
 
 
 

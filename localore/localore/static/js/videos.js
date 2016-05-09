@@ -116,7 +116,7 @@ $(function() {
 
   $play.one('click', function(e) {
 
-    $preview.fadeOut(1000);
+    $preview.fadeOut(1250);
     $mainVideo.addClass('playing');
     $play.removeClass('show');
     $viewMore.addClass('hide');
