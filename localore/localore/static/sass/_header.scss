@@ -45,7 +45,11 @@ header {
   // }
 
   @include media($header-size) {
+
     background-color: rgba(0,0,0,0.6);
+    .template-homepage & {
+      background-color: transparent;
+    }
   }
 
   @include media($mobile) {

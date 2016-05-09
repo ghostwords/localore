@@ -10,7 +10,15 @@
     font-size: em(36);
 
     @include media($mobile) {
-      font-size: em(30);
+
+      font-size: em(28);
+      line-height: 1.1;
+
+      li {
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
     }
   }
 
@@ -21,6 +29,10 @@
 
     &:hover {
       cursor: default;
+    }
+
+    span {
+      line-height: 50px;
     }
   }
 
