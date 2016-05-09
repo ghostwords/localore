@@ -28,15 +28,38 @@
     text-align: left;
     line-height: 30px;
     @include span-columns(4);
+
+    @include media($mobile) {
+      @include span-columns(3);
+      @include omega();
+      margin-bottom: 0;
+      line-height: 20px;
+    }
+  }
+
+  .prod-list-call-sign {
+    text-align: center;
+    line-height: 30px;
+    @include span-columns(2);
+
+    @include media($mobile) {
+      width: 25%;
+      @include omega();
+      text-align: right;
+      margin-bottom: 5px;
+      float: right;
+    }
   }
 
   .prod-list-title {
-    @include span-columns(7);
+    @include span-columns(6);
     & h5 { color: $orange; }
   }
 
   @include media($mobile) {
-    .prod-list-loc, .prod-list-title { @include fill-parent; }
+    .prod-list-loc, .prod-list-call-sign { font-size: 90%; line-height: 20px;  }
+    // .prod-list-loc, .prod-list-call-sign, .prod-list-title { @include fill-parent; }
+    .prod-list-title { @include fill-parent; }
     .prod-list-title { margin-bottom: 1.5em }
   }
 

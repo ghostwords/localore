@@ -36,6 +36,7 @@
 		{% for prod in page.productions %}
 			<div class="row">
 				<h6 class="prod-list-loc">{{ prod.city }}, {{ prod.state }}</h6>
+				<h6 class="prod-list-call-sign">{{ prod.host_station_call_sign }}</h6>
 				<a class="prod-list-title" href="{% pageurl prod %}"><h5>{{ prod.title }}</h5></a>
 			</div>
 		{% empty %}
