@@ -24,12 +24,17 @@
 </div>
 
 <div class="hero-section">
+	{# TODO include separate mobile preview screen - mobile_poster_image #}
+	{# image page.mobile_poster_image max-1000x1000 as mobile_poster_image #}
+
 	{% image page.video_poster_image max-2000x2000 as poster_image %}
 	{% if page.video_mp4 and page.video_webm and page.video_ogv and poster_image %}
 		<div id="preview" class="full-bg-video"
 				 data-vide-bg="mp4: {{ page.video_mp4.file.url }}, webm: {{ page.video_webm.file.url }}, ogv: {{ page.video_ogv.file.url }}, poster: {{ poster_image.url }}"
 				 data-vide-options="posterType: {{ page.video_poster_image_file_extension }}">
 		</div>
+
+		<!-- <div id="preview" class="full-bg-image full-bg-mobile" style="background-image:url({{ mobile_poster_image.url }})"></div> -->
 	{% else %}
 		<div id="preview" class="full-bg-image" style="background-image:url({{ poster_image.url }})"></div>
 	{% endif %}

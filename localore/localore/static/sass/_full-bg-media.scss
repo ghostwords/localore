@@ -54,6 +54,10 @@
 
 .full-bg-video {
   @include abs-position();
+
+  @include media($tablet) {
+    display: none;
+  }
 }
 
 .full-bg-image {
@@ -61,6 +65,14 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
+  &.full-bg-mobile {
+    display: none;
+
+    @include media($tablet) {
+      display: block;
+    }
+  }
 }
 
 .play-icon {
