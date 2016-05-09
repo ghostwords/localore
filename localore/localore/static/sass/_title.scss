@@ -89,7 +89,7 @@
 .title-about {
 
   height: $header-md * 1.5;
-  background-color: $dark-grey;
+  background-color: rgba(35,31,32, 0.65);
 
   &:after {
     content: '';
@@ -100,7 +100,7 @@
     height: 0;
     border-style: solid;
     border-width: ($header-md * .5) 200px 0 200px;
-    border-color: $dark-grey transparent transparent transparent;
+    border-color: rgba(35,31,32, 0.65) transparent transparent transparent;
     z-index: -1;
   }
 
@@ -123,6 +123,7 @@
     margin-left: 0;
     padding-top: em($header-md) + 2em;
     padding-bottom: 2em;
+    background-color: $dark-grey;
 
 
     & > div {
