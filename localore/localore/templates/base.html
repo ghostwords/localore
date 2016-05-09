@@ -17,7 +17,7 @@
 		{# Facebook Open Graph META #}
 		<meta property="og:site_name" content="Localore: Finding America">
 		{# TODO: append " | Localore: Finding America" to og:title on subpages #}
-		<meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
+		<meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if page.url != '/' %} | Localore: Finding America{% endif %}">
 		<meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}From 15 communities across the country, we share intimate stories, explore what connects disparate people, and watch a social media portrait of America unfold in real time.{% endif %}">
 		<meta property="og:url" content="https://{{ request.site.hostname }}{{ page.url }}">
 		<meta property="og:image" content="http://i.imgur.com/jOAZfzW.jpg">
@@ -26,7 +26,7 @@
 		{# Twitter Cards META #}
 		<meta name="twitter:card" content="summary_large_image">
 		{# TODO: append " | Localore: Finding America" to twitter:title on subpages #}
-		<meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
+		<meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if page.url != '/' %} | Localore: Finding America{% endif %}">
 		<meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}From 15 communities across the country, we share intimate stories, explore what connects disparate people, and watch a social media portrait of America unfold in real time.{% endif %}">
 		<meta name="twitter:url" content="https://{{ request.site.hostname }}{{ page.url }}">
 		<meta name="twitter:image" content="http://i.imgur.com/jOAZfzW.jpg">
