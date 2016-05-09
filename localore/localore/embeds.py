@@ -31,5 +31,7 @@ def finder(url, max_width=None):
             .replace('width="500"', 'width="100%"')
             .replace('height="500"', 'height="166"')
         )
+        embed_dict['width'] = '100%'
+        embed_dict['height'] = '166'
 
     return embed_dict

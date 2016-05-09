@@ -190,7 +190,7 @@ h6 {
     margin-left: auto;
     margin-right: auto;
 
-    &.embedly-embed:not(&[src*='soundcloud']) {
+    &.embedly-embed:not([src*='soundcloud']) {
       height: 100%;
     }
 
@@ -202,7 +202,7 @@ h6 {
     //   height: auto;
     // }
 
-    &[src*='instagram'] {
+    &[src*='instagram'], &[src*='soundcloud'] {
       position: static;
       width: 100% !important;
       max-width: 100% !important;
