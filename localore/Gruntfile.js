@@ -125,7 +125,15 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '<%= config.app %>/static/css'
+      server: {
+        files: [{
+          dot: true,
+          src: [
+            '<%= config.app %>/static/css',
+            '<%= config.app %>/templates/base.html'
+          ]
+        }]
+      }
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -183,12 +191,21 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= config.html %>/base.html'],
-        ignorePath: /^(\.\.\/)*\.\./
+        ignorePath: /^(\.\.\/)*\.\./,
+        options: {
+          fileTypes: {
+            html: {
+                replace: {
+                    css: '<link rel="stylesheet" href="/static{{filePath}}" />',
+                    js: '<script src="/static{{filePath}}"></script>'
+                }
+            }
+          }
+        }
       },
       sass: {
         src: ['<%= config.app %>/static/sass/{,*/}*.{scss,sass}'],
-        ignorePath: /^(\.\.\/)+/
-        ,
+        ignorePath: /^(\.\.\/)+/,
         options: {
           fileTypes: {
               scss: {
@@ -364,6 +381,17 @@ module.exports = function (grunt) {
             'base.html'
           ]
         }]
+      },
+      server: {
+        files:[{
+          expand: true,
+          dot: true,
+          cwd: '<%= config.html %>',
+          dest: '<%= config.app %>/templates/',
+          src: [
+            'base.html'
+          ]
+        }]
       }
     },
 
@@ -397,6 +425,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'postcss',
+      'copy:server',
       'browserSync:livereload',
       'watch'
     ]);
