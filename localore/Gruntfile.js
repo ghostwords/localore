@@ -225,9 +225,10 @@ module.exports = function (grunt) {
           '<%= config.dist %>/js/{,*/}*.js',
           // '<%= config.dist %>/scripts/vendor.js',
           '<%= config.dist %>/css/{,*/}*.css',
-          '<%= config.dist %>/images/{,*/}*.*',
+          '<%= config.dist %>/images/{,*/}*.*'
+          // ,
           // '<%= config.dist %>/styles/fonts/{,*/}*.*',
-          '<%= config.dist %>/*.{ico,png}'
+          // '<%= config.dist %>/images/*.{ico,png}'
         ]
       }
     },
@@ -362,10 +363,10 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>',
+          cwd: '<%= config.app %>/static/images',
+          dest: '<%= config.dist %>/images',
           src: [
-            '*.{ico,png,txt}'
+            '*.ico'
             // '/images/{,*/}*.webp',
             // 'static/images/{,*/}*.png',
             // 'templates/base.html',
