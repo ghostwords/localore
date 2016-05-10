@@ -36,6 +36,20 @@
 
 	If the Django dev server isn't running on port 8000 (the default), you have to update livereload's proxy config in [Gruntfile.js](localore/Gruntfile.js).
 
+12. The primary HTML layout file, `base.html`, exists in `localore/static/html` and should be edited there. When grunt compiles, it will make a copy of this file with updated references to `localore/templates`. If you edit the file in `localore/templates` it will get overwritten next time grunt compiles.
+
+## Packaging for deployment
+
+`grunt build` will prepare front-end assets for deployment. It does the following:
+
+1. Package vendor libraries from `bower_components`
+2. Compile sass, compress resulting css file, and compress js files
+3. Update references with cache-busting file revision numbers
+4. and more!
+
+Everything should be referenced from `static/dist` - you will need to also copy over `static/js` to account for `{% extra_js %}` blocks.
+
+One outstanding issue is that `<img>` references scattered around the HTML won't take advantage of this because they are using the django `{% static %}` naming convention - for this reason `static/images` should also be included wherever assets are served just in case.
 
 ## Things that have to happen repeatedly
 
