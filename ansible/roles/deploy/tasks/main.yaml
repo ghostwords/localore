@@ -13,6 +13,13 @@
 #
 #- debug: var=result.stdout
 
+- name: Build static assets
+  local_action: >
+      command chdir={{ django_project_name }}
+      grunt build
+  run_once: True
+  become: False
+
 - name: Create release archive
   local_action: >
       command chdir={{ django_project_name }}
@@ -23,6 +30,9 @@
         -x '*__pycache__*'
         -x '*.swp'
         -x 'node_modules/*'
+        # TODO exclude all of localore/static except for dist
+        -x 'localore/static/bower_components/*'
+        -x '.tmp/*'
   run_once: True
   become: False
 

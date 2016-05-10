@@ -105,7 +105,6 @@ INSTALLED_APPS = (
     'localore_admin',
 
     'cachalot',
-    'compressor',
     'dbbackup',
     'modelcluster',
     'overextends',
@@ -225,35 +224,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-# Fingerprint static resources (cache busting) so that we can serve them
-# with far-future expires headers and not run into stale cache problems.
-# This makes the static template tag insert content hashes into filenames.
-STATICFILES_STORAGE = (
-    'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-)
-
-# make Django Compressor work with `./manage.py collectstatic`
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
-
-# will be using `./manage.py compress` to pre-build compress-tagged assets
-COMPRESS_OFFLINE = True
-
-# any template variables inside compress blocks have to be declared here
-#COMPRESS_OFFLINE_CONTEXT = {
-#}
-
-# minify CSS
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.rCSSMinFilter',
-]
-
-# don't append query strings to url() assets in CSS
-COMPRESS_CSS_HASHING_METHOD = None
 
 # additional absolute paths the staticfiles app will traverse if the
 # FileSystemFinder finder is enabled, e.g. if you use the collectstatic or
