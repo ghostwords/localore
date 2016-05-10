@@ -163,7 +163,39 @@ h6 {
 
 
 
+.juicer-feed {
+  height: 50vh;
+  position: relative;
+  background-color: $dark-grey;
+
+  // &:before {
+  //   content: '';
+  //   display: block;
+  //   @include abs-position;
+  //
+  //   opacity: 1;
+  //   z-index: -1;
+  //   @include transition(all 1.5s cubic-bezier(0.190, 1.000, 0.220, 1.000));
+  //
+  // }
+
+  &.loaded {
+    height: auto;
+
+    &:before {
+      // opacity: 0;
+    }
+  }
+}
+
 .j-loading {
+
+  position: relative;
+  height: 76px !important;
+  width: 76px !important;
+  z-index: 3;
+  top: 50% !important;
+  margin-top: -38px !important;
 
   &:before {
     background-color: $orange !important;

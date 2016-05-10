@@ -109,12 +109,14 @@ $(function() {
 
   $('.hero-section').on("mousemove", "#video-overlay", function () {
     $('#main-video').trigger('hover');
+    console.log('mousemove');
     $play.addClass('show');
     $viewMore.removeClass('hide');
     $title.fadeIn(600);
     $header.fadeIn(600);
   });
   $('.hero-section').on("mousemoveend", "#video-overlay", function () {
+    console.log('mousemovened');
     $play.removeClass('show');
     $viewMore.addClass('hide');
     $title.fadeOut(600);
@@ -128,7 +130,7 @@ $(function() {
     $play.removeClass('show');
     $viewMore.addClass('hide');
 
-    if(!jQuery.browser.mobile) {
+    if(!window.mobileAndTabletcheck()) {
       $title.fadeOut(600);
       $header.fadeOut(600);
       toggleMainVideo();
