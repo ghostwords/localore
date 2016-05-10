@@ -30,6 +30,9 @@
         -x '*__pycache__*'
         -x '*.swp'
         -x 'node_modules/*'
+        # TODO exclude all of localore/static except for dist
+        -x 'localore/static/bower_components/*'
+        -x '.tmp/*'
   run_once: True
   become: False
 
