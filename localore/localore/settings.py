@@ -224,13 +224,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-# Fingerprint static resources (cache busting) so that we can serve them
-# with far-future expires headers and not run into stale cache problems.
-# This makes the static template tag insert content hashes into filenames.
-STATICFILES_STORAGE = (
-    'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-)
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
