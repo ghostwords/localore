@@ -16,3 +16,4 @@ localore/localore/static/bower_components/
 localore/localore/static/css
 localore/localore/static/dist
 .tmp
+localore/localore/templates/base.html
