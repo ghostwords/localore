@@ -51,9 +51,15 @@
 
 		{# Global stylesheets #}
 		{# compress css #}
-		<link rel="stylesheet" href="{% static 'dist/css/vendor.min.db1aae18.css' %}">
+		<!-- build:css(./localore) css/vendor.min.css -->
+		<!-- bower:css -->
+		<link rel="stylesheet" href="/static/bower_components/normalize-css/normalize.css" />
+		<!-- endbower -->
+		<!-- endbuild -->
 
-		<link rel="stylesheet" href="{% static 'dist/css/main.min.576d735b.css' %}">
+		<!-- build:css(./localore) css/main.min.css -->
+		<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+		<!-- endbuild -->
 		{# endcompress #}
 
 		{% block extra_css %}
@@ -174,9 +180,20 @@
 
 		{# Global JavaScript #}
 		{# compress js #}
-		<script type="text/javascript" src="{% static 'dist/js/vendor.min.63624758.js' %}"></script>
+		<!-- build:js(./localore) js/vendor.min.js -->
+		<!-- bower:js -->
+		<script src="/static/bower_components/jquery/dist/jquery.js"></script>
+		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+		<script src="/static/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+		<script src="/static/bower_components/vide/dist/jquery.vide.js"></script>
+		<script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
+		<!-- endbower -->
+		<!-- endbuild -->
 
-		<script type="text/javascript" src="{% static 'dist/js/main.min.a5775c6d.js' %}"></script>
+		<!-- build:js(./localore) js/main.min.js -->
+		<script type="text/javascript" src="/static/js/localore.js"></script>
+		<!-- endbuild -->
 		{# endcompress #}
 
 		{% block extra_js %}

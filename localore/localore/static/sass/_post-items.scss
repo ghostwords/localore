@@ -49,13 +49,15 @@
   }
 
   & > .post-item-bg {
+    width: 100%; height: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     // z-index: -1;
     @include transform(scale(1));
     @include transition(all 1.5s cubic-bezier(0.190, 1.000, 0.220, 1.000));
-    @include abs-position;
+
+
   }
 
   & > .post-item-link {
