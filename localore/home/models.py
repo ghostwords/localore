@@ -41,6 +41,13 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    video_poster_image_mobile = models.ForeignKey(
+        'localore_admin.LocaloreImage',
+        verbose_name="poster image (mobile)",
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     video_mp4 = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -102,6 +109,7 @@ class HomePage(Page):
         ], "Featured content"),
         MultiFieldPanel([
             ImageChooserPanel('video_poster_image'),
+            ImageChooserPanel('video_poster_image_mobile'),
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),
             DocumentChooserPanel('video_ogv'),

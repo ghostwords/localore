@@ -93,6 +93,13 @@ class BlogPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    video_poster_image_mobile = models.ForeignKey(
+        'localore_admin.LocaloreImage',
+        verbose_name="poster image (mobile)",
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     video_mp4 = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -197,6 +204,7 @@ class BlogPage(Page):
         ], "Index page order"),
         MultiFieldPanel([
             ImageChooserPanel('video_poster_image'),
+            ImageChooserPanel('video_poster_image_mobile'),
             ImageChooserPanel('tile_image'),
             DocumentChooserPanel('video_mp4'),
             DocumentChooserPanel('video_webm'),
@@ -325,7 +333,11 @@ class BlogIndexPage(Page):
     def posts(self):
         return (
             BlogPage.objects.live().descendant_of(self)
-            .select_related('video_poster_image', 'tile_image')
+            .select_related(
+                'video_poster_image',
+                'video_poster_image_mobile',
+                'tile_image',
+            )
             .order_by('-is_featured', '-date', '-pk')
         )
 
