@@ -4,10 +4,13 @@
 }
 
 .prod-content .rich-text {
-  & p, & .responsive-object {
+  & p, & .responsive-object, & > i {
     width: 80%;
     margin: 2rem auto;
   }
+}
+.prod-content .rich-text > i {
+  display: block;
 }
 
 .block-raw_html, .block-paragraph, .block-quote, .block-image, .block-embed {

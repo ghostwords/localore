@@ -1,7 +1,7 @@
 $(function() {
 
   var $modal = $('#dispatch');
-  var $modalBody = $modal.find('.modal-body');
+  var $modalBody = $modal.find('.modal-media-embed');
   var $prev = $modal.find('.dispatch-prev');
   var $next = $modal.find('.dispatch-next');
 
