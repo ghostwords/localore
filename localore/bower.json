@@ -20,7 +20,8 @@
       "main": [
         "assets/javascripts/bootstrap/transition.js",
         "assets/javascripts/bootstrap/collapse.js",
-        "assets/javascripts/bootstrap/modal.js"
+        "assets/javascripts/bootstrap/modal.js",
+        "assets/javascripts/bootstrap/tooltip.js"
       ]
     },
     "typeplate-starter-kit": {

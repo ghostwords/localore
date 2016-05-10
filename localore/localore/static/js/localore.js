@@ -35,6 +35,8 @@ $(function() {
 
   FastClick.attach(document.body);
 
+  $('[data-toggle="tooltip"]').tooltip();
+
   $(document).on('focus', '.accessible',function(){
     var $this = $(this);
     $(document).on('keyup.access', function(e){

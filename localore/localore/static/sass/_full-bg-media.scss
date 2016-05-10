@@ -10,6 +10,7 @@
     position: absolute;
     top: calc(100% + 5px);
     right: 10px;
+    z-index: 10;
 
     .rich-text p, .rich-text a {
       font-family: $roboto-reg;
@@ -22,6 +23,24 @@
     }
     .rich-text a {
       text-decoration: underline;
+    }
+
+    &.hero-section-caption-mobile {
+      visibility: hidden;
+      right: 5px;
+      height: 25px; width: 25px;
+      background: url('../images/info_icon.svg') no-repeat center;
+      background-size: 100%;
+      opacity: 0.8;
+    }
+
+    @include media($mobile) {
+      &.hero-section-caption-mobile {
+        visibility: visible;
+      }
+      &.hero-section-caption-desktop {
+        visibility: hidden;
+      }
     }
   }
 }
@@ -114,7 +133,7 @@
   width: 150px;
   height: 70px;
   background: url('../images/live_feed.svg') no-repeat bottom center;
-  background-size: 60% 30%;
+  background-size: 100% 40%;
   z-index: 18;
 
   color: #fff;
@@ -122,7 +141,7 @@
   font-size: em(16);
   text-align: center;
   letter-spacing: 4px;
-  font-weight: 100;
+  font-weight: 400;
 
   opacity: 0.6;
 

@@ -47,8 +47,17 @@ header {
   @include media($header-size) {
 
     background-color: rgba(0,0,0,0.6);
+
+    &:after {
+      display: none;
+    }
+
     .template-homepage & {
       background-color: transparent;
+
+      &:after {
+        display: block;
+      }
     }
   }
 

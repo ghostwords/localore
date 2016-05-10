@@ -27,7 +27,8 @@
 	{% image page.hero_image max-2000x2000 as hero_image %}
 	<div class="full-bg-image" style="background-image:url({{ hero_image.url }})"></div>
 	{% if page.image_credit_caption %}
-		<div class="hero-section-caption">{{ page.image_credit_caption|richtext }}</div>
+		<div class="hero-section-caption hero-section-caption-desktop">{{ page.image_credit_caption|richtext }}</div>
+		<span class="hero-section-caption hero-section-caption-mobile" data-trigger="click" data-toggle="tooltip" data-placement="left" title="{{ page.image_credit_caption|striptags }}"></span>
 	{% endif %}
 </div>
 
