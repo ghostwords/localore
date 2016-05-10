@@ -76,7 +76,7 @@
 }
 
 .play-icon {
-  background: url('/static/images/play.png') no-repeat center;
+  background: url('../images/play.png') no-repeat center;
   opacity: 0;
   @include transition(all 600ms ease-out);
   width: 61px;
@@ -95,7 +95,7 @@
   }
 
   &.pause {
-    background: url('/static/images/pause.png') no-repeat center;
+    background: url('../images/pause.png') no-repeat center;
 
   }
 
@@ -113,7 +113,7 @@
   bottom: 7vh;
   width: 150px;
   height: 70px;
-  background: url('/static/images/live_feed.svg') no-repeat bottom center;
+  background: url('../images/live_feed.svg') no-repeat bottom center;
   background-size: 60% 30%;
   z-index: 18;
 

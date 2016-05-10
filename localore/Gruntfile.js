@@ -21,7 +21,8 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'localore',
-    // dist: 'dist'
+    dist: 'localore/static/dist',
+    html: 'localore/static/html'
   };
 
   // Define the configuration for all the tasks
@@ -71,7 +72,7 @@ module.exports = function (grunt) {
             // '<%= config.app %>/templates/base.html',
             '**/*.html',
             '<%= config.app %>/static/css/*.css',
-            '<%= config.app %>/images/{,*/}*',
+            '<%= config.app %>/static/images/{,*/}*',
             '.tmp/scripts/{,*/}*.js',
             '!node_modules/**'
           ],
@@ -115,8 +116,9 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
-            // '<%= config.dist %>/*',
+            // '.tmp',
+            '<%= config.dist %>/*',
+            '<%= config.app %>/templates/base.html'
             // '!<%= config.dist %>/.git',
             // '!<%= config.dist %>/.gitignore',
             // '!<%= config.dist %>/index.php'
@@ -143,7 +145,7 @@ module.exports = function (grunt) {
         sourceMapEmbed: true,
         sourceMapContents: true
         ,
-        includePaths: ['<%= config.app %>/static/bower_components/bourbon/app/assets/stylesheets', '<%= config.app %>/static', '<%= config.app %>/static/bower_components/bootstrap-sass/assets/stylesheets',]
+        includePaths: ['<%= config.app %>/static/bower_components/bourbon/app/assets/stylesheets', '<%= config.app %>/static', '<%= config.app %>/static/bower_components/bootstrap-sass/assets/stylesheets']
         // includePaths: ['.']
       },
       dist: {
@@ -162,17 +164,17 @@ module.exports = function (grunt) {
         map: true,
         processors: [
           // Add vendor prefixed styles
-          require('autoprefixer')({
-            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']
-          })
+          // require('autoprefixer')({
+          //   browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']
+          // })
         ]
       },
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/',
+          cwd: '<%= config.dist %>/css/',
           src: '{,*/}*.css',
-          dest: '.tmp/'
+          dest: '<%= config.dist %>/css/'
         }]
       }
     },
@@ -180,7 +182,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the HTML file
     wiredep: {
       app: {
-        src: ['<%= config.app %>/templates/base.html'],
+        src: ['<%= config.html %>/base.html'],
         ignorePath: /^(\.\.\/)*\.\./
       },
       sass: {
@@ -203,15 +205,17 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          '<%= config.dist %>/scripts/{,*/}*.js',
-          // '!<%= config.dist %>/scripts/vendor.js',
-          '<%= config.dist %>/styles/{,*/}*.css',
+          '<%= config.dist %>/js/{,*/}*.js',
+          // '<%= config.dist %>/scripts/vendor.js',
+          '<%= config.dist %>/css/{,*/}*.css',
           '<%= config.dist %>/images/{,*/}*.*',
           // '<%= config.dist %>/styles/fonts/{,*/}*.*',
           '<%= config.dist %>/*.{ico,png}'
         ]
       }
     },
+
+
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -220,7 +224,7 @@ module.exports = function (grunt) {
       options: {
         dest: '<%= config.dist %>'
       },
-      html: '<%= config.dist %>/*.html'
+      html: '<%= config.html %>/base.html'
     },
 
     // Performs rewrites based on rev and the useminPrepare configuration
@@ -228,20 +232,47 @@ module.exports = function (grunt) {
       options: {
         assetsDirs: [
           '<%= config.dist %>',
-          // '<%= config.dist %>/images',
-          '<%= config.dist %>/styles'
-        ]
+          '<%= config.dist %>/images',
+          '<%= config.dist %>/css',
+          '<%= config.dist %>/js'
+        ],
+        blockReplacements: {
+          css: function (block) {
+              var arr = {};
+              for (var key in grunt.filerev.summary) {
+                  arr[key.replace("localore/static/dist/", "")] = grunt.filerev.summary[key].replace("localore/static/", "");
+              }
+
+              var path = (arr[block.dest] !== undefined) ? arr[block.dest] : block.dest;
+
+              return '<link rel="stylesheet" href="{% static \'' + path + '\' %}">';
+          },
+          js: function (block) {
+
+            var arr = {};
+            for (var key in grunt.filerev.summary) {
+                arr[key.replace("localore/static/dist/", "")] = grunt.filerev.summary[key].replace("localore/static/", "");
+            }
+
+            var path = (arr[block.dest] !== undefined) ? arr[block.dest] : block.dest;
+
+              return '<script type="text/javascript" src="{% static \'' + path + '\' %}"></script>';
+          }
+        }
       },
-      html: ['<%= config.dist %>/{,*/}*.html'],
-      css: ['<%= config.dist %>/styles/{,*/}*.css']
+      html: ['<%= config.app %>/templates/base.html'],
+      css: ['<%= config.dist %>/css/{,*/}*.css']
     },
+    // html: ['<%= config.app %>/templates/*.html'],
+
+
 
     // The following *-min tasks produce minified files in the dist folder
     imagemin: {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= config.app %>/images',
+          cwd: '<%= config.app %>/static/images',
           src: '{,*/}*.{gif,jpeg,jpg,png}',
           dest: '<%= config.dist %>/images'
         }]
@@ -252,7 +283,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= config.app %>/images',
+          cwd: '<%= config.app %>/static/images',
           src: '{,*/}*.svg',
           dest: '<%= config.dist %>/images'
         }]
@@ -285,28 +316,28 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care
     // of minification. These next options are pre-configured if you do not
     // wish to use the Usemin blocks.
-    cssmin: {
-      dist: {
-        files: {
-          '<%= config.dist %>/styles/main.css': [
-            '.tmp/styles/{,*/}*.css',
-            '<%= config.app %>/styles/{,*/}*.css'
-          ]
-        }
-      }
-    },
-    uglify: {
-      dist: {
-        files: {
-          '<%= config.dist %>/scripts/scripts.js': [
-            '<%= config.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
-    },
-    concat: {
-      dist: {}
-    },
+    // cssmin: {
+    //   dist: {
+    //     files: {
+    //       '<%= config.dist %>/styles/main.css': [
+    //         '.tmp/styles/{,*/}*.css',
+    //         '<%= config.app %>/styles/{,*/}*.css'
+    //       ]
+    //     }
+    //   }
+    // },
+    // uglify: {
+    //   dist: {
+    //     files: {
+    //       '<%= config.dist %>/scripts/scripts.js': [
+    //         '<%= config.dist %>/scripts/scripts.js'
+    //       ]
+    //     }
+    //   }
+    // },
+    // concat: {
+    //   dist: {}
+    // },
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -317,12 +348,20 @@ module.exports = function (grunt) {
           cwd: '<%= config.app %>',
           dest: '<%= config.dist %>',
           src: [
-            '*.{ico,png,txt}',
-            'images/{,*/}*.webp',
-            'images/{,*/}*.png',
-            '{,*/}*.html',
-            'styles/fonts/{,*/}*.*',
-            'styles/ajax-loader.gif'
+            '*.{ico,png,txt}'
+            // '/images/{,*/}*.webp',
+            // 'static/images/{,*/}*.png',
+            // 'templates/base.html',
+            // 'styles/fonts/{,*/}*.*',
+            // 'styles/ajax-loader.gif'
+          ]
+        },{
+          expand: true,
+          dot: true,
+          cwd: '<%= config.html %>',
+          dest: '<%= config.app %>/templates/',
+          src: [
+            'base.html'
           ]
         }]
       }
@@ -340,7 +379,7 @@ module.exports = function (grunt) {
       dist: [
         // 'babel',
         'sass',
-        // 'imagemin',
+        'imagemin',
         'svgmin'
       ]
     }
@@ -385,7 +424,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'swig:dist',
+    // 'swig:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -394,7 +433,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy:dist',
-    //'filerev',
+    'filerev',
+    // 'remapFilerev',
     'usemin',
     // 'htmlmin'
   ]);

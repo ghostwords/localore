@@ -55,7 +55,7 @@ body {
 }
 
 .description {
-  background: url('/static/images/header_bg.png') fixed;
+  background: url('../images/header_bg.png') fixed;
   background-size: 130%;
   background-position: top center;
   background-repeat: no-repeat;
@@ -77,7 +77,7 @@ body {
   }
 
   @include media($header-size) {
-    background: url('/static/images/header_bg_tablet.png');
+    background: url('../images/header_bg_tablet.png');
     background-size: 100%;
     background-repeat: no-repeat;
     height: auto;

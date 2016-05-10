@@ -30,7 +30,7 @@
     position: absolute;
     width: 289px;
     height: 21px;
-    background: url('/static/images/loader_dark.gif') no-repeat center;
+    background: url('../images/loader_dark.gif') no-repeat center;
     top: 50%;
     left: 50%;
     @include transform(translate(-50%));
@@ -82,12 +82,12 @@
     }
 
     &.dispatch-prev {
-      background: url('/static/images/dispatch_prev.png') no-repeat center;
+      background: url('../images/dispatch_prev.png') no-repeat center;
       background-size: 75%;
       left: 1.5%;
     }
     &.dispatch-next {
-      background: url('/static/images/dispatch_next.png') no-repeat center;
+      background: url('../images/dispatch_next.png') no-repeat center;
       background-size: 75%;
       right: 1.5%;
     }
