@@ -13,3 +13,6 @@ env/
 npm-debug.log
 localore/node_modules/
 localore/localore/static/bower_components/
+localore/localore/static/css
+localore/localore/static/dist
+.tmp
