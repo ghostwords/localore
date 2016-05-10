@@ -45,7 +45,7 @@
   }
 }
 
-#preview {
+.preview {
   z-index: 8;
 }
 
@@ -73,10 +73,6 @@
 
 .full-bg-video {
   @include abs-position();
-
-  @include media($tablet) {
-    display: none;
-  }
 }
 
 .full-bg-image {
@@ -85,12 +81,8 @@
   background-position: center;
   background-size: cover;
 
-  &.full-bg-mobile {
+  &.preview-mobile {
     display: none;
-
-    @include media($tablet) {
-      display: block;
-    }
   }
 }
 

@@ -4,9 +4,16 @@ $(function() {
   var $viewMore = $('.view-more');
   var $mainVideo = $('#main-video');
   var mainVideoPlayer, videoPlaying = false;
-  var $preview = $('#preview');
+  var $preview = $('.preview');
+  var $previewDesktop = $('.preview-desktop');
+  var $previewMobile = $('.preview-mobile');
   var $title = $('#title');
   var $header = $('header');
+
+  if(jQuery.browser.mobile) {
+    $previewDesktop.hide();
+    $previewMobile.show();
+  }
 
   var timeout;
   $(document).on('mousemove', function (event) {
