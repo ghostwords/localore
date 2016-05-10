@@ -53,34 +53,31 @@
 		</div>
 		{% endif %}
 
-
-		<!-- team -->
-		{% if page.featured_people.all %}
-		<div class="prod-team">
-				{% get_about_team_page as about_team_page %}
-				<div class="team-members clearfix">
-					{% for item in page.featured_people.all %}
-					{% with person=item.person %}
-					{# <a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ item.person }}</a> #}
-					<div class="team-member">
-						{# <img src="https://assets.lensculture.com/static/competitions/jury/juror-ann-2.jpg" /> #}
-						{# <img src="{% image person.photo fill-140x140-c100 %}" /> #}
-						{% image person.photo fill-140x140-c100 %}
-						<h6 class="team-member-name"><a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ person.full_name }}</a></h6>
-						<p class="team-member-title">{{ person.role }}</p>
-					</div>
-					{% endwith %}
-					{% endfor %}
-				</div>
-		</div>
-		{% endif %}
-
-
-
 	</div>
 </div>
 
 <div class="container prod-content">
+
+	<!-- team -->
+	{% if page.featured_people.all %}
+	<div class="prod-team">
+			{% get_about_team_page as about_team_page %}
+			<div class="team-members clearfix">
+				{% for item in page.featured_people.all %}
+				{% with person=item.person %}
+				{# <a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ item.person }}</a> #}
+				<div class="team-member">
+					{# <img src="https://assets.lensculture.com/static/competitions/jury/juror-ann-2.jpg" /> #}
+					{# <img src="{% image person.photo fill-140x140-c100 %}" /> #}
+					{% image person.photo fill-140x140-c100 %}
+					<h6 class="team-member-name"><a href="{{ about_team_page.url }}#{{ item.person.production|slugify }}">{{ person.full_name }}</a></h6>
+					<p class="team-member-title">{{ person.role }}</p>
+				</div>
+				{% endwith %}
+				{% endfor %}
+			</div>
+	</div>
+	{% endif %}
 
 	{% if page.highlights %}
 		<h5 class="text-center">Watch and Listen</h5>
