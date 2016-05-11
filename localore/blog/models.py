@@ -258,6 +258,14 @@ class BlogPage(Page):
         return self.video_poster_image.file.url.split('.')[-1]
 
     @property
+    def related_live_posts(self):
+        return [item.related_blog_page for item in (
+            self
+            .related_posts.filter(related_blog_page__live=True)
+            .order_by('related_blog_page__title')
+        )]
+
+    @property
     def preview_modes(self):
         return super(BlogPage, self).preview_modes + [
             ('no-video', 'Preview poster image'),

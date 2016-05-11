@@ -74,12 +74,12 @@
 	{% endif %}
 </div>
 
-{% if page.related_posts.all %}
+{% if page.related_live_posts %}
 <div class="text-description connection-more">
 	<div class="container">
 		<h6>More connections</h6>
-		{% for item in page.related_posts.all %}
-			<a href="{{ item.related_blog_page.url }}" class="link-large">{{ item.related_blog_page }}</a>{% if not forloop.last %}, {% endif %}
+		{% for blog_page in page.related_live_posts %}
+			<a href="{{ blog_page.url }}" class="link-large">{{ blog_page }}</a>{% if not forloop.last %}, {% endif %}
 		{% endfor %}
 	</div>
 </div>
