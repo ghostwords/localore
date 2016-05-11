@@ -39,7 +39,7 @@ header {
       @include abs-position();
       z-index: -1;
       height: $header-md + 40;
-      @include background-image(linear-gradient(top, rgba(21,19,19,0.55) 0%, rgba(255,255,255,0) 100%));
+      @include background-image(linear-gradient(top, rgba(21,19,19,0.55) 0%, rgba(0,0,0,0) 100%));
     }
 
   // }
