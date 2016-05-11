@@ -145,6 +145,7 @@ if DEBUG and env('DEBUG_TOOLBAR'):
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'donottrack.middleware.DoNotTrackMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

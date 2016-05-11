@@ -64,8 +64,7 @@
 		{# Override this in templates to add extra stylesheets #}
 		{% endblock %}
 
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+	{% if not request.donottrack %}{# Google Analytics #}
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -74,6 +73,8 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-25722193-3');ga('send','pageview');
     </script>
+	{% endif %}
+
 	</head>
 
 	<body class="{% block body_class %}{% endblock %}">
