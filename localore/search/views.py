@@ -9,6 +9,42 @@ from wagtail.wagtailsearch.models import Query
 from localore_admin.models import PageAlias
 
 
+def get_results_json(response):
+    results_json = {
+        'search_query': response['search_query'],
+        'search_results': [],
+    }
+
+    for result_type in ('promoted_results', 'search_results'):
+        for page in response[result_type]:
+            page = page.specific
+            result = {}
+
+            result['title'] = page.title
+            result['url'] = page.url
+
+            # if page is an index page, blank out the content type
+            if page.content_type.name.endswith('Index'):
+                content_type = "&nbsp;"
+            else:
+                parent = Page.objects.parent_of(page).first()
+                # if page is a child of an index page
+                if (
+                    parent and
+                    parent.specific.content_type.name.endswith('Index')
+                ):
+                    # use the parent's title for content type
+                    content_type = parent.title
+                else:
+                    content_type = page.content_type.name
+            result['content_type'] = content_type
+
+            if result not in results_json['search_results']:
+                results_json['search_results'].append(result)
+
+    return results_json
+
+
 def search(request):
     do_json = 'json' in request.GET
     search_query = request.GET.get('query', None)
@@ -57,23 +93,6 @@ def search(request):
     }
 
     if do_json:
-        results_json = {
-            'search_query': search_query,
-            'search_results': [],
-        }
-
-        for result_type in ('promoted_results', 'search_results'):
-            for page in response[result_type]:
-                result = {}
-
-                result['title'] = page.specific.title
-                result['url'] = page.specific.url
-                result['content_type'] = page.specific.content_type.name
-
-                if result not in results_json['search_results']:
-                    results_json['search_results'].append(result)
-
-        return JsonResponse(results_json)
-
+        return JsonResponse(get_results_json(response))
     else:
         return render(request, 'search/search.html', response)

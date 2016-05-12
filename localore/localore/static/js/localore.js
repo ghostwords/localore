@@ -151,10 +151,10 @@ $(function() {
       var windowHeight = $(window).height();
 
       if ((scrollDistance >= (juicerFeedScrollDistance - (windowHeight))) && !juicerLoaded) {
-        console.log('loading juicer');
+        //console.log('loading juicer');
         $.getScript('//assets.juicer.io/embed-amd.js', function() {
           Juicer.initialize();
-          console.log( "loaded juicer" );
+          //console.log( "loaded juicer" );
         });
 
         $('head').append('<link rel="stylesheet" type="text/css" href="//assets.juicer.io/embed.css">');
@@ -212,7 +212,7 @@ $(function() {
     $.getJSON('/search/?query=' + query + '&json=true', function(data) {
 
       if(data.search_results.length) {
-        console.log(data);
+        //console.log(data);
         $results.empty();
         $.each(data.search_results, function (i, v) {
           $results.append('<div class="search-results-item"><span>' + v.content_type + '</span><a href="' + v.url + '"><h5>' + v.title + '</h5></a></div>');
