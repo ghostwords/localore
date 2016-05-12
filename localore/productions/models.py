@@ -8,15 +8,16 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     InlinePanel,
-    MultiFieldPanel
+    MultiFieldPanel,
+    StreamFieldPanel,
 )
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
-from blog.models import BlogPageAssociatedProduction
+from blog.models import BlogBodyBlock, BlogPageAssociatedProduction
 
 
 class LinkField(models.Model):
@@ -146,9 +147,9 @@ class ProductionPage(Page):
 
     description = RichTextField()
 
-    highlights = RichTextField(
+    highlights = StreamField(
+        BlogBodyBlock,
         blank=True,
-        help_text="Optional WYSIWYG area to highlight the production's work."
     )
 
     search_fields = Page.search_fields + (
@@ -188,7 +189,7 @@ class ProductionPage(Page):
             max_num=4,
             help_text="Select up to four people to feature on this page."
         ),
-        FieldPanel('highlights', classname='full'),
+        StreamFieldPanel('highlights'),
         InlinePanel('juicer_sources', label="Juicer sources"),
     ]
 

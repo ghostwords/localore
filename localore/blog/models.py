@@ -11,8 +11,9 @@ from wagtail.wagtailcore.blocks import (
     CharBlock,
     RawHTMLBlock,
     RichTextBlock,
+    StreamBlock,
     StructBlock,
-    TextBlock
+    TextBlock,
 )
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
@@ -81,6 +82,28 @@ class CaptionBlock(RichTextBlock):
         icon = 'openquote'
         label = "Caption"
         template = 'blog/blocks/caption.html'
+
+
+class BlogBodyBlock(StreamBlock):
+    heading = CharBlock(
+        classname="full title",
+        icon='title',
+        template='blog/blocks/heading.html'
+    )
+    quote = QuoteBlock()
+    paragraph = RichTextBlock(icon='doc-full', label="Rich Text")
+    image = ImageChooserBlock(icon='image')
+    embed = EmbedBlock(icon='media')
+    caption = CaptionBlock()
+    raw_html = RawHTMLBlock(
+        icon='code',
+        label="Raw HTML",
+        help_text=format_html(
+            '<ul class="messages"><li class="error">Please mind that '
+            'using raw HTML can break site rendering and/or compromise '
+            'site security.</li></ul>'
+        ),
+    )
 
 
 class BlogPage(Page):
@@ -166,27 +189,7 @@ class BlogPage(Page):
 
     intro = RichTextField(blank=True)
 
-    body = StreamField([
-        ('heading', CharBlock(
-            classname="full title",
-            icon='title',
-            template='blog/blocks/heading.html'
-        )),
-        ('quote', QuoteBlock()),
-        ('paragraph', RichTextBlock(icon='doc-full', label="Rich Text")),
-        ('image', ImageChooserBlock(icon='image')),
-        ('embed', EmbedBlock(icon='media')),
-        ('caption', CaptionBlock()),
-        ('raw_html', RawHTMLBlock(
-            icon='code',
-            label="Raw HTML",
-            help_text=format_html(
-                '<ul class="messages"><li class="error">Please mind that '
-                'using raw HTML can break site rendering and/or compromise '
-                'site security.</li></ul>'
-            ),
-        )),
-    ])
+    body = StreamField(BlogBodyBlock)
 
     # search index config
     search_fields = Page.search_fields + (
