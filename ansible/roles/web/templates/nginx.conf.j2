@@ -33,6 +33,13 @@ server {
 
 	client_max_body_size 6m;
 
+	location = /favicon.ico {
+		alias /var/www/{{ domain }}/current/static/images/favicon.ico;
+		access_log off;
+		expires max;
+		add_header Cache-Control "public";
+	}
+
 	location /static {
 		root /var/www/{{ domain }}/current;
 		access_log off;
