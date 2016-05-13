@@ -28,10 +28,10 @@ def finder(url, max_width=None):
         embed_dict['html'] = (
             embed_dict['html']
             .replace('visual%3Dtrue', 'visual%3Dfalse')
-            .replace('width="500"', 'width="100%"')
-            .replace('height="500"', 'height="166"')
+            .replace('width="%s"' % embed_dict['width'], 'width="100%"')
+            .replace('height="%s"' % embed_dict['height'], 'height="166"')
         )
-        embed_dict['width'] = '100%'
-        embed_dict['height'] = '166'
+        embed_dict['width'] = None
+        embed_dict['height'] = 166
 
     return embed_dict
