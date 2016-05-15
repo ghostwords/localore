@@ -44,6 +44,7 @@ class GoogleAnalytics(BaseSetting):
     ga_tracking_id = models.CharField(
         "Google Analytics tracking ID",
         max_length=20,
+        blank=True,
     )
 
     panels = [
@@ -58,10 +59,12 @@ class GoogleAnalytics(BaseSetting):
 class JuicerSettings(BaseSetting):
     juicer_feed_id = models.CharField(
         max_length=200,
+        blank=True,
         help_text="Your Juicer feed ID."
     )
     juicer_auth_token = models.CharField(
         max_length=200,
+        blank=True,
         help_text="Your Juicer API authentication token."
     )
 
