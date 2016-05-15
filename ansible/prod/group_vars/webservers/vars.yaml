@@ -1,5 +1,9 @@
 ---
 
+aws_access_key: "{{ vault_aws_access_key }}"
+aws_secret_key: "{{ vault_aws_secret_key }}"
+s3_backup_bucket_name: "{{ vault_s3_backup_bucket_name }}"
+
 collectd_plugin_memcached: on
 collectd_plugin_nginx: on
 collectd_plugin_write_graphite: "{{ vault_collectd_plugin_write_graphite }}"
@@ -21,6 +25,8 @@ django_project_name: localore
 
 django_secret_key: "{{ vault_django_secret_key }}"
 
-elasticsearch_heap_size: '256m'
+elasticsearch_heap_size: 1g
 
 embedly_key: "{{ vault_embedly_key }}"
+
+memcached_memory_allocation_mb: 256

@@ -23,6 +23,7 @@
     command: dbbackup
     app_path: "{{ release_dir }}"
     virtualenv: "{{ virtualenv_dir }}"
+  when: aws_access_key is defined and aws_secret_key is defined and s3_backup_bucket_name is defined
 
 - name: Run Django database migrations
   django_manage:
