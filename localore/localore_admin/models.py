@@ -40,6 +40,21 @@ class PageAlias(Page, LinkFields): # pylint: disable=too-many-ancestors
 # site settings
 
 @register_setting(icon='site')
+class GoogleAnalytics(BaseSetting):
+    ga_tracking_id = models.CharField(
+        "Google Analytics tracking ID",
+        max_length=20,
+    )
+
+    panels = [
+        FieldPanel('ga_tracking_id'),
+    ]
+
+    class Meta:
+        verbose_name = "Google Analytics"
+
+
+@register_setting(icon='site')
 class JuicerSettings(BaseSetting):
     juicer_feed_id = models.CharField(
         max_length=200,
