@@ -70,6 +70,9 @@ class JuicerSettings(BaseSetting):
         FieldPanel('juicer_auth_token'),
     ]
 
+    class Meta:
+        verbose_name = "Juicer"
+
 
 # custom image model
 
