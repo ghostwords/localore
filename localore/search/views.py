@@ -2,11 +2,15 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.template import defaultfilters
 
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailsearch.backends import get_search_backend
 from wagtail.wagtailsearch.models import Query
 
+from about.models import AboutTeamPage
 from localore_admin.models import PageAlias
+from people.models import Person
 
 
 def get_results_json(response):
@@ -42,6 +46,18 @@ def get_results_json(response):
             if result not in results_json['search_results']:
                 results_json['search_results'].append(result)
 
+    about_team_page = AboutTeamPage.objects.live().first()
+    for person in response['people_results']:
+        results_json['search_results'].append({
+            'content_type': about_team_page.title,
+            'title': str(person),
+            'url': '%s#%s-%s' % (
+                about_team_page.url,
+                defaultfilters.slugify(person.full_name),
+                person.pk
+            ),
+        })
+
     return results_json
 
 
@@ -73,9 +89,16 @@ def search(request):
             pick.page.id for pick in query.editors_picks.all()
         ]
         promoted_results = Page.objects.filter(pk__in=promoted_page_ids)
+
+        # search Person snippets
+        search_backend = get_search_backend()
+        people_results = search_backend.search(
+            search_query, Person.objects.all()
+        )
     else:
         search_results = Page.objects.none()
         promoted_results = Page.objects.none()
+        people_results = Person.objects.none()
 
     # Pagination
     paginator = Paginator(search_results, 10)
@@ -90,6 +113,7 @@ def search(request):
         'search_query': search_query,
         'search_results': search_results,
         'promoted_results': promoted_results,
+        'people_results': people_results,
     }
 
     if do_json:

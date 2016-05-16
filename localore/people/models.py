@@ -49,8 +49,6 @@ class Person(models.Model, index.Indexed):
         index.SearchField('first_name'),
         index.SearchField('last_name'),
         index.SearchField('role', partial_match=True),
-        index.SearchField('biography', partial_match=True),
-        # only works with Elasticsearch
         index.RelatedFields('production', [
             index.SearchField('title', partial_match=True),
         ]),
@@ -90,8 +88,7 @@ class Person(models.Model, index.Indexed):
 
     class Meta:
         ordering = ('last_name',)
-        verbose_name = "Person"
-        verbose_name_plural = "People"
+        verbose_name = "Team Member"
 
     def __str__(self):
         out = [
@@ -100,7 +97,7 @@ class Person(models.Model, index.Indexed):
         ]
 
         if self.role_and_production:
-            out.append(" (%s)" % self.role_and_production)
+            out.append("(%s)" % self.role_and_production)
 
         return " ".join(out)
 
