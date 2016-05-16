@@ -6,6 +6,12 @@
     height: 75vh;
   }
 
+  body:not(.template-homepage) & {
+    @include media($mobile) {
+      height: 70vh;
+    }
+  }
+
   .hero-section-caption {
     position: absolute;
     top: calc(100% + 5px);
