@@ -49,7 +49,7 @@ def get_results_json(response):
     about_team_page = AboutTeamPage.objects.live().first()
     for person in response['people_results']:
         results_json['search_results'].append({
-            'content_type': about_team_page.title,
+            'content_type': about_team_page.content_type.name,
             'title': str(person),
             'url': '%s#%s-%s' % (
                 about_team_page.url,
