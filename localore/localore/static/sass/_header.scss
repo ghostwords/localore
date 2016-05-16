@@ -8,14 +8,13 @@ header {
   z-index: 20;
   @include transition(opacity 600ms ease-out);
 
-  -webkit-transition: -webkit-transform 1s cubic-bezier(0.075, 0.820, 0.165, 1.000);
-  -moz-transition: -moz-transform 1s cubic-bezier(0.075, 0.820, 0.165, 1.000);
-  transition: transform 1s cubic-bezier(0.075, 0.820, 0.165, 1.000);
   &.scrolled {
-    -webkit-transition: -webkit-transform 2.5s cubic-bezier(0.075, 0.820, 0.165, 1.000);
-    -moz-transition: -moz-transform 2.5s cubic-bezier(0.075, 0.820, 0.165, 1.000);
-    transition: transform 2.5s cubic-bezier(0.075, 0.820, 0.165, 1.000);
-    @include transform(translateY(-$header-md * 1.5));
+
+    &:after {
+      opacity: 0.6;
+      height: $header-md + 20;
+    }
+
   }
 
   &.hide {
@@ -40,6 +39,8 @@ header {
       z-index: -1;
       height: $header-md + 40;
       @include background-image(linear-gradient(top, rgba(21,19,19,0.55) 0%, rgba(0,0,0,0) 100%));
+      @include transition(all 600ms ease-out);
+      pointer-events: none;
     }
 
   // }
@@ -87,10 +88,10 @@ header {
     .menu-icon {
       float:left;
       height: 60%;
-      width: 25px;
+      width: 34px;
       margin-right: 25px;
       position: relative;
-      top: 4px;
+      top: 1px;
       @include transition(all 150ms ease-out);
       @include transform-origin(center top);
       // opacity: 0.6;
@@ -99,9 +100,13 @@ header {
         @include transform(scaleY(1.2));
         // opacity: 1;
         cursor: pointer;
+
+        span {
+          @include transform(scaleY(0.9));
+        }
       }
 
-      span {
+      i {
         width: 100%;
         height: 15%;
         // background-color: #fff;
@@ -120,9 +125,19 @@ header {
         }
       }
 
+      span {
+        position: absolute;
+        bottom: -20px;
+        font-family: $roboto-reg;
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: $orange;
+      }
+
       @include media($mobile) {
-        top: 20%;
-        margin-right: 1em;
+        top: 13%;
+        height: 50%;
+        margin-right: 1.3em;
         @include transform-origin(center);
       }
     }
@@ -131,11 +146,12 @@ header {
       background: url('../images/search.svg');
       background-position: center;
       background-repeat: no-repeat;
+      background-size: 100%;
       display: inline-block;
       vertical-align: top;
-      width: 20px;
+      width: 25px;
       height: 100%;
-      margin-right: 25px;
+      margin-right: 20px;
 
       &:hover {
         cursor: pointer;
@@ -148,11 +164,11 @@ header {
 
     .fa-logo {
       float: left;
-      height: 100%;
+      height: 105%;
       width: inherit;
 
       @include media($mobile) {
-        height: 75%;
+        height: 80%;
       }
 
       // @media screen and (min-width: $grid-md) {
@@ -165,9 +181,9 @@ header {
     .air-logo {
       display: inline-block;
       vertical-align: middle;
-      height: 120%;
+      height: 130%;
       @include media($mobile) {
-        height: 90%;
+        height: 100%;
       }
 
       // @media screen and (min-width: $grid-md) { height: 80%; }

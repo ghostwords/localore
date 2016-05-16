@@ -127,11 +127,16 @@
         bottom: 6em;
       }
 
-      img {
-        width: 13%;
-        display: block;
-        margin: 15px auto 0 auto;
+      .sponsors {
+        img {
+          width: 13%;
+          display: inline-block;
+          vertical-align: middle;
+          margin: 15px;
+        }
       }
+
+
 
     }
 

@@ -52,6 +52,10 @@ module.exports = function (grunt) {
         files: ['<%= config.app %>/static/css/*.css'],
         // tasks: ['newer:copy:styles', 'postcss']
         tasks: ['postcss']
+      },
+      html: {
+        files: ['<%= config.html %>/base.html'],
+        tasks: ['clean:server', 'copy:server']
       }
     },
 
@@ -129,7 +133,7 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= config.app %>/static/css',
+            // '<%= config.app %>/static/css',
             '<%= config.app %>/templates/base.html'
           ]
         }]

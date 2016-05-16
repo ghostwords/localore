@@ -79,11 +79,11 @@ $(function() {
 
      if(st > lastScrollTop && st > threshold && windowWidth >= 925 && !hasShrunkHeader) {
        $title.addClass('scrolled');
-      //  $header.addClass('scrolled');
+       $header.addClass('scrolled');
        hasShrunkHeader = true;
      } else if((st < lastScrollTop && hasShrunkHeader && scrollUpDist > scrollUpThreshold) || st == 0) {
        $title.removeClass('scrolled');
-      //  $header.removeClass('scrolled');
+       $header.removeClass('scrolled');
        hasShrunkHeader = false;
      }
 

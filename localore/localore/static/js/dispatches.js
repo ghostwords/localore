@@ -4,6 +4,7 @@ $(function() {
   var $modalBody = $modal.find('.modal-media-embed');
   var $prev = $modal.find('.dispatch-prev');
   var $next = $modal.find('.dispatch-next');
+  var isLoadingDispatch = false;
 
   window.loadDispatch = function(data, item) {
 
@@ -36,13 +37,18 @@ $(function() {
   $('.post-item-link, .dispatch-arrow').on('click', function() {
     var item = $(this).attr("href");
 
-    // TODO cache
-    $.getJSON(item + "?json", function(data) {
-      // update URL to dispatch page
-      window.history.pushState("", data.title, item);
+    if(!isLoadingDispatch) {
 
-      loadDispatch(data, item);
-    });
+      isLoadingDispatch = true;
+
+      // TODO cache
+      $.getJSON(item + "?json", function(data) {
+        // update URL to dispatch page
+        window.history.pushState("", data.title, item);
+        loadDispatch(data, item);
+        isLoadingDispatch = false;
+      });
+    }
 
     return false;
   });
