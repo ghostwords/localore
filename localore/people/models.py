@@ -48,10 +48,6 @@ class Person(models.Model, index.Indexed):
     search_fields = (
         index.SearchField('first_name'),
         index.SearchField('last_name'),
-        index.SearchField('role', partial_match=True),
-        index.RelatedFields('production', [
-            index.SearchField('title', partial_match=True),
-        ]),
     )
 
     # Wagtail admin
