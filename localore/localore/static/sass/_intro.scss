@@ -51,10 +51,6 @@
       @include media($mobile) {
         padding: 1em 1.5em;
         bottom: 12em;
-        & > .rich-text > p {
-          margin: 1em 0;
-          font-size: 80%;
-        }
       }
 
       & > img {
@@ -74,7 +70,7 @@
         }
 
         @include media($mobile) {
-          margin: 1em 0;
+          margin: 1em 0 0 0;
           font-size: 80%;
         }
       }
@@ -114,6 +110,11 @@
             width: auto;
           }
         }
+
+        @include media($mobile) {
+          margin-top: 25px;
+          margin-bottom: 20px;
+        }
       }
     }
 
@@ -124,7 +125,7 @@
       text-align: center;
 
       @include media($mobile) {
-        bottom: 6em;
+        bottom: 5em;
       }
 
       .sponsors {
