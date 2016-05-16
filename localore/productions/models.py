@@ -211,7 +211,6 @@ class ProductionPage(Page):
         associations = (
             BlogPageAssociatedProduction.objects
             .filter(page__live=True, production_page=self)
-            .order_by('page__title')
         )
         return [item.page for item in associations]
 

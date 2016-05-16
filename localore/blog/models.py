@@ -263,10 +263,8 @@ class BlogPage(Page):
     @property
     def related_live_posts(self):
         return [item.related_blog_page for item in (
-            self
-            .related_posts.filter(related_blog_page__live=True)
-            .order_by('related_blog_page__title')
-        )]
+            self.related_posts.all()
+        ) if item.related_blog_page.live]
 
     @property
     def preview_modes(self):
