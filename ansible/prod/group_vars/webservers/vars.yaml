@@ -30,3 +30,6 @@ elasticsearch_heap_size: 1g
 embedly_key: "{{ vault_embedly_key }}"
 
 memcached_memory_allocation_mb: 256
+
+nginx_worker_processes: 2
+nginx_worker_connections: 1024
