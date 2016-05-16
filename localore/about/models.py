@@ -8,7 +8,7 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 
 from blog.models import RelatedLink
-from productions.models import PersonField
+from productions.models import PersonField, ProductionPage
 
 
 class AboutMissionPageRelatedLink(Orderable, RelatedLink):
@@ -72,6 +72,16 @@ class AboutTeamPage(Page):
     @property
     def localore_staff(self):
         return self.related_people.select_related('person__photo').all()
+
+    def get_context(self, request):
+        context = super(AboutTeamPage, self).get_context(request)
+
+        context['productions'] = (
+            ProductionPage.objects.live()
+            .prefetch_related('related_people__person__photo')
+        )
+
+        return context
 
     class Meta:
         verbose_name = "About: Team"

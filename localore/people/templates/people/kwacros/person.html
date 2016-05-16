@@ -1,5 +1,6 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags kwacros %}
 
+{% kwacro person person %}
 <div class="team-member" id="{{ person.full_name|slugify }}-{{ person.pk }}">
 	{% image person.photo fill-140x140-c100 %}
 	<h6 class="team-member-name">{{ person.full_name }}</h6>
@@ -22,3 +23,4 @@
 	</div>
 	<div class="team-member-desc">{{ person.biography|richtext }}</div>
 </div>
+{% endkwacro %}

@@ -1,6 +1,8 @@
 {% extends "about/base.html" %}
 
-{% load wagtailcore_tags people_tags productions_tags %}
+{% load wagtailcore_tags kwacros %}
+
+{% loadkwacros 'people/kwacros/person.html' %}
 
 {% block body_class %}template-about-team{% endblock %}
 
@@ -24,13 +26,36 @@
 			<div id="team-members-0" class="about-team-member collapse in">
 				<div class="team-members clearfix">
 					{% for item in page.localore_staff %}
-					{% person item.person %}
+					{% usekwacro person item.person %}
 					{% endfor %}
 				</div>
 			</div>
 		</div>
 
-		{% productions %}
+		{% for production in productions %}
+
+		<div class="team-item" id="{{ production.title|slugify }}">
+
+			<h6 class="team-location">{{ production.city }}, {{ production.state }}</h6>
+			<a data-toggle="collapse"
+					href="#team-members-{{ forloop.counter }}"
+					aria-expanded="true"
+					aria-controls="team-members-{{ forloop.counter }}"
+					data-parent=".team-section">
+				<h4 class="team-name">{{ production.title }}</h4>
+			</a>
+
+			<div id="team-members-{{ forloop.counter }}" class="about-team-member collapse in">
+				<div class="team-members clearfix">
+					{% for item in production.related_people.all %}
+					{% usekwacro person item.person %}
+					{% endfor %}
+				</div>
+			</div>
+
+		</div>
+
+		{% endfor %}
 
 	</div>
 

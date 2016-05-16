@@ -138,7 +138,7 @@ def do_loadmacros(parser, token):
     if filename[0] in ('"', "'") and filename[-1] == filename[0]:
         filename = filename[1:-1]
     t = get_template(filename)
-    macros = t.nodelist.get_nodes_by_type(DefineMacroNode)
+    macros = t.template.nodelist.get_nodes_by_type(DefineMacroNode)
     ## Metadata of each macro are stored in a new attribute
     ## of 'parser' class. That way we can access it later
     ## in the template when processing 'usemacro' tags.
