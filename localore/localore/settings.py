@@ -288,6 +288,8 @@ DBBACKUP_STORAGE_OPTIONS = {
     'bucket_name': env('DBBACKUP_S3_BUCKET_NAME'),
     'default_acl': 'private'
 }
+DBBACKUP_CLEANUP_KEEP = 5
+DBBACKUP_CLEANUP_KEEP_MEDIA = 7
 
 
 # Django Cache Framework

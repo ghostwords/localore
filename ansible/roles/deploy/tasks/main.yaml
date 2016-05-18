@@ -50,7 +50,7 @@
     name: back up media files
     minute: 30
     hour: 3
-    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py mediabackup >/dev/null 2>&1
+    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py mediabackup --clean >/dev/null 2>&1
     state: present
   become: False
   when: aws_access_key is defined and aws_secret_key is defined and s3_backup_bucket_name is defined
@@ -59,7 +59,7 @@
   cron:
     name: back up the database
     minute: 5
-    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py dbbackup >/dev/null 2>&1
+    job: cd /var/www/{{ domain }}/current && ./venv/bin/python manage.py dbbackup --clean >/dev/null 2>&1
     state: present
   become: False
   when: aws_access_key is defined and aws_secret_key is defined and s3_backup_bucket_name is defined
