@@ -10,6 +10,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 env = Env(
     ALLOWED_HOSTS=(list, []),
 
+    BASE_URL=(str, 'http://localhost:8000'),
+
     DEBUG=(bool, False),
     DEBUG_TOOLBAR=(bool, False),
 
@@ -41,6 +43,10 @@ DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+
+# Base URL to use when referring to full URLs within the Wagtail admin backend;
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+BASE_URL = env('BASE_URL')
 
 # make Django log to stderr
 LOGGING = {
