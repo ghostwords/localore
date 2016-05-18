@@ -100,6 +100,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailcore',
     'wagtail.contrib.settings',
     'wagtail.contrib.wagtailsearchpromotions',
+    'wagtail.contrib.wagtailsitemaps',
 
     # needs to go after wagtaildocs to remove its site summary
     'localore_admin',
