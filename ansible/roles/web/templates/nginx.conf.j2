@@ -40,6 +40,10 @@ server {
 		add_header Cache-Control "public";
 	}
 
+	location = /robots.txt {
+		alias /var/www/{{ domain }}/current/robots.txt;
+	}
+
 	location /static {
 		root /var/www/{{ domain }}/current;
 		access_log off;
