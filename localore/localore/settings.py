@@ -46,10 +46,6 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
-# Base URL to use when referring to full URLs within the Wagtail admin backend;
-# e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = env('BASE_URL')
-
 # make Django log to stderr
 LOGGING = {
     'version': 1,
@@ -139,6 +135,7 @@ if DEBUG and env('DEBUG_TOOLBAR'):
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.versions.VersionsPanel',
         'debug_toolbar.panels.timer.TimerPanel',
+        #'debug_toolbar.panels.profiling.ProfilingPanel',
         'debug_toolbar.panels.settings.SettingsPanel',
         'debug_toolbar.panels.headers.HeadersPanel',
         'debug_toolbar.panels.request.RequestPanel',
@@ -271,6 +268,10 @@ if CDN_DOMAIN:
 
 
 # Wagtail settings
+
+# Base URL to use when referring to full URLs within the Wagtail admin backend;
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+BASE_URL = env('BASE_URL')
 
 WAGTAIL_SITE_NAME = "Localore: Finding America"
 
