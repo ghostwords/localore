@@ -12,6 +12,8 @@ env = Env(
 
     BASE_URL=(str, 'http://localhost:8000'),
 
+    CDN_DOMAIN=(str, None),
+
     DEBUG=(bool, False),
     DEBUG_TOOLBAR=(bool, False),
 
@@ -255,11 +257,17 @@ STATICFILES_DIRS = (
 # will collect static files for deployment
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+CDN_DOMAIN = env('CDN_DOMAIN')
 # URL to use when referring to static files located in STATIC_ROOT
 STATIC_URL = '/static/'
+if CDN_DOMAIN:
+    STATIC_URL = 'https://' + CDN_DOMAIN + STATIC_URL
 
 MEDIA_ROOT = env('MEDIA_ROOT')
+
 MEDIA_URL = '/media/'
+if CDN_DOMAIN:
+    MEDIA_URL = 'https://' + CDN_DOMAIN + MEDIA_URL
 
 
 # Wagtail settings

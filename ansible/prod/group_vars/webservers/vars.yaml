@@ -8,6 +8,8 @@ collectd_plugin_memcached: on
 collectd_plugin_nginx: on
 collectd_plugin_write_graphite: "{{ vault_collectd_plugin_write_graphite }}"
 
+cdn_domain: "{{ vault_cdn_domain }}"
+
 domain: "{{ vault_domain }}"
 
 dbuser: "{{ vault_dbuser }}"
