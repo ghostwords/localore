@@ -17,6 +17,7 @@ from wagtail.wagtailembeds.exceptions import EmbedException
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
+from localore_core.models import LocalorePromoteFields
 from localore.embeds import get_default_finder
 
 
@@ -28,7 +29,7 @@ DISPATCH_TYPE_CHOICES = (
 )
 
 
-class DispatchPage(Page):
+class DispatchPage(Page, LocalorePromoteFields):
     date = models.DateField(default=datetime.date.today)
     is_featured = models.BooleanField(
         "featured",
@@ -83,6 +84,8 @@ class DispatchPage(Page):
         FieldPanel('dispatch_type'),
         FieldPanel('embed_url'),
     ]
+
+    promote_panels = LocalorePromoteFields.promote_panels
 
     parent_page_types = ['dispatches.DispatchesIndexPage']
     subpage_types = []
@@ -170,7 +173,7 @@ class DispatchPage(Page):
         verbose_name = "Dispatch"
 
 
-class DispatchesIndexPage(Page):
+class DispatchesIndexPage(Page, LocalorePromoteFields):
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
 
@@ -185,6 +188,8 @@ class DispatchesIndexPage(Page):
         FieldPanel('intro', classname="full"),
         FieldPanel('default_dispatch_type'),
     ]
+
+    promote_panels = LocalorePromoteFields.promote_panels
 
     subpage_types = ['dispatches.DispatchPage']
 

@@ -3,6 +3,7 @@ strictness: veryhigh
 pylint:
   disable:
     - C0103
+    - R0901
     - R0903
     - W0105
     - W0232

@@ -1,8 +1,24 @@
 {% spaceless %}
 
-{% load staticfiles wagtailcore_tags wagtailuserbar localore_core_tags kwacros %}
+{% load staticfiles wagtailcore_tags wagtailimages_tags wagtailuserbar localore_core_tags kwacros %}
 
 {% kwacro title %}{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_postfix %} | Localore: Finding America{% endblock %}{% endkwacro %}
+
+{% image page.social_image width-320 as social_img %}
+
+{% get_site_hostname as site_hostname %}
+
+{% kwacro social_image_url %}{% spaceless %}
+	{% if page.social_image %}
+		{% if social_img.url|slice:':4' == 'http' %}
+			{{ social_img.url }}
+		{% else %}
+			{{ request.scheme }}://{{ site_hostname }}{{ social_img.url }}
+		{% endif %}
+	{% else %}
+		https://i.imgur.com/jOAZfzW.jpg
+	{% endif %}
+{% endspaceless %}{% endkwacro %}
 
 {% endspaceless %}<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -22,16 +38,16 @@
 		<meta property="og:site_name" content="Localore: Finding America">
 		<meta property="og:title" content="{% usekwacro title %}">
 		<meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}From 15 communities across the country, we share intimate stories, explore what connects disparate people, and watch a social media portrait of America unfold in real time.{% endif %}">
-		<meta property="og:url" content="https://{{ request.site.hostname }}{{ page.url }}">
-		<meta property="og:image" content="http://i.imgur.com/jOAZfzW.jpg">
+		<meta property="og:url" content="{{ request.scheme }}://{{ site_hostname }}{{ page.url }}">
+		<meta property="og:image" content="{% usekwacro social_image_url %}">
 		<meta property="og:type" content="website">
 
 		{# Twitter Cards META #}
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:title" content="{% usekwacro title %}">
 		<meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}From 15 communities across the country, we share intimate stories, explore what connects disparate people, and watch a social media portrait of America unfold in real time.{% endif %}">
-		<meta name="twitter:url" content="https://{{ request.site.hostname }}{{ page.url }}">
-		<meta name="twitter:image" content="http://i.imgur.com/jOAZfzW.jpg">
+		<meta name="twitter:url" content="{{ request.scheme }}://{{ site_hostname }}{{ page.url }}">
+		<meta name="twitter:image" content="{% usekwacro social_image_url %}">
 
 		<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700|Roboto:400,300,100,500,700,300italic,400italic,100italic,500italic,700italic' rel='stylesheet' type='text/css'>
 

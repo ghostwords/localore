@@ -4,6 +4,15 @@ register = template.Library()
 
 
 @register.assignment_tag(takes_context=True)
+def get_site_hostname(context):
+    site = context['request'].site
+    return "{}{}".format(
+        site.hostname,
+        ':' + str(site.port) if site.port != 80 else ''
+    )
+
+
+@register.assignment_tag(takes_context=True)
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
     # so object-comparison to self will return false as objects would differ

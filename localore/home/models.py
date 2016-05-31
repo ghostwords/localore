@@ -11,8 +11,10 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+from localore_core.models import LocalorePromoteFields
 
-class HomePage(Page):
+
+class HomePage(Page, LocalorePromoteFields):
     site_intro = RichTextField(blank=True)
 
     related_content_title = models.CharField(
@@ -122,6 +124,8 @@ class HomePage(Page):
         ], "Fullscreen video"),
         FieldPanel('live_feed_intro', classname="full"),
     ]
+
+    promote_panels = LocalorePromoteFields.promote_panels
 
     parent_page_types = []
 

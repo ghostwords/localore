@@ -28,6 +28,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
 
+from localore_core.models import LocalorePromoteFields
+
 
 class AssociatedProduction(models.Model):
     production_page = models.ForeignKey(
@@ -106,7 +108,7 @@ class BlogBodyBlock(StreamBlock):
     )
 
 
-class BlogPage(Page):
+class BlogPage(Page, LocalorePromoteFields):
     subtitle = models.CharField(max_length=255, blank=True)
 
     video_poster_image = models.ForeignKey(
@@ -198,7 +200,7 @@ class BlogPage(Page):
         index.SearchField('body', partial_match=True),
     )
 
-    # admin editor panels config
+    # admin editor content panels config
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
         MultiFieldPanel([
@@ -223,6 +225,9 @@ class BlogPage(Page):
         InlinePanel('associated_productions', label="Associated Productions"),
         InlinePanel('related_posts', label="Related Connections"),
     ]
+
+    # admin editor metadata panels config
+    promote_panels = LocalorePromoteFields.promote_panels
 
     # parent page/subpage type rules
     parent_page_types = ['blog.BlogIndexPage']
@@ -326,7 +331,7 @@ class RelatedLink(LinkFields):
         abstract = True
 
 
-class BlogIndexPage(Page):
+class BlogIndexPage(Page, LocalorePromoteFields):
     subtitle = models.CharField(max_length=255, blank=True)
 
     intro = RichTextField(blank=True)
@@ -335,6 +340,8 @@ class BlogIndexPage(Page):
         FieldPanel('subtitle', classname="full"),
         FieldPanel('intro', classname="full"),
     ]
+
+    promote_panels = LocalorePromoteFields.promote_panels
 
     subpage_types = ['blog.BlogPage']
 

@@ -18,6 +18,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from blog.models import BlogBodyBlock, BlogPageAssociatedProduction
+from localore_core.models import LocalorePromoteFields
 
 
 class LinkField(models.Model):
@@ -99,7 +100,7 @@ class ProductionPageJuicerSource(JuicerSourceField):
     page = ParentalKey('ProductionPage', related_name='juicer_sources')
 
 
-class ProductionPage(Page):
+class ProductionPage(Page, LocalorePromoteFields):
     city = models.CharField(max_length=255)
     state = USStateField()
 
@@ -193,6 +194,8 @@ class ProductionPage(Page):
         InlinePanel('juicer_sources', label="Juicer sources"),
     ]
 
+    promote_panels = LocalorePromoteFields.promote_panels
+
     parent_page_types = ['productions.ProductionsIndexPage']
     subpage_types = []
 
@@ -218,7 +221,7 @@ class ProductionPage(Page):
         verbose_name = "Production"
 
 
-class ProductionsIndexPage(Page):
+class ProductionsIndexPage(Page, LocalorePromoteFields):
     DISPLAY_TYPE_GRID = 'g'
     DISPLAY_TYPE_LIST = 'l'
     DISPLAY_TYPE_CHOICES = (
@@ -241,6 +244,8 @@ class ProductionsIndexPage(Page):
         FieldPanel('intro', classname='full'),
         FieldPanel('default_view', widget=RadioSelect),
     ]
+
+    promote_panels = LocalorePromoteFields.promote_panels
 
     subpage_types = ['productions.ProductionPage']
 
