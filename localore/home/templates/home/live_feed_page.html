@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load staticfiles wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+<div class="container-full">
+
+	<section class="live-feed" id="livefeed">
+		<div class="container">
+			<h4>{{ page.title }}</h4>
+			{% if page.live_feed_intro %}
+			{{ page.live_feed_intro|richtext }}
+			{% endif %}
+		</div>
+	</section>
+
+	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
+	{% if juicer_feed_id %}
+	<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-style="image-grid" data-per="50" data-pages="2" data-after="checkViewHeight()"></ul>
+	{% endif %}
+	{% endwith %}
+
+</div>
+
+{% endblock %}

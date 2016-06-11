@@ -147,3 +147,18 @@ class HomePage(Page, LocalorePromoteFields):
 
     class Meta:
         verbose_name = "Homepage"
+
+
+class LiveFeedPage(Page, LocalorePromoteFields):
+    live_feed_intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('live_feed_intro', classname="full"),
+    ]
+
+    promote_panels = LocalorePromoteFields.promote_panels
+
+    child_page_types = []
+
+    class Meta:
+        verbose_name = "Live Feed"
