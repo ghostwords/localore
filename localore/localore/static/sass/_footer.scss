@@ -2,7 +2,9 @@ footer {
   padding: 4em 3em;
   background-color: #000;
 
-
+  .template-homepage & {
+    display: none;
+  }
 
   @include media($mobile) {
     padding: 3em 1.5em;

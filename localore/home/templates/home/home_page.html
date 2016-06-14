@@ -40,9 +40,9 @@
 			<div id="youtube-embed"></div>
 		</div>
 		<div class="play-icon accessible" tabindex="0"></div>
-		<div class="view-more accessible" tabindex="0">
+		<!-- <div class="view-more accessible" tabindex="0">
 			LIVE FEED
-		</div>
+		</div> -->
 		{% if page.view_more_page %}
 			<div class="after-link">
 				<a href="{% pageurl page.view_more_page %}">{{ page.view_more_title }}</a>
@@ -50,18 +50,18 @@
 		{% endif %}
 	</section>
 
-	<section class="live-feed" id="livefeed">
+	<!-- <section class="live-feed" id="livefeed">
 		<div class="container">
 			<h4>Live Feed</h4>
 			{% if page.live_feed_intro %}
 			{{ page.live_feed_intro|richtext }}
 			{% endif %}
 		</div>
-	</section>
+	</section> -->
 
 	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
 	{% if juicer_feed_id %}
-	<ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-style="image-grid" data-per="50" data-pages="2" data-after="checkViewHeight()"></ul>
+	<!-- <ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-style="image-grid" data-per="50" data-pages="2" data-after="checkViewHeight()"></ul> -->
 	{% endif %}
 	{% endwith %}
 
