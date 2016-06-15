@@ -44,6 +44,7 @@
     height: 100%;
 
     @include media($mobile) {
+      display: block;
       background-color: #4A4A4A;
     }
   }
@@ -51,7 +52,7 @@
   @include media($mobile) {
     position: static;
     @include transform(none);
-
+    height: auto;
   }
 
   .further-link {
