@@ -40,15 +40,42 @@
 			<div id="youtube-embed"></div>
 		</div>
 		<div class="play-icon accessible" tabindex="0"></div>
-		<!-- <div class="view-more accessible" tabindex="0">
-			LIVE FEED
-		</div> -->
+		<div class="view-more accessible" tabindex="0">
+			VIEW MORE
+		</div>
 		{% if page.view_more_page %}
 			<div class="after-link">
 				<a href="{% pageurl page.view_more_page %}">{{ page.view_more_title }}</a>
 			</div>
 		{% endif %}
 	</section>
+
+
+	{#
+		TODO: need urls, titles, and subtitles for these.
+					all should be mandatory (including subtitles)
+					and there should always be 3 links
+	 #}
+	<div class="further-links">
+		<a class="further-link" href="http://google.com">
+			<div>
+				<h1>15 Communities</h1>
+				<h4>Lorem ipsum dolor sit this thing is long</h4>
+			</div>
+		</a>
+		<a class="further-link" href="http://google.com">
+			<div>
+				<h1>How They Connect</h1>
+				<h4>Lorem ipsum dolor sit this thing is long</h4>
+			</div>
+		</a>
+		<a class="further-link" href="http://google.com">
+			<div>
+				<h1>How They Connect</h1>
+				<h4>Lorem ipsum dolor sit this thing is long</h4>
+			</div>
+		</a>
+	</div>
 
 	<!-- <section class="live-feed" id="livefeed">
 		<div class="container">

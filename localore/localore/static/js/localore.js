@@ -122,8 +122,9 @@ $(function() {
 
   $('#intro, .intro-enter-btn').click(function () {
     $('.intro-section').removeClass('show');
+    $('body').removeClass('intro');
     setTimeout(function(){
-      $('body').removeClass('intro');
+      // $('body').removeClass('intro');
       $('#intro').css("display", "none");
     }, 750);
   });

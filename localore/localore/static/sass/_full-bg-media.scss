@@ -148,6 +148,18 @@
     bottom: 15vh;
   }
 
+
+    body.template-homepage & {
+
+      display: none;
+
+      @include media($mobile) {
+        display: block;
+      }
+    }
+
+
+
   &:hover {
     cursor: pointer;
     opacity: 1;

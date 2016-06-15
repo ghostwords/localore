@@ -1,5 +1,6 @@
 $(function() {
 
+  var $body = $('body');
   var $play = $('.play-icon');
   var $viewMore = $('.view-more');
   var $mainVideo = $('#main-video');
@@ -9,6 +10,7 @@ $(function() {
   var $previewMobile = $('.preview-mobile');
   var $title = $('#title');
   var $header = $('header');
+  var $further = $('.further-links');
 
   if(jQuery.browser.mobile) {
     $previewDesktop.hide();
@@ -59,8 +61,12 @@ $(function() {
     // video playing
     else if (event.data === 1) {
       // console.log('play');
+      $body.addClass('video-playing');
       $play.addClass('pause');
-      if(!window.IS_360_VIDEO) $('.hero-section').append('<div id="video-overlay"></div>');
+      $further.fadeOut(600);
+      if(!window.IS_360_VIDEO) {
+        $('.hero-section').append('<div id="video-overlay"></div>');
+      }
       else {
         $play.removeClass('show');
         $viewMore.addClass('hide');
@@ -72,23 +78,29 @@ $(function() {
     // video paused
     else if (event.data === 2) {
       // console.log('paused');
+      $body.removeClass('video-playing');
+      $further.fadeIn(600);
       $play.removeClass('pause').addClass('show');
       $viewMore.removeClass('hide');
-      if(!window.IS_360_VIDEO) $('#video-overlay').remove();
+      if(!window.IS_360_VIDEO) {
+        $('#video-overlay').remove();
+      }
       else {
         $play.addClass('show');
         $viewMore.removeClass('hide');
         $title.fadeIn(600);
-        $header.fadeIn(600);
       }
       videoPlaying = false;
     }
     // video ended
     else if (event.data === 0) {
+
+      $body.removeClass('video-playing');
       if(!window.IS_360_VIDEO) $('#video-overlay').remove();
       $viewMore.removeClass('hide');
       $title.fadeIn(600);
       $header.fadeIn(600);
+      $further.fadeIn(600);
       $('.after-link').addClass('show');
     }
   }
@@ -123,6 +135,8 @@ $(function() {
 
   $play.one('click', function(e) {
 
+    $body.addClass('video-playing');
+    $further.fadeOut(600);
     $preview.fadeOut(1250);
     $mainVideo.addClass('playing');
     $play.removeClass('show');
