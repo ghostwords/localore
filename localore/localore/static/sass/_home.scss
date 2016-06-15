@@ -58,15 +58,15 @@
 
     @include span-columns(4);
     position: relative;
-    padding: 30px 60px 30px 20px;
+    padding: 30px 60px 30px 50px;
 
     background: url('../images/dispatch_next.png') no-repeat center;
     background-size: 29px 51px;
-    background-position: calc(100% - 70px) center;
+    background-position: calc(100% - 50px) center;
 
     &:hover {
       text-decoration: none;
-      background-position: calc(100% - 60px) center;
+      background-position: calc(100% - 40px) center;
     }
 
     @for $i from 1 through 3 {
