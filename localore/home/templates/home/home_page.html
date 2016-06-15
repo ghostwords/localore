@@ -77,21 +77,6 @@
 		</a>
 	</div>
 
-	<!-- <section class="live-feed" id="livefeed">
-		<div class="container">
-			<h4>Live Feed</h4>
-			{% if page.live_feed_intro %}
-			{{ page.live_feed_intro|richtext }}
-			{% endif %}
-		</div>
-	</section> -->
-
-	{% with juicer_feed_id=settings.localore_admin.JuicerSettings.juicer_feed_id %}
-	{% if juicer_feed_id %}
-	<!-- <ul class="juicer-feed" data-feed-id="{{ juicer_feed_id }}" data-style="image-grid" data-per="50" data-pages="2" data-after="checkViewHeight()"></ul> -->
-	{% endif %}
-	{% endwith %}
-
 </div>
 
 <div id="intro">
@@ -136,21 +121,6 @@
 		</div>
 	</div>
 </div>
-
-{% comment %}
-<!-- <div class="modal fade" id="homeVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<a class="modal-close" data-dismiss="modal" aria-label="Close">
-		<span aria-hidden="true">×</span>
-	</a>
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body embed-responsive embed-responsive-16by9">
-				<div id="modal-player" class=""></div>
-			</div>
-		</div>
-	</div>
-</div> -->
-{% endcomment %}
 
 <script type="text/javascript">
 	// Load the IFrame Player API code asynchronously.

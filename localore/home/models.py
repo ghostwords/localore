@@ -100,8 +100,6 @@ class HomePage(Page, LocalorePromoteFields):
         related_name='+'
     )
 
-    live_feed_intro = RichTextField(blank=True)
-
     content_panels = Page.content_panels + [
         FieldPanel('site_intro', classname="full"),
         MultiFieldPanel([
@@ -122,7 +120,6 @@ class HomePage(Page, LocalorePromoteFields):
             FieldPanel('view_more_title'),
             PageChooserPanel('view_more_page'),
         ], "Fullscreen video"),
-        FieldPanel('live_feed_intro', classname="full"),
     ]
 
     promote_panels = LocalorePromoteFields.promote_panels
