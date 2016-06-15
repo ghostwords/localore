@@ -118,11 +118,14 @@ $(function() {
     $('body').addClass('intro');
     $('#intro').css("display", "block");
     $('.intro-section').addClass('show');
+  } else if(getCookie('has_visited')) {
+    $('.further-link').addClass('init');
   }
 
   $('#intro, .intro-enter-btn').click(function () {
     $('.intro-section').removeClass('show');
     $('body').removeClass('intro');
+    $('.further-link').addClass('init');
     setTimeout(function(){
       // $('body').removeClass('intro');
       $('#intro').css("display", "none");

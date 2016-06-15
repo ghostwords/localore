@@ -14,11 +14,10 @@
 
   position: fixed;
   height: 20vh;
+  width: 100%;
   bottom: 0;
   left: 50%;
   @include transform(translateX(-50%));
-  @include row(table);
-  max-width: 80em;
   z-index: 15;
 
   &:after {
@@ -30,12 +29,29 @@
     @include background-image(linear-gradient(bottom, rgba(10,9,9,0.95) 0%, rgba(0,0,0,0) 100%));
     // @include transition(all 600ms ease-out);
     pointer-events: none;
+
+    @include media($mobile) {
+      display: none;
+    }
+  }
+
+  // @include row(table);
+  // max-width: 80em;
+  & > div {
+    @include row(table);
+    max-width: 80em;
+    margin: 0 auto;
+    height: 100%;
+
+    @include media($mobile) {
+      background-color: #4A4A4A;
+    }
   }
 
   @include media($mobile) {
     position: static;
     @include transform(none);
-    background-color: #4A4A4A;
+
   }
 
   .further-link {
@@ -48,40 +64,44 @@
     background-size: 29px 51px;
     background-position: calc(100% - 70px) center;
 
-    -webkit-transition:background-position 300ms ease-out, transform 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000);
-    -moz-transition:background-position 300ms ease-out, transform 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000);
-    -o-transition:background-position 300ms ease-out, transform 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000);
-    transition:background-position 300ms ease-out, transform 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000);
+    &:hover {
+      text-decoration: none;
+      background-position: calc(100% - 60px) center;
+    }
 
-    @for $i from 0 through 2 {
-      &:nth-child(#{$i+1}) {
-       @include transition-delay(200ms * $i);
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        -webkit-transition:background-position 200ms cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 600ms (200ms * $i) cubic-bezier(0.075, 0.820, 0.165, 1.000);
+        -moz-transition:background-position 200ms cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 600ms (200ms * $i) cubic-bezier(0.075, 0.820, 0.165, 1.000);
+        -o-transition:background-position 200ms cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 600ms (200ms * $i) cubic-bezier(0.075, 0.820, 0.165, 1.000);
+        transition:background-position 200ms cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 600ms (200ms * $i) cubic-bezier(0.075, 0.820, 0.165, 1.000);
       }
     }
 
-    body.intro &,  body.video-playing & {
+    @include transform(translateY(100%));
+
+    &.init {
+      @include transform(translateY(0%));
+    }
+
+    body.video-playing & {
       @include transform(translateY(100%));
     }
+
 
     & > div {
       @include vertical-align(absolute);
       width: 70%;
 
-
-      @include media($desktop-xl-max) {
-        width: 75%;
-      }
+      // @include media($desktop-xl-max) {
+      //   width: 75%;
+      // }
       @include media($mobile) {
         position: static;
         @include transform(none);
         width: 87%;
       }
 
-    }
-
-    &:hover {
-      text-decoration: none;
-      background-position: calc(100% - 60px) center;
     }
 
     h1, h4 {
@@ -98,7 +118,7 @@
       font-size: em(14);
       font-weight: 300;
       opacity: 0.7;
-      letter-spacing: 5px;
+      letter-spacing: 4px;
       line-height: 1.35;
       margin-top: 7px;
       margin-bottom: 0;
