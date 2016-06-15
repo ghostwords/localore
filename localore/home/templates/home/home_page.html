@@ -51,30 +51,15 @@
 	</section>
 
 
-	{#
-		TODO: need urls, titles, and subtitles for these.
-					all should be mandatory (including subtitles)
-					and there should always be 3 links
-	 #}
 	<div class="further-links">
-		<a class="further-link" href="http://google.com">
+	{% for item in page.featured_pages.all %}
+		<a class="further-link" href="{% pageurl item.featured_page %}">
 			<div>
-				<h1>15 Communities</h1>
-				<h4>Lorem ipsum dolor sit this thing is long</h4>
+				<h1>{{ item.title|default:item.featured_page }}</h1>
+				<h4>{{ item.subtitle }}</h4>
 			</div>
 		</a>
-		<a class="further-link" href="http://google.com">
-			<div>
-				<h1>How They Connect</h1>
-				<h4>Lorem ipsum dolor sit this thing is long</h4>
-			</div>
-		</a>
-		<a class="further-link" href="http://google.com">
-			<div>
-				<h1>How They Connect</h1>
-				<h4>Lorem ipsum dolor sit this thing is long</h4>
-			</div>
-		</a>
+	{% endfor %}
 	</div>
 
 </div>

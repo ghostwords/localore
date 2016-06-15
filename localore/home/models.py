@@ -1,17 +1,49 @@
 from django.db import models
 from django.utils.html import format_html
 
+from modelcluster.fields import ParentalKey
+
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    PageChooserPanel,
+    InlinePanel,
     MultiFieldPanel,
+    PageChooserPanel,
 )
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from localore_core.models import LocalorePromoteFields
+
+
+class FeaturedPage(models.Model):
+    featured_page = models.ForeignKey(
+        'wagtailcore.Page',
+        verbose_name="page to feature",
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+
+    title = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Leave blank to use page title.")
+
+    subtitle = models.CharField(max_length=255)
+
+    panels = [
+        PageChooserPanel('featured_page'),
+        FieldPanel('title'),
+        FieldPanel('subtitle'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class HomePageFeaturedPage(Orderable, FeaturedPage):
+    home_page = ParentalKey('HomePage', related_name='featured_pages')
 
 
 class HomePage(Page, LocalorePromoteFields):
@@ -120,6 +152,12 @@ class HomePage(Page, LocalorePromoteFields):
             FieldPanel('view_more_title'),
             PageChooserPanel('view_more_page'),
         ], "Fullscreen video"),
+        InlinePanel(
+            'featured_pages',
+            label="Featured Pages",
+            min_num=3,
+            max_num=3,
+        ),
     ]
 
     promote_panels = LocalorePromoteFields.promote_panels
