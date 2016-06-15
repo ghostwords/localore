@@ -17,4 +17,10 @@
   notify:
    - restart uWSGI
 
+- name: Fix shell completion for uWSGI Upstart service
+  file:
+    state: link
+    src: /lib/init/upstart-job
+    path: /etc/init.d/uwsgi-{{ domain }}
+
 # TODO emperor mode: http://daeyunshin.com/2013/01/06/nginx-uwsgi-django-flask-deployment.html
