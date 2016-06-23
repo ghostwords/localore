@@ -3,7 +3,7 @@
 server {
 	listen [::]:80;
 	listen 80;
-	server_name {{ domain }};
+	server_name {{ domain }} www.{{ domain }};
 
 	# serve ACME challenge files over HTTP
 	location /.well-known/acme-challenge/ {
@@ -18,6 +18,19 @@ server {
 	location / {
 		return 301 https://{{ domain }}$request_uri;
 	}
+}
+
+# redirect HTTPS www to non-www
+server {
+	listen [::]:443 ssl spdy;
+	listen 443 ssl spdy;
+	server_name www.{{ domain }};
+
+	ssl_certificate /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ domain }}/key.pem;
+	include /etc/nginx/ssl.conf;
+
+	return 301 https://{{ domain }}$request_uri;
 }
 
 server {
