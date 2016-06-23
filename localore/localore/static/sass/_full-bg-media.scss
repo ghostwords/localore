@@ -1,7 +1,6 @@
 .hero-section {
   height: 100vh;
   position: relative;
-  overflow: hidden;
 
   &.hero-section-3by4 {
     height: 75vh;
@@ -80,6 +79,7 @@
 
 .full-bg-video {
   @include abs-position();
+  overflow: hidden;
 }
 
 .full-bg-image {
