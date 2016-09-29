@@ -54,7 +54,7 @@ server {
 	}
 
 	location = /robots.txt {
-		alias /var/www/{{ domain }}/current/robots.txt;
+		alias /var/www/{{ domain }}/current/robots{% if inventory_dir|basename == "staging" %}_staging{% endif %}.txt;
 	}
 
 	location /static {
