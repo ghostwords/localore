@@ -21,11 +21,11 @@ class AboutMissionPage(Page, LocalorePromoteFields):
     description = RichTextField()
     org_description = RichTextField(verbose_name="Organizational Description")
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('subtitle', partial_match=True),
         index.SearchField('description', partial_match=True),
         index.SearchField('org_description', partial_match=True),
-    )
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
@@ -51,10 +51,10 @@ class AboutTeamPage(Page, LocalorePromoteFields):
     subtitle = models.CharField(max_length=255, blank=True)
     description = RichTextField()
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('subtitle', partial_match=True),
         index.SearchField('description', partial_match=True),
-    )
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
@@ -96,10 +96,10 @@ class AboutContactPage(Page, LocalorePromoteFields):
     subtitle = models.CharField(max_length=255, blank=True)
     contact_information = RichTextField()
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('subtitle', partial_match=True),
         index.SearchField('contact_information', partial_match=True),
-    )
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),

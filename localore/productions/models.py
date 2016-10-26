@@ -153,14 +153,14 @@ class ProductionPage(Page, LocalorePromoteFields):
         blank=True,
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('city'),
         index.SearchField('state'),
         index.SearchField('get_state_display'),
         index.SearchField('host_station_call_sign'),
         index.SearchField('description', partial_match=True),
         index.SearchField('highlights', partial_match=True),
-    )
+    ]
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([

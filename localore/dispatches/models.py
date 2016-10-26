@@ -63,12 +63,12 @@ class DispatchPage(Page, LocalorePromoteFields):
         help_text="YouTube or SoundCloud"
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('city'),
         index.SearchField('state'),
         index.SearchField('get_state_display'),
         index.SearchField('description', partial_match=True),
-    )
+    ]
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([

@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'wagtail.contrib.settings',
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.contrib.wagtailsitemaps',
+    'wagtail.contrib.modeladmin',
 
     # needs to go after wagtaildocs to remove its site summary
     'localore_admin',
@@ -121,8 +122,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'wagtailmodeladmin',
 )
 if DEBUG:
     INSTALLED_APPS += (
@@ -162,8 +161,6 @@ MIDDLEWARE_CLASSES = (
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-
-    'wagtailmodeladmin.middleware.ModelAdminMiddleware',
 )
 if DEBUG:
     MIDDLEWARE_CLASSES = (

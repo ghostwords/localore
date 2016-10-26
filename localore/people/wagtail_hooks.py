@@ -5,10 +5,10 @@ from wagtail.wagtailadmin.search import SearchArea
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailsnippets.permissions import user_can_edit_snippet_type
 
-from wagtailmodeladmin.options import (
+from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
-    ThumbmnailMixin,
-    wagtailmodeladmin_register
+    ThumbnailMixin,
+    modeladmin_register
 )
 
 from people.models import Person
@@ -23,13 +23,13 @@ class PeopleSearchArea(SearchArea):
 def register_people_search_area():
     return PeopleSearchArea(
         'Team Members',
-        reverse('people_person_modeladmin_index/'),
+        reverse('people_person_modeladmin_index'),
         classnames='icon icon-group',
         order=150
     )
 
 
-class PersonThumbnailMixin(ThumbmnailMixin):
+class PersonThumbnailMixin(ThumbnailMixin):
     thumb_image_field_name = 'photo'
 
 
@@ -40,13 +40,14 @@ class PeopleAdmin(ModelAdmin):
     menu_order = 300
     list_display = ('profile_photo', 'full_name', 'role_and_production')
     list_filter = ('role', 'production')
-    search_fields = (
+    list_per_page = 50
+    search_fields = [
         'first_name',
         'last_name',
         'role',
         'biography',
         'production__title',
-    )
+    ]
 
     def profile_photo(self, obj): # pylint: disable=no-self-use
         return PersonThumbnailMixin().admin_thumb(obj)
@@ -80,4 +81,4 @@ class PeopleAdmin(ModelAdmin):
     full_name.short_description = 'name'
     full_name.admin_order_field = 'last_name'
 
-wagtailmodeladmin_register(PeopleAdmin)
+modeladmin_register(PeopleAdmin)

@@ -45,10 +45,10 @@ class Person(models.Model, index.Indexed):
     instagram_url = models.URLField("Instagram URL", blank=True)
 
     # Wagtail search
-    search_fields = (
+    search_fields = [
         index.SearchField('first_name'),
         index.SearchField('last_name'),
-    )
+    ]
 
     # Wagtail admin
     panels = [

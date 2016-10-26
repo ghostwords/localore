@@ -194,11 +194,11 @@ class BlogPage(Page, LocalorePromoteFields):
     body = StreamField(BlogBodyBlock)
 
     # search index config
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('subtitle', partial_match=True),
         index.SearchField('intro', partial_match=True),
         index.SearchField('body', partial_match=True),
-    )
+    ]
 
     # admin editor content panels config
     content_panels = Page.content_panels + [
