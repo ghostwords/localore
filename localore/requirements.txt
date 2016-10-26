@@ -9,10 +9,9 @@ django_overextends==0.4.1
 django_storages_redux==1.3.2
 elasticsearch>=1.0.0,<2.0.0
 embedly==0.5.0
-html5lib==0.999999
 psycopg2==2.6.1
 pylibmc==1.5.1
 pytz
-wagtail==1.4.3
+wagtail==1.4.6
 wagtailmodeladmin==2.5.0
 Wand==0.4.2
