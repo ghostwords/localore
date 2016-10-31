@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'home',
     'localore_core',
     'people',
+    'president',
     'productions',
     'search',
 

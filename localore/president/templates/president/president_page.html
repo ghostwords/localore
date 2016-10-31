@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load about_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-president-page{% endblock %}
+
+{% block content %}
+
+<div id="title" class="title title-about">
+	<div>
+		<h6><a href="{% pageurl page.get_parent %}">{{ page.get_parent }}</a></h6>
+		<h2>{{ page.title }}</h2>
+		<h3>{{ page.subtitle}}</h3>
+		{% with prev=page.prev_post next=page.next_post %}
+			{% if prev %}
+				<a href="{% pageurl prev %}" title="{{ prev }}" class="title-nav title-prev"></a>
+			{% endif %}
+			{% if next %}
+				<a href="{% pageurl next %}" title="{{ next }}" class="title-nav title-next"></a>
+			{% endif %}
+		{% endwith %}
+	</div>
+</div>
+
+<div class="hero-section hero-section-3by4">
+	{% image page.hero_image max-2000x2000 as hero_image %}
+	<div class="full-bg-image" style="background-image:url({{ hero_image.url }})"></div>
+	{% if page.image_credit_caption %}
+		<div class="hero-section-caption hero-section-caption-desktop">{{ page.image_credit_caption|richtext }}</div>
+		<span class="hero-section-caption hero-section-caption-mobile" data-trigger="click" data-toggle="tooltip" data-placement="left" title="{{ page.image_credit_caption|striptags }}"></span>
+	{% endif %}
+</div>
+
+<div class="text-description">
+	<div class="container">
+		{{ page.intro }}
+		Aired on {{ page.aired_on_date }}. NPR logo.
+	</div>
+</div>
+
+{% if page.body %}
+<div class="container">
+	{{ page.body }}
+</div>
+{% endif %}
+
+<h4>We want to hear from you</h4>
+<b>Share your story</b>
+{{ page.get_parent.specific.share_your_store_text|richtext }}
+
+{% endblock %}

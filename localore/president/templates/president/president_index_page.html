@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-president-index{% endblock %}
+
+{% block content %}
+
+<div id="title" class="title title-about">
+	<div>
+		<h1>{{ page.title }}</h1>
+		<h3>{{ page.subtitle }}</h3>
+	</div>
+</div>
+
+<div class="description">
+	{% if page.intro %}{{ page.intro|richtext }}{% endif %}
+</div>
+
+<div class="container-full">
+
+	<div class="prod-grid">
+
+		{% for post in page.posts %}
+
+			{% if forloop.counter0|divisibleby:3 %}<div class="prod-grid-row">{% endif %}
+
+			{% image post.tile_image|default:post.hero_image max-800x800 as tile_image %}
+			<div class="prod-grid-item post-item">
+				<div class="post-item-bg" style="background-image:url({{ tile_image.url }})"></div>
+				<a class="post-item-link" href="{% pageurl post %}">
+					<div class="post-item-content">
+						<span class="post-item-title">{{ post.title }}</span>
+					</div>
+				</a>
+			</div>
+
+			{% if forloop.counter|divisibleby:3 %}</div>{% endif %}
+
+		{% empty %}
+
+			<h3>No President Series posts.</h3>
+
+		{% endfor %}
+
+	</div>
+
+</div>
+
+<h4>We want to hear from you</h4>
+<b>Share your story</b>
+{{ page.share_your_store_text|richtext }}
+
+{% endblock %}
