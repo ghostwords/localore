@@ -13,8 +13,12 @@
 	</div>
 </div>
 
-<div class="description">
+<div class="description description-fluid">
 	{% if page.intro %}{{ page.intro|richtext }}{% endif %}
+
+	<a class="share-prompt" href="">
+		<h5>Share your story</h5>
+	</a>
 </div>
 
 <div class="container-full">
@@ -26,11 +30,12 @@
 			{% if forloop.counter0|divisibleby:3 %}<div class="prod-grid-row">{% endif %}
 
 			{% image post.tile_image|default:post.hero_image max-800x800 as tile_image %}
-			<div class="prod-grid-item post-item">
+			<div class="prod-grid-item post-item max-third">
 				<div class="post-item-bg" style="background-image:url({{ tile_image.url }})"></div>
 				<a class="post-item-link" href="{% pageurl post %}">
 					<div class="post-item-content">
 						<span class="post-item-title">{{ post.title }}</span>
+						<span class="post-item-loc">{{ post.subtitle }}</span>
 					</div>
 				</a>
 			</div>
@@ -47,8 +52,14 @@
 
 </div>
 
-<h4>We want to hear from you</h4>
-<b>Share your story</b>
-{{ page.share_your_store_text|richtext }}
+<div class="connection-more">
+	<div class="container">
+		<h6>We want to hear from you</h6>
+		<a href="" class="link-large">Share your story</a>
+	</div>
+</div>
+
+	{# page.share_your_store_text|richtext #}
+
 
 {% endblock %}

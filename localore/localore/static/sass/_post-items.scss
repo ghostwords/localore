@@ -112,4 +112,14 @@
       }
     }
   }
+
+  &.max-third {
+    display: inline-block;
+    width: 33%;
+
+    @include media($tablet) {
+      display: table-cell;
+      width: 100%;
+    }
+  }
 }

@@ -63,6 +63,57 @@ body {
   width: 100%;
   position: relative;
 
+  &.description-fluid {
+
+    height: auto;
+    text-align: center;
+    background: url('../images/header_bg.jpg');
+    background-size: cover;
+    padding-top: $header-title + 45px;
+
+    @include media($header-size) {
+      padding-top: 85px;
+    }
+
+    .rich-text {
+      position: relative;
+      display: inline-block;
+      @include transform(none);
+      left: inherit;
+      bottom: inherit;
+    }
+
+    .share-prompt {
+
+      display: block;
+      margin-top: 45px;
+      width: 100%;
+      background-color: rgba(0,0,0,0.6);
+      height: 85px;
+      position: relative;
+      @include transition(all 600ms ease-out);
+
+      h5 {
+        line-height: 85px;
+        color: $orange;
+        @include transition(all 600ms ease-out);
+      }
+
+      &:hover {
+
+        background-color: rgba(0,0,0,0.7);
+        text-decoration: none;
+
+        h5 {
+            // @include transform(scale(1.05));
+        }
+      }
+
+    }
+
+
+  }
+
   .rich-text {
     @include outer-container($grid-md);
     width: 75%;

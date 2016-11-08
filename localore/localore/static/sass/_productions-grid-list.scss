@@ -68,6 +68,7 @@
 .prod-grid {
   // display: table;
   @include fill-parent();
+  background-color: $dark-grey;
   // @include row(block);
 
 }
