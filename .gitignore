@@ -17,3 +17,5 @@ localore/localore/static/css
 localore/localore/static/dist
 .tmp
 localore/localore/templates/base.html
+.DS_Store
+venv/
