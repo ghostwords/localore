@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load about_tags wagtailcore_tags wagtailimages_tags %}
+{% load staticfiles about_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-president-page{% endblock %}
 
@@ -32,9 +32,15 @@
 </div>
 
 <div class="text-description">
-	<div class="container">
+	<div class="container no-padding">
 		{{ page.intro }}
-		Aired on {{ page.aired_on_date }}. NPR logo.
+
+		<div class="block-paragraph air-attribution">
+			<ul class="list-inline">
+			<li><p><em>Aired on {{ page.aired_on_date }}.</em></p></li>
+			<li><a href="http://www.npr.org/" target="_blank"><img src="{% static 'images/npr_logo.svg' %}" alt="NPR Logo" /></a></li>
+			</ul>
+		</div>
 	</div>
 </div>
 

@@ -40,6 +40,11 @@ body {
   //   width: 100%;
   // }
 
+  &.no-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
 }
 
 .container-full {
