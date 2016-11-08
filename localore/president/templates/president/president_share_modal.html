@@ -1,0 +1,18 @@
+<div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="share">
+  <div class="modal-close">
+    <a data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </a>
+  </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>{{ share_your_story_text|striptags }}</p>
+        <ul class="share-links list-inline">
+          <li><a class="facebook-share" href="" onclick="fbShare()"></a></li>
+          <li><a class="twitter-share" href="https://twitter.com/intent/tweet?hashtags=findingamerica&via=airmedia"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

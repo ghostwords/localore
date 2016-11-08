@@ -14,3 +14,62 @@
     height: 25px;
   }
 }
+
+#share {
+
+  .modal-dialog {
+    max-width: 45%;
+
+    @include media($mobile) {
+        max-width: 100%;
+    }
+  }
+
+  .modal-body {
+
+    p {
+      font-family: $roboto-reg;
+      color: #fff;
+    }
+
+    .share-links {
+
+      display: table;
+      width: 100%;
+      margin-top: 40px;
+
+      li {
+        display: table-cell;
+      }
+
+      a {
+        display: block;
+        height: 120px;
+
+        &.facebook-share {
+          background: url('../images/social/facebook.svg') no-repeat bottom center;
+          background-size: auto 100%;
+        }
+        &.twitter-share {
+          background: url('../images/social/twitter.svg') no-repeat bottom center;
+          background-size: auto 100%;
+        }
+      }
+    }
+
+    @include media($tablet) {
+      .share-links a {
+        height: 80px;
+      }
+    }
+
+    @include media($mobile) {
+
+      font-size: 85%;
+
+      .share-links a {
+        height: 50px;
+      }
+    }
+  }
+}

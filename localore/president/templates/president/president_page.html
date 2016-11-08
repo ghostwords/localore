@@ -53,10 +53,11 @@
 <div class="connection-more">
 	<div class="container">
 		<h6>We want to hear from you</h6>
-		<a href="" class="link-large">Share your story</a>
+		<a href="" class="link-large" data-toggle="modal" data-target="#share">Share your story</a>
 	</div>
 </div>
 
-{# page.get_parent.specific.share_your_store_text|richtext #}
+
+{% include "president/president_share_modal.html" with share_your_story_text=page.get_parent.specific.share_your_store_text %}
 
 {% endblock %}
