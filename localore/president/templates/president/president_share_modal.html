@@ -16,3 +16,37 @@
     </div>
   </div>
 </div>
+
+{% block extra_js %}
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+	{# Facebook Share #}
+	<script>
+	  window.fbAsyncInit = function() {
+		FB.init({
+		  // appId      : '111659572649977',    // debug
+		  appId      : '111649839317617',    // findingamerica.airmedia.org
+		  xfbml      : true,
+		  version    : 'v2.8'
+		});
+		FB.AppEvents.logPageView();
+	  };
+
+	  (function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement(s); js.id = id;
+		 js.src = "//connect.facebook.net/en_US/sdk.js";
+		 fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+
+		 window.fbShare = function() {
+			 FB.ui({
+				  method: 'share',
+					hashtag: '#findingamerica',
+				  href: '{{ request.scheme }}://{{ site_hostname }}{{ page.url }}'
+				  // href: '{{ request.scheme }}://findingamerica.airmedia.org/{{ page.url }}',
+				}, function(response){});
+		 };
+	</script>
+{% endblock %}
