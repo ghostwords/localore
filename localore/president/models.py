@@ -26,6 +26,7 @@ class PresidentPage(Page, LocalorePromoteFields):
         on_delete=models.SET_NULL,
         related_name='+',
         help_text=(
+            "Optional: "
             "The header/hero/feature image for this President Series post."
         )
     )
@@ -37,15 +38,14 @@ class PresidentPage(Page, LocalorePromoteFields):
         on_delete=models.SET_NULL,
         related_name='+',
         help_text=(
-            "Optional: "
-            "The image to use on the President Series index page. "
-            "Will use hero image if not set."
+            "The image to use on the President Series index page."
         )
     )
 
     image_credit_caption = RichTextField(
         verbose_name="credit caption",
-        blank=True
+        blank=True,
+        help_text="Optional: Goes under the hero image."
     )
 
     intro = StreamField(BlogBodyBlock)
@@ -67,9 +67,9 @@ class PresidentPage(Page, LocalorePromoteFields):
         FieldPanel('subtitle', classname='full'),
         FieldPanel('aired_on_date'),
         MultiFieldPanel([
+            ImageChooserPanel('tile_image'),
             ImageChooserPanel('hero_image'),
             FieldPanel('image_credit_caption'),
-            ImageChooserPanel('tile_image'),
         ], "Graphics"),
         StreamFieldPanel('intro'),
         StreamFieldPanel('body'),
