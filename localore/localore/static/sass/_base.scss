@@ -78,7 +78,13 @@ body {
 
     @include media($header-size) {
       padding-top: 85px;
+
+      .template-president-page & {
+        padding-top: 0;
+      }
     }
+
+
 
     .rich-text {
       position: relative;

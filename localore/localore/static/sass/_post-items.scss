@@ -115,7 +115,11 @@
 
   &.max-third {
     display: inline-block;
-    width: 33%;
+    width: 33.333%;
+
+    .prod-grid-row:not(:first-of-type) & {
+      margin-top: -7px;
+    }
 
     @include media($tablet) {
       display: table-cell;

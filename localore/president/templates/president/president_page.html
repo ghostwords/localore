@@ -22,6 +22,7 @@
 	</div>
 </div>
 
+{% if page.hero_image %}
 <div class="hero-section hero-section-3by4">
 	{% image page.hero_image max-2000x2000 as hero_image %}
 	<div class="full-bg-image" style="background-image:url({{ hero_image.url }})"></div>
@@ -30,6 +31,9 @@
 		<span class="hero-section-caption hero-section-caption-mobile" data-trigger="click" data-toggle="tooltip" data-placement="left" title="{{ page.image_credit_caption|striptags }}"></span>
 	{% endif %}
 </div>
+{% else %}
+<div class="description description-fluid"></div>
+{% endif %}
 
 <div class="text-description">
 	<div class="container no-padding">
