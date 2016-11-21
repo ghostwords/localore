@@ -113,14 +113,14 @@ class PresidentIndexPage(Page, LocalorePromoteFields):
 
     intro = RichTextField(blank=True)
 
-    share_your_store_text = RichTextField(
+    share_your_story_text = RichTextField(
         verbose_name="Share Your Story text"
     )
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname='full'),
         FieldPanel('intro', classname='full'),
-        FieldPanel('share_your_store_text', classname='full'),
+        FieldPanel('share_your_story_text', classname='full'),
     ]
 
     promote_panels = LocalorePromoteFields.promote_panels
