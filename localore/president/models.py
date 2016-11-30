@@ -129,8 +129,12 @@ class PresidentIndexPage(Page, LocalorePromoteFields):
 
     @property
     def posts(self):
+        if self.live:
+            children = PresidentPage.objects.live().descendant_of(self)
+        else:
+            children = PresidentPage.objects.descendant_of(self)
         return (
-            PresidentPage.objects.live().descendant_of(self)
+            children
             .select_related('hero_image', 'tile_image')
             .order_by('-aired_on_date', '-pk')
         )
