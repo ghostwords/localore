@@ -80,30 +80,6 @@ class PresidentPage(Page, LocalorePromoteFields):
     parent_page_types = ['president.PresidentIndexPage']
     subpage_types = []
 
-    @property
-    def prev_post(self):
-        ordered_posts = (
-            PresidentPage.objects.live().sibling_of(self, inclusive=True)
-            .order_by('-aired_on_date', '-pk')
-        )
-        prev_item = None
-        for item in ordered_posts:
-            if item == self:
-                return prev_item
-            prev_item = item
-
-    @property
-    def next_post(self):
-        ordered_posts = (
-            PresidentPage.objects.live().sibling_of(self, inclusive=True)
-            .order_by('aired_on_date', 'pk')
-        )
-        prev_item = None
-        for item in ordered_posts:
-            if item == self:
-                return prev_item
-            prev_item = item
-
     class Meta:
         verbose_name = "President Series Post"
 
@@ -133,11 +109,7 @@ class PresidentIndexPage(Page, LocalorePromoteFields):
             children = PresidentPage.objects.live().descendant_of(self)
         else:
             children = PresidentPage.objects.descendant_of(self)
-        return (
-            children
-            .select_related('hero_image', 'tile_image')
-            .order_by('-aired_on_date', '-pk')
-        )
+        return children.select_related('hero_image', 'tile_image')
 
     class Meta:
         verbose_name = "President Series Index"

@@ -11,7 +11,7 @@
 		<h6><a href="{% pageurl page.get_parent %}">{{ page.get_parent }}</a></h6>
 		<h2>{{ page.title }}</h2>
 		<h3>{{ page.subtitle}}</h3>
-		{% with prev=page.prev_post next=page.next_post %}
+		{% with prev=page.get_prev_siblings.live.first next=page.get_next_siblings.live.first %}
 			{% if prev %}
 				<a href="{% pageurl prev %}" title="{{ prev }}" class="title-nav title-prev"></a>
 			{% endif %}
