@@ -73,6 +73,11 @@
   h1 {
     font-size: em(50);
     margin-bottom: 7px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
   }
   h3 {
     font-family: $roboto-reg;
