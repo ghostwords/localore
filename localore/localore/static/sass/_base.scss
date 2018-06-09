@@ -255,6 +255,13 @@ h6 {
   }
 }
 
+.template-homepage {
+  .juicer-feed {
+    padding: 20px;
+  }
+}
+
+
 .j-loading {
 
   position: relative;
@@ -270,7 +277,6 @@ h6 {
 
   border-color: $orange !important;
 }
-
 
 
 .j-filters {
@@ -297,12 +303,18 @@ h6 {
   }
 }
 
-.juicer-feed.slider .slick-prev:hover:before, .juicer-feed.slider .slick-next:hover:before {
+.juicer-feed.slider .slick-prev:hover:before,
+.juicer-feed.slider .slick-next:hover:before {
   color: $orange !important;
 }
-.juicer-feed.image-grid .j-text .j-message a, .juicer-feed.slider .j-text .j-message a, .juicer-feed.hip .j-text .j-message a {
+
+.juicer-feed.modern .j-text .j-message a,
+.juicer-feed.image-grid .j-text .j-message a,
+.juicer-feed.slider .j-text .j-message a,
+.juicer-feed.hip .j-text .j-message a {
   color: $orange !important;
 }
+
 
 .browsehappy {
   margin: 0.2em 0;
