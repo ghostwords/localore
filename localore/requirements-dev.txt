@@ -1,5 +1,5 @@
 -r requirements.txt
-django_debug_toolbar
+django_debug_toolbar==1.5
 grip
 ipython
 prospector==0.11.7
