@@ -3,7 +3,7 @@
 server {
 	listen [::]:80;
 	listen 80;
-	server_name {{ domain }} www.{{ domain }};
+	server_name {{ domain }} www.{{ domain }} findingamerica.airmedia.org www.findingamerica.airmedia.org;
 
 	# serve ACME challenge files over HTTP
 	location /.well-known/acme-challenge/ {
@@ -13,30 +13,31 @@ server {
 
 	# redirect HTTP requests to HTTPS
 	location @forward_https {
-		return 301 https://{{ domain }}$request_uri;
+		return 301 https://www.{{ domain }}$request_uri;
 	}
 	location / {
-		return 301 https://{{ domain }}$request_uri;
+		return 301 https://www.{{ domain }}$request_uri;
 	}
 }
 
-# redirect HTTPS www to non-www
+# redirect HTTPS non-www to www
+# also redirect the old domains to the new domain over HTTPS
 server {
 	listen [::]:443 ssl spdy;
 	listen 443 ssl spdy;
-	server_name www.{{ domain }};
+	server_name {{ domain }} findingamerica.airmedia.org www.findingamerica.airmedia.org;
 
 	ssl_certificate /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ domain }}/key.pem;
 	include /etc/nginx/ssl.conf;
 
-	return 301 https://{{ domain }}$request_uri;
+	return 301 https://www.{{ domain }}$request_uri;
 }
 
 server {
 	listen [::]:443 ssl spdy;
 	listen 443 ssl spdy;
-	server_name {{ domain }};
+	server_name www.{{ domain }};
 
 	ssl_certificate /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ domain }}/key.pem;
