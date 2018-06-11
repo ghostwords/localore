@@ -58,6 +58,13 @@ server {
 		alias /var/www/{{ domain }}/current/robots{% if inventory_dir|basename == "staging" %}_staging{% endif %}.txt;
 	}
 
+	location = /google48e4df83467edaaa.html {
+		alias /var/media/google48e4df83467edaaa.html;
+	}
+	location = /BingSiteAuth.xml {
+		alias /var/media/BingSiteAuth.xml;
+	}
+
 	location /static {
 		root /var/www/{{ domain }}/current;
 		access_log off;
