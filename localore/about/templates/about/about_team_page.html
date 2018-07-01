@@ -15,22 +15,40 @@
 	<div class="team-section">
 
 		<div class="team-item" id="air-localore-team">
-			<h4 class="team-name"></h4>
 			<a data-toggle="collapse"
 					href="#team-members-0"
 					aria-expanded="true"
 					aria-controls="team-members-0"
 					data-parent=".team-section">
-				<h4 class="team-name">AIR | Localore Team</h4>
+				<h4 class="team-name">Finding America</h4>
 			</a>
 			<div id="team-members-0" class="about-team-member collapse in">
 				<div class="team-members clearfix">
-					{% for item in page.localore_staff %}
+					{% for item in page.air_staff %}
 					{% usekwacro person item.person %}
 					{% endfor %}
 				</div>
 			</div>
 		</div>
+
+		{% if page.localorelive_staff|length > 0 %}
+			<div class="team-item" id="localorelive-team">
+				<a data-toggle="collapse"
+						href="#team-members-1"
+						aria-expanded="true"
+						aria-controls="team-members-1"
+						data-parent=".team-section">
+					<h4 class="team-name">#LocaloreLive</h4>
+				</a>
+				<div id="team-members-1" class="about-team-member collapse in">
+					<div class="team-members clearfix">
+						{% for item in page.localorelive_staff %}
+						{% usekwacro person item.person %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
 
 		{% for production in productions %}
 
@@ -38,14 +56,14 @@
 
 			<h6 class="team-location">{{ production.city }}, {{ production.state }}</h6>
 			<a data-toggle="collapse"
-					href="#team-members-{{ forloop.counter }}"
+					href="#team-members-{{ forloop.counter|add:"1" }}"
 					aria-expanded="true"
-					aria-controls="team-members-{{ forloop.counter }}"
+					aria-controls="team-members-{{ forloop.counter|add:"1" }}"
 					data-parent=".team-section">
 				<h4 class="team-name">{{ production.title }}</h4>
 			</a>
 
-			<div id="team-members-{{ forloop.counter }}" class="about-team-member collapse in">
+			<div id="team-members-{{ forloop.counter|add:"1" }}" class="about-team-member collapse in">
 				<div class="team-members clearfix">
 					{% for item in production.related_people.all %}
 					{% usekwacro person item.person %}

@@ -44,7 +44,14 @@ class AboutMissionPage(Page, LocalorePromoteFields):
 
 
 class AboutTeamPageRelatedPerson(Orderable, PersonField):
-    page = ParentalKey('AboutTeamPage', related_name='related_people')
+    page = ParentalKey('AboutTeamPage', related_name='related_air_people')
+
+
+class AboutTeamPageRelatedLocaloreLivePerson(Orderable, PersonField):
+    page = ParentalKey(
+        'AboutTeamPage',
+        related_name='related_localorelive_people'
+    )
 
 
 class AboutTeamPage(Page, LocalorePromoteFields):
@@ -60,11 +67,19 @@ class AboutTeamPage(Page, LocalorePromoteFields):
         FieldPanel('subtitle', classname='full'),
         FieldPanel('description', classname='full'),
         InlinePanel(
-            'related_people',
-            label="AIR | Localore staff",
+            'related_air_people',
+            label="Finding America staff",
             help_text=(
-                "Select the AIR | Localore staff, and the order "
-                "to display them in on this page."
+                "Select the staff for the Finding America team, "
+                "and the order to display them in on this page."
+            )
+        ),
+        InlinePanel(
+            'related_localorelive_people',
+            label="#LocaloreLive staff",
+            help_text=(
+                "Select the staff for the #LocaloreLive team, "
+                "and the order to display them in on this page."
             )
         ),
     ]
@@ -75,8 +90,12 @@ class AboutTeamPage(Page, LocalorePromoteFields):
     subpage_types = []
 
     @property
-    def localore_staff(self):
-        return self.related_people.select_related('person__photo').all()
+    def air_staff(self):
+        return self.related_air_people.select_related('person__photo').all()
+
+    @property
+    def localorelive_staff(self):
+        return self.related_localorelive_people.select_related('person__photo').all()
 
     def get_context(self, request):
         context = super(AboutTeamPage, self).get_context(request)

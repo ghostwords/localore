@@ -35,7 +35,7 @@ class Person(models.Model, index.Indexed):
         on_delete=models.SET_NULL,
         related_name='+',
         verbose_name="associated production",
-        help_text="Leave blank for AIR/Localore staff."
+        help_text="Leave blank for Finding America and #LocaloreLive staff."
     )
 
     biography = RichTextField(blank=True)
