@@ -2,4 +2,4 @@
 django_debug_toolbar==1.5
 grip
 ipython
-prospector==0.11.7
+prospector==0.12.11
