@@ -67,18 +67,18 @@ class AboutTeamPage(Page, LocalorePromoteFields):
         FieldPanel('subtitle', classname='full'),
         FieldPanel('description', classname='full'),
         InlinePanel(
-            'related_air_people',
-            label="Finding America staff",
-            help_text=(
-                "Select the staff for the Finding America team, "
-                "and the order to display them in on this page."
-            )
-        ),
-        InlinePanel(
             'related_localorelive_people',
             label="#LocaloreLive staff",
             help_text=(
                 "Select the staff for the #LocaloreLive team, "
+                "and the order to display them in on this page."
+            )
+        ),
+        InlinePanel(
+            'related_air_people',
+            label="Finding America staff",
+            help_text=(
+                "Select the staff for the Finding America team, "
                 "and the order to display them in on this page."
             )
         ),

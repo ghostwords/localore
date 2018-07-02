@@ -14,33 +14,16 @@
 
 	<div class="team-section">
 
-		<div class="team-item" id="air-localore-team">
-			<a data-toggle="collapse"
-					href="#team-members-0"
-					aria-expanded="true"
-					aria-controls="team-members-0"
-					data-parent=".team-section">
-				<h4 class="team-name">Finding America</h4>
-			</a>
-			<div id="team-members-0" class="about-team-member collapse in">
-				<div class="team-members clearfix">
-					{% for item in page.air_staff %}
-					{% usekwacro person item.person %}
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-
 		{% if page.localorelive_staff|length > 0 %}
 			<div class="team-item" id="localorelive-team">
 				<a data-toggle="collapse"
-						href="#team-members-1"
+						href="#team-members-0"
 						aria-expanded="true"
-						aria-controls="team-members-1"
+						aria-controls="team-members-0"
 						data-parent=".team-section">
 					<h4 class="team-name">#LocaloreLive</h4>
 				</a>
-				<div id="team-members-1" class="about-team-member collapse in">
+				<div id="team-members-0" class="about-team-member collapse in">
 					<div class="team-members clearfix">
 						{% for item in page.localorelive_staff %}
 						{% usekwacro person item.person %}
@@ -49,6 +32,23 @@
 				</div>
 			</div>
 		{% endif %}
+
+		<div class="team-item" id="air-localore-team">
+			<a data-toggle="collapse"
+					href="#team-members-1"
+					aria-expanded="true"
+					aria-controls="team-members-1"
+					data-parent=".team-section">
+				<h4 class="team-name">Finding America</h4>
+			</a>
+			<div id="team-members-1" class="about-team-member collapse in">
+				<div class="team-members clearfix">
+					{% for item in page.air_staff %}
+					{% usekwacro person item.person %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 
 		{% for production in productions %}
 
