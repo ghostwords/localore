@@ -235,9 +235,9 @@ $(function() {
    *    ABOUT - TEAM
    **/
 
-   if(jQuery.browser.mobile) {
+   // if(jQuery.browser.mobile) {
      $('.about-team-member').collapse('hide');
-   }
+   // }
 
 
 
