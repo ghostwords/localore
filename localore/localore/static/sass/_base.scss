@@ -127,7 +127,7 @@ body {
 
   .rich-text {
     @include outer-container($grid-md);
-    width: 75%;
+    width: 80%;
     position: absolute;
     bottom: 25px;
     left: 50%;
@@ -162,7 +162,7 @@ body {
   }
 
   @include media($mobile) {
-    background-size: 200%;
+    background-size: 225%;
   }
 
 
