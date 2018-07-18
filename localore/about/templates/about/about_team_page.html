@@ -12,18 +12,20 @@
 
 	{{ page.description|richtext }}
 
-	<div class="team-section">
+	<div id="team-section" class="team-section">
 
 		{% if page.localorelive_staff|length > 0 %}
-			<div class="team-item" id="localorelive-team">
-				<a data-toggle="collapse"
+			<h5 class="team-section-header">#LocaloreLive</h5>
+			<div class="team-item panel" id="localorelive-team">
+				<a  class="team-item-toggle"
+						data-toggle="collapse"
 						href="#team-members-0"
 						aria-expanded="true"
 						aria-controls="team-members-0"
 						data-parent=".team-section">
-					<h4 class="team-name">#LocaloreLive</h4>
+					<p>View all</p>
 				</a>
-				<div id="team-members-0" class="about-team-member collapse in">
+				<div id="team-members-0" class="about-team-member collapse">
 					<div class="team-members clearfix">
 						{% for item in page.localorelive_staff %}
 						{% usekwacro person item.person %}
@@ -33,15 +35,20 @@
 			</div>
 		{% endif %}
 
-		<div class="team-item" id="air-localore-team">
-			<a data-toggle="collapse"
+
+		<h5 class="team-section-header">AIR| Finding America Team</h5>
+		<div class="team-item panel" id="air-localore-team">
+			<a 	class="team-item-toggle"
+					data-toggle="collapse"
 					href="#team-members-1"
 					aria-expanded="true"
 					aria-controls="team-members-1"
 					data-parent=".team-section">
-				<h4 class="team-name">Finding America</h4>
+				<p>
+					View all
+				</p>
 			</a>
-			<div id="team-members-1" class="about-team-member collapse in">
+			<div id="team-members-1" class="about-team-member collapse">
 				<div class="team-members clearfix">
 					{% for item in page.air_staff %}
 					{% usekwacro person item.person %}
@@ -50,20 +57,23 @@
 			</div>
 		</div>
 
+
+		<h5 class="team-section-header">Finding America Winners</h5>
 		{% for production in productions %}
 
-		<div class="team-item" id="{{ production.title|slugify }}">
+		<div class="team-item team-item--production panel" id="{{ production.title|slugify }}">
 
-			<h6 class="team-location">{{ production.city }}, {{ production.state }}</h6>
-			<a data-toggle="collapse"
+			<!-- <h6 class="team-location">{{ production.city }}, {{ production.state }}</h6> -->
+			<a 	class="team-item-toggle"
+					data-toggle="collapse"
 					href="#team-members-{{ forloop.counter|add:"1" }}"
 					aria-expanded="true"
 					aria-controls="team-members-{{ forloop.counter|add:"1" }}"
 					data-parent=".team-section">
-				<h4 class="team-name">{{ production.title }}</h4>
+				<p>{{ production.title }}</p>
 			</a>
 
-			<div id="team-members-{{ forloop.counter|add:"1" }}" class="about-team-member collapse in">
+			<div id="team-members-{{ forloop.counter|add:"1" }}" class="about-team-member collapse">
 				<div class="team-members clearfix">
 					{% for item in production.related_people.all %}
 					{% usekwacro person item.person %}

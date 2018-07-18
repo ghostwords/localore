@@ -235,12 +235,5 @@ $(function() {
    *    ABOUT - TEAM
    **/
 
-   if(jQuery.browser.mobile) {
-     $('.about-team-member').collapse('hide');
-   }
-
-
-
-
 
 });
